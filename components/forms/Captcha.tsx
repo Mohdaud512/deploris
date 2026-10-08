@@ -65,7 +65,7 @@ export function Captcha({
 
   if (!publicEnv.hcaptchaSiteKey) {
     return (
-      <p className="text-xs text-brand-900/60 dark:text-white/60">
+      <p className="text-xs text-brand-900/80 dark:text-white/60">
         Captcha disabled in dev. Set NEXT_PUBLIC_HCAPTCHA_SITE_KEY to enable.
       </p>
     );

@@ -27,6 +27,16 @@ export default async function DpaPage({ params }: { params: Promise<{ locale: Lo
       <h1 className="font-display text-3xl font-bold text-brand-900 md:text-4xl dark:text-white">
         {de ? 'Auftragsverarbeitung (AVV) / DPA' : 'Data Processing Agreement (DPA)'}
       </h1>
+      <div
+        role="note"
+        className="mt-6 max-w-3xl rounded-xl border border-amber-500/40 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-400/40 dark:bg-amber-500/10 dark:text-amber-200"
+      >
+        <strong>{de ? 'Hinweis: Platzhalter-Volltext' : 'Notice: placeholder full text'}</strong>
+        {' '}
+        {de
+          ? 'Der juristisch geprüfte AVV-Volltext wird hier eingesetzt, sobald er freigegeben ist. Für konkrete Verhandlungen fordern Sie bitte die aktuelle Fassung per E-Mail an.'
+          : 'The legally reviewed full DPA text will be inserted here once approved. For an actionable copy, please request the current draft by email.'}
+      </div>
       <div className="prose prose-brand mt-6 max-w-3xl dark:prose-invert">
         <p>
           {de

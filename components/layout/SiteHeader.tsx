@@ -27,8 +27,9 @@ export function SiteHeader() {
           <Image
             src="/logo.png"
             alt={`${site.name} ${site.tagline[locale]}`}
-            width={512}
-            height={512}
+            width={128}
+            height={128}
+            sizes="64px"
             priority
             className="h-16 w-16 object-contain"
           />
@@ -150,7 +151,7 @@ function MobileNavGroup({
                       key={leaf.href}
                       href={leaf.href}
                       onClick={onNav}
-                      className="block py-1 text-xs text-brand-900/70 dark:text-white/70"
+                      className="block py-1 text-xs text-brand-900/85 dark:text-white/70"
                     >
                       {leaf.label}
                     </Link>

@@ -11,6 +11,7 @@ export function ContactForm() {
   const [captchaToken, setCaptchaToken] = useState('');
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [serviceLine, setServiceLine] = useState('unsure');
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -18,6 +19,7 @@ export function ContactForm() {
     if (state === 'sending') return;
     setState('sending');
     setErrorMsg(null);
+    setFieldErrors({});
 
     const form = e.currentTarget;
     const fd = new FormData(form);
@@ -41,7 +43,11 @@ export function ContactForm() {
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        const data = (await res.json().catch(() => ({}))) as {
+          error?: string;
+          fields?: Record<string, string>;
+        };
+        setFieldErrors(data.fields ?? {});
         setErrorMsg(data.error ?? t('error'));
         setState('error');
         return;
@@ -69,10 +75,10 @@ export function ContactForm() {
     <form onSubmit={onSubmit} className="relative flex flex-col gap-4" noValidate>
       <Honeypot />
       <div className="grid gap-4 md:grid-cols-2">
-        <TextField id="name" name="name" label={t('field_name')} required autoComplete="name" maxLength={120} />
-        <TextField id="email" name="email" type="email" label={t('field_email')} required autoComplete="email" maxLength={320} />
-        <TextField id="company" name="company" label={t('field_company')} autoComplete="organization" maxLength={200} />
-        <TextField id="phone" name="phone" label={t('field_phone')} autoComplete="tel" maxLength={200} />
+        <TextField id="name" name="name" label={t('field_name')} required autoComplete="name" maxLength={120} error={fieldErrors.name} />
+        <TextField id="email" name="email" type="email" label={t('field_email')} required autoComplete="email" maxLength={320} error={fieldErrors.email} />
+        <TextField id="company" name="company" label={t('field_company')} autoComplete="organization" maxLength={200} error={fieldErrors.company} />
+        <TextField id="phone" name="phone" label={t('field_phone')} autoComplete="tel" maxLength={200} error={fieldErrors.phone} />
       </div>
       <SelectField
         id="serviceLine"
@@ -87,15 +93,19 @@ export function ContactForm() {
           { value: 'unsure', label: t('options.unsure') },
         ]}
       />
-      <TextAreaField id="message" name="message" label={t('field_message')} required minLength={10} maxLength={5000} />
+      <TextAreaField id="message" name="message" label={t('field_message')} required minLength={10} maxLength={5000} error={fieldErrors.message} />
       <label className="flex items-start gap-2 text-sm text-brand-900/85 dark:text-white/85">
         <input type="checkbox" name="consent" required className="mt-1" />
         <span>{t('field_consent')}</span>
       </label>
+      {fieldErrors.consent && (
+        <p className="text-xs text-red-600">{fieldErrors.consent}</p>
+      )}
       <Captcha onToken={setCaptchaToken} />
       {errorMsg && (
         <p role="alert" className="text-sm text-red-600">
           {errorMsg}
+          {Object.keys(fieldErrors).length > 0 && ` ${t('field_errors_hint')}`}
         </p>
       )}
       <button

@@ -83,7 +83,7 @@ export default async function DevelopmentServiceDetail({
   return (
     <>
       <section className="container py-14">
-        <nav aria-label="Breadcrumb" className="text-xs text-brand-900/60 dark:text-white/60">
+        <nav aria-label="Breadcrumb" className="text-xs text-brand-900/80 dark:text-white/60">
           <a href={`${prefix}/services/development`} className="hover:underline">
             {locale === 'de' ? 'Softwareentwicklung' : 'Software Development'}
           </a>{' '}

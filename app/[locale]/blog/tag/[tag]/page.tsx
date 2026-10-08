@@ -20,17 +20,28 @@ export function generateStaticParams() {
   return params;
 }
 
+function tagLabel(tag: string): string {
+  return tag
+    .split('-')
+    .map((w) => (w ? w[0]!.toUpperCase() + w.slice(1) : w))
+    .join(' ');
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale; tag: string }> }) {
   const { locale, tag } = await params;
   if (!SAFE_TAG.test(tag)) return {};
+  const label = tagLabel(tag);
   return buildMetadata({
     locale,
     path: `/blog/tag/${tag}`,
-    title: `${tag} Blog | Deploris`,
+    title:
+      locale === 'de'
+        ? `Thema: ${label} | Deploris Blog`
+        : `Topic: ${label} | Deploris Blog`,
     description:
       locale === 'de'
-        ? `Alle Blog-Beiträge im Themenfeld ${tag}.`
-        : `All posts tagged ${tag}.`,
+        ? `Alle Blog-Beiträge im Themenfeld ${label}.`
+        : `All posts tagged ${label}.`,
   });
 }
 

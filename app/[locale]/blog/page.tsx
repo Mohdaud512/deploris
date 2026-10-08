@@ -51,7 +51,7 @@ export default async function BlogIndex({ params }: { params: Promise<{ locale: 
           />
         ))}
         {posts.length === 0 && (
-          <p className="text-brand-900/70 dark:text-white/70">
+          <p className="text-brand-900/85 dark:text-white/70">
             {locale === 'de' ? 'Bald verfügbar.' : 'Coming soon.'}
           </p>
         )}

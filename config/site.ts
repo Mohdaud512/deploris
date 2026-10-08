@@ -34,7 +34,10 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://deploris.com',
   ogImage: '/og-default.png',
   contact: {
-    email: 'muhammad.daud@deploris.com',
+    // Role mailbox (not a personal address) so GDPR controller + Impressum
+    // contact resolves to the team, not an individual. Ensure this alias is
+    // configured in the mail provider before launch.
+    email: 'hello@deploris.com',
     phone: '+1 (321) 495-3200',
     phoneRaw: '+13214953200',
     address: {

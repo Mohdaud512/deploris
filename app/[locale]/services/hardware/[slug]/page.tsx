@@ -55,7 +55,7 @@ export default async function HardwareServiceDetail({
   return (
     <>
       <section className="container py-14">
-        <nav aria-label="Breadcrumb" className="text-xs text-brand-900/60 dark:text-white/60">
+        <nav aria-label="Breadcrumb" className="text-xs text-brand-900/80 dark:text-white/60">
           <a href={`${prefix}/services/hardware`} className="hover:underline">
             {locale === 'de' ? 'Hardware & Infrastruktur' : 'Hardware & Infrastructure'}
           </a>{' '}

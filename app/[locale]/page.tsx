@@ -7,7 +7,6 @@ import { LogoStrip } from '@/components/marketing/LogoStrip';
 import { DualServiceSplit } from '@/components/marketing/DualServiceSplit';
 import { ValuePropGrid } from '@/components/marketing/ValueProp';
 import { StatCounterGrid } from '@/components/marketing/StatCounter';
-import { TestimonialCarousel } from '@/components/marketing/TestimonialCarousel';
 import { CTASection } from '@/components/marketing/CTASection';
 import { RoiCalculator } from '@/components/marketing/RoiCalculator';
 
@@ -63,34 +62,15 @@ export default async function HomePage({
       <StatCounterGrid
         stats={[
           { label: t('stats_projects'), value: 240, suffix: '+' },
-          { label: t('stats_uptime'), value: 999, suffix: '‰' },
+          { label: t('stats_uptime'), value: 99.9, suffix: '%', decimals: 1 },
           { label: t('stats_response'), value: 15, suffix: ' min' },
           { label: t('stats_countries'), value: 12 },
         ]}
       />
 
-      <TestimonialCarousel
-        items={[
-          {
-            quote:
-              locale === 'de'
-                ? 'Deploris hat unser CRM in acht Wochen abgelöst vom Kick-off bis zum produktiven Rollout. Der Support-Prozess läuft heute reibungslos.'
-                : 'Deploris replaced our CRM in eight weeks from kickoff to production rollout. Support has been rock-steady since.',
-            author: 'Placeholder Contact',
-            role: 'Head of Revenue Ops',
-            company: 'Client A',
-          },
-          {
-            quote:
-              locale === 'de'
-                ? 'Die Kombination aus Infrastruktur-Know-how und Softwareentwicklung war für uns entscheidend eine Verantwortlichkeit statt drei Dienstleister.'
-                : 'Their combination of infra know-how and software chops was decisive one throat to choke instead of three vendors.',
-            author: 'Placeholder Contact',
-            role: 'CTO',
-            company: 'Client B',
-          },
-        ]}
-      />
+      {/* Testimonials are intentionally hidden until approved client quotes
+          are available. Restore the <TestimonialCarousel /> when real items
+          (quote + named author + role + company, with permission) land. */}
 
       <RoiCalculator locale={locale} />
 

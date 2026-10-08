@@ -41,7 +41,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ loca
         {c.metrics.map((m) => (
           <div key={m.label} className="rounded-2xl border border-brand-900/10 bg-white p-6 text-center dark:border-white/10 dark:bg-white/5">
             <p className="font-display text-3xl font-bold text-brand-900 dark:text-white">{m.value}</p>
-            <p className="mt-1 text-xs uppercase tracking-wide text-brand-900/60 dark:text-white/60">{m.label}</p>
+            <p className="mt-1 text-xs uppercase tracking-wide text-brand-900/80 dark:text-white/60">{m.label}</p>
           </div>
         ))}
       </section>

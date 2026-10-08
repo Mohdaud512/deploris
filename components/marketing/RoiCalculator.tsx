@@ -73,7 +73,7 @@ export function RoiCalculator({ locale }: { locale: Locale }) {
           <ResultCell label={de ? 'Ersparnis / Jahr' : 'Savings / year'} value={formatCurrency(results.yearlyDollarsSaved, locale)} highlight />
         </div>
 
-        <p className="mt-4 text-xs text-brand-900/60 dark:text-white/60">
+        <p className="mt-4 text-xs text-brand-900/80 dark:text-white/60">
           {de
             ? 'Grobe Näherung. Reale Ergebnisse hängen von Datenqualität, Prozessreife und Nutzeraufnahme ab.'
             : 'Rough approximation. Actual results depend on data quality, process maturity, and user adoption.'}
@@ -151,7 +151,7 @@ function RangeInput({
 function ResultCell({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div>
-      <p className="text-xs uppercase tracking-wide text-brand-900/70 dark:text-white/70">{label}</p>
+      <p className="text-xs uppercase tracking-wide text-brand-900/85 dark:text-white/70">{label}</p>
       <p
         className={
           highlight

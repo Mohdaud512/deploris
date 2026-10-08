@@ -44,7 +44,7 @@ export function LocaleSwitcher() {
             className={
               isActive
                 ? 'flex items-center gap-1 rounded-full bg-brand-900 px-3 py-1 font-semibold text-white shadow-sm'
-                : 'flex items-center gap-1 rounded-full px-3 py-1 font-medium text-brand-900/70 hover:bg-brand-900/5 hover:text-brand-900 dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white'
+                : 'flex items-center gap-1 rounded-full px-3 py-1 font-medium text-brand-900/85 hover:bg-brand-900/5 hover:text-brand-900 dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white'
             }
           >
             <span aria-hidden>{localeFlags[l]}</span>

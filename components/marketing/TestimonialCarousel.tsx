@@ -21,7 +21,7 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
         <blockquote className="font-display text-2xl leading-relaxed text-brand-900 md:text-3xl dark:text-white">
           “{cur.quote}”
         </blockquote>
-        <p className="mt-6 text-sm text-brand-900/70 dark:text-white/70"> {cur.author}, {cur.role}, {cur.company}
+        <p className="mt-6 text-sm text-brand-900/85 dark:text-white/70"> {cur.author}, {cur.role}, {cur.company}
         </p>
         {items.length > 1 && (
           <div className="mt-6 flex justify-center gap-2">

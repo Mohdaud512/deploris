@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-type Stat = { label: string; value: number; suffix?: string; prefix?: string };
+type Stat = { label: string; value: number; suffix?: string; prefix?: string; decimals?: number };
 
 export function StatCounterGrid({ stats }: { stats: Stat[] }) {
   return (
@@ -32,7 +32,7 @@ function StatItem({ stat }: { stat: Stat }) {
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) {
-            animate(stat.value, setValue);
+            animate(stat.value, setValue, stat.decimals);
             observer.disconnect();
             break;
           }
@@ -44,25 +44,30 @@ function StatItem({ stat }: { stat: Stat }) {
     return () => observer.disconnect();
   }, [stat.value, reduce]);
 
+  const decimals = stat.decimals ?? 0;
   return (
     <div ref={ref} className="text-center">
       <p className="font-display text-4xl font-bold text-brand-900 dark:text-white">
         {stat.prefix}
-        {value.toLocaleString()}
+        {value.toLocaleString(undefined, {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        })}
         {stat.suffix}
       </p>
-      <p className="mt-2 text-sm text-brand-900/70 dark:text-white/70">{stat.label}</p>
+      <p className="mt-2 text-sm text-brand-900/85 dark:text-white/70">{stat.label}</p>
     </div>
   );
 }
 
-function animate(target: number, set: (n: number) => void) {
+function animate(target: number, set: (n: number) => void, decimals = 0) {
   const start = performance.now();
   const duration = 1400;
+  const factor = 10 ** decimals;
   function tick(now: number) {
     const t = Math.min(1, (now - start) / duration);
     const eased = 1 - Math.pow(1 - t, 3);
-    set(Math.round(target * eased));
+    set(Math.round(target * eased * factor) / factor);
     if (t < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);

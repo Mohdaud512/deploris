@@ -46,7 +46,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <br />
             {site.contact.address.country}
           </address>
-          <p className="mt-4 text-brand-900/70 dark:text-white/70">
+          <p className="mt-4 text-brand-900/85 dark:text-white/70">
             {de ? 'Mo–Fr' : 'Mon–Fri'} {site.contact.hours.opens}–{site.contact.hours.closes}
           </p>
         </aside>

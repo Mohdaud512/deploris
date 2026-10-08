@@ -106,7 +106,12 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // TODO: connect Grok no key configured, return a grounded stub answer.
+  // No key configured: in production the chat widget should be disabled, so
+  // return 503 and let the client show its generic unavailability state. In
+  // dev we keep the grounded stub so the widget can be demoed end-to-end.
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Chat is not available.' }, { status: 503 });
+  }
   return streamStub(d.locale, contextDocs);
 }
 

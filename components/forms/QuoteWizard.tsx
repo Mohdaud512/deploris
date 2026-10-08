@@ -83,7 +83,7 @@ export function QuoteWizard() {
       <Honeypot />
 
       <div>
-        <p className="text-xs uppercase tracking-wide text-brand-900/60 dark:text-white/60">
+        <p className="text-xs uppercase tracking-wide text-brand-900/80 dark:text-white/60">
           {t('progress', { current: step, total: 3 })}
         </p>
         <div className="mt-2 flex h-2 overflow-hidden rounded-full bg-brand-100 dark:bg-white/10">
@@ -102,7 +102,7 @@ export function QuoteWizard() {
           </legend>
           <SelectField
             id="serviceLine"
-            label={t('step1')}
+            label={locale === 'de' ? 'Leistungsbereich' : 'Service line'}
             value={form.serviceLine}
             onChange={(v) => set('serviceLine', v as FormState['serviceLine'])}
             options={[

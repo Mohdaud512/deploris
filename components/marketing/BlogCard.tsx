@@ -27,7 +27,7 @@ export function BlogCard({
         </h3>
         <p className="mt-2 text-sm text-brand-900/80 dark:text-white/80">{description}</p>
       </Link>
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-brand-900/70 dark:text-white/70">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-brand-900/85 dark:text-white/70">
         <span>
           {formatDate(date, locale)} · {author}
         </span>

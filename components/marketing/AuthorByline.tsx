@@ -15,7 +15,7 @@ export function AuthorByline({
   locale: Locale;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-4 text-sm text-brand-900/70 dark:text-white/70">
+    <div className="flex flex-wrap items-center gap-4 text-sm text-brand-900/85 dark:text-white/70">
       <span className="flex items-center gap-2">
         <span
           aria-hidden

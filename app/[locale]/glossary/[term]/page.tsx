@@ -44,7 +44,7 @@ export default async function GlossaryTermPage({
 
   return (
     <section className="container py-14">
-      <nav aria-label="Breadcrumb" className="text-xs text-brand-900/60 dark:text-white/60">
+      <nav aria-label="Breadcrumb" className="text-xs text-brand-900/80 dark:text-white/60">
         <Link href={`${prefix}/glossary`} className="hover:underline">
           {locale === 'de' ? 'Glossar' : 'Glossary'}
         </Link>{' '}

@@ -78,7 +78,7 @@ export default async function LocationPage({ params }: { params: Promise<{ local
         <p className="mt-6 max-w-3xl text-lg text-brand-900/85 dark:text-white/85">
           {city.copy[locale].intro}
         </p>
-        <p className="mt-4 max-w-3xl text-brand-900/70 dark:text-white/70">
+        <p className="mt-4 max-w-3xl text-brand-900/85 dark:text-white/70">
           {city.copy[locale].localAngle}
         </p>
       </section>

@@ -8,7 +8,7 @@ export function DualServiceSplit({ locale }: { locale: Locale }) {
   return (
     <section aria-labelledby="dual-title" className="container py-16">
       <h2 id="dual-title" className="sr-only">
-        {t('split_hardware_title')} & {t('split_dev_title')}
+        {locale === 'de' ? 'Unsere beiden Leistungsbereiche' : 'Our two service lines'}
       </h2>
       <div className="grid gap-6 md:grid-cols-2">
         <Link

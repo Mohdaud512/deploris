@@ -24,7 +24,12 @@ export async function POST(req: NextRequest) {
   }
   const parsed = contactSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: 'Invalid form.' }, { status: 400 });
+    const fields: Record<string, string> = {};
+    for (const issue of parsed.error.issues) {
+      const path = issue.path[0];
+      if (typeof path === 'string' && !fields[path]) fields[path] = issue.message;
+    }
+    return NextResponse.json({ error: 'Invalid form.', fields }, { status: 400 });
   }
   const data = parsed.data;
 

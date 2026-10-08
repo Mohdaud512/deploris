@@ -21,7 +21,7 @@ export function PricingBand({
           </div>
         ))}
       </div>
-      <p className="mt-4 text-center text-xs text-brand-900/60 dark:text-white/60">
+      <p className="mt-4 text-center text-xs text-brand-900/80 dark:text-white/60">
         Bands, not quotes every engagement is priced in writing after discovery.
       </p>
     </section>

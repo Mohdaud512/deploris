@@ -114,6 +114,7 @@
     "submit": "Send message",
     "success": "Thanks we've received your message and will reply within one business day.",
     "error": "We couldn't send that. Please try again or email us directly.",
+    "field_errors_hint": "Please correct the highlighted fields.",
     "options": {
       "hardware": "Hardware & Infrastructure",
       "development": "Software Development",

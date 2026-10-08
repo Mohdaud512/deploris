@@ -26,6 +26,16 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
       <h1 className="font-display text-3xl font-bold text-brand-900 md:text-4xl dark:text-white">
         {de ? 'Allgemeine Geschäftsbedingungen' : 'Terms of service'}
       </h1>
+      <div
+        role="note"
+        className="mt-6 max-w-3xl rounded-xl border border-amber-500/40 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-400/40 dark:bg-amber-500/10 dark:text-amber-200"
+      >
+        <strong>{de ? 'Hinweis: Platzhalter' : 'Notice: placeholder'}</strong>
+        {' '}
+        {de
+          ? 'Dieser Text ist eine Vorab-Fassung. Die rechtsgeprüften AGB werden hier veröffentlicht, sobald sie freigegeben sind. Bis dahin gelten die Regelungen aus den individuellen Verträgen.'
+          : 'This text is a draft. The legally reviewed terms will be published here once approved. Until then, the terms of the individual engagement letters and signed agreements take precedence.'}
+      </div>
       <div className="prose prose-brand mt-6 max-w-3xl dark:prose-invert">
         <p data-placeholder="terms">
           {de

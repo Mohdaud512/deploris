@@ -114,6 +114,7 @@
     "submit": "Nachricht senden",
     "success": "Vielen Dank wir haben Ihre Nachricht erhalten und melden uns innerhalb eines Werktags.",
     "error": "Das hat leider nicht geklappt. Bitte erneut versuchen oder direkt an uns schreiben.",
+    "field_errors_hint": "Bitte markierte Felder korrigieren.",
     "options": {
       "hardware": "Hardware & Infrastruktur",
       "development": "Softwareentwicklung",

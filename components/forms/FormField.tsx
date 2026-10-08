@@ -33,7 +33,7 @@ export const TextField = forwardRef<
         {...rest}
       />
       {(hint || error) && (
-        <p id={`${id}-desc`} className={cn('text-xs', error ? 'text-red-600' : 'text-brand-900/60 dark:text-white/60')}>
+        <p id={`${id}-desc`} className={cn('text-xs', error ? 'text-red-600' : 'text-brand-900/80 dark:text-white/60')}>
           {error ?? hint}
         </p>
       )}
@@ -66,7 +66,7 @@ export const TextAreaField = forwardRef<
         {...rest}
       />
       {(hint || error) && (
-        <p id={`${id}-desc`} className={cn('text-xs', error ? 'text-red-600' : 'text-brand-900/60 dark:text-white/60')}>
+        <p id={`${id}-desc`} className={cn('text-xs', error ? 'text-red-600' : 'text-brand-900/80 dark:text-white/60')}>
           {error ?? hint}
         </p>
       )}
