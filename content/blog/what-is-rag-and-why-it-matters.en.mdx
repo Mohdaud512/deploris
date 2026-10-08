@@ -1,0 +1,43 @@
+---
+title: What is RAG, and why it matters for business AI
+description: A plain-English explanation of retrieval-augmented generation what it is, when it wins, and how to evaluate one.
+date: 2025-01-20
+author: Deploris
+tags:
+  - rag
+  - ai
+  - buyer-guide
+locale: en
+slug: what-is-rag-and-why-it-matters
+---
+
+If you've heard the acronym RAG and nodded along, you're not alone. It stands for **retrieval-augmented generation**, and it's the pattern behind most trustworthy business AI shipping today.
+
+## The one-paragraph version
+
+A retriever finds the passages in your knowledge base that are most relevant to a question. A language model then answers using those passages and only those passages and cites the source. The user gets an answer they can verify; the business gets a system whose facts they can audit.
+
+## Why not just fine-tune a model?
+
+Fine-tuning changes the model's weights. That's expensive to run, hard to update, and impossible to audit at the fact level. RAG leaves the model as-is and just feeds it your current documents. When you update a doc, the next answer reflects it no retraining.
+
+## Where RAG wins
+
+- **Support and internal knowledge.** Employees or customers keep asking the same knowledge-heavy questions.
+- **Regulated content.** You need to prove which source drove a claim.
+- **Docs that change often.** Product notes, policies, release notes.
+
+## Where RAG struggles
+
+- **Genuinely novel synthesis.** If the answer isn't in your corpus, a RAG system still won't invent it (which is a *feature*, but sometimes an inconvenience).
+- **Highly conversational tasks with no source.** Small-talk, negotiation, unstructured brainstorming.
+
+## The five things a production RAG needs
+
+1. **A curated corpus.** Not "everything on SharePoint" the sources people trust.
+2. **Retrieval evaluation.** Measured precision, recall, and answer accuracy on a real question set that grows over time.
+3. **Access control.** The retriever must respect existing permissions, not sidestep them.
+4. **Source citation in every answer.** No exceptions.
+5. **A monitoring surface.** So you know when quality drifts.
+
+*If you're weighing RAG vs. a chatbot vs. a knowledge base, [we're happy to sketch which fits your case](/contact).*

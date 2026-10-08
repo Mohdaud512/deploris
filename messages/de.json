@@ -1,0 +1,143 @@
+{
+  "common": {
+    "brand": "Deploris",
+    "tagline": "Maßgeschneiderte, effiziente und verlässliche IT-Lösungen.",
+    "cta_book": "Beratungstermin buchen",
+    "cta_quote": "Angebot anfordern",
+    "cta_contact": "Kontakt aufnehmen",
+    "cta_learn": "Mehr erfahren",
+    "cta_read": "Zum Leitfaden",
+    "cta_all_services": "Alle Leistungen ansehen",
+    "loading": "Lädt",
+    "error_generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+    "success_generic": "Vielen Dank wir haben Ihre Nachricht erhalten und melden uns innerhalb eines Werktags."
+  },
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "services": "Leistungen",
+    "hardware": "Hardware & Infrastruktur",
+    "development": "Softwareentwicklung",
+    "industries": "Branchen",
+    "projects": "Referenzen",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "glossary": "Glossar",
+    "contact": "Kontakt",
+    "quote": "Angebot anfordern",
+    "careers": "Karriere"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "quick_links": "Schnellzugriff",
+    "services_h": "Leistungen",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "follow": "Folgen Sie uns",
+    "impressum": "Impressum",
+    "privacy": "Datenschutz",
+    "cookies": "Cookies",
+    "terms": "AGB",
+    "dpa": "Auftragsverarbeitung (AVV)",
+    "data_request": "Datenauskunft / Löschung"
+  },
+  "locale_banner": {
+    "message": "Besuchen Sie uns aus Deutschland? Wechseln Sie zur deutschen Version.",
+    "switch": "Zu Deutsch wechseln",
+    "dismiss": "Bei Englisch bleiben"
+  },
+  "cookies": {
+    "title": "Diese Website verwendet Cookies",
+    "body": "Wir verwenden notwendige Cookies für den Betrieb der Website. Mit Ihrer Einwilligung laden wir zusätzlich datenschutzfreundliche Analytik (Plausible), Google Analytics 4 und Microsoft Clarity, um das Erlebnis zu verbessern. Sie können Ihre Einwilligung jederzeit über den Footer anpassen.",
+    "accept_all": "Alle akzeptieren",
+    "reject_all": "Nur notwendige",
+    "manage": "Einstellungen",
+    "save": "Einstellungen speichern",
+    "categories": {
+      "necessary": "Notwendig (immer aktiv)",
+      "analytics": "Analytik",
+      "marketing": "Marketing"
+    }
+  },
+  "home": {
+    "hero_eyebrow": "Von der Hardware bis zur Software aus einer Hand",
+    "hero_title": "Verlässliche IT-Infrastruktur und individuelle Software auf Ihre Ziele ausgerichtet.",
+    "hero_body": "Deploris liefert praxiserprobten Infrastruktur-Support ebenso wie individuelle CRM-Systeme, RAG-Systeme, KI-Agenten und Individualsoftware. Ein Team, eine Verantwortlichkeit vom Netzwerkschrank bis zum produktiven Release.",
+    "hero_cta_primary": "Angebot anfordern",
+    "hero_cta_secondary": "Mit einem Ingenieur sprechen",
+    "trust_bar": "Vertrauenspartner für Unternehmens-IT und individuelle KI-Systeme",
+    "split_hardware_title": "Hardware & Infrastruktur",
+    "split_hardware_body": "Rollouts, Migrationen, Break-Fix, WLAN-Ausleuchtung und 24/7 Rechenzentrum-Support. Planbare SLAs, remote oder vor Ort.",
+    "split_dev_title": "Softwareentwicklung",
+    "split_dev_body": "Individuelle CRM-Systeme, Retrieval-Augmented Generation, agentische Automatisierung und Individualsoftware produktionsreif, sicherheitsgeprüft, termingerecht.",
+    "value_1_t": "Ein Team, zwei Kompetenzfelder",
+    "value_1_b": "Selten am Markt: erfahrene Infrastruktur-Techniker und erfahrene Software-Ingenieure unter einem Dach gemeinsame Verantwortung, gemeinsamer Kontext.",
+    "value_2_t": "Security-First als Standard",
+    "value_2_b": "Gehärtete Header, geprüfter Code, EU-Datenverarbeitung und auditierte E-Mail- und Formularflüsse in jedem Projekt.",
+    "value_3_t": "Ergebnis statt Stunden",
+    "value_3_b": "Wir definieren Erfolg vorab Verfügbarkeit, Reaktionszeit, Adoption, Umsatzwirkung und berichten in jedem Sprint dagegen.",
+    "value_4_t": "Zweisprachige Lieferung",
+    "value_4_b": "Deutsch und Englisch, formales Sie für den deutschen Mittelstand, und Dokumentation, mit der Ihr Team wirklich arbeiten kann.",
+    "stats_projects": "Umgesetzte Enterprise-Projekte",
+    "stats_uptime": "Durchschnittliche Verfügbarkeit",
+    "stats_response": "Mediane Erstreaktionszeit",
+    "stats_countries": "Betreute Länder",
+    "cta_bottom_t": "Bereit für einen Anbietervergleich?",
+    "cta_bottom_b": "Senden Sie uns Ihre Anforderungen. Innerhalb eines Werktags erhalten Sie eine schriftliche Leistungsbeschreibung, einen Zeitplan und eine Preisspanne ohne Verkaufstänze."
+  },
+  "chatbot": {
+    "title": "Deploris fragen",
+    "subtitle": "KI-Assistent basiert auf unseren Leistungen und FAQ",
+    "placeholder": "Fragen Sie zu CRM, RAG, KI-Agenten oder IT-Support…",
+    "send": "Senden",
+    "close": "Chat schließen",
+    "open": "Chat öffnen",
+    "escalate": "Mit einem Menschen sprechen",
+    "book_call": "Termin buchen",
+    "lead_prompt": "Sollen wir uns bei Ihnen melden? Bitte Name und E-Mail:",
+    "lead_name": "Ihr Name",
+    "lead_email": "Ihre E-Mail",
+    "lead_submit": "Senden",
+    "lead_thanks": "Vielen Dank ein Ingenieur meldet sich innerhalb eines Werktags.",
+    "stub_notice": "Die KI-Antworten sind im Vorschaumodus, bis das produktive Modell angebunden ist."
+  },
+  "contact": {
+    "title": "Sprechen Sie mit Deploris",
+    "intro": "Erzählen Sie uns, was Sie aufbauen oder betreiben. Wir melden uns innerhalb eines Werktags.",
+    "field_name": "Vollständiger Name",
+    "field_email": "Geschäftliche E-Mail",
+    "field_company": "Unternehmen",
+    "field_phone": "Telefon (optional)",
+    "field_service_line": "Welches Leistungsfeld?",
+    "field_message": "Wobei können wir unterstützen?",
+    "field_consent": "Ich habe die Datenschutzerklärung gelesen und stimme der Kontaktaufnahme durch Deploris zu.",
+    "submit": "Nachricht senden",
+    "success": "Vielen Dank wir haben Ihre Nachricht erhalten und melden uns innerhalb eines Werktags.",
+    "error": "Das hat leider nicht geklappt. Bitte erneut versuchen oder direkt an uns schreiben.",
+    "options": {
+      "hardware": "Hardware & Infrastruktur",
+      "development": "Softwareentwicklung",
+      "both": "Beides",
+      "unsure": "Noch unsicher"
+    }
+  },
+  "quote": {
+    "title": "Angebot anfordern",
+    "step1": "1. Welches Leistungsfeld?",
+    "step2": "2. Ihre Anforderungen",
+    "step3": "3. Ihre Kontaktdaten",
+    "next": "Weiter",
+    "back": "Zurück",
+    "submit": "Anfrage senden",
+    "progress": "Schritt {current} von {total}"
+  },
+  "newsletter": {
+    "title": "Der Deploris Brief",
+    "body": "Einmal im Monat: praxisorientierte Erkenntnisse zu CRM, RAG und IT-Infrastruktur aus echten Projekten.",
+    "field_email": "Geschäftliche E-Mail",
+    "submit": "Abonnieren",
+    "consent": "Ich willige in den Bezug des Deploris-Newsletters ein. Ich kann diese Einwilligung jederzeit widerrufen.",
+    "double_opt_in": "Bitte prüfen Sie Ihr Postfach wir haben Ihnen einen Bestätigungslink gesendet. Sie werden erst nach Ihrer Bestätigung abonniert.",
+    "already": "Sie sind bereits eingetragen."
+  }
+}

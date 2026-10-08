@@ -1,0 +1,143 @@
+{
+  "common": {
+    "brand": "Deploris",
+    "tagline": "Tailored, efficient, reliable IT solutions.",
+    "cta_book": "Book a consultation",
+    "cta_quote": "Get a quote",
+    "cta_contact": "Contact us",
+    "cta_learn": "Learn more",
+    "cta_read": "Read the guide",
+    "cta_all_services": "Explore all services",
+    "loading": "Loading",
+    "error_generic": "Something went wrong. Please try again or email us directly.",
+    "success_generic": "Thanks we've received your message. We'll reply within one business day."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "hardware": "Hardware & Infrastructure",
+    "development": "Software Development",
+    "industries": "Industries",
+    "projects": "Case Studies",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "glossary": "Glossary",
+    "contact": "Contact",
+    "quote": "Get a quote",
+    "careers": "Careers"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "quick_links": "Quick links",
+    "services_h": "Services",
+    "company": "Company",
+    "legal": "Legal",
+    "follow": "Follow us",
+    "impressum": "Imprint",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "terms": "Terms",
+    "dpa": "Data processing (DPA)",
+    "data_request": "Data request / erasure"
+  },
+  "locale_banner": {
+    "message": "Are you visiting from Germany? Switch to Deutsch for German-language content.",
+    "switch": "Switch to Deutsch",
+    "dismiss": "Keep English"
+  },
+  "cookies": {
+    "title": "This site uses cookies",
+    "body": "We use essential cookies to run the site. With your consent we also load privacy-first analytics (Plausible), Google Analytics 4, and Microsoft Clarity to help improve the experience. You can change your choice any time from the footer.",
+    "accept_all": "Accept all",
+    "reject_all": "Reject non-essential",
+    "manage": "Preferences",
+    "save": "Save preferences",
+    "categories": {
+      "necessary": "Necessary (always on)",
+      "analytics": "Analytics",
+      "marketing": "Marketing"
+    }
+  },
+  "home": {
+    "hero_eyebrow": "Hardware to software one partner",
+    "hero_title": "Reliable IT infrastructure and custom software, engineered for outcomes.",
+    "hero_body": "Deploris delivers hands-on hardware and infrastructure services alongside custom CRM, RAG systems, AI agents, and bespoke software one team, one point of accountability, from wiring closet to production release.",
+    "hero_cta_primary": "Get a quote",
+    "hero_cta_secondary": "Talk to an engineer",
+    "trust_bar": "Trusted for enterprise IT and custom AI systems",
+    "split_hardware_title": "Hardware & Infrastructure",
+    "split_hardware_body": "Rollouts, migrations, break-fix, WiFi surveys, and 24/7 data-center support. Predictable SLAs, on-site or remote.",
+    "split_dev_title": "Software Development",
+    "split_dev_body": "Custom CRMs, retrieval-augmented AI, agentic automation, and bespoke systems production-grade, security-reviewed, delivered on schedule.",
+    "value_1_t": "One team, dual expertise",
+    "value_1_b": "Rare in the market: senior hardware operators and senior engineers under one roof, sharing context and accountability.",
+    "value_2_t": "Security-first by default",
+    "value_2_b": "Hardened headers, hardened code, EU-region processing, and audited email + form flows on every project.",
+    "value_3_t": "Outcome, not hours",
+    "value_3_b": "We define success up front uptime, response time, adoption, revenue lift and report against it every sprint.",
+    "value_4_t": "Bilingual delivery",
+    "value_4_b": "German and English, formal Sie for German B2B, and documentation your teams can actually operate from.",
+    "stats_projects": "Enterprise engagements delivered",
+    "stats_uptime": "Average infrastructure uptime",
+    "stats_response": "Median first-response time",
+    "stats_countries": "Countries served",
+    "cta_bottom_t": "Ready to compare vendors?",
+    "cta_bottom_b": "Send us your requirements. You'll get a written scope, timeline, and price band within one business day no sales dance."
+  },
+  "chatbot": {
+    "title": "Ask Deploris",
+    "subtitle": "AI assistant grounded in our services and FAQ",
+    "placeholder": "Ask about CRM, RAG, AI agents, or IT support…",
+    "send": "Send",
+    "close": "Close chat",
+    "open": "Open chat",
+    "escalate": "Talk to a human",
+    "book_call": "Book a call",
+    "lead_prompt": "Want us to follow up? Leave your name + email:",
+    "lead_name": "Your name",
+    "lead_email": "Your email",
+    "lead_submit": "Send",
+    "lead_thanks": "Thanks a real engineer will reply within one business day.",
+    "stub_notice": "AI responses are in a preview mode until we plug in the live model."
+  },
+  "contact": {
+    "title": "Talk to Deploris",
+    "intro": "Tell us what you're building or supporting. We reply within one business day.",
+    "field_name": "Full name",
+    "field_email": "Business email",
+    "field_company": "Company",
+    "field_phone": "Phone (optional)",
+    "field_service_line": "Which service line?",
+    "field_message": "What do you need help with?",
+    "field_consent": "I've read the privacy notice and consent to Deploris contacting me.",
+    "submit": "Send message",
+    "success": "Thanks we've received your message and will reply within one business day.",
+    "error": "We couldn't send that. Please try again or email us directly.",
+    "options": {
+      "hardware": "Hardware & Infrastructure",
+      "development": "Software Development",
+      "both": "Both",
+      "unsure": "Not sure yet"
+    }
+  },
+  "quote": {
+    "title": "Get a quote",
+    "step1": "1. Which service line?",
+    "step2": "2. Your requirements",
+    "step3": "3. Your contact details",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Send request",
+    "progress": "Step {current} of {total}"
+  },
+  "newsletter": {
+    "title": "The Deploris brief",
+    "body": "One email a month on practical CRM, RAG, and IT-infrastructure lessons from real engagements.",
+    "field_email": "Business email",
+    "submit": "Subscribe",
+    "consent": "I consent to receive Deploris's newsletter. I can unsubscribe any time.",
+    "double_opt_in": "Check your inbox we've sent a confirmation link. You'll only be subscribed after you confirm.",
+    "already": "You're already on the list."
+  }
+}

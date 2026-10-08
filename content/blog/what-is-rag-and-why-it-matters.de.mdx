@@ -1,0 +1,43 @@
+---
+title: Was ist ein RAG-System und warum ist es für Business-KI wichtig?
+description: Eine verständliche Erklärung von Retrieval-Augmented Generation was es ist, wann es gewinnt und wie man es bewertet.
+date: 2025-01-20
+author: Deploris
+tags:
+  - rag
+  - ki
+  - kaufberatung
+locale: de
+slug: was-ist-ein-rag-system
+---
+
+Wenn Sie das Kürzel RAG schon einmal gehört und mitgenickt haben, sind Sie in guter Gesellschaft. Es steht für **Retrieval-Augmented Generation** und ist das Muster hinter den meisten belastbaren Business-KI-Systemen, die heute in Produktion gehen.
+
+## Der Ein-Absatz-Ansatz
+
+Ein Retriever findet die Passagen in Ihrer Wissensbasis, die zu einer Frage am besten passen. Ein Sprachmodell antwortet dann ausschließlich auf Basis dieser Passagen und zitiert die Quelle. Der Nutzer bekommt eine überprüfbare Antwort; das Unternehmen bekommt ein System, dessen Fakten auditierbar sind.
+
+## Warum kein Fine-Tuning?
+
+Fine-Tuning verändert die Modellgewichte. Das ist teuer, schwer zu aktualisieren und faktisch nicht auditierbar. RAG belässt das Modell wie es ist und übergibt ihm zur Laufzeit Ihre aktuellen Dokumente. Sobald Sie ein Dokument aktualisieren, spiegelt die nächste Antwort das wider kein Retraining.
+
+## Wo RAG gewinnt
+
+- **Support und internes Wissen.** Mitarbeitende oder Kunden fragen immer wieder dasselbe.
+- **Regulierte Inhalte.** Sie müssen nachweisen, welche Quelle eine Aussage stützt.
+- **Dokumente, die sich häufig ändern.** Produktnotizen, Richtlinien, Release-Notes.
+
+## Wo RAG an Grenzen stößt
+
+- **Wirklich neuartige Synthese.** Was nicht im Korpus steht, erfindet ein RAG-System nicht (das ist ein *Feature*, gelegentlich unbequem).
+- **Rein konversationelle Aufgaben ohne Quelle.**
+
+## Fünf Dinge, die ein produktives RAG braucht
+
+1. **Kuratiertes Korpus.** Nicht „alles auf SharePoint" die vertrauenswürdigen Quellen.
+2. **Retrieval-Evaluation.** Precision, Recall und Antwortgenauigkeit auf einem wachsenden Fragenset.
+3. **Zugriffskontrolle.** Der Retriever respektiert bestehende Berechtigungen.
+4. **Quellenzitat in jeder Antwort.** Keine Ausnahme.
+5. **Monitoring-Oberfläche.** Damit Sie wissen, wenn Qualität abrutscht.
+
+*Wenn Sie zwischen RAG, Chatbot und Knowledge-Base abwägen, [skizzieren wir gerne, was zu Ihrem Fall passt](/de/contact).*

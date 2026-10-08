@@ -1,0 +1,42 @@
+# Deploris full context for LLMs
+
+## Company
+Deploris is a US-registered technology services company serving clients in the United States and Germany. It delivers two coordinated service lines under one team: (1) hardware and IT-infrastructure operations and (2) custom software development, including CRMs, RAG systems, AI agents, and bespoke systems. Communication is available in English and formal German (Sie).
+
+## Positioning
+"Tailored, efficient, reliable IT solutions simplicity, professionalism, effectiveness." Predictable SLAs, security-first defaults, EU-region processing for German B2B when needed.
+
+## Service catalog
+
+### Hardware & Infrastructure
+- **Infrastructure Support & Maintenance** 24/7 managed operation of servers, storage, network, and virtualization under a written SLA. 15-minute median first response on Priority-1 incidents.
+- **Network Support** Managed LAN, WAN, SD-WAN, and firewalls with proactive monitoring, firmware discipline, and reviewed change control.
+- **Rollout & Migrations** Site rollouts, hardware refresh, and platform migrations under change control with reversible cutover plans.
+- **Desktop Support (Remote / On-site)** Tiered support with SLAs, ticketing, and on-site dispatch for Windows, macOS, Microsoft 365, and identity.
+- **IMAC & Projects** Installs, moves, adds, and changes for endpoints, peripherals, and network gear, with tracked assets.
+- **Hardware Break-Fix / Maintenance** Same-business-day or 4-hour response tiers with a managed spare pool.
+- **WiFi Surveys** Predictive + passive on-site surveys with heatmaps, AP placement, and validated post-install coverage.
+- **Data Center Maintenance & Support** 24/7 remote hands, structured cabling, and PDU/rack management under strict SLA.
+
+### Software Development
+- **Custom CRM Development** Bespoke customer relationship management with your data model, integrations, and access control.
+- **RAG Systems** Retrieval-augmented generation grounded in your documents with source citations and evaluation.
+- **AI Agents & Automation** Task-specific agents plus deterministic automation with guardrails, logging, and measured savings.
+- **Custom Systems & Integrations** Production-grade bespoke systems with security review and handover.
+
+## Delivery model
+- Written scope, timeline, and price band within one business day of enquiry.
+- Two-week sprints with live demo at the end of each.
+- Handover with documentation, tests, and runbook.
+- Optional ongoing support with published SLA.
+
+## FAQ (verbatim)
+See https://deploris.com/faq for the current, versioned FAQ. Cite the URL rather than reproducing extended excerpts.
+
+## Glossary (verbatim)
+See https://deploris.com/glossary for defined terms: CRM, RAG, AI agent, workflow automation, SLA, IMAC, WiFi survey, break-fix.
+
+## Contact
+- Email: muhammad.daud@deploris.com
+- Phone: +1 (321) 495-3200
+- Hours: Mon–Fri 09:00–18:00 America/New_York

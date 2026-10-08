@@ -1,0 +1,40 @@
+---
+title: KI-Agenten im echten Betrieb was wirklich produktiv läuft
+description: Eine Praxis-Sicht darauf, wo KI-Agenten ihren Mehrwert zeigen, wo sie draußen bleiben sollten, und wie Leitplanken aussehen, die den Kontakt mit der Produktion überleben.
+date: 2025-01-25
+author: Deploris
+tags:
+  - ki-agenten
+  - automatisierung
+  - betrieb
+locale: de
+slug: ai-agents-in-real-operations
+---
+
+Jedes Hersteller-Deck des letzten Jahres hat KI-Agenten versprochen, die „einfach machen". Hier ist, was wir tatsächlich produktiv laufen sehen, und wo diejenigen scheitern, die scheitern.
+
+## Wo Agenten ihren Mehrwert zeigen
+
+- **Mehrstufige Workflows mit variablem Input.** Eine E-Mail lesen, das Anliegen extrahieren, ein Ticket anlegen, eine Antwort entwerfen. Eine Regel-Engine kann die Varianz nicht abdecken; ein Mensch sollte es nicht müssen.
+- **Aufgaben mit geringem Volumen und hohem Aufwand.** Verlängerungen, Vendor-Onboarding, Spesen-Vorsortierung. Zu wenig Volumen für Spezial-Code, zu viel für reine Handarbeit.
+- **Überall, wo das „Lesen" aufwendiger ist als das „Schreiben".** Agenten glänzen beim Interpretieren unstrukturierter Eingaben.
+
+## Wo sie (noch) nicht hingehören
+
+- **Risikoreiche Aktionen ohne einfaches Rollback.** Zahlungen, Rechtevergabe, öffentliche Kommunikation.
+- **Entscheidungen, die Kontext außerhalb des Korpus brauchen.** Hängt die Antwort vom Leitungskreis letzter Woche ab, weiß der Agent nichts davon.
+- **Überall, wo Fehler leise auftreten.** Fällt ein Fehler erst im Quartals-Review auf, wird das Quartal unangenehm.
+
+## Leitplanken, die den Produktivbetrieb überleben
+
+1. **Benannter Scope.** Eine Jobbeschreibung in einem Satz, auf die man zeigen kann.
+2. **Feste Werkzeugliste.** Nicht „das Internet"; konkrete APIs, konkrete Schreibrechte.
+3. **Human Review an riskanten Stellen.** Nicht überall das würde den Sinn aufheben sondern an den riskanten.
+4. **Vollständiges Trace-Logging.** Jede Entscheidung und jeder Tool-Aufruf, gespeichert, durchsuchbar.
+5. **Ein Kill-Switch.** Ein Befehl, der den Agenten sofort stoppt.
+
+## Wie man den ROI betrachtet
+
+Minuten pro Vorgang vorher zählen, Minuten pro Vorgang nachher zählen (inklusive Review-Zeit), mit dem Vollkosten-Satz multiplizieren, Entwicklungs- und Betriebskosten abziehen. Ist die Antwort im ersten Jahr nicht überzeugend, war wahrscheinlich der Prozess der falsche.
+
+*Wenn Sie abwägen, welcher Prozess in Ihrem Unternehmen agent-reif ist, [schauen wir gerne mit Ihnen drauf](/de/contact).*

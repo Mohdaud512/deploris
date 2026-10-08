@@ -1,0 +1,40 @@
+---
+title: AI agents in real operations what actually ships
+description: A practitioner's view on where AI agents earn their keep, where they should stay out, and how to design guardrails that survive contact with production.
+date: 2025-01-25
+author: Deploris
+tags:
+  - ai-agents
+  - automation
+  - operations
+locale: en
+slug: ai-agents-in-real-operations
+---
+
+Every vendor deck for the last year has promised AI agents that "just do it." Here is what we actually see working in production, and where the ones that fail tend to fail.
+
+## Where agents earn their keep
+
+- **Multi-step workflows with variable inputs.** Reading an email, extracting the ask, filing a ticket, drafting the reply. A rules engine can't cover the variability; a person shouldn't have to.
+- **Low-volume, high-toil tasks.** Renewals, vendor onboarding, expense triage. Volume is too low to justify custom code, too high to keep doing by hand.
+- **Anywhere the "read" is more work than the "write."** Agents shine at interpreting unstructured input.
+
+## Where they don't (yet)
+
+- **High-stakes actions with no easy rollback.** Financial transfers, permission grants, public communications.
+- **Decisions requiring context outside the corpus.** If the answer depends on last week's leadership call, the agent won't know.
+- **Anywhere the failure mode is silent.** If a mistake doesn't surface until quarterly review, you're in for a bad quarter.
+
+## Guardrails that survive production
+
+1. **Named scope.** A one-sentence job description you can point at.
+2. **Fixed tool list.** Not "the internet"; specific APIs, specific write permissions.
+3. **Human review at risky steps.** Not everywhere that defeats the point but at the risky ones.
+4. **Full trace logging.** Every decision and every tool call, stored, searchable.
+5. **A kill switch.** One command that stops the agent immediately.
+
+## How to think about ROI
+
+Count the minutes per case before, count the minutes per case after (including any human review time), multiply by fully-loaded rate, subtract build + run cost. If the answer isn't compelling in the first year, you probably chose the wrong process.
+
+*If you're weighing which process in your business is agent-ready, [we're happy to look with you](/contact).*

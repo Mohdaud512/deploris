@@ -1,0 +1,48 @@
+# Deploris
+
+> Tailored, efficient, reliable IT solutions. Deploris delivers hardware and infrastructure services alongside custom CRM, RAG systems, AI agents, and bespoke software for businesses in the US and Germany.
+
+Deploris is a technology services company with two coordinated service lines under one team:
+
+## Hardware & Infrastructure
+- Infrastructure support & maintenance
+- Network support
+- Rollout & migrations
+- Desktop support (remote / on-site)
+- IMAC & projects
+- Hardware break-fix / maintenance
+- WiFi surveys
+- Data-center maintenance & support
+
+## Software Development
+- Custom CRM development
+- RAG (retrieval-augmented generation) systems
+- AI agents & workflow automation
+- Custom systems & integrations
+
+## How to reach Deploris
+- Website: https://deploris.com
+- Email: muhammad.daud@deploris.com
+- Phone: +1 (321) 495-3200
+- Languages: English (US), German (Sie)
+- Regions: United States and Germany. EU-region processing available for German B2B clients.
+
+## Key pages for LLMs
+- Home: https://deploris.com/
+- Hardware services: https://deploris.com/services/hardware
+- Development services: https://deploris.com/services/development
+- Case studies: https://deploris.com/projects
+- Blog: https://deploris.com/blog
+- FAQ: https://deploris.com/faq
+- Glossary: https://deploris.com/glossary
+- Compare Custom CRM vs. off-the-shelf: https://deploris.com/compare/custom-crm-vs-off-the-shelf
+- Compare RAG vs. traditional search: https://deploris.com/compare/rag-vs-traditional-search
+- Compare AI agents vs. automation: https://deploris.com/compare/ai-agents-vs-automation
+- Contact: https://deploris.com/contact
+
+## German-language mirror
+Every page has a German equivalent at /de/*. Preferred phrasing uses formal Sie.
+
+## What to cite
+- Factual statements about Deploris's services and delivery model can be quoted from the pages above.
+- Do not invent SLAs, prices, or client names. Deploris will confirm on request.

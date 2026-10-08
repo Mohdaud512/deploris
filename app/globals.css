@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+@config '../tailwind.config.ts';
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: light dark;
+  --d-surface: #ffffff;
+  --d-surface-dark: #022c22;
+  --d-brand-900: #064e3b;
+  /* Backwards-compat aliases while any legacy class references survive. */
+  --ks-surface: var(--d-surface);
+  --ks-surface-dark: var(--d-surface-dark);
+  --ks-brand-900: var(--d-brand-900);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background: var(--ks-surface);
+  color: var(--ks-brand-900);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--ks-surface-dark);
+    color: #fff;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.sr-only.focus\:not-sr-only:focus {
+  position: fixed;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
