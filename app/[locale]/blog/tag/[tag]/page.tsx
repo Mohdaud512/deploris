@@ -34,14 +34,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: `/blog/tag/${tag}`,
-    title:
-      locale === 'de'
-        ? `Thema: ${label} | Deploris Blog`
-        : `Topic: ${label} | Deploris Blog`,
-    description:
-      locale === 'de'
-        ? `Alle Blog-Beiträge im Themenfeld ${label}.`
-        : `All posts tagged ${label}.`,
+    title: locale === 'de' ? `Thema ${label} im Deploris-Blog` : `Topic ${label} on the Deploris blog`,
+    description: locale === 'de'
+      ? `Alle Beiträge im Themenfeld ${label} Analysen, Entscheidungshilfen und Praxiserfahrungen aus unseren laufenden Projekten.`
+      : `All posts tagged ${label} analysis, decision guides, and field notes from the engagements we're currently running.`,
     // Tag pages have few posts and are near-duplicates of each other;
     // noindex until there are 5+ posts per tag so Google doesn't classify
     // them as thin content.

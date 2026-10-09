@@ -9,14 +9,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/industries',
-    title:
-      locale === 'de'
-        ? 'Branchen & Anwendungsfälle | Deploris'
-        : 'Industries & Use Cases | Deploris',
-    description:
-      locale === 'de'
-        ? 'Wie Deploris IT-Infrastruktur, CRM, RAG und KI-Automatisierung in konkreten Branchen liefert.'
-        : 'How Deploris delivers IT infrastructure, CRM, RAG, and AI automation in specific industries.',
+    title: locale === 'de' ? 'Branchen und Anwendungsfälle für CRM, RAG und IT' : 'Industries and use cases for CRM, RAG, and IT operations',
+    description: locale === 'de'
+      ? 'Wie Deploris IT-Infrastruktur, individuelle CRM-Systeme, RAG und KI-Automatisierung in konkreten Branchen vom SMB-Vertrieb bis zur Rechenzentrumsmigration liefert.'
+      : 'How Deploris delivers IT infrastructure, custom CRM, RAG, and AI automation across specific industries from SMB revenue teams to data-center migrations.',
   });
 }
 

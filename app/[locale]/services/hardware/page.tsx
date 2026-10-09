@@ -11,14 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/services/hardware',
-    title:
-      locale === 'de'
-        ? 'Hardware & Infrastruktur IT Infrastruktur Support | Deploris'
-        : 'Hardware & Infrastructure IT infrastructure support | Deploris',
-    description:
-      locale === 'de'
-        ? 'Managed IT-Infrastruktur, Netzwerk-Support, Rollouts, Desktop-Support, WLAN-Ausleuchtung und 24/7 Rechenzentrum-Support unter schriftlicher SLA.'
-        : 'Managed IT infrastructure, network support, rollouts, desktop support, WiFi surveys, and 24/7 data-center support under a written SLA.',
+    title: locale === 'de' ? 'Hardware und Infrastruktur IT-Betrieb unter SLA' : 'Hardware and Infrastructure IT operations under written SLA',
+    description: locale === 'de'
+      ? 'Managed IT-Infrastruktur, Netzwerk-Support, Hardware-Rollouts, Desktop-Support, WLAN-Ausleuchtung und 24/7 Rechenzentrum-Support unter schriftlicher SLA.'
+      : 'Managed IT infrastructure, network support, hardware rollouts, desktop support, WiFi surveys, and 24/7 data-center support each delivered under a written SLA.',
   });
 }
 

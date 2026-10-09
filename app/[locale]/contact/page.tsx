@@ -9,7 +9,7 @@ import { contactPageSchema, breadcrumbSchema } from '@/lib/schema';
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'contact' });
-  return buildMetadata({ locale, path: '/contact', title: t('title'), description: t('intro') });
+  return buildMetadata({ locale, path: '/contact', title: t('meta_title'), description: t('meta_description') });
 }
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: Locale }> }) {

@@ -25,8 +25,10 @@ export async function generateMetadata({
   return buildMetadata({
     locale,
     path: `/glossary/${term}`,
-    title: `${found.term} ${locale === 'de' ? 'Glossar' : 'Glossary'} | Deploris`,
-    description: found.description,
+    title: `${found.term} ${locale === 'de' ? 'Definition im Glossar' : 'definition in the glossary'}`,
+    description: found.description.length < 110
+      ? `${found.description} ${locale === 'de' ? 'Teil des Deploris-Glossars zu CRM-, RAG-, KI- und IT-Begriffen.' : 'Part of the Deploris glossary of CRM, RAG, AI, and IT operations terms.'}`
+      : found.description,
     type: 'article',
   });
 }

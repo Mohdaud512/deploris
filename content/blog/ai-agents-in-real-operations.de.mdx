@@ -15,9 +15,9 @@ Jedes Hersteller-Deck des letzten Jahres hat KI-Agenten versprochen, die „einf
 
 ## Wo Agenten ihren Mehrwert zeigen
 
-- **Mehrstufige Workflows mit variablem Input.** Eine E-Mail lesen, das Anliegen extrahieren, ein Ticket anlegen, eine Antwort entwerfen. Eine Regel-Engine kann die Varianz nicht abdecken; ein Mensch sollte es nicht müssen.
+- **Mehrstufige Workflows mit variablem Input.** Eine E-Mail lesen, das Anliegen extrahieren, ein Ticket anlegen, eine Antwort entwerfen. Eine Regel-Engine kann die Varianz nicht abdecken; ein Mensch sollte es nicht müssen. Genau hier setzt unser [KI-Agenten- und Automatisierungs-Service](/de/services/development/ki-automatisierung) typischerweise an.
 - **Aufgaben mit geringem Volumen und hohem Aufwand.** Verlängerungen, Vendor-Onboarding, Spesen-Vorsortierung. Zu wenig Volumen für Spezial-Code, zu viel für reine Handarbeit.
-- **Überall, wo das „Lesen" aufwendiger ist als das „Schreiben".** Agenten glänzen beim Interpretieren unstrukturierter Eingaben.
+- **Überall, wo das „Lesen" aufwendiger ist als das „Schreiben".** Agenten glänzen beim Interpretieren unstrukturierter Eingaben. Wenn das „Lesen" sich auf Ihre eigenen Dokumente stützt, ist ein [RAG-System](/de/blog/what-is-rag-and-why-it-matters) meist die richtige erste Schicht unter dem Agenten.
 
 ## Wo sie (noch) nicht hingehören
 
@@ -27,11 +27,13 @@ Jedes Hersteller-Deck des letzten Jahres hat KI-Agenten versprochen, die „einf
 
 ## Leitplanken, die den Produktivbetrieb überleben
 
-1. **Benannter Scope.** Eine Jobbeschreibung in einem Satz, auf die man zeigen kann.
+1. **Benannter Scope.** Eine Jobbeschreibung in einem Satz, auf die man zeigen kann. Die Langform steht in der [KI-Agent-Definition im Glossar](/de/glossary/ki-agent).
 2. **Feste Werkzeugliste.** Nicht „das Internet"; konkrete APIs, konkrete Schreibrechte.
 3. **Human Review an riskanten Stellen.** Nicht überall das würde den Sinn aufheben sondern an den riskanten.
 4. **Vollständiges Trace-Logging.** Jede Entscheidung und jeder Tool-Aufruf, gespeichert, durchsuchbar.
 5. **Ein Kill-Switch.** Ein Befehl, der den Agenten sofort stoppt.
+
+Wenn eine Entscheidung einen Kundendatensatz oder eine Vertriebsaktion berührt, braucht der Agent in der Regel ein [individuelles CRM](/de/services/development/crm-entwicklung) als Schreibziel statt eines generischen SaaS-Endpunkts.
 
 ## Wie man den ROI betrachtet
 

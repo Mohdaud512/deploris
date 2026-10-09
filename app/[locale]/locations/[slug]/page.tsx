@@ -51,8 +51,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: `/locations/${slug}`,
-    title: `${svcTitle} ${city.name} | Deploris`,
-    description: `${svcTitle} for ${city.name} clients served ${city.country === 'DE' ? 'Germany-wide' : 'US-wide'} remotely with on-site visits on request.`,
+    title: locale === 'de' ? `${svcTitle} für Kunden in ${city.name}` : `${svcTitle} for teams in ${city.name}`,
+    description: locale === 'de'
+      ? `${svcTitle} für Kunden in ${city.name} remote ${city.country === 'DE' ? 'deutschlandweit' : 'US-weit'} mit Vor-Ort-Terminen auf Anfrage, zweisprachig und unter schriftlicher Leistungsvereinbarung.`
+      : `${svcTitle} for teams in ${city.name} delivered remotely ${city.country === 'DE' ? 'Germany-wide' : 'across the US'} with on-site visits on request, bilingual, under a written SLA.`,
   });
 }
 

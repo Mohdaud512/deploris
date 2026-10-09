@@ -7,11 +7,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/legal/cookies',
-    title: locale === 'de' ? 'Cookie-Richtlinie | Deploris' : 'Cookie policy | Deploris',
-    description:
-      locale === 'de'
-        ? 'Welche Cookies wir setzen, wozu, und wie Sie Ihre Einwilligung verwalten.'
-        : 'Which cookies we set, why, and how to manage your consent.',
+    title: locale === 'de' ? 'Cookie-Richtlinie Einwilligung und Verwaltung' : 'Cookie policy what we set and how to manage consent',
+    description: locale === 'de'
+      ? 'Welche Cookies Deploris setzt (essentiell, Analytics, Marketing), warum, wie lange sie gespeichert werden, und wie Sie Ihre Einwilligung jederzeit verwalten.'
+      : 'Which cookies Deploris sets (essential, analytics, marketing), why, how long they persist, and how to review or change your consent at any time.',
   });
 }
 

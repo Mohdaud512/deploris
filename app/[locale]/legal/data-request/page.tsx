@@ -8,11 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/legal/data-request',
-    title: locale === 'de' ? 'Datenauskunft / Löschung | Deploris' : 'Data request / erasure | Deploris',
-    description:
-      locale === 'de'
-        ? 'Auskunft, Berichtigung, Löschung, Datenübertragung reichen Sie eine DSGVO-Anfrage in wenigen Feldern ein.'
-        : 'Access, rectification, erasure, portability submit a GDPR data request in a few fields.',
+    title: locale === 'de' ? 'Datenauskunft und Löschung nach DSGVO' : 'Data request and erasure under GDPR',
+    description: locale === 'de'
+      ? 'Auskunft, Berichtigung, Löschung oder Datenübertragung Ihre DSGVO-Betroffenenrechte in wenigen Feldern direkt an das Deploris-Datenschutzteam einreichen.'
+      : 'Access, rectification, erasure, or portability submit a GDPR data-subject request to the Deploris privacy team through a short structured form.',
     // Form page that submits PII; disallowed in robots.txt, also noindex at
     // meta level as defense-in-depth so other engines (not just Google) honor
     // it.

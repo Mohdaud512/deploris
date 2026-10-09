@@ -35,12 +35,17 @@ export function buildMetadata({
   }
   languages['x-default'] = `${publicEnv.siteUrl}${path}`;
 
+  // Append " | Deploris" if not already present. We don't use title.template
+  // here because every page composes its own full metadata via this helper
+  // (no nested routes rely on the template firing on a child), and that
+  // double-booked risk of "Foo | Deploris | Deploris" was flagged in the
+  // SEO audit. Belt-and-suspenders: strip repeated suffix defensively.
+  const trimmed = title.replace(/\s*\|\s*Deploris\s*$/i, '').trim();
+  const brandedTitle = `${trimmed} | ${site.name}`;
+
   return {
     metadataBase: new URL(publicEnv.siteUrl),
-    title: {
-      default: title,
-      template: `%s | ${site.name}`,
-    },
+    title: brandedTitle,
     description,
     alternates: {
       canonical,

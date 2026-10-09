@@ -15,9 +15,9 @@ Every vendor deck for the last year has promised AI agents that "just do it." He
 
 ## Where agents earn their keep
 
-- **Multi-step workflows with variable inputs.** Reading an email, extracting the ask, filing a ticket, drafting the reply. A rules engine can't cover the variability; a person shouldn't have to.
+- **Multi-step workflows with variable inputs.** Reading an email, extracting the ask, filing a ticket, drafting the reply. A rules engine can't cover the variability; a person shouldn't have to. This is where our [AI agents and automation service](/services/development/ai-agents-automation) tends to land.
 - **Low-volume, high-toil tasks.** Renewals, vendor onboarding, expense triage. Volume is too low to justify custom code, too high to keep doing by hand.
-- **Anywhere the "read" is more work than the "write."** Agents shine at interpreting unstructured input.
+- **Anywhere the "read" is more work than the "write."** Agents shine at interpreting unstructured input. When the "read" is grounded in your own documents, a [RAG system](/blog/what-is-rag-and-why-it-matters) is usually the right first layer under the agent.
 
 ## Where they don't (yet)
 
@@ -27,11 +27,13 @@ Every vendor deck for the last year has promised AI agents that "just do it." He
 
 ## Guardrails that survive production
 
-1. **Named scope.** A one-sentence job description you can point at.
+1. **Named scope.** A one-sentence job description you can point at. See the [AI agent definition in our glossary](/glossary/ai-agent) for the longer form.
 2. **Fixed tool list.** Not "the internet"; specific APIs, specific write permissions.
 3. **Human review at risky steps.** Not everywhere that defeats the point but at the risky ones.
 4. **Full trace logging.** Every decision and every tool call, stored, searchable.
 5. **A kill switch.** One command that stops the agent immediately.
+
+When one of those decisions touches a customer record or a sales action, the agent usually needs a [custom CRM](/services/development/custom-crm) to write into rather than a generic SaaS endpoint.
 
 ## How to think about ROI
 

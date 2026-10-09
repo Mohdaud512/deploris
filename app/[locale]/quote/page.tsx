@@ -9,11 +9,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/quote',
-    title: t('title'),
-    description:
-      locale === 'de'
-        ? 'Beschreiben Sie Ihr Projekt in drei Schritten Sie erhalten eine schriftliche Preisspanne binnen eines Werktags.'
-        : 'Describe your project in three steps get a written price band within one business day.',
+    title: t('meta_title'),
+    description: t('meta_description'),
   });
 }
 

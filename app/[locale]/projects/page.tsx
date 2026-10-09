@@ -11,11 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/projects',
-    title: locale === 'de' ? 'Referenzen | Deploris' : 'Case studies | Deploris',
-    description:
-      locale === 'de'
-        ? 'Ausgewählte Kundenprojekte anonymisierte Platzhalter, bis freigegebene Fassungen vorliegen.'
-        : 'Selected client engagements anonymized placeholders until approved versions are ready.',
+    title: locale === 'de' ? 'Referenzen und Fallstudien aus CRM, RAG und IT' : 'Case studies and references across CRM, RAG, and IT',
+    description: locale === 'de'
+      ? 'Ausgewählte Kundenprojekte aus CRM-Entwicklung, RAG-Systemen, KI-Automatisierung und Infrastruktur-Support anonymisierte Platzhalter bis zur Freigabe.'
+      : 'Selected client engagements across custom CRM, RAG systems, AI automation, and infrastructure anonymized placeholders until approved versions ship.',
   });
 }
 

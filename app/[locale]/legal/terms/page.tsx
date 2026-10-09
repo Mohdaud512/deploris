@@ -8,11 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/legal/terms',
-    title: locale === 'de' ? 'AGB | Deploris' : 'Terms of service | Deploris',
-    description:
-      locale === 'de'
-        ? 'Allgemeine Geschäftsbedingungen für die Nutzung dieser Website und der über sie angebotenen Leistungen.'
-        : 'Terms governing use of this website and the services offered through it.',
+    title: locale === 'de' ? 'Allgemeine Geschäftsbedingungen (AGB)' : 'Terms of service for Deploris engagements',
+    description: locale === 'de'
+      ? 'Allgemeine Geschäftsbedingungen von Deploris für Nutzung dieser Website sowie Beauftragung und Lieferung unserer Hardware- und Softwareleistungen.'
+      : 'The terms that govern use of the Deploris website and the engagement and delivery of our hardware, infrastructure, and custom-software services.',
   });
 }
 

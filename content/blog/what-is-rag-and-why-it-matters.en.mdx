@@ -15,7 +15,7 @@ If you've heard the acronym RAG and nodded along, you're not alone. It stands fo
 
 ## The one-paragraph version
 
-A retriever finds the passages in your knowledge base that are most relevant to a question. A language model then answers using those passages and only those passages and cites the source. The user gets an answer they can verify; the business gets a system whose facts they can audit.
+A retriever finds the passages in your knowledge base that are most relevant to a question. A language model then answers using those passages and only those passages and cites the source. The user gets an answer they can verify; the business gets a system whose facts they can audit. The short-form definition sits in our [glossary entry for RAG](/glossary/rag).
 
 ## Why not just fine-tune a model?
 
@@ -23,7 +23,7 @@ Fine-tuning changes the model's weights. That's expensive to run, hard to update
 
 ## Where RAG wins
 
-- **Support and internal knowledge.** Employees or customers keep asking the same knowledge-heavy questions.
+- **Support and internal knowledge.** Employees or customers keep asking the same knowledge-heavy questions. This is what our [RAG systems service](/services/development/rag-systems) is built for.
 - **Regulated content.** You need to prove which source drove a claim.
 - **Docs that change often.** Product notes, policies, release notes.
 
@@ -39,5 +39,7 @@ Fine-tuning changes the model's weights. That's expensive to run, hard to update
 3. **Access control.** The retriever must respect existing permissions, not sidestep them.
 4. **Source citation in every answer.** No exceptions.
 5. **A monitoring surface.** So you know when quality drifts.
+
+If the answers also need to *do* something (file a ticket, update a record, trigger a workflow), you probably want a [RAG system paired with an AI agent](/blog/ai-agents-in-real-operations), not RAG on its own.
 
 *If you're weighing RAG vs. a chatbot vs. a knowledge base, [we're happy to sketch which fits your case](/contact).*

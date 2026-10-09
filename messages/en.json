@@ -106,6 +106,8 @@
   "contact": {
     "title": "Talk to Deploris",
     "intro": "Tell us what you're building or supporting. We reply within one business day.",
+    "meta_title": "Contact Deploris IT and custom software support",
+    "meta_description": "Reach the Deploris team for managed IT, custom CRM, RAG systems, or AI agents. Written scope and price band within one business day of enquiry.",
     "field_name": "Full name",
     "field_email": "Business email",
     "field_company": "Company",
@@ -126,6 +128,8 @@
   },
   "quote": {
     "title": "Get a quote",
+    "meta_title": "Request a project quote one business day turnaround",
+    "meta_description": "Describe your project in three short steps and receive a written scope, timeline, and price band from Deploris within one business day no sales dance.",
     "step1": "1. Which service line?",
     "step2": "2. Your requirements",
     "step3": "3. Your contact details",

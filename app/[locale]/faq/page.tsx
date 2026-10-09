@@ -11,14 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/faq',
-    title:
-      locale === 'de'
-        ? 'FAQ Antworten zu CRM, RAG, KI-Agenten und IT-Support | Deploris'
-        : 'FAQ Answers on CRM, RAG, AI agents, and IT support | Deploris',
-    description:
-      locale === 'de'
-        ? 'Antworten auf die häufigsten Fragen zu unseren Leistungen und zur Zusammenarbeit mit Deploris.'
-        : 'Answers to the most common questions about our services and working with Deploris.',
+    title: locale === 'de' ? 'FAQ Antworten zu CRM, RAG, KI-Agenten und IT' : 'FAQ Answers on CRM, RAG, AI agents, and IT support',
+    description: locale === 'de'
+      ? 'Antworten auf die häufigsten Fragen zu CRM, RAG, KI-Agenten, Automatisierung, Hardware-Support, Sicherheit, Preisen und Zusammenarbeit mit Deploris.'
+      : 'Answers to the most common questions on CRM, RAG, AI agents, automation, hardware support, security, pricing, and working with Deploris.',
   });
 }
 

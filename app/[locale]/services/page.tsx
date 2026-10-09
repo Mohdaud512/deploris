@@ -13,14 +13,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/services',
-    title:
-      locale === 'de'
-        ? 'Leistungen: Hardware, Infrastruktur, CRM, RAG und KI | Deploris'
-        : 'Services: Hardware, infrastructure, CRM, RAG and AI | Deploris',
-    description:
-      locale === 'de'
-        ? 'Zwei Leistungsfelder aus einer Hand: Hardware- und Infrastruktur-Support sowie individuelle Softwareentwicklung, RAG-Systeme, KI-Agenten und Individualsoftware.'
-        : 'Two service lines under one team: hardware and infrastructure operations, alongside custom software, RAG systems, AI agents, and bespoke systems.',
+    title: locale === 'de' ? 'Leistungen Hardware, Infrastruktur, CRM, RAG und KI' : 'Services Hardware, infrastructure, CRM, RAG, and AI',
+    description: locale === 'de'
+      ? 'Zwölf Leistungen in zwei Feldern Hardware- und Infrastruktur-Support sowie individuelle CRM-Systeme, RAG, KI-Agenten und Automatisierung aus einem Team.'
+      : 'Twelve services in two lines hardware and infrastructure operations alongside custom CRM, RAG systems, AI agents, and automation under one engineering team.',
   });
 }
 

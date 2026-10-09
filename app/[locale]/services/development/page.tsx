@@ -11,14 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/services/development',
-    title:
-      locale === 'de'
-        ? 'Softwareentwicklung CRM, RAG, KI-Automatisierung, Individualsoftware | Deploris'
-        : 'Software Development Custom CRM, RAG, AI Automation, Custom Systems | Deploris',
-    description:
-      locale === 'de'
-        ? 'Individuelle CRM-Systeme, RAG-Systeme, KI-Agenten und Individualsoftware produktionsreif, sicherheitsgeprüft, dokumentiert.'
-        : 'Custom CRMs, RAG systems, AI agents, and bespoke software production-grade, security-reviewed, documented.',
+    title: locale === 'de' ? 'Softwareentwicklung CRM, RAG, KI-Agenten, Individualsoftware' : 'Software Development Custom CRM, RAG, AI agents, bespoke systems',
+    description: locale === 'de'
+      ? 'Individuelle CRM-Systeme, RAG-Systeme, KI-Agenten und maßgeschneiderte Softwarelösungen produktionsreif, sicherheitsgeprüft, vollständig dokumentiert.'
+      : 'Custom CRM, RAG systems, AI agents, and bespoke software production-grade from day one, security-reviewed, and fully documented for your team.',
   });
 }
 

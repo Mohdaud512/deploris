@@ -11,11 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/about',
-    title: locale === 'de' ? 'Über Deploris IT- und Software-Partner' : 'About Deploris IT and software partner',
-    description:
-      locale === 'de'
-        ? 'Wir liefern verlässlichen Infrastruktur-Support sowie individuelle CRM-, RAG- und KI-Systeme aus einer Hand.'
-        : 'We deliver reliable infrastructure support alongside custom CRM, RAG, and AI systems under one team.',
+    title: locale === 'de' ? 'Über Deploris IT- und Software-Partner aus einer Hand' : 'About Deploris IT and software partner under one team',
+    description: locale === 'de'
+      ? 'Deploris liefert verlässlichen Infrastruktur-Support sowie individuelle CRM-, RAG- und KI-Systeme aus einer Hand mit zweisprachigem Team in US und DACH.'
+      : 'Deploris delivers reliable infrastructure operations alongside custom CRM, RAG, and AI systems under one team bilingual presence across the US and DACH regions.',
   });
 }
 

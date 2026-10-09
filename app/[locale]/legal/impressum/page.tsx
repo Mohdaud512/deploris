@@ -8,8 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/legal/impressum',
-    title: locale === 'de' ? 'Impressum | Deploris' : 'Imprint | Deploris',
-    description: locale === 'de' ? 'Anbieterkennzeichnung gemäß § 5 TMG.' : 'Provider identification per § 5 TMG.',
+    title: locale === 'de' ? 'Impressum rechtliche Angaben nach TMG § 5' : 'Imprint provider identification per TMG § 5',
+    description: locale === 'de'
+      ? 'Anbieterkennzeichnung nach TMG § 5 für Deploris: Rechtsform, Registrierung, Vertretung, redaktionelle Verantwortung und Streitbeilegung.'
+      : 'Provider identification for Deploris per German TMG § 5: legal form, registration, representation, editorial responsibility, and dispute resolution.',
     noIndex: false,
   });
 }

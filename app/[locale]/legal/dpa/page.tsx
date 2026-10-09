@@ -8,11 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/legal/dpa',
-    title: locale === 'de' ? 'AVV / Auftragsverarbeitung | Deploris' : 'Data Processing Agreement | Deploris',
-    description:
-      locale === 'de'
-        ? 'Auftragsverarbeitungsvertrag nach Art. 28 DSGVO Muster und Anfrageweg.'
-        : 'Data Processing Agreement per Art. 28 GDPR template and how to request it.',
+    title: locale === 'de' ? 'Auftragsverarbeitung (AVV) nach Art. 28 DSGVO' : 'Data Processing Agreement (DPA) per GDPR Art. 28',
+    description: locale === 'de'
+      ? 'Auftragsverarbeitungsvertrag (AVV) nach Art. 28 DSGVO für EWR-Kunden und Standard-DPA für US-Kunden Muster, Umfang, Subunternehmer und Anfrageweg.'
+      : 'Deploris Data Processing Agreement (DPA) for EEA clients per GDPR Article 28 and the standard DPA for US clients template, scope, subprocessors, and how to request it.',
   });
 }
 

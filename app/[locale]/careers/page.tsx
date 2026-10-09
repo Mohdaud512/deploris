@@ -11,8 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/careers',
-    title: locale === 'de' ? 'Karriere bei Deploris' : 'Careers at Deploris',
-    description: locale === 'de' ? 'Offene Positionen für Senior-Ingenieure US und DE, remote-first.' : 'Open senior engineering roles US and DE, remote-first.',
+    title: locale === 'de' ? 'Karriere Senior-Rollen remote in US und Deutschland' : 'Careers senior remote roles in the US and Germany',
+    description: locale === 'de'
+      ? 'Offene Senior-Positionen bei Deploris Backend, Infrastructure, AI Solutions. Remote-first, zweisprachig US und DACH, mit Verantwortung ab Tag eins.'
+      : 'Open senior engineering roles at Deploris backend, infrastructure, AI solutions. Remote-first, bilingual US and DACH, with real responsibility from day one.',
   });
 }
 

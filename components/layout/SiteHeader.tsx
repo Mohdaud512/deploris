@@ -26,7 +26,7 @@ export function SiteHeader() {
         >
           <Image
             src="/logo.png"
-            alt={`${site.name} ${site.tagline[locale]}`}
+            alt={site.name}
             width={128}
             height={128}
             sizes="64px"

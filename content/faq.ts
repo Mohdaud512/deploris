@@ -60,7 +60,23 @@ const en: FaqGroup[] = [
       },
       {
         q: 'Do you own ongoing maintenance after launch?',
-        a: 'Optional. Many clients take a monthly managed-ops retainer; others handle in-house and we return for scoped feature work.',
+        a: 'Optional. Many clients take a monthly managed-ops retainer; others handle in-house and we return for scoped feature work. Either way the codebase, infrastructure, and documentation stay fully in your account.',
+      },
+      {
+        q: 'Who owns the code and data at the end of the engagement?',
+        a: 'You do. Repositories, cloud infrastructure, databases, and secrets live in your own accounts from day one. There is no shared tenant, no license lock, and no exit fee for terminating the retainer.',
+      },
+      {
+        q: 'Which integrations are typically in scope for a custom CRM?',
+        a: 'Email and calendar (Google Workspace or Microsoft 365), telephony and messaging (Twilio, Vonage, Slack, Teams), billing and payments (Stripe, QuickBooks, DATEV), e-signature (DocuSign, HelloSign), marketing (ActiveCampaign, Customer.io), and data warehouse (BigQuery, Snowflake, Postgres read replicas).',
+      },
+      {
+        q: 'How do you keep a custom CRM secure?',
+        a: 'Role-based access control, audit logging on every write, encryption at rest and in transit, scoped API keys with rotation, OWASP ASVS checks before launch, and a security review signed off by a second engineer before each production deploy.',
+      },
+      {
+        q: 'What does onboarding look like for a new CRM project?',
+        a: 'A one-week discovery sprint maps your sales process, data model, and integration surface, followed by a written scope with milestones, a fixed first-release date, and a weekly working session until launch. Nothing starts until you have signed off on the scope.',
       },
     ],
   },
@@ -88,6 +104,22 @@ const en: FaqGroup[] = [
         q: 'How do you measure RAG quality?',
         a: 'A labelled eval set that grows as real questions come in; retrieval precision, answer faithfulness (grounded in retrieved content), and refusal rate on out-of-scope questions. Weekly report during active engagements.',
       },
+      {
+        q: 'Which document sources can a RAG system ingest?',
+        a: 'Confluence, Notion, SharePoint, Google Drive, Dropbox, S3 buckets, Postgres and MySQL databases, Zendesk and Intercom knowledge bases, GitHub wikis, PDF archives, and transcripts from Fireflies, Grain, or Otter. Every source respects its native permission model.',
+      },
+      {
+        q: 'How often does the index refresh?',
+        a: 'For actively edited sources (Notion, Confluence, Google Drive) we poll webhooks or change feeds and reindex within minutes. For slower-moving archives a nightly batch is enough. The refresh cadence is a configurable per-source policy.',
+      },
+      {
+        q: 'What does a RAG system cost to run?',
+        a: 'Running cost scales with document volume and query load. For a knowledge base of a few hundred thousand pages served at modest query volume, infrastructure plus model inference typically lands in the low four figures per month. We publish the full cost model before you sign.',
+      },
+      {
+        q: 'Which models do you support?',
+        a: 'Claude (Opus, Sonnet), GPT-4-class models, Gemini, open-weights models via Together, Fireworks, Groq, and self-hosted deployments on vLLM or SGLang. The orchestration layer is model-agnostic so you can switch without rewriting the application.',
+      },
     ],
   },
   {
@@ -105,6 +137,26 @@ const en: FaqGroup[] = [
       {
         q: 'What guardrails do production agents run under?',
         a: 'Named scope (one-sentence job description), fixed tool list (specific APIs, specific write permissions), human review at risky steps, full trace logging of every decision and tool call, and a kill switch that stops the agent immediately.',
+      },
+      {
+        q: 'How is prompt injection prevented inside an agent?',
+        a: 'Retrieved content is tagged as untrusted and cannot override system instructions. Tool calls run against an allow-list of exact function names and argument shapes. Any action that writes to a system of record passes through an approval queue reviewed by a human.',
+      },
+      {
+        q: 'What is a human-in-the-loop gate?',
+        a: 'A pause-point in the agent run where a draft action (an email to a customer, a database write, a payment) is shown to a human in a review UI before it is executed. The agent cannot proceed until the human approves, edits, or rejects.',
+      },
+      {
+        q: 'How do you monitor an agent in production?',
+        a: 'A dashboard shows every run, the tools it called, the arguments, the outputs, and the final decision. Errors and refusals are grouped so patterns surface quickly, and alerts fire on cost spikes, repeated failures, or any unusual escalation to a human reviewer.',
+      },
+      {
+        q: 'What happens when an agent gets a task wrong?',
+        a: 'Every write is reversible. The trace log identifies the exact tool call that caused the issue, we patch the scope, re-run the failing case against the eval set, and only re-enable the agent after the regression is covered.',
+      },
+      {
+        q: 'Can an agent run against our internal systems without exposing credentials?',
+        a: 'Yes. Credentials stay in a secrets manager (AWS Secrets Manager, Vault, Doppler). The agent requests short-lived scoped tokens for each tool call and never sees the underlying secret. Access is audited per call.',
       },
     ],
   },
@@ -362,6 +414,30 @@ const de: FaqGroup[] = [
         q: 'Wie lange dauert die Entwicklung eines individuellen CRM?',
         a: 'Ein nutzbares erstes Release läuft üblicherweise ab Woche 4–6 im internen Einsatz. Der vollständige Ersatz eines bestehenden Systems ist meist innerhalb von 3–6 Monaten erreicht abhängig von Integrationen und Datenmigration.',
       },
+      {
+        q: 'Von welchen CRMs können Sie migrieren?',
+        a: 'Wir migrieren regelmäßig von HubSpot, Salesforce, Pipedrive, Zoho und bestehenden Eigenentwicklungen. Die Migration läuft unter Change-Kontrolle mit typisiertem ETL und einem reversiblen Cutover.',
+      },
+      {
+        q: 'Übernehmen Sie die Wartung nach dem Launch?',
+        a: 'Optional. Viele Kunden nehmen einen monatlichen Managed-Ops-Retainer, andere übernehmen intern und beauftragen uns für definierte Feature-Pakete. Codebase, Infrastruktur und Dokumentation bleiben vollständig in Ihrem Account.',
+      },
+      {
+        q: 'Wem gehören Code und Daten am Ende?',
+        a: 'Ihnen. Repositories, Cloud-Infrastruktur, Datenbanken und Secrets liegen vom ersten Tag an in Ihren eigenen Accounts kein geteilter Mandant, keine Lizenzbindung und keine Austrittsgebühr bei Kündigung des Retainers.',
+      },
+      {
+        q: 'Welche Integrationen sind typischerweise im Scope?',
+        a: 'E-Mail und Kalender (Google Workspace, Microsoft 365), Telefonie und Messaging (Twilio, Vonage, Slack, Teams), Buchhaltung (DATEV, Stripe, QuickBooks), E-Signatur (DocuSign, HelloSign), Marketing (ActiveCampaign, Customer.io) und Data Warehouse (BigQuery, Snowflake, Postgres-Replikate).',
+      },
+      {
+        q: 'Wie wird ein individuelles CRM abgesichert?',
+        a: 'Rollenbasierte Zugriffssteuerung, Audit-Logging jeder Schreibaktion, Verschlüsselung at-rest und in-transit, API-Keys mit Rotation, OWASP-ASVS-Checks vor Launch und ein Vier-Augen-Review vor jedem Produktiv-Deploy.',
+      },
+      {
+        q: 'Wie läuft das Onboarding für ein neues CRM-Projekt?',
+        a: 'Ein einwöchiger Discovery-Sprint erfasst Vertriebsprozess, Datenmodell und Integrationsumfang. Danach folgt ein schriftlicher Scope mit Meilensteinen, festem ersten Release-Termin und wöchentlicher Working-Session bis zum Launch nichts startet vor Scope-Freigabe.',
+      },
     ],
   },
   {
@@ -380,6 +456,30 @@ const de: FaqGroup[] = [
         q: 'Gehen unsere internen Daten an den Modell-Anbieter?',
         a: 'Nur die zur Beantwortung einer konkreten Frage abgerufenen Passagen. In Enterprise-Tarifen werden diese nicht zum Training verwendet. Wenn kein Datenabfluss zulässig ist, betreiben wir die Pipeline gegen ein On-Prem- oder EU-gehostetes Modell.',
       },
+      {
+        q: 'Wie wird Prompt Injection abgewehrt?',
+        a: 'Gekennzeichnete Retrieval-Grenzen, sodass abgerufene Inhalte System-Instruktionen nicht überschreiben können, System-Reminder in jeder Runde und Tool-Allow-Lists. Jeder Versuch wird protokolliert und nachträglich prüfbar.',
+      },
+      {
+        q: 'Wie messen Sie RAG-Qualität?',
+        a: 'Ein wachsendes beschriftetes Eval-Set aus echten Fragen; Retrieval-Präzision, Antwort-Treue (gestützt auf abgerufene Inhalte) und Ablehnungsquote bei Off-Topic-Fragen. Wöchentlicher Report während aktiver Projekte.',
+      },
+      {
+        q: 'Welche Dokumentquellen können angebunden werden?',
+        a: 'Confluence, Notion, SharePoint, Google Drive, Dropbox, S3-Buckets, Postgres- und MySQL-Datenbanken, Zendesk- und Intercom-Wissensbasen, GitHub-Wikis, PDF-Archive sowie Transkripte aus Fireflies, Grain oder Otter jeweils unter Beibehaltung der nativen Rechteverwaltung.',
+      },
+      {
+        q: 'Wie oft wird der Index aktualisiert?',
+        a: 'Für aktiv bearbeitete Quellen (Notion, Confluence, Google Drive) nutzen wir Webhooks oder Change-Feeds und reindizieren innerhalb von Minuten. Langsamer werdende Archive erhalten einen nächtlichen Batch-Lauf. Die Cadence ist pro Quelle konfigurierbar.',
+      },
+      {
+        q: 'Was kostet der Betrieb eines RAG-Systems?',
+        a: 'Die Betriebskosten skalieren mit Dokumentvolumen und Query-Last. Für einige hunderttausend Seiten bei moderatem Nutzeraufkommen liegen Infrastruktur plus Modell-Inferenz typischerweise im niedrigen vierstelligen Euro-Bereich pro Monat. Das vollständige Kostenmodell liegt vor Vertragsabschluss vor.',
+      },
+      {
+        q: 'Welche Modelle werden unterstützt?',
+        a: 'Claude (Opus, Sonnet), GPT-4-Klasse-Modelle, Gemini, Open-Weight-Modelle via Together, Fireworks oder Groq sowie selbst gehostete Deployments auf vLLM oder SGLang. Die Orchestrierung ist modell-agnostisch Sie können jederzeit wechseln, ohne die Anwendung umzuschreiben.',
+      },
     ],
   },
   {
@@ -393,6 +493,30 @@ const de: FaqGroup[] = [
       {
         q: 'Wie entscheiden Sie, was automatisiert wird?',
         a: 'Wir suchen Aufgaben, die wiederholbar und klar definiert sind, messbar Zeit kosten und ein klares Erfolgssignal haben. Ohne Erfolgssignal oder mit hohem Fehler-Schaden bleibt die Aufgabe menschlich oder erhält ein Freigabe-Gate.',
+      },
+      {
+        q: 'Unter welchen Guardrails laufen Produktions-Agenten?',
+        a: 'Benannter Scope (einsätzige Aufgabenbeschreibung), feste Tool-Liste (konkrete APIs, konkrete Schreibrechte), menschliche Freigabe an Risikoschritten, vollständige Trace-Logs jedes Tool-Calls und ein Kill-Switch, der den Agenten sofort stoppt.',
+      },
+      {
+        q: 'Wie wird Prompt Injection innerhalb eines Agenten verhindert?',
+        a: 'Abgerufene Inhalte sind als nicht vertrauenswürdig markiert und können System-Instruktionen nicht überschreiben. Tool-Calls laufen gegen eine Allow-List konkreter Funktionen und Argument-Formen. Schreibzugriffe auf Produktivsysteme passieren eine menschliche Freigabe-Queue.',
+      },
+      {
+        q: 'Was ist ein Human-in-the-Loop-Gate?',
+        a: 'Ein Haltepunkt im Agent-Lauf, an dem eine geplante Aktion (eine Kunden-E-Mail, ein Datenbank-Schreibvorgang, eine Zahlung) einer Person im Review-UI vorgelegt wird. Der Agent setzt erst fort, nachdem die Person freigegeben, editiert oder abgelehnt hat.',
+      },
+      {
+        q: 'Wie wird ein Agent im Betrieb überwacht?',
+        a: 'Ein Dashboard zeigt jeden Lauf, die aufgerufenen Tools, die Argumente, Ausgaben und die finale Entscheidung. Fehler und Ablehnungen werden gruppiert, Alerts feuern bei Kosten-Spikes, wiederholten Ausfällen oder ungewöhnlichen Eskalationen.',
+      },
+      {
+        q: 'Was passiert, wenn ein Agent eine Aufgabe falsch löst?',
+        a: 'Jede Schreibaktion ist reversibel. Das Trace-Log identifiziert den konkreten Tool-Call, wir ziehen den Scope nach, decken den Fehlerfall im Eval-Set ab und reaktivieren den Agenten erst, wenn die Regression abgesichert ist.',
+      },
+      {
+        q: 'Kann ein Agent gegen interne Systeme laufen, ohne Credentials offenzulegen?',
+        a: 'Ja. Credentials bleiben in einem Secrets-Manager (AWS Secrets Manager, Vault, Doppler). Der Agent fordert kurzlebige, scope-begrenzte Tokens pro Tool-Call an und sieht das zugrunde liegende Secret nie. Jeder Zugriff wird auditiert.',
       },
     ],
   },

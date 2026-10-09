@@ -38,7 +38,7 @@ export const hardwareServices: Service[] = [
         title: 'Infrastructure Support & Maintenance',
         h1: 'IT Infrastructure Support that keeps you online.',
         slug: 'infrastructure-support',
-        metaTitle: 'IT Infrastructure Support & Maintenance | Deploris',
+        metaTitle: 'IT Infrastructure Support & Maintenance',
         metaDescription:
           'Proactive monitoring, patching, capacity planning, and 24/7 response for servers, storage, and network. Predictable SLAs, on-site or remote.',
         summary:
@@ -64,7 +64,7 @@ export const hardwareServices: Service[] = [
         title: 'Infrastruktur-Support & Wartung',
         h1: 'IT-Infrastruktur-Support, der Sie online hält.',
         slug: 'infrastruktur-support',
-        metaTitle: 'IT Infrastruktur Support & Wartung | Deploris',
+        metaTitle: 'IT Infrastruktur Support & Wartung',
         metaDescription:
           'Proaktives Monitoring, Patching, Kapazitätsplanung und 24/7-Reaktion für Server, Storage und Netzwerk. Planbare SLAs remote oder vor Ort.',
         summary:
@@ -100,7 +100,7 @@ export const hardwareServices: Service[] = [
         title: 'Network Support',
         h1: 'Network support that keeps traffic flowing.',
         slug: 'network-support',
-        metaTitle: 'Network Support & Management | Deploris',
+        metaTitle: 'Network Support & Management',
         metaDescription:
           'Managed LAN, WAN, and SD-WAN operation with proactive monitoring, firmware management, and firewall change control.',
         summary:
@@ -126,7 +126,7 @@ export const hardwareServices: Service[] = [
         title: 'Netzwerk-Support',
         h1: 'Netzwerk-Support, der den Verkehr fließen lässt.',
         slug: 'netzwerk-support',
-        metaTitle: 'Netzwerk Support & Netzwerkbetreuung | Deploris',
+        metaTitle: 'Netzwerk Support & Netzwerkbetreuung',
         metaDescription:
           'Managed LAN, WAN und SD-WAN mit proaktivem Monitoring, Firmware-Management und Firewall-Change-Kontrolle.',
         summary:
@@ -159,7 +159,7 @@ export const hardwareServices: Service[] = [
         title: 'Rollout & Migrations',
         h1: 'Rollouts and migrations, delivered on schedule.',
         slug: 'rollout-migrations',
-        metaTitle: 'IT Rollout & Migration Services | Deploris',
+        metaTitle: 'IT Rollout & Migration Services',
         metaDescription:
           'Site rollouts, hardware refresh, and platform migrations delivered under change control with reversible cutover plans.',
         summary:
@@ -185,7 +185,7 @@ export const hardwareServices: Service[] = [
         title: 'Rollout & Migration',
         h1: 'Rollouts und Migrationen termingerecht geliefert.',
         slug: 'rollout-migration',
-        metaTitle: 'IT-Rollout & Migration | Deploris',
+        metaTitle: 'IT-Rollout & Migration',
         metaDescription:
           'Standortrollouts, Hardware-Refresh und Plattform-Migrationen unter Change-Kontrolle mit rückrollbaren Cutover-Plänen.',
         summary:
@@ -218,7 +218,7 @@ export const hardwareServices: Service[] = [
         title: 'Desktop Support (Remote / On-site)',
         h1: 'Desktop support that shows up remote or on-site.',
         slug: 'desktop-support',
-        metaTitle: 'Remote & On-site Desktop Support | Deploris',
+        metaTitle: 'Remote & On-site Desktop Support',
         metaDescription:
           'Tiered desktop support with ticketing, SLAs, and on-site dispatch. Windows, macOS, Microsoft 365, imaging, and identity.',
         summary:
@@ -244,7 +244,7 @@ export const hardwareServices: Service[] = [
         title: 'Desktop-Support (Remote / Vor-Ort)',
         h1: 'Desktop-Support, der da ist remote oder vor Ort.',
         slug: 'desktop-support',
-        metaTitle: 'Desktop Support Remote & Vor-Ort | Deploris',
+        metaTitle: 'Desktop Support Remote & Vor-Ort',
         metaDescription:
           'Gestufter Desktop-Support mit Ticketing, SLAs und Vor-Ort-Einsatz. Windows, macOS, Microsoft 365, Imaging und Identität.',
         summary:
@@ -277,7 +277,7 @@ export const hardwareServices: Service[] = [
         title: 'IMAC & Projects',
         h1: 'Installs, Moves, Adds, Changes cleanly executed.',
         slug: 'imac-projects',
-        metaTitle: 'IMAC Services & Project Delivery | Deploris',
+        metaTitle: 'IMAC Services & Project Delivery',
         metaDescription:
           'Installs, moves, adds, and changes for endpoints, peripherals, and network gear, with tracked assets and clean handover.',
         summary:
@@ -303,7 +303,7 @@ export const hardwareServices: Service[] = [
         title: 'IMAC & Projekte',
         h1: 'Installations, Moves, Adds, Changes sauber umgesetzt.',
         slug: 'imac-projekte',
-        metaTitle: 'IMAC Services & Projektabwicklung | Deploris',
+        metaTitle: 'IMAC Services & Projektabwicklung',
         metaDescription:
           'Installations, Moves, Adds und Changes für Endgeräte, Peripherie und Netzwerktechnik mit getrackten Assets und sauberer Übergabe.',
         summary:
@@ -336,7 +336,7 @@ export const hardwareServices: Service[] = [
         title: 'Hardware Break-Fix / Maintenance',
         h1: 'Break-fix maintenance with real SLA teeth.',
         slug: 'hardware-break-fix',
-        metaTitle: 'Hardware Break-Fix & Maintenance | Deploris',
+        metaTitle: 'Hardware Break-Fix & Maintenance',
         metaDescription:
           'Time-bound break-fix maintenance for servers, network gear, endpoints, and peripherals same-day or next-business-day.',
         summary:
@@ -362,7 +362,7 @@ export const hardwareServices: Service[] = [
         title: 'Hardware Break-Fix / Wartung',
         h1: 'Break-Fix mit echten SLA-Zähnen.',
         slug: 'hardware-reparatur-wartung',
-        metaTitle: 'Hardware Reparatur & Break-Fix Wartung | Deploris',
+        metaTitle: 'Hardware Reparatur & Break-Fix Wartung',
         metaDescription:
           'Zeitgebundene Break-Fix-Wartung für Server, Netzwerktechnik, Endgeräte und Peripherie same-day oder next-business-day.',
         summary:
@@ -395,7 +395,7 @@ export const hardwareServices: Service[] = [
         title: 'WiFi Surveys',
         h1: 'WiFi surveys that actually predict real-world coverage.',
         slug: 'wifi-surveys',
-        metaTitle: 'Predictive & On-site WiFi Surveys | Deploris',
+        metaTitle: 'Predictive & On-site WiFi Surveys',
         metaDescription:
           'Predictive and passive WiFi site surveys with heatmaps, AP placement plan, and validated post-install coverage.',
         summary:
@@ -421,7 +421,7 @@ export const hardwareServices: Service[] = [
         title: 'WLAN-Ausleuchtung',
         h1: 'WLAN-Ausleuchtung, die reale Abdeckung wirklich vorhersagt.',
         slug: 'wlan-ausleuchtung',
-        metaTitle: 'WLAN Ausleuchtung & WLAN Vermessung | Deploris',
+        metaTitle: 'WLAN Ausleuchtung & WLAN Vermessung',
         metaDescription:
           'Prädiktive und passive WLAN-Ausleuchtung mit Heatmaps, AP-Platzierung und validierter Abdeckung nach Installation.',
         summary:
@@ -454,7 +454,7 @@ export const hardwareServices: Service[] = [
         title: 'Data Center Maintenance & Support',
         h1: 'Data center support that treats the SLA as sacred.',
         slug: 'data-center-maintenance',
-        metaTitle: 'Data Center Maintenance & 24/7 Support | Deploris',
+        metaTitle: 'Data Center Maintenance & 24/7 Support',
         metaDescription:
           '24/7 data center operations, remote hands, structured cabling, and PDU/rack management under strict SLA.',
         summary:
@@ -480,7 +480,7 @@ export const hardwareServices: Service[] = [
         title: 'Rechenzentrum Wartung & Support',
         h1: 'Rechenzentrum-Support, der die SLA ernst nimmt.',
         slug: 'rechenzentrum-wartung',
-        metaTitle: 'Rechenzentrum Wartung & 24/7 Support | Deploris',
+        metaTitle: 'Rechenzentrum Wartung & 24/7 Support',
         metaDescription:
           '24/7 Rechenzentrum-Betrieb, Remote Hands, strukturierte Verkabelung sowie PDU-/Rack-Management unter strikter SLA.',
         summary:
@@ -519,7 +519,7 @@ export const developmentServices: Service[] = [
         title: 'Custom CRM Development',
         h1: 'Custom CRMs built around how you actually sell.',
         slug: 'custom-crm',
-        metaTitle: 'Custom CRM Development | Deploris',
+        metaTitle: 'Custom CRM Development',
         metaDescription:
           'Custom CRM systems designed around your sales process not the other way around. Integrations, migrations, and audit-friendly access control.',
         summary:
@@ -545,7 +545,7 @@ export const developmentServices: Service[] = [
         title: 'CRM Entwicklung',
         h1: 'Individuelle CRM-Systeme rund um Ihren tatsächlichen Vertriebsprozess.',
         slug: 'crm-entwicklung',
-        metaTitle: 'CRM Entwicklung & individuelle CRM Lösungen | Deploris',
+        metaTitle: 'CRM Entwicklung & individuelle CRM Lösungen',
         metaDescription:
           'Maßgeschneiderte CRM-Systeme rund um Ihren Vertriebsprozess nicht umgekehrt. Integrationen, Migrationen und auditfähige Zugriffskontrolle.',
         summary:
@@ -578,7 +578,7 @@ export const developmentServices: Service[] = [
         title: 'RAG Systems',
         h1: 'Retrieval-augmented AI grounded in your own knowledge.',
         slug: 'rag-systems',
-        metaTitle: 'RAG System Development | Deploris',
+        metaTitle: 'RAG System Development',
         metaDescription:
           'RAG systems that ground LLM answers in your own documents with access control, source citations, and evaluation you can trust.',
         summary:
@@ -604,7 +604,7 @@ export const developmentServices: Service[] = [
         title: 'RAG-Systeme',
         h1: 'Retrieval-Augmented KI geerdet in Ihrem eigenen Wissen.',
         slug: 'rag-systeme',
-        metaTitle: 'RAG System Entwicklung | Deploris',
+        metaTitle: 'RAG System Entwicklung',
         metaDescription:
           'RAG-Systeme, die LLM-Antworten in Ihren Dokumenten verankern mit Zugriffskontrolle, Quellenzitaten und belastbarer Evaluation.',
         summary:
@@ -637,7 +637,7 @@ export const developmentServices: Service[] = [
         title: 'AI Agents & Automation',
         h1: 'AI agents that finish real work not demos.',
         slug: 'ai-agents-automation',
-        metaTitle: 'AI Agents & Workflow Automation | Deploris',
+        metaTitle: 'AI Agents & Workflow Automation',
         metaDescription:
           'AI agents and workflow automation that finish real work end-to-end with human-in-the-loop, audit trails, and measurable time savings.',
         summary:
@@ -663,7 +663,7 @@ export const developmentServices: Service[] = [
         title: 'KI-Agenten & Automatisierung',
         h1: 'KI-Agenten, die echte Arbeit abschließen keine Demos.',
         slug: 'ki-automatisierung',
-        metaTitle: 'KI Automatisierung & KI Agenten | Deploris',
+        metaTitle: 'KI Automatisierung & KI Agenten',
         metaDescription:
           'KI-Agenten und Workflow-Automatisierung, die echte Arbeit end-to-end erledigen mit Human-in-the-Loop, Audit-Trails und messbaren Zeitersparnissen.',
         summary:
@@ -696,7 +696,7 @@ export const developmentServices: Service[] = [
         title: 'Custom Systems & Integrations',
         h1: 'Custom software and integrations, engineered to last.',
         slug: 'custom-systems',
-        metaTitle: 'Custom Software Development & Integrations | Deploris',
+        metaTitle: 'Custom Software Development & Integrations',
         metaDescription:
           'Custom software, APIs, and integrations production-grade, security-reviewed, and documented for your team to operate long after we ship.',
         summary:
@@ -722,7 +722,7 @@ export const developmentServices: Service[] = [
         title: 'Individualsoftware & Integrationen',
         h1: 'Individualsoftware und Integrationen gebaut, um zu halten.',
         slug: 'individualsoftware',
-        metaTitle: 'Individualsoftware Entwicklung & Integrationen | Deploris',
+        metaTitle: 'Individualsoftware Entwicklung & Integrationen',
         metaDescription:
           'Individualsoftware, APIs und Integrationen produktionsreif, sicherheitsgeprüft und dokumentiert, damit Ihr Team langfristig damit arbeiten kann.',
         summary:

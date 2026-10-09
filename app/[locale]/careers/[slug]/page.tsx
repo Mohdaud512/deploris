@@ -17,7 +17,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   const r = roles.find((x) => x.slug === slug);
   if (!r) return {};
   const c = r.copy[locale];
-  return buildMetadata({ locale, path: `/careers/${slug}`, title: `${c.title} Deploris`, description: c.summary });
+  return buildMetadata({
+    locale,
+    path: `/careers/${slug}`,
+    title: locale === 'de' ? `${c.title} remote Senior-Rolle` : `${c.title} remote senior role`,
+    description: c.summary,
+  });
 }
 
 export default async function RolePage({ params }: { params: Promise<{ locale: Locale; slug: string }> }) {

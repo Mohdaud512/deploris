@@ -8,11 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/legal/privacy',
-    title: locale === 'de' ? 'Datenschutzerklärung | Deploris' : 'Privacy notice | Deploris',
-    description:
-      locale === 'de'
-        ? 'Wie wir personenbezogene Daten erheben, verarbeiten und schützen gemäß DSGVO.'
-        : 'How we collect, process, and protect personal data GDPR-compliant.',
+    title: locale === 'de' ? 'Datenschutzerklärung DSGVO-konforme Verarbeitung' : 'Privacy notice GDPR-compliant personal-data processing',
+    description: locale === 'de'
+      ? 'Wie Deploris personenbezogene Daten nach DSGVO erhebt, verarbeitet und schützt: Datenkategorien, Zwecke, Rechtsgrundlagen, Fristen, Auftragsverarbeiter und Betroffenenrechte.'
+      : 'How Deploris collects, processes, and protects personal data under GDPR: categories, purposes, legal bases, retention, sub-processors, and your data-subject rights.',
   });
 }
 

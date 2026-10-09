@@ -106,6 +106,8 @@
   "contact": {
     "title": "Sprechen Sie mit Deploris",
     "intro": "Erzählen Sie uns, was Sie aufbauen oder betreiben. Wir melden uns innerhalb eines Werktags.",
+    "meta_title": "Kontakt Deploris IT- und Software-Support",
+    "meta_description": "Erreichen Sie das Deploris-Team für Managed IT, individuelle CRMs, RAG-Systeme oder KI-Agenten. Schriftliche Leistungsbeschreibung und Preisspanne innerhalb eines Werktags.",
     "field_name": "Vollständiger Name",
     "field_email": "Geschäftliche E-Mail",
     "field_company": "Unternehmen",
@@ -126,6 +128,8 @@
   },
   "quote": {
     "title": "Angebot anfordern",
+    "meta_title": "Angebot anfordern Antwort in einem Werktag",
+    "meta_description": "Beschreiben Sie Ihr Projekt in drei Schritten und erhalten Sie innerhalb eines Werktags eine schriftliche Leistungsbeschreibung, einen Zeitplan und eine Preisspanne.",
     "step1": "1. Welches Leistungsfeld?",
     "step2": "2. Ihre Anforderungen",
     "step3": "3. Ihre Kontaktdaten",

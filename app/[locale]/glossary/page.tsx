@@ -11,14 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   return buildMetadata({
     locale,
     path: '/glossary',
-    title:
-      locale === 'de'
-        ? 'Glossar CRM, RAG, KI-Agenten und IT-Betrieb einfach erklärt | Deploris'
-        : 'Glossary CRM, RAG, AI agents, and IT operations, plain-language | Deploris',
-    description:
-      locale === 'de'
-        ? 'Klare Definitionen von Kernbegriffen aus CRM-Entwicklung, RAG-Systemen, KI-Automatisierung und IT-Infrastruktur.'
-        : 'Clear definitions of the core terms from CRM development, RAG systems, AI automation, and IT infrastructure.',
+    title: locale === 'de' ? 'Glossar CRM, RAG, KI-Agenten und IT-Betrieb erklärt' : 'Glossary CRM, RAG, AI agents, and IT operations explained',
+    description: locale === 'de'
+      ? 'Klare Definitionen der Kernbegriffe aus CRM-Entwicklung, RAG-Systemen, KI-Automatisierung, Infrastruktur- und Netzwerkbetrieb jeweils mit Praxis-Beispiel.'
+      : 'Clear definitions of the core terms across CRM development, RAG systems, AI automation, and infrastructure operations each with a short practical example.',
   });
 }
 
