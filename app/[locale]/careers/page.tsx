@@ -3,6 +3,8 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { roles } from '@/content/careers';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -43,6 +45,26 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
           </Link>
         ))}
       </div>
+      <SchemaJsonLd
+        data={[
+          collectionPageSchema({
+            locale,
+            path: '/careers',
+            title: locale === 'de' ? 'Karriere bei Deploris' : 'Careers at Deploris',
+            description: locale === 'de'
+              ? 'Offene Senior-Positionen bei Deploris US und Deutschland, remote-first.'
+              : 'Open senior engineering roles at Deploris US and Germany, remote-first.',
+            hasPart: roles.map((r) => ({
+              name: r.copy[locale].title,
+              url: `${prefix}/careers/${r.slug}`,
+            })),
+          }),
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: locale === 'de' ? 'Karriere' : 'Careers', href: `${prefix}/careers` },
+          ]),
+        ]}
+      />
     </section>
   );
 }

@@ -55,13 +55,18 @@ export function buildMetadata({
       siteName: site.name,
       locale: locale === 'de' ? 'de_DE' : 'en_US',
       type,
-      images: [{ url: image ?? '/og-default.png', width: 1200, height: 630, alt: title }],
+      // When no explicit image is passed, we let Next's file-conventions
+      // auto-populate from the nearest opengraph-image.tsx — per-page
+      // dynamic OGs win for routes that have one; everything else inherits
+      // the root app/opengraph-image.tsx. Setting an explicit path here
+      // would override that resolution.
+      ...(image ? { images: [{ url: image, width: 1200, height: 630, alt: title }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [image ?? '/og-default.png'],
+      ...(image ? { images: [image] } : {}),
     },
   };
 }

@@ -414,6 +414,170 @@ const de: FaqGroup[] = [
       },
     ],
   },
+  // Per-service DE groups (slug = service.id so service pages can look up
+  // the right group regardless of locale).
+  {
+    slug: 'infrastructure-support',
+    title: 'IT-Infrastruktur-Support',
+    items: [
+      {
+        q: 'Was umfasst IT-Infrastruktur-Support?',
+        a: 'Monitoring, Patching, Kapazitätsplanung, Change-Kontrolle und 24/7 Incident-Response für Server, Storage, Netzwerk, Firewalls und Virtualisierung unter schriftlicher SLA.',
+      },
+      {
+        q: 'Welche Reaktionsziele garantieren Sie?',
+        a: 'Priorität 1 (geschäftskritisch): 15-min mediane Erst-Reaktion. P2: 1 Stunde. P3: nächster Werktag. Lösungsziele je Vertrag.',
+      },
+      {
+        q: 'Unterstützen Sie Hybrid-Cloud?',
+        a: 'Ja on-prem, Colo, AWS, Azure, GCP und hybride Kombinationen. IaC-Werkzeuge (Terraform, Pulumi, Ansible) nach Kundenpräferenz.',
+      },
+    ],
+  },
+  {
+    slug: 'network-support',
+    title: 'Netzwerk-Support',
+    items: [
+      {
+        q: 'Welche Netzwerk-Hersteller unterstützen Sie?',
+        a: 'Cisco, Juniper, Aruba, Fortinet, MikroTik, pfSense, OPNsense, Ubiquiti UniFi, Meraki und Palo Alto. Herstellerneutral wir betreiben, was Sie besitzen.',
+      },
+      {
+        q: 'Wie läuft Firewall-Change-Kontrolle?',
+        a: 'Jede Regeländerung ist ticketbasiert, wird von einem zweiten Engineer geprüft, in einem definierten Change-Window angewendet, geloggt und mindestens 48 Stunden reversibel.',
+      },
+      {
+        q: 'Betreuen Sie SD-WAN?',
+        a: 'Ja. Deployment, Policy-Design und laufende Path-Selection + Failover-Drills für Fortinet, Cisco Meraki, VeloCloud, Silver Peak und andere.',
+      },
+    ],
+  },
+  {
+    slug: 'rollout-migrations',
+    title: 'IT-Rollouts & Migrationen',
+    items: [
+      {
+        q: 'Was enthält ein Rollout-Projekt?',
+        a: 'Standort-Erhebung, Staging, Imaging, Logistik, Cutover mit reversiblem Rollback-Plan und Post-Cutover-Support.',
+      },
+      {
+        q: 'Wie viele Standorte parallel sind machbar?',
+        a: 'Typische Parallelität: 3–5 Standorte pro Woche mit gemeinsamem Playbook; mehr mit gestaffelten Teams. Alle Assets getaggt und abgeglichen.',
+      },
+      {
+        q: 'Wie sieht ein reversibler Cutover aus?',
+        a: 'Altes und neues System sind beide bereit, DNS-/Traffic-Umschaltung zum definierten Zeitpunkt, 48-Stunden-Fenster für risikolose Rückrollung ohne Datenverlust.',
+      },
+    ],
+  },
+  {
+    slug: 'desktop-support',
+    title: 'Desktop-Support',
+    items: [
+      {
+        q: 'Welche Betriebssysteme und Plattformen werden unterstützt?',
+        a: 'Windows, macOS, Microsoft 365, Google Workspace sowie Identity-Provider Entra ID, Okta, Google. Linux-Desktop auf Anfrage.',
+      },
+      {
+        q: 'Welche Tier-Struktur nutzen Sie?',
+        a: 'L1 First-Touch (skriptbasiert) mit 4-h-SLA, L2 Spezialist (remote) mit 2-h-SLA, L3 Senior (remote oder vor Ort) mit 15-Min-SLA bei geschäftskritischen Vorfällen.',
+      },
+      {
+        q: 'Bieten Sie Vor-Ort-Einsätze?',
+        a: 'Ja. Vor-Ort-Dispatch für alles, was remote nicht lösbar ist in US- und DACH-Service-Regionen.',
+      },
+    ],
+  },
+  {
+    slug: 'imac-projects',
+    title: 'IMAC und Projekte',
+    items: [
+      {
+        q: 'Wofür steht IMAC?',
+        a: 'Install, Move, Add, Change die regelmäßigen Hardware-Arbeiten zum Installieren, Verlegen, Hinzufügen und Ändern von Endgeräten, Peripherie und Netzwerk-Technik.',
+      },
+      {
+        q: 'Tracken Sie Assets?',
+        a: 'Jede IMAC-Aktion erzeugt einen Asset-Ledger-Eintrag mit Quellort, Zielort, Asset-Tag und Zeitstempel. Monatlich gegen das Kundenregister abgeglichen.',
+      },
+      {
+        q: 'Übernehmen Sie Meetingraum-Installationen end-to-end?',
+        a: 'Ja Montage, Verkabelung, Display- und Audio-Inbetriebnahme, Room-Booking-Integration und Abnahme nach schriftlicher Checkliste.',
+      },
+    ],
+  },
+  {
+    slug: 'hardware-break-fix',
+    title: 'Hardware Break-Fix',
+    items: [
+      {
+        q: 'Welche SLA-Optionen gibt es?',
+        a: 'Same-Business-Day 4-Stunden-Fenster oder Next-Business-Day 24-Stunden-Fenster. Wochenend-Abdeckung optional pro Vertrag.',
+      },
+      {
+        q: 'Halten Sie Ersatzteile vor?',
+        a: 'Ja ein Managed Spare Pool, dimensioniert für die Kundenflotte, mit Rotations- und Refresh-Policy pro Vertrag.',
+      },
+      {
+        q: 'Welche Hardware ist abgedeckt?',
+        a: 'Server, Netzwerk-Technik, Endgeräte und Peripherie. Hersteller-Reparaturen über unsere Partnerschaften (HPE, Dell, Lenovo, Cisco, HP, Apple).',
+      },
+    ],
+  },
+  {
+    slug: 'wifi-surveys',
+    title: 'WLAN-Ausleuchtung',
+    items: [
+      {
+        q: 'Was ist eine prädiktive WLAN-Ausleuchtung?',
+        a: 'Ein Software-Modell des Standorts mit AP-Platzierung, Baumaterialien und modellierter Interferenz. Fängt offensichtliche Fehler ab, bevor Hardware beschafft wird.',
+      },
+      {
+        q: 'Was enthält das Deliverable?',
+        a: 'Signalstärke- und SNR-Heatmaps, Kanalplan mit Begründung, Interferenz-Bericht mit benannten Quellen, Stückliste nach realer Last und Roaming-Plan für die wichtigsten Geräte.',
+      },
+      {
+        q: 'Wann ist eine passive Vor-Ort-Vermessung nötig?',
+        a: 'Immer dann, wenn die Umgebung unbekannte Interferenz hat (Nachbarmieter, Alt-Funk, ungewöhnliche Materialien) oder wenn die Post-Install-SLA validierte Messungen verlangt. Empfehlung: Predictive + passiv für jede produktive Installation.',
+      },
+    ],
+  },
+  {
+    slug: 'data-center-maintenance',
+    title: 'Rechenzentrum-Wartung & 24/7-Support',
+    items: [
+      {
+        q: 'Was umfasst "Remote Hands"?',
+        a: 'Physische Arbeiten durch Deploris-Personal für Sie Kabeltausch, Medienwechsel, Button-Press an Remote-Console, Sichtprüfung, Fotodokumentation, Hardware-Swap aus Spare-Pool.',
+      },
+      {
+        q: 'Welche SLA bieten Sie für Rechenzentrum-Projekte?',
+        a: '99,95 % monatliches Uptime-Ziel für von uns betriebene Dienste, 15-Min P1-Erst-Reaktion. Spezifische SLAs pro Vertrag.',
+      },
+      {
+        q: 'Unterstützen Sie Colo und On-Prem?',
+        a: 'Ja. Deploris arbeitet in Kunden-RZs und Colos (Equinix, Digital Realty, CoreSite, Interxion, NTT und regionale Anbieter).',
+      },
+    ],
+  },
+  {
+    slug: 'custom-systems',
+    title: 'Individualsoftware & Integrationen',
+    items: [
+      {
+        q: 'Was zählt als "Individualsoftware"?',
+        a: 'Ein internes Tool, eine Daten-Pipeline, ein SaaS-Backend, ein Migrations-Werkzeug oder eine Admin-Oberfläche, die kein kommerzielles Produkt sauber abdeckt gebaut in Produktionsqualität mit Sicherheits-Review und dokumentierter Übergabe.',
+      },
+      {
+        q: 'Wann besser kaufen als bauen?',
+        a: 'Kaufen, wenn ein kommerzielles Produkt 80 %+ des Bedarfs mit leichter Konfiguration abdeckt. Bauen, wenn Vendor-Lösungen strukturelle Kompromisse erzwingen oder die Fähigkeit selbst ein Differenzierer ist.',
+      },
+      {
+        q: 'Wie halten Sie gebaute Systeme wartbar?',
+        a: 'Schriftliche Architektur-Entscheidungen (ADRs), Testabdeckung auf kritischen Pfaden, Deployment-Runbooks und eine dokumentierte Übergabe-Session. Optional laufender Support unter veröffentlichter SLA.',
+      },
+    ],
+  },
   {
     slug: 'sicherheit-datenschutz',
     title: 'Sicherheit & Datenschutz',
@@ -429,6 +593,10 @@ const de: FaqGroup[] = [
       {
         q: 'Schließen Sie eine Auftragsverarbeitungsvereinbarung (AVV) ab?',
         a: 'Ja. Wir stellen eine AVV nach Art. 28 DSGVO für deutsche Kunden bereit sowie eine Standard-DPA für US-Kunden.',
+      },
+      {
+        q: 'Welche Security-Header liefert die Deploris-Website aus?',
+        a: 'Gehärtete CSP, HSTS, Permissions-Policy, X-Frame-Options und Referrer-Policy auf jeder öffentlichen Antwort. Server-only-Secret-Envelopes, keine Credentials im Client-Bundle.',
       },
     ],
   },

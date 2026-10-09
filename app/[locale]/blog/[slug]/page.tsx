@@ -59,6 +59,9 @@ export default async function BlogPost({ params }: { params: Promise<{ locale: L
             date: post.data.date,
             updated: post.data.updated,
             author: post.data.author,
+            // All current posts are authored by the Deploris managing member;
+            // the slug makes `author.url` resolve to the real Person page.
+            authorSlug: post.data.author === 'Muhammad Daud' ? 'muhammad-daud' : undefined,
             locale,
             image: post.data.hero,
             keywords: post.data.tags,

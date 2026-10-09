@@ -7,6 +7,7 @@ import { projects } from '@/content/projects';
 import { roles } from '@/content/careers';
 import { cities, cityServiceIds } from '@/config/cities';
 import { getAllBlogPosts } from '@/lib/mdx';
+import { authors } from '@/content/authors';
 
 const staticPaths = [
   '',
@@ -158,6 +159,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const id of cityServiceIds) {
       push(`/locations/${city.slug}-${id}`, 0.5, 'monthly', '/industries');
     }
+  }
+
+  // Author profile pages (Person schema targets).
+  for (const a of authors) {
+    push(`/about/${a.slug}`, 0.6, 'monthly', '/about');
   }
 
   for (const l of locales) {

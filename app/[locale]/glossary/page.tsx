@@ -3,6 +3,8 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { glossaryData } from '@/content/glossary';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -51,6 +53,27 @@ export default async function GlossaryPage({ params }: { params: Promise<{ local
           </li>
         ))}
       </ul>
+      <SchemaJsonLd
+        data={[
+          collectionPageSchema({
+            locale,
+            path: '/glossary',
+            title: locale === 'de' ? 'Deploris Glossar' : 'Deploris Glossary',
+            description:
+              locale === 'de'
+                ? 'Deploris-Glossar klare Definitionen von CRM, RAG, KI-Agent, Workflow-Automatisierung, SLA, IMAC, WLAN-Ausleuchtung, Break-Fix.'
+                : 'Deploris glossary plain-language definitions of CRM, RAG, AI agent, workflow automation, SLA, IMAC, WiFi survey, break-fix.',
+            hasPart: terms.map((t) => ({
+              name: t.term,
+              url: `${prefix}/glossary/${t.slug}`,
+            })),
+          }),
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: locale === 'de' ? 'Glossar' : 'Glossary', href: `${prefix}/glossary` },
+          ]),
+        ]}
+      />
     </section>
   );
 }

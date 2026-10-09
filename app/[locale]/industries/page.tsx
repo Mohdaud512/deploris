@@ -1,6 +1,8 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -48,6 +50,7 @@ const usecases = [
 export default async function IndustriesPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const prefix = locale === 'en' ? '' : `/${locale}`;
   return (
     <section className="container py-14">
       <h1 className="font-display text-4xl font-bold text-brand-900 md:text-5xl dark:text-white">
@@ -69,6 +72,26 @@ export default async function IndustriesPage({ params }: { params: Promise<{ loc
           );
         })}
       </div>
+      <SchemaJsonLd
+        data={[
+          collectionPageSchema({
+            locale,
+            path: '/industries',
+            title: locale === 'de' ? 'Deploris Branchen & Anwendungsfälle' : 'Deploris Industries & Use Cases',
+            description: locale === 'de'
+              ? 'Konkrete Anwendungsfälle für CRM, RAG, KI-Automatisierung und IT-Infrastruktur in einzelnen Branchen.'
+              : 'Concrete use cases for CRM, RAG, AI automation, and IT infrastructure across specific industries.',
+            hasPart: usecases.map((u) => ({
+              name: u[locale].title,
+              url: `${prefix}/industries`,
+            })),
+          }),
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: locale === 'de' ? 'Branchen' : 'Industries', href: `${prefix}/industries` },
+          ]),
+        ]}
+      />
     </section>
   );
 }

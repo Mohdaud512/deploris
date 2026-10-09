@@ -4,7 +4,9 @@ import { buildMetadata } from '@/lib/seo';
 import { DualServiceSplit } from '@/components/marketing/DualServiceSplit';
 import { ServiceCard } from '@/components/marketing/ServiceCard';
 import { CTASection } from '@/components/marketing/CTASection';
-import { hardwareServices, developmentServices } from '@/config/services';
+import { hardwareServices, developmentServices, allServices } from '@/config/services';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -88,6 +90,27 @@ export default async function ServicesIndex({
           ))}
         </div>
       </section>
+
+      <SchemaJsonLd
+        data={[
+          collectionPageSchema({
+            locale,
+            path: '/services',
+            title: de ? 'Deploris Leistungen' : 'Deploris Services',
+            description: de
+              ? 'Alle Deploris-Leistungen Hardware & Infrastruktur und individuelle Softwareentwicklung.'
+              : 'All Deploris services hardware & infrastructure and custom software development.',
+            hasPart: allServices.map((s) => ({
+              name: s.copy[locale].title,
+              url: `${prefix}/services/${s.line}/${s.copy[locale].slug}`,
+            })),
+          }),
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: de ? 'Leistungen' : 'Services', href: `${prefix}/services` },
+          ]),
+        ]}
+      />
 
       <CTASection
         title={de ? 'Nicht sicher, wo Sie anfangen sollen?' : 'Not sure where to start?'}
