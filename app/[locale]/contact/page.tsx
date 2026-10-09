@@ -3,6 +3,8 @@ import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { site } from '@/config/site';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { contactPageSchema, breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -15,6 +17,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'contact' });
   const de = locale === 'de';
+  const prefix = locale === 'en' ? '' : `/${locale}`;
 
   return (
     <section className="container py-16">
@@ -51,6 +54,15 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           </p>
         </aside>
       </div>
+      <SchemaJsonLd
+        data={[
+          contactPageSchema({ locale, title: t('title'), description: t('intro') }),
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: de ? 'Kontakt' : 'Contact', href: `${prefix}/contact` },
+          ]),
+        ]}
+      />
     </section>
   );
 }

@@ -3,6 +3,10 @@ import type { Locale } from '@/config/locales';
 export type ProjectCase = {
   slug: string;
   line: 'hardware' | 'development';
+  /** Publication date for Article schema. Keep stable; don't tie to rebuild. */
+  date: string;
+  /** Industry + anonymized client descriptor used for schema.about. */
+  about: string;
   copy: Record<Locale, {
     title: string;
     summary: string;
@@ -18,6 +22,8 @@ export const projects: ProjectCase[] = [
   {
     slug: 'smb-crm-replacement',
     line: 'development',
+    date: '2025-02-18',
+    about: 'Custom CRM development for a 40-person US B2B revenue team.',
     copy: {
       en: {
         title: 'SMB revenue team replaces per-seat CRM in eight weeks',
@@ -50,6 +56,8 @@ export const projects: ProjectCase[] = [
   {
     slug: 'support-rag-knowledge',
     line: 'development',
+    date: '2025-04-22',
+    about: 'RAG assistant for a B2B SaaS support team.',
     copy: {
       en: {
         title: 'RAG assistant grounds support answers in current documentation',
@@ -82,6 +90,8 @@ export const projects: ProjectCase[] = [
   {
     slug: 'multi-site-rollout',
     line: 'hardware',
+    date: '2025-06-10',
+    about: 'Multi-site endpoint and network refresh for a mid-market services firm.',
     copy: {
       en: {
         title: 'Twelve-site hardware refresh delivered under change control',

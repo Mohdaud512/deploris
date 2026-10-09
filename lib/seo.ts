@@ -12,6 +12,8 @@ type BuildMetaInput = {
   image?: string;
   noIndex?: boolean;
   type?: 'website' | 'article';
+  /** Absolute RSS URL to declare via <link rel="alternate" type="application/rss+xml">. */
+  rss?: string;
 };
 
 /** Build canonical + hreflang + OG/Twitter for a page. */
@@ -23,6 +25,7 @@ export function buildMetadata({
   image,
   noIndex,
   type = 'website',
+  rss,
 }: BuildMetaInput): Metadata {
   const localizedPath = locale === 'en' ? path : `/${locale}${path}`;
   const canonical = `${publicEnv.siteUrl}${localizedPath}`;
@@ -39,7 +42,11 @@ export function buildMetadata({
       template: `%s | ${site.name}`,
     },
     description,
-    alternates: { canonical, languages },
+    alternates: {
+      canonical,
+      languages,
+      ...(rss ? { types: { 'application/rss+xml': rss } } : {}),
+    },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
       title,

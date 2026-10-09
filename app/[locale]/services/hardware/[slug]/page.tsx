@@ -10,8 +10,16 @@ import { ProcessSteps } from '@/components/marketing/ProcessSteps';
 import { FAQGroup } from '@/components/marketing/FAQGroup';
 import { CTASection } from '@/components/marketing/CTASection';
 import { ServiceAnimationBySlug } from '@/components/marketing/ServiceAnimationBySlug';
+import { ServiceRelatedLinks } from '@/components/marketing/ServiceRelatedLinks';
 import { site } from '@/config/site';
 import { faqData } from '@/content/faq';
+import { howToSchema } from '@/lib/schema';
+
+/** Extract the first full sentence of a paragraph (period followed by space). */
+function firstSentence(text: string): string {
+  const match = text.match(/^[^.!?]*[.!?]/);
+  return match ? match[0].trim() : text;
+}
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -49,9 +57,15 @@ export default async function HardwareServiceDetail({
   const tCommon = await getTranslations({ locale, namespace: 'common' });
   const prefix = locale === 'en' ? '' : `/${locale}`;
 
-  // Pick a hardware-oriented FAQ group if it exists in the locale's data.
-  const hardwareGroup = faqData[locale].find((g) => g.slug === 'hardware' || g.slug === 'hardware');
-  const faqItems = hardwareGroup?.items ?? [];
+  // Per-service FAQ group falls back to the generic "hardware" group only
+  // if the per-service group isn't present (keeps every service page's
+  // FAQPage schema distinct from the others — duplicate FAQPages across
+  // pages is a soft-ranking signal to Google).
+  const perServiceSlug = svc.id;
+  const faqGroup =
+    faqData[locale].find((g) => g.slug === perServiceSlug) ??
+    faqData[locale].find((g) => g.slug === 'hardware');
+  const faqItems = faqGroup?.items ?? [];
 
   return (
     <>
@@ -66,7 +80,12 @@ export default async function HardwareServiceDetail({
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-brand-900 md:text-5xl dark:text-white">
             {c.h1}
           </h1>
-          <p className="mt-6 max-w-3xl text-lg text-brand-900/85 dark:text-white/85">{c.summary}</p>
+          {/* Direct 1-sentence definition under the H1 the format AI answer
+              engines (Perplexity, Google AI Overviews, ChatGPT) quote. */}
+          <p className="mt-4 max-w-3xl text-base font-medium text-brand-900 dark:text-white">
+            {firstSentence(c.whatItIs)}
+          </p>
+          <p className="mt-4 max-w-3xl text-lg text-brand-900/85 dark:text-white/85">{c.summary}</p>
         </div>
         <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:justify-self-end">
           <ServiceAnimationBySlug serviceId={svc.id} />
@@ -114,6 +133,8 @@ export default async function HardwareServiceDetail({
         </section>
       )}
 
+      <ServiceRelatedLinks serviceId={svc.id} locale={locale} />
+
       <CTASection
         title={locale === 'de' ? 'Schriftliches Angebot in einem Werktag.' : 'Written scope within one business day.'}
         body={locale === 'de'
@@ -130,10 +151,19 @@ export default async function HardwareServiceDetail({
           serviceSchema(svc.id, locale)!,
           breadcrumbSchema([
             { name: 'Home', href: prefix || '/' },
+            { name: locale === 'de' ? 'Leistungen' : 'Services', href: `${prefix}/services` },
             { name: locale === 'de' ? 'Hardware & Infrastruktur' : 'Hardware & Infrastructure', href: `${prefix}/services/hardware` },
             { name: c.title, href: `${prefix}/services/hardware/${slug}` },
           ]),
-          ...(faqItems.length > 0 ? [faqSchema(faqItems)] : []),
+          ...(faqItems.length > 0
+            ? [faqSchema(faqItems, { pageUrl: `${site.url}${prefix}/services/hardware/${slug}` })]
+            : []),
+          howToSchema({
+            locale,
+            name: `${c.title} — ${locale === 'de' ? 'Vorgehensweise' : 'Our process'}`,
+            description: c.summary,
+            steps: c.process.map((p) => ({ name: p.step, text: p.body })),
+          }),
         ]}
       />
     </>

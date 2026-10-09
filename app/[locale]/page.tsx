@@ -20,8 +20,11 @@ export async function generateMetadata({
   return buildMetadata({
     locale,
     path: '/',
-    title: t('hero_title'),
-    description: t('hero_body'),
+    // Short meta title + description for SERP (the long hero_title/hero_body
+    // are still used on-page as the H1 and intro paragraph; those read as
+    // marketing copy, these read as index entries).
+    title: t('meta_title'),
+    description: t('meta_description'),
   });
 }
 

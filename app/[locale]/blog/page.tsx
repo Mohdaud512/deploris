@@ -4,6 +4,8 @@ import { buildMetadata } from '@/lib/seo';
 import { BlogCard } from '@/components/marketing/BlogCard';
 import { getAllBlogPosts } from '@/lib/mdx';
 import { NewsletterOptIn } from '@/components/forms/NewsletterOptIn';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { collectionPageSchema, breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -12,12 +14,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     path: '/blog',
     title:
       locale === 'de'
-        ? 'Blog Praxis-Wissen zu CRM, RAG, KI und IT-Betrieb | Deploris'
-        : 'Blog Practical writing on CRM, RAG, AI, and IT operations | Deploris',
+        ? 'Deploris Blog CRM, RAG, KI und IT-Betrieb'
+        : 'Deploris Blog CRM, RAG, AI, and IT operations',
     description:
       locale === 'de'
-        ? 'Erkenntnisse aus echten Projekten CRM-Entwicklung, RAG-Systeme, KI-Automatisierung und IT-Infrastruktur.'
-        : 'Lessons from real engagements custom CRM, RAG systems, AI automation, and IT infrastructure.',
+        ? 'Erkenntnisse aus echten Deploris-Projekten CRM-Entwicklung, RAG-Systeme, KI-Automatisierung und IT-Infrastruktur, auf Deutsch und Englisch.'
+        : 'Field notes from real Deploris engagements custom CRM, RAG systems, AI automation, and IT infrastructure, in English and German.',
+    rss: 'https://deploris.com/blog/rss.xml',
   });
 }
 
@@ -60,6 +63,27 @@ export default async function BlogIndex({ params }: { params: Promise<{ locale: 
       <div className="mt-16 rounded-3xl border border-brand-900/10 bg-white p-8 dark:border-white/10 dark:bg-white/5">
         <NewsletterOptIn />
       </div>
+      <SchemaJsonLd
+        data={[
+          collectionPageSchema({
+            locale,
+            path: '/blog',
+            title: locale === 'de' ? 'Blog Deploris' : 'Blog Deploris',
+            description:
+              locale === 'de'
+                ? 'Erkenntnisse aus echten Projekten CRM-Entwicklung, RAG-Systeme, KI-Automatisierung und IT-Infrastruktur.'
+                : 'Lessons from real engagements custom CRM, RAG systems, AI automation, and IT infrastructure.',
+            hasPart: posts.map((p) => ({
+              name: p.title,
+              url: `${prefix}/blog/${p.slug}`,
+            })),
+          }),
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: locale === 'de' ? 'Blog' : 'Blog', href: `${prefix}/blog` },
+          ]),
+        ]}
+      />
     </section>
   );
 }

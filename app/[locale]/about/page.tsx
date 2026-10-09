@@ -3,6 +3,8 @@ import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { CTASection } from '@/components/marketing/CTASection';
 import { ValuePropGrid } from '@/components/marketing/ValueProp';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { aboutPageSchema, breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -95,6 +97,22 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         primaryLabel={tCommon('cta_contact')}
         secondaryHref={`${prefix}/quote`}
         secondaryLabel={tCommon('cta_quote')}
+      />
+
+      <SchemaJsonLd
+        data={[
+          aboutPageSchema({
+            locale,
+            title: de ? 'Über Deploris IT- und Software-Partner' : 'About Deploris IT and software partner',
+            description: de
+              ? 'Deploris liefert Hardware-/Infrastruktur-Support und individuelle CRM-, RAG- und KI-Systeme aus einem Team mit schriftlicher SLA.'
+              : 'Deploris delivers reliable infrastructure support alongside custom CRM, RAG, and AI systems one team, one SLA, one accountability.',
+          }),
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: de ? 'Über uns' : 'About', href: `${prefix}/about` },
+          ]),
+        ]}
       />
     </>
   );

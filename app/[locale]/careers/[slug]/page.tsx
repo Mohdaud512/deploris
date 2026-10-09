@@ -50,6 +50,8 @@ export default async function RolePage({ params }: { params: Promise<{ locale: L
             description: c.body,
             employmentType: r.employmentType,
             datePosted: r.datePosted,
+            validThrough: r.validThrough,
+            baseSalary: r.baseSalary,
             locale,
           }),
           breadcrumbSchema([

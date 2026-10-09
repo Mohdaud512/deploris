@@ -13,6 +13,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
       locale === 'de'
         ? 'Auskunft, Berichtigung, Löschung, Datenübertragung reichen Sie eine DSGVO-Anfrage in wenigen Feldern ein.'
         : 'Access, rectification, erasure, portability submit a GDPR data request in a few fields.',
+    // Form page that submits PII; disallowed in robots.txt, also noindex at
+    // meta level as defense-in-depth so other engines (not just Google) honor
+    // it.
+    noIndex: true,
   });
 }
 

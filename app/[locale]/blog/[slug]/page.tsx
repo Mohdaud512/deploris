@@ -60,6 +60,8 @@ export default async function BlogPost({ params }: { params: Promise<{ locale: L
             updated: post.data.updated,
             author: post.data.author,
             locale,
+            image: post.data.hero,
+            keywords: post.data.tags,
           }),
           breadcrumbSchema([
             { name: 'Home', href: prefix || '/' },

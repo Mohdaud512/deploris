@@ -4,6 +4,10 @@ export type CareerRole = {
   slug: string;
   employmentType: string;
   datePosted: string;
+  /** Google Jobs requires a validThrough; schema will auto-compute if absent. */
+  validThrough?: string;
+  /** USD annual range by default; schema will emit MonetaryAmount+QuantitativeValue. */
+  baseSalary?: { currency: string; min: number; max: number; unit: 'YEAR' | 'MONTH' | 'HOUR' };
   copy: Record<Locale, { title: string; summary: string; body: string }>;
 };
 
@@ -11,7 +15,9 @@ export const roles: CareerRole[] = [
   {
     slug: 'senior-backend-engineer',
     employmentType: 'FULL_TIME',
-    datePosted: '2025-01-15',
+    datePosted: '2026-09-01',
+    validThrough: '2027-03-01',
+    baseSalary: { currency: 'USD', min: 140000, max: 190000, unit: 'YEAR' },
     copy: {
       en: {
         title: 'Senior Backend Engineer CRM & RAG systems',
@@ -28,7 +34,9 @@ export const roles: CareerRole[] = [
   {
     slug: 'infrastructure-engineer',
     employmentType: 'FULL_TIME',
-    datePosted: '2025-01-15',
+    datePosted: '2026-09-01',
+    validThrough: '2027-03-01',
+    baseSalary: { currency: 'USD', min: 120000, max: 160000, unit: 'YEAR' },
     copy: {
       en: {
         title: 'Infrastructure Engineer Managed IT & data centre',
@@ -45,7 +53,9 @@ export const roles: CareerRole[] = [
   {
     slug: 'ai-solutions-engineer',
     employmentType: 'FULL_TIME',
-    datePosted: '2025-01-15',
+    datePosted: '2026-09-01',
+    validThrough: '2027-03-01',
+    baseSalary: { currency: 'USD', min: 150000, max: 200000, unit: 'YEAR' },
     copy: {
       en: {
         title: 'AI Solutions Engineer Agents & automation',

@@ -11,6 +11,16 @@ import { FAQGroup } from '@/components/marketing/FAQGroup';
 import { CTASection } from '@/components/marketing/CTASection';
 import { PricingBand } from '@/components/marketing/PricingBand';
 import { ServiceAnimationBySlug } from '@/components/marketing/ServiceAnimationBySlug';
+import { ServiceRelatedLinks } from '@/components/marketing/ServiceRelatedLinks';
+import { howToSchema } from '@/lib/schema';
+import type { ServicePricingTier } from '@/lib/schema';
+import { site } from '@/config/site';
+
+/** Extract the first full sentence of a paragraph (period followed by space). */
+function firstSentence(text: string): string {
+  const match = text.match(/^[^.!?]*[.!?]/);
+  return match ? match[0].trim() : text;
+}
 import { faqData } from '@/content/faq';
 
 export function generateStaticParams() {
@@ -36,27 +46,60 @@ export async function generateMetadata({
   });
 }
 
-const pricingByService: Record<string, { name: string; range: string; scope: string }[]> = {
-  'custom-crm': [
-    { name: 'Focused', range: '$40–90k', scope: 'Replace one platform, 4–8 weeks to production.' },
-    { name: 'Standard', range: '$90–200k', scope: 'Full internal CRM with integrations, 3–5 months.' },
-    { name: 'Enterprise', range: '$200k+', scope: 'Multi-country rollout with migration and change management.' },
-  ],
-  'rag-systems': [
-    { name: 'Pilot', range: '$20–50k', scope: 'Scoped RAG on one corpus, evaluated on real questions.' },
-    { name: 'Production', range: '$60–160k', scope: 'End-to-end pipeline with access control and monitoring.' },
-    { name: 'Continuous', range: '$5–15k / mo', scope: 'Ongoing eval + retraining + optimization.' },
-  ],
-  'ai-agents-automation': [
-    { name: 'Scoped agent', range: '$25–70k', scope: 'One process, one agent, shadow-mode + cutover.' },
-    { name: 'Program', range: '$100–250k', scope: 'Multiple processes with shared platform.' },
-    { name: 'Managed', range: '$4–12k / mo', scope: 'Ongoing agent ops, guardrails, and improvements.' },
-  ],
-  'custom-systems': [
-    { name: 'Focused', range: '$30–80k', scope: 'One internal tool or integration, 4–8 weeks.' },
-    { name: 'Standard', range: '$80–200k', scope: 'Multi-integration system with security review.' },
-    { name: 'Enterprise', range: '$200k+', scope: 'Platform work with staged rollout and hypercare.' },
-  ],
+// Pricing in two shapes: the display-form (string range for the PricingBand
+// component) and the typed numeric form (fed into Service -> offers JSON-LD).
+const pricingByService: Record<
+  string,
+  { display: { name: string; range: string; scope: string }[]; tiers: ServicePricingTier[] }
+> = {
+  'custom-crm': {
+    display: [
+      { name: 'Focused', range: '$40–90k', scope: 'Replace one platform, 4–8 weeks to production.' },
+      { name: 'Standard', range: '$90–200k', scope: 'Full internal CRM with integrations, 3–5 months.' },
+      { name: 'Enterprise', range: '$200k+', scope: 'Multi-country rollout with migration and change management.' },
+    ],
+    tiers: [
+      { name: 'Focused', min: 40000, max: 90000, description: 'Replace one platform, 4–8 weeks to production.' },
+      { name: 'Standard', min: 90000, max: 200000, description: 'Full internal CRM with integrations, 3–5 months.' },
+      { name: 'Enterprise', min: 200000, description: 'Multi-country rollout with migration and change management.' },
+    ],
+  },
+  'rag-systems': {
+    display: [
+      { name: 'Pilot', range: '$20–50k', scope: 'Scoped RAG on one corpus, evaluated on real questions.' },
+      { name: 'Production', range: '$60–160k', scope: 'End-to-end pipeline with access control and monitoring.' },
+      { name: 'Continuous', range: '$5–15k / mo', scope: 'Ongoing eval + retraining + optimization.' },
+    ],
+    tiers: [
+      { name: 'Pilot', min: 20000, max: 50000, description: 'Scoped RAG on one corpus, evaluated on real questions.' },
+      { name: 'Production', min: 60000, max: 160000, description: 'End-to-end pipeline with access control and monitoring.' },
+      { name: 'Continuous', min: 5000, max: 15000, recurring: true, description: 'Ongoing eval + retraining + optimization.' },
+    ],
+  },
+  'ai-agents-automation': {
+    display: [
+      { name: 'Scoped agent', range: '$25–70k', scope: 'One process, one agent, shadow-mode + cutover.' },
+      { name: 'Program', range: '$100–250k', scope: 'Multiple processes with shared platform.' },
+      { name: 'Managed', range: '$4–12k / mo', scope: 'Ongoing agent ops, guardrails, and improvements.' },
+    ],
+    tiers: [
+      { name: 'Scoped agent', min: 25000, max: 70000, description: 'One process, one agent, shadow-mode + cutover.' },
+      { name: 'Program', min: 100000, max: 250000, description: 'Multiple processes with shared platform.' },
+      { name: 'Managed', min: 4000, max: 12000, recurring: true, description: 'Ongoing agent ops, guardrails, and improvements.' },
+    ],
+  },
+  'custom-systems': {
+    display: [
+      { name: 'Focused', range: '$30–80k', scope: 'One internal tool or integration, 4–8 weeks.' },
+      { name: 'Standard', range: '$80–200k', scope: 'Multi-integration system with security review.' },
+      { name: 'Enterprise', range: '$200k+', scope: 'Platform work with staged rollout and hypercare.' },
+    ],
+    tiers: [
+      { name: 'Focused', min: 30000, max: 80000, description: 'One internal tool or integration, 4–8 weeks.' },
+      { name: 'Standard', min: 80000, max: 200000, description: 'Multi-integration system with security review.' },
+      { name: 'Enterprise', min: 200000, description: 'Platform work with staged rollout and hypercare.' },
+    ],
+  },
 };
 
 export default async function DevelopmentServiceDetail({
@@ -72,14 +115,21 @@ export default async function DevelopmentServiceDetail({
   const tCommon = await getTranslations({ locale, namespace: 'common' });
   const prefix = locale === 'en' ? '' : `/${locale}`;
 
-  const svcFaqSlug =
+  // Per-service FAQ group: prefer the service-id-slug (e.g. "custom-systems"),
+  // fall back to the topic group ("crm"/"rag"/"automation") where that exists.
+  const topicFallback =
     svc.id === 'custom-crm' ? (locale === 'de' ? 'crm-entwicklung' : 'crm') :
     svc.id === 'rag-systems' ? (locale === 'de' ? 'rag-systeme' : 'rag') :
     svc.id === 'ai-agents-automation' ? (locale === 'de' ? 'ki-agenten' : 'automation') :
     null;
-  const faqItems = svcFaqSlug ? faqData[locale].find((g) => g.slug === svcFaqSlug)?.items ?? [] : [];
+  const faqGroup =
+    faqData[locale].find((g) => g.slug === svc.id) ??
+    (topicFallback ? faqData[locale].find((g) => g.slug === topicFallback) : undefined);
+  const faqItems = faqGroup?.items ?? [];
 
-  const tiers = pricingByService[svc.id] ?? [];
+  const pricing = pricingByService[svc.id];
+  const displayTiers = pricing?.display ?? [];
+  const schemaTiers = pricing?.tiers ?? [];
 
   return (
     <>
@@ -94,7 +144,12 @@ export default async function DevelopmentServiceDetail({
           <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-brand-900 md:text-5xl dark:text-white">
             {c.h1}
           </h1>
-          <p className="mt-6 max-w-3xl text-lg text-brand-900/85 dark:text-white/85">{c.summary}</p>
+          {/* Direct 1-sentence definition under the H1 the format AI answer
+              engines (Perplexity, Google AI Overviews, ChatGPT) quote. */}
+          <p className="mt-4 max-w-3xl text-base font-medium text-brand-900 dark:text-white">
+            {firstSentence(c.whatItIs)}
+          </p>
+          <p className="mt-4 max-w-3xl text-lg text-brand-900/85 dark:text-white/85">{c.summary}</p>
         </div>
         <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:justify-self-end">
           <ServiceAnimationBySlug serviceId={svc.id} />
@@ -132,7 +187,7 @@ export default async function DevelopmentServiceDetail({
 
       <ProcessSteps steps={c.process} />
 
-      {tiers.length > 0 && <PricingBand tiers={tiers} />}
+      {displayTiers.length > 0 && <PricingBand tiers={displayTiers} />}
 
       {faqItems.length > 0 && (
         <section className="container py-8">
@@ -143,6 +198,8 @@ export default async function DevelopmentServiceDetail({
           />
         </section>
       )}
+
+      <ServiceRelatedLinks serviceId={svc.id} locale={locale} />
 
       <CTASection
         title={locale === 'de' ? 'Nur ein Scope, kein Verkaufsgespräch.' : 'Just a scope, not a sales pitch.'}
@@ -157,13 +214,22 @@ export default async function DevelopmentServiceDetail({
 
       <SchemaJsonLd
         data={[
-          serviceSchema(svc.id, locale)!,
+          serviceSchema(svc.id, locale, { pricingTiers: schemaTiers })!,
           breadcrumbSchema([
             { name: 'Home', href: prefix || '/' },
+            { name: locale === 'de' ? 'Leistungen' : 'Services', href: `${prefix}/services` },
             { name: locale === 'de' ? 'Softwareentwicklung' : 'Software Development', href: `${prefix}/services/development` },
             { name: c.title, href: `${prefix}/services/development/${slug}` },
           ]),
-          ...(faqItems.length > 0 ? [faqSchema(faqItems)] : []),
+          ...(faqItems.length > 0
+            ? [faqSchema(faqItems, { pageUrl: `${site.url}${prefix}/services/development/${slug}` })]
+            : []),
+          howToSchema({
+            locale,
+            name: `${c.title} — ${locale === 'de' ? 'Vorgehensweise' : 'Our process'}`,
+            description: c.summary,
+            steps: c.process.map((p) => ({ name: p.step, text: p.body })),
+          }),
         ]}
       />
     </>

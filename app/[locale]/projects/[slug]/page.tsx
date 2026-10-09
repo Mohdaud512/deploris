@@ -5,7 +5,7 @@ import { locales } from '@/config/locales';
 import { projects } from '@/content/projects';
 import { buildMetadata } from '@/lib/seo';
 import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
-import { articleSchema, breadcrumbSchema } from '@/lib/schema';
+import { caseStudySchema, breadcrumbSchema } from '@/lib/schema';
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => projects.map((p) => ({ locale, slug: p.slug })));
@@ -70,13 +70,13 @@ export default async function ProjectDetail({ params }: { params: Promise<{ loca
 
       <SchemaJsonLd
         data={[
-          articleSchema({
+          caseStudySchema({
             title: c.title,
             description: c.summary,
             slug,
-            date: '2025-01-01',
-            author: 'Deploris',
+            date: p.date,
             locale,
+            about: p.about,
           }),
           breadcrumbSchema([
             { name: 'Home', href: prefix || '/' },

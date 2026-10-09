@@ -42,6 +42,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
       locale === 'de'
         ? `Alle Blog-Beiträge im Themenfeld ${label}.`
         : `All posts tagged ${label}.`,
+    // Tag pages have few posts and are near-duplicates of each other;
+    // noindex until there are 5+ posts per tag so Google doesn't classify
+    // them as thin content.
+    noIndex: true,
   });
 }
 

@@ -57,9 +57,36 @@ export default async function GlossaryTermPage({
       <div className="prose prose-brand mt-8 max-w-3xl dark:prose-invert">
         <p>{found.body}</p>
       </div>
+
+      {found.related && found.related.length > 0 && (
+        <aside className="mt-10 max-w-3xl rounded-2xl border border-brand-900/10 bg-brand-50 p-6 dark:border-white/10 dark:bg-white/5">
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-brand-700 dark:text-accent-400">
+            {locale === 'de' ? 'Weiterführend' : 'Related'}
+          </h2>
+          <ul className="mt-3 space-y-2">
+            {found.related.map((r) => (
+              <li key={r.href}>
+                <Link
+                  href={`${prefix}${r.href}`}
+                  className="text-brand-900 underline underline-offset-2 hover:text-brand-700 dark:text-white dark:hover:text-accent-400"
+                >
+                  {r.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+
       <SchemaJsonLd
         data={[
-          definedTermSchema({ slug: found.slug, name: found.term, description: found.description, locale }),
+          definedTermSchema({
+            slug: found.slug,
+            name: found.term,
+            description: found.description,
+            locale,
+            sameAs: found.sameAs,
+          }),
           breadcrumbSchema([
             { name: 'Home', href: prefix || '/' },
             { name: locale === 'de' ? 'Glossar' : 'Glossary', href: `${prefix}/glossary` },

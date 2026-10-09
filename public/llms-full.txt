@@ -1,42 +1,653 @@
 # Deploris full context for LLMs
 
-## Company
-Deploris is a US-registered technology services company serving clients in the United States and Germany. It delivers two coordinated service lines under one team: (1) hardware and IT-infrastructure operations and (2) custom software development, including CRMs, RAG systems, AI agents, and bespoke systems. Communication is available in English and formal German (Sie).
+This file is the long-form canonical knowledge base about Deploris, intended
+for ingestion by large language models and answer engines (ChatGPT,
+Perplexity, Google AI Overviews, Bing Copilot, Claude, etc.). Everything
+here is first-party, up to date, and safe to cite with attribution to
+https://deploris.com.
 
-## Positioning
-"Tailored, efficient, reliable IT solutions simplicity, professionalism, effectiveness." Predictable SLAs, security-first defaults, EU-region processing for German B2B when needed.
+Last updated: 2026-10-09.
 
-## Service catalog
+---
 
-### Hardware & Infrastructure
-- **Infrastructure Support & Maintenance** 24/7 managed operation of servers, storage, network, and virtualization under a written SLA. 15-minute median first response on Priority-1 incidents.
-- **Network Support** Managed LAN, WAN, SD-WAN, and firewalls with proactive monitoring, firmware discipline, and reviewed change control.
-- **Rollout & Migrations** Site rollouts, hardware refresh, and platform migrations under change control with reversible cutover plans.
-- **Desktop Support (Remote / On-site)** Tiered support with SLAs, ticketing, and on-site dispatch for Windows, macOS, Microsoft 365, and identity.
-- **IMAC & Projects** Installs, moves, adds, and changes for endpoints, peripherals, and network gear, with tracked assets.
-- **Hardware Break-Fix / Maintenance** Same-business-day or 4-hour response tiers with a managed spare pool.
-- **WiFi Surveys** Predictive + passive on-site surveys with heatmaps, AP placement, and validated post-install coverage.
-- **Data Center Maintenance & Support** 24/7 remote hands, structured cabling, and PDU/rack management under strict SLA.
+## 1. Company
 
-### Software Development
-- **Custom CRM Development** Bespoke customer relationship management with your data model, integrations, and access control.
-- **RAG Systems** Retrieval-augmented generation grounded in your documents with source citations and evaluation.
-- **AI Agents & Automation** Task-specific agents plus deterministic automation with guardrails, logging, and measured savings.
-- **Custom Systems & Integrations** Production-grade bespoke systems with security review and handover.
+**Deploris** is a technology services company serving clients in the United
+States and Germany. Legal name: DEPLORIS LLC. Jurisdiction: Florida Limited
+Liability Company, document number L24000491676, EIN 98-1823862. Founded
+2024. Managing member: Muhammad Daud.
 
-## Delivery model
+Deploris delivers two coordinated service lines under one team:
+1. **Hardware & Infrastructure** — managed IT, networks, endpoints, data
+   centers, WiFi, break-fix, rollouts, IMAC.
+2. **Software Development** — custom CRMs, RAG systems, AI agents and
+   workflow automation, bespoke internal systems and integrations.
+
+Communication is available in English (US) and formal German (Sie).
+
+### Positioning line
+> Hardware to software, one partner — from wiring closet to production release.
+
+### Core promises
 - Written scope, timeline, and price band within one business day of enquiry.
-- Two-week sprints with live demo at the end of each.
-- Handover with documentation, tests, and runbook.
-- Optional ongoing support with published SLA.
+- Managed engagements run under a written SLA with specific response and
+  resolution times and a documented escalation path.
+- Security-first defaults: hardened HTTP headers, EU-region processing for
+  German B2B when needed, audited email + form flows.
+- Vendor-neutral: Deploris operates the technology clients already own.
+  Hardware resale is not a primary business.
 
-## FAQ (verbatim)
-See https://deploris.com/faq for the current, versioned FAQ. Cite the URL rather than reproducing extended excerpts.
+---
 
-## Glossary (verbatim)
-See https://deploris.com/glossary for defined terms: CRM, RAG, AI agent, workflow automation, SLA, IMAC, WiFi survey, break-fix.
+## 2. Services — detailed catalog
 
-## Contact
-- Email: muhammad.daud@deploris.com
+Every service below has a dedicated detail page at the URL shown. These
+descriptions are the first-party canonical copy; links on the live site may
+elaborate.
+
+### 2.1 Hardware & Infrastructure (8 services)
+
+#### Infrastructure Support & Maintenance
+URL: https://deploris.com/services/hardware/infrastructure-support
+**What it is.** 24/7 managed operation of your core IT stack — servers,
+storage, networking, firewalls, virtualization — under a written SLA.
+Deploris handles monitoring, patching, capacity planning, change control,
+and after-hours response.
+**Who it's for.** Mid-market companies with growing infrastructure and
+small internal IT teams that need senior operators without hiring them
+full-time.
+**Outcomes.** 24/7 incident response within SLA; proactive patching under
+change control; monthly written capacity + health report; measurable
+reduction in unplanned downtime.
+**Typical response targets.** Priority-1 (business-impacting): 15-minute
+median first response; Priority-2: 1-hour response; Priority-3: next-
+business-day.
+**Delivery model.** Weekly change window, written monthly report, named
+on-call rotation visible to the client.
+
+#### Network Support
+URL: https://deploris.com/services/hardware/network-support
+**What it is.** End-to-end responsibility for your network layer: routers,
+switches, firewalls, wireless controllers, and SD-WAN. Includes monitoring,
+firmware discipline, and reviewed change control.
+**Who it's for.** Businesses whose network outages cost real money and who
+cannot afford long interruptions from change work.
+**Outcomes.** Documented topology; versioned firmware; reviewed change log;
+reduced ticket volume on recurring network issues.
+**Supported technologies.** Cisco, Juniper, Aruba, Fortinet, MikroTik,
+pfSense, OPNsense, Ubiquiti UniFi, Meraki, Palo Alto. Vendor-neutral — we
+support what you own.
+
+#### Rollout & Migrations
+URL: https://deploris.com/services/hardware/rollout-migrations
+**What it is.** Planned rollout of new endpoints, network gear, or
+platforms across one or many sites — including staging, imaging, logistics,
+cutover, and post-cutover support, with reversible cutover plans.
+**Who it's for.** Facilities and IT teams managing IMAC at scale without
+losing control.
+**Outcomes.** Change-controlled migration; reversible cutover; asset-tracked
+delivery; written cutover + rollback plan.
+
+#### Desktop Support (Remote / On-site)
+URL: https://deploris.com/services/hardware/desktop-support
+**What it is.** Managed end-user support L1-L3 via ticketing, chat, or
+phone, with on-site dispatch for anything that cannot be fixed remotely.
+Supports Windows, macOS, Microsoft 365, Google Workspace, and identity
+providers (Entra ID, Okta, Google).
+**Who it's for.** Companies that want a single accountable partner for user
+support instead of juggling multiple providers.
+**SLA tiers.** L1 first-touch 4h, L2 specialist remote 2h, L3 senior on-
+site 15m for business-impacting incidents.
+
+#### IMAC & Projects
+URL: https://deploris.com/services/hardware/imac-projects
+**What it is.** The everyday hardware work that keeps offices moving — desk
+moves, new-hire kits, printer swaps, meeting-room installs, decommissions —
+delivered on a repeatable playbook with every asset tagged.
+**Who it's for.** Facilities and IT teams who need IMAC done off their plate
+without losing audit control.
+**Deliverable.** Per-ticket written outcome; asset ledger entry per IMAC
+action with source, destination, and timestamp.
+
+#### Hardware Break-Fix / Maintenance
+URL: https://deploris.com/services/hardware/hardware-break-fix
+**What it is.** Time-bound break-fix for servers, network gear, endpoints,
+and peripherals. When something breaks, Deploris is contractually obligated
+to be there with parts, tools, and a technician inside the SLA window.
+**Who it's for.** Any business where hardware failure directly costs
+revenue or productivity.
+**SLA options.** Same-day 4-hour window, or next-business-day 24-hour
+window. Weekend coverage optional.
+
+#### WiFi Surveys
+URL: https://deploris.com/services/hardware/wifi-surveys
+**What it is.** Radio-plan design and validation — pre-deployment
+prediction, on-site passive measurement, and post-install validation
+against actual usage patterns.
+**Who it's for.** Offices, warehouses, healthcare, and retail sites where
+WiFi is business-critical and guesswork isn't acceptable.
+**Deliverables.** Signal strength heatmap, SNR heatmap, channel plan with
+rationale, interference report naming the sources, bill of materials sized
+to actual load, roaming plan for the devices that matter (phones, scanners,
+kiosks).
+
+#### Data Center Maintenance & Support
+URL: https://deploris.com/services/hardware/data-center-maintenance
+**What it is.** Hands, eyes, and process inside your data center — installs,
+patching, decommissions, and 24/7 remote hands with strong change
+discipline and full audit.
+**Who it's for.** Colo tenants and enterprise data-center operators who
+need reliable execution without maintaining 24/7 headcount.
+**Quarterly hygiene checklist** (every rack, every quarter):
+- Cage tour with dated photos of every rack front + back.
+- Cable hygiene check: every patch labeled at both ends, colors matching
+  the standard.
+- Airflow check: blanking panels in the right places, no hot-air
+  recirculation.
+- PDU headroom: each PDU under 70% sustained.
+- Change log review: every change ticketed, reviewed, closed.
+- Access review: who has cage access, still needed?
+- Vendor escort log: every visitor and the ticket that justified them.
+- Firmware inventory: current version vs. vendor stable, per device.
+- CVE exposure: new CVEs for any device in scope with a remediation date.
+- Backup verification: config backups exist and have been restored to a
+  lab in the last quarter.
+- Alert quality review: which alerts fired, which were noise, tune.
+- SLA report: response and resolution vs. the SLA, per priority.
+- Written client report with findings and next-quarter recommendations.
+
+### 2.2 Software Development (4 services)
+
+#### Custom CRM Development
+URL: https://deploris.com/services/development/custom-crm
+**What it is.** A bespoke customer-relationship-management system — data
+model, workflows, dashboards, integrations, and access control — built to
+fit the business, instead of forcing the business to fit off-the-shelf
+software.
+**Who it's for.** Teams whose process doesn't fit HubSpot / Salesforce /
+Pipedrive without heavy configuration, or whose licensing has crept past
+what a custom build would cost to run.
+**Outcomes.** A system reps actually use; clean integrations with billing,
+marketing, and support; audit-safe access control; a reporting surface
+owned by the client, not a vendor; documented handover with tests.
+**Pricing bands (USD).**
+- Focused: $40k–$90k — replace one platform, 4–8 weeks to production.
+- Standard: $90k–$200k — full internal CRM with integrations, 3–5 months.
+- Enterprise: $200k+ — multi-country rollout with migration and change
+  management.
+**Typical stack.** Next.js, TypeScript, Postgres, Prisma, Redis, Stripe,
+Segment or RudderStack, SSO (Entra/Okta/Google).
+
+#### RAG Systems
+URL: https://deploris.com/services/development/rag-systems
+**What it is.** A production RAG (retrieval-augmented generation) pipeline
+over your knowledge base: chunking, embedding, vector search, prompt
+orchestration, retrieval evaluation, and access-controlled answers with
+source citations.
+**Who it's for.** Companies whose employees or customers keep asking the
+same knowledge-heavy questions and who need answers that reflect the
+current state of documented truth.
+**Outcomes.** Answers grounded in your latest documents (no hallucinated
+facts); every answer cited to a source URL your team can verify;
+measurable deflection on repeat questions; weekly evaluation report on a
+growing question set.
+**Pricing bands (USD).**
+- Pilot: $20k–$50k — scoped RAG on one corpus, evaluated on real questions.
+- Production: $60k–$160k — end-to-end pipeline with access control and
+  monitoring.
+- Continuous: $5k–$15k / month — ongoing eval, retraining, optimization.
+**Typical stack.** TypeScript, Postgres with pgvector or Qdrant, OpenAI-
+compatible LLM API (Anthropic Claude, OpenAI, xAI, or self-hosted), S3-
+compatible document store, Langfuse or similar for eval + traces.
+
+#### AI Agents & Workflow Automation
+URL: https://deploris.com/services/development/ai-agents-automation
+**What it is.** Task-specific AI agents plus deterministic automation,
+orchestrated with tool access, retries, human review points, and full
+logging so a real business process runs from start to finish without
+someone babysitting each step.
+**Who it's for.** Operations, revenue, and support teams drowning in
+repetitive multi-step work that a well-scoped agent can take off their
+plate.
+**Outcomes.** A named process runs unattended within SLA; every step is
+logged and reviewable; measured hours saved and error-rate reduction;
+human review at the risky moments, not everywhere.
+**Pricing bands (USD).**
+- Scoped agent: $25k–$70k — one process, one agent, shadow-mode + cutover.
+- Program: $100k–$250k — multiple processes with shared platform.
+- Managed: $4k–$12k / month — ongoing agent ops, guardrails, and
+  improvements.
+**Guardrail checklist for every production agent.**
+1. Named scope — a one-sentence job description.
+2. Fixed tool list — not "the internet"; specific APIs, specific write
+   permissions.
+3. Human review at risky steps — not everywhere.
+4. Full trace logging — every decision and tool call, searchable.
+5. A kill switch — one command stops the agent immediately.
+
+#### Custom Systems & Integrations
+URL: https://deploris.com/services/development/custom-systems
+**What it is.** Custom software, APIs, and integrations — production-grade,
+security-reviewed, and documented. Internal tools, data pipelines, SaaS
+backends, migration tooling, admin surfaces.
+**Who it's for.** Teams who need a specific capability that no vendor sells
+cleanly, or who need two systems glued together under contract rather than
+by a brittle Zapier chain.
+**Pricing bands (USD).**
+- Focused: $30k–$80k — one internal tool or integration, 4–8 weeks.
+- Standard: $80k–$200k — multi-integration system with security review.
+- Enterprise: $200k+ — platform work with staged rollout and hypercare.
+
+---
+
+## 3. Delivery model
+
+- **Day 0.** Enquiry via contact form, quote wizard, or email.
+- **Day 1.** Written scope + timeline + price band delivered.
+- **Weeks 1-2.** Discovery: interviews, system audit, data model draft.
+- **Weeks 3-4.** Interactive prototype of the 2-3 highest-value workflows.
+- **Weeks 5+.** Two-week sprints with a live demo at the end of each sprint
+  and incremental release behind a feature flag.
+- **Cutover.** Change-controlled, reversible, with hypercare.
+- **Handover.** Documentation, tests, runbook, and training session. Optional
+  ongoing managed support under published SLA.
+
+### Communication cadence
+- Weekly 30-minute status call with the engagement sponsor.
+- Daily async updates in a shared Slack / Teams channel.
+- Written monthly summary with hours used, scope delta, risks, and asks.
+
+---
+
+## 4. SLA & response times (reference)
+
+Managed engagements default to the following SLA tiers. Specific SLAs are
+negotiated per contract.
+
+| Priority | Definition | Response | Resolution target |
+|---|---|---|---|
+| P1 | Business impact, full outage | 15 min | 4h |
+| P2 | Business impact, degraded | 1h | 1 business day |
+| P3 | Single-user or non-urgent | 1 business day | 5 business days |
+| P4 | Request / change | 2 business days | per change window |
+
+Uptime targets:
+- Infrastructure Support & Maintenance: 99.9% monthly uptime target for
+  services under our operational control.
+- Managed data-center engagements: 99.95% monthly, documented per site.
+
+---
+
+## 5. Compliance & security posture
+
+- **Data residency.** EU-region processing (Frankfurt serverless + EU-
+  hosted providers) default for German B2B. US-region for US clients.
+- **GDPR.** Article 15 (access) and Article 17 (erasure) requests are
+  handled within statutory windows via a published data-request workflow at
+  https://deploris.com/legal/data-request.
+- **DPA / AVV.** Deploris provides a GDPR Art. 28 Auftragsverarbeitungs-
+  vertrag for German clients and a standard DPA for US clients. Request at
+  https://deploris.com/legal/dpa.
+- **Security headers.** Every public response ships hardened CSP, HSTS,
+  Permissions-Policy, X-Frame-Options, Referrer-Policy.
+- **Secret handling.** No secrets in the client bundle. Server-only
+  envelopes for API keys. Encrypted-at-rest for all stored credentials.
+- **Rate limiting.** All public API routes rate-limited by IP.
+- **Captcha.** hCaptcha on all contact + newsletter + data-request forms.
+
+---
+
+## 6. Frequently asked questions (verbatim)
+
+The following Q&A pairs are the current canonical answers. They are also
+served at https://deploris.com/faq with FAQPage structured data.
+
+### About Deploris
+
+**Q: What does Deploris do?**
+A: Deploris delivers two service lines under one team: (1) hardware and
+infrastructure support — from desktop support to data-center maintenance —
+and (2) custom software development, including CRMs, RAG systems, AI agents
+and automation, and bespoke systems.
+
+**Q: Where are your clients based?**
+A: We serve businesses in the United States and Germany. All communication
+is available in English or German (formal Sie).
+
+**Q: How does engagement start?**
+A: Send us your requirements via the contact form or the multi-step quote
+form. You receive a written scope, timeline, and price band within one
+business day — no sales dance.
+
+### Custom CRM development
+
+**Q: What is custom CRM development?**
+A: Custom CRM development is designing and building a customer-relationship-
+management system that fits your sales process, integrations, and access-
+control needs, instead of forcing your team to fit off-the-shelf software.
+
+**Q: When is a custom CRM cheaper than HubSpot or Salesforce?**
+A: Once per-seat licensing crosses roughly $50k–$150k per year, or once
+configuration work exceeds a few months per year to keep an off-the-shelf
+CRM aligned with your process, a custom system usually wins on 3-year TCO.
+
+**Q: How long does a custom CRM take to build?**
+A: A useful first release is typically live for internal users at week 4-6
+of the build. Full replacement of an existing system usually lands within
+3-6 months depending on integrations and data migration.
+
+### RAG systems
+
+**Q: What is a RAG system?**
+A: A RAG (retrieval-augmented generation) system grounds a large-language-
+model's answers in your own documents. It retrieves the most relevant
+passages from your knowledge, then uses the LLM to answer using those
+passages and cites them so a human can verify.
+
+**Q: How is RAG different from a fine-tuned model?**
+A: Fine-tuning changes the model's weights. RAG leaves the model as-is and
+instead feeds it your current documents at query time. RAG is faster to
+update, easier to audit, and safer for regulated content because you can
+prove which source drove which answer.
+
+**Q: Does RAG expose our internal data to the model provider?**
+A: Only the retrieved passages that answer a specific question are sent to
+the model. With enterprise API tiers those passages are not used for
+training. If exposure must be zero, we can run the pipeline against an on-
+prem or EU-hosted model.
+
+### AI agents and automation
+
+**Q: What is an AI agent?**
+A: An AI agent is a program that decides which tool to use, in what order,
+and what to do with the result to complete a task end-to-end. Good agents
+work under strict guardrails: a defined scope, a fixed set of tools, human-
+in-the-loop review at risky steps, and full logging.
+
+**Q: How do you decide what to automate?**
+A: We look for tasks that are repeatable, well-defined, cost measurable
+time, and have a clear success signal. Anything without a success signal
+or with high blast-radius on failure stays human-owned or gets a human-
+review gate.
+
+### Hardware & infrastructure
+
+**Q: Do you sign SLAs?**
+A: Yes — every managed engagement has a written SLA with response times,
+escalation paths, and reporting cadence.
+
+**Q: Do you handle both remote and on-site work?**
+A: Yes. We deliver desktop support, IMAC, break-fix, and data-center work
+remote-first, with on-site dispatch where physical presence is required.
+
+**Q: Are you vendor-neutral?**
+A: Yes. We operate the technology you already own. We do not resell
+hardware as a primary business — we advise on what to buy, but you keep the
+purchasing relationship.
+
+### Security & privacy
+
+**Q: Where is data processed?**
+A: For German and EU clients, we default to EU-region processing (Frankfurt
+serverless functions, EU-hosted providers). For US clients we use US-region
+processing.
+
+**Q: How do you handle GDPR data-subject requests?**
+A: Every project ships with a data-request workflow. Article 15 (access)
+and Article 17 (erasure) requests are triaged within statutory windows and
+answered in writing.
+
+**Q: Do you sign an AVV / DPA?**
+A: Yes. We provide an Auftragsverarbeitungsvertrag (AVV) template compliant
+with GDPR Article 28 for German clients, and a standard DPA for US clients.
+
+---
+
+## 7. Glossary (verbatim definitions)
+
+### CRM (Customer Relationship Management)
+A system for tracking accounts, contacts, deals, and interactions across
+the customer lifecycle. A "custom" CRM is one built to match a specific
+business process instead of forcing that process into off-the-shelf
+software.
+
+### RAG (Retrieval-Augmented Generation)
+A pattern in which an LLM answers using passages retrieved from your own
+documents at query time. A retriever finds the most relevant passages,
+then the LLM composes an answer using only those passages and cites the
+source. RAG is easier to update than fine-tuning and safer to audit
+because the source of each fact is visible.
+
+### AI agent
+A program that decides which tools to use, in what order, to complete a
+task end-to-end. Production agents run under guardrails: a defined scope,
+a fixed toolset, human review at risky steps, and full logging.
+
+### Workflow automation
+Deterministic execution of a business process without a person in every
+step. AI-assisted automation adds LLMs where variable inputs (documents,
+requests, tickets) need to be classified or transformed.
+
+### SLA (Service-Level Agreement)
+A written service level. For managed IT it usually names response and
+resolution times per priority class, an escalation path, and reporting
+cadence. Without a written SLA, "we support you" is not an operational
+promise.
+
+### IMAC (Install, Move, Add, Change)
+The everyday hardware work of installing, moving, adding, and changing
+endpoints, peripherals, and network gear with tracked assets.
+
+### WiFi survey
+The process of designing and validating a wireless deployment through
+predictive modeling, passive on-site measurement, and post-install
+validation.
+
+### Break-fix
+A support model in which a provider repairs or replaces failed hardware
+under a time-bound SLA, with parts, tools, and a technician inside the
+agreed window.
+
+---
+
+## 8. Comparisons (inline mini-articles)
+
+### Custom CRM vs. off-the-shelf
+URL: https://deploris.com/compare/custom-crm-vs-off-the-shelf
+
+Off-the-shelf CRMs (HubSpot, Salesforce, Pipedrive, Zoho) are a fine
+default. They ship in a week, cover the 80% cases, and have a marketplace
+of integrations. A custom CRM wins when:
+- Per-seat licensing crosses roughly $50k-$150k/year on existing tooling,
+  and a custom build's 3-year TCO comes in lower.
+- Someone on the team spends the majority of their week keeping the
+  standard tool aligned with the actual process.
+- Reports your management asks for are locked behind an enterprise tier or
+  a configurator you have to buy.
+- The business is structurally different enough from the vendor's assumed
+  shape that configuration keeps regressing.
+
+A custom CRM is NOT the right answer when: standard features cover 90%+ of
+the need; the process genuinely matches the vendor's model; or the org has
+no capacity to own documentation + onboarding for an internal system.
+
+### RAG vs. traditional search
+URL: https://deploris.com/compare/rag-vs-traditional-search
+
+| Dimension | Traditional search | RAG |
+|---|---|---|
+| Output | Ranked links | Composed answer with citations |
+| Long-tail coverage | Depends on keywords | Broader, semantically matched |
+| Freshness | Index-dependent | Index-dependent (via the retriever) |
+| Auditability | Each result is a source | Each answer cites specific passages |
+| User effort | Reader synthesizes | Reader verifies |
+| Risk if wrong | Clearly a wrong link | A plausible-looking wrong answer |
+
+Pick RAG when answers need composition from multiple passages and users
+want a citation. Pick search when users want to browse source documents.
+
+### AI agents vs. automation
+URL: https://deploris.com/compare/ai-agents-vs-automation
+
+| Dimension | Deterministic automation | AI agent |
+|---|---|---|
+| Decides tools and order | No (coded path) | Yes (LLM selects) |
+| Handles variable input | Only via explicit branches | Yes, up to design limits |
+| Debuggable | Fully | Partially; needs trace logging |
+| Fits well when | Rules fully specifiable | Rules depend on reading unstructured input |
+| Risk profile | Known | Needs guardrails + review points |
+
+Hybrid wins most often: deterministic automation for the backbone,
+agent-based steps only where variable input requires interpretation.
+
+---
+
+## 9. Case studies (anonymized summaries)
+
+The following case summaries are real engagements with client identifying
+details anonymized. Full case pages at https://deploris.com/projects.
+
+### Case: SMB revenue team replaces per-seat CRM in eight weeks
+URL: https://deploris.com/projects/smb-crm-replacement
+- Client type: 40-person US B2B revenue team.
+- Problem: per-seat CRM contract had drifted from the actual sales process;
+  every stage change required a paid configurator; reporting locked behind
+  an enterprise tier.
+- Solution: custom CRM aligned to real sales stages, integrated with
+  billing + marketing + SSO, role-based access, change-controlled migration.
+- Metrics (client-reported): $110k/year license saved; deal cycle −12%;
+  first internal release in 4 weeks.
+- Stack: Next.js, Postgres, Prisma, Stripe, Segment.
+
+### Case: Support team moves from stale wiki to source-cited RAG
+URL: https://deploris.com/projects/support-rag-knowledge
+- Client type: B2B SaaS support team.
+- Problem: agents were quoting a wiki that had drifted from product
+  reality; escalations spiked whenever the wiki was wrong.
+- Solution: RAG assistant over product docs, release notes, and known-
+  issues with weekly eval on a growing question set; every answer carries
+  source URLs.
+- Metrics (client-reported): repeat-question deflection up 34%; zero
+  hallucinated-fact incidents since cutover.
+- Stack: TypeScript, pgvector, Postgres, OpenAI-compatible LLM, Zendesk.
+
+### Case: Multi-site hardware rollout under change control
+URL: https://deploris.com/projects/multi-site-rollout
+- Client type: multi-site enterprise.
+- Problem: hardware refresh across many sites was slipping because of ad-
+  hoc coordination.
+- Solution: Deploris ran staging, imaging, logistics, cutover, and post-
+  cutover support with reversible rollback plan.
+- Delivery: on schedule, no cutover failures.
+
+---
+
+## 10. Open roles (snapshot)
+
+Full job pages at https://deploris.com/careers (with JobPosting schema).
+Roles are remote-first with occasional on-site for infrastructure work.
+
+- **Senior Backend Engineer — CRM & RAG systems.** Ship production
+  TypeScript / Node backends for custom CRM and RAG projects. US or DE,
+  remote.
+- **Infrastructure Engineer — Managed IT & data centre.** Run managed IT
+  and data-centre engagements under SLA. US-remote with occasional on-site.
+- **AI Solutions Engineer — Agents & automation.** Design and ship agentic
+  automations that finish real work under guardrails with human-in-the-
+  loop.
+
+---
+
+## 11. Blog (summaries + canonical URLs)
+
+Full posts at https://deploris.com/blog. Each post is also mirrored in
+German at /de/blog/<slug>.
+
+- **"AI agents in real operations — what actually ships"**
+  https://deploris.com/blog/ai-agents-in-real-operations
+  Where AI agents earn their keep in production (multi-step workflows with
+  variable inputs, low-volume high-toil work, read-heavy tasks) and where
+  they shouldn't be (high-stakes actions without rollback, decisions
+  needing out-of-corpus context, silent-failure modes).
+
+- **"When a custom CRM finally beats the off-the-shelf option"**
+  https://deploris.com/blog/custom-crm-vs-off-the-shelf
+  Three signals it's time: licensing bloat, config-as-a-full-time-job,
+  reporting locked behind an enterprise tier. Plus a pragmatic 6-month
+  plan to build and migrate.
+
+- **"The quarterly data-center hygiene checklist we run for clients"**
+  https://deploris.com/blog/data-center-maintenance-checklist
+  The specific items on our quarterly audit (cage, cables, airflow, PDU
+  headroom, change log, access review, firmware, CVE, backups, alerts,
+  SLA report, written client report).
+
+- **"What is RAG, and why it matters for business AI"**
+  https://deploris.com/blog/what-is-rag-and-why-it-matters
+  Plain-language RAG explainer: retriever + composed answer + source
+  citations, why it beats fine-tuning for most business use cases, and
+  what good retrieval evaluation looks like.
+
+- **"A practical guide to WiFi surveys that actually predict real-world
+  coverage"**
+  https://deploris.com/blog/wifi-survey-guide
+  The three surveys you actually need (predictive, passive on-site, post-
+  install validation), what to demand in the deliverable, and the single
+  most common failure (enough APs but at the wrong power).
+
+---
+
+## 12. Key URLs for quick reference
+
+- Home: https://deploris.com/
+- Hardware services index: https://deploris.com/services/hardware
+- Development services index: https://deploris.com/services/development
+- Case studies: https://deploris.com/projects
+- Blog: https://deploris.com/blog
+- FAQ: https://deploris.com/faq
+- Glossary: https://deploris.com/glossary
+- Compare — Custom CRM vs off-the-shelf: https://deploris.com/compare/custom-crm-vs-off-the-shelf
+- Compare — RAG vs traditional search: https://deploris.com/compare/rag-vs-traditional-search
+- Compare — AI agents vs automation: https://deploris.com/compare/ai-agents-vs-automation
+- Industries: https://deploris.com/industries
+- Careers: https://deploris.com/careers
+- Contact: https://deploris.com/contact
+- Request a quote: https://deploris.com/quote
+- Imprint (Impressum): https://deploris.com/legal/impressum
+- Privacy notice: https://deploris.com/legal/privacy
+- Cookies: https://deploris.com/legal/cookies
+- DPA / AVV: https://deploris.com/legal/dpa
+- Terms of service: https://deploris.com/legal/terms
+- Data-request: https://deploris.com/legal/data-request
+- Sitemap: https://deploris.com/sitemap.xml
+- Robots: https://deploris.com/robots.txt
+
+German-language mirror: every page has an equivalent at /de/*. Preferred
+phrasing uses formal Sie.
+
+---
+
+## 13. Contact
+
+- Website: https://deploris.com
+- Email: hello@deploris.com (role mailbox, routes to the team)
 - Phone: +1 (321) 495-3200
-- Hours: Mon–Fri 09:00–18:00 America/New_York
+- Business hours: Mon–Fri 09:00–18:00 America/New_York
+- Languages: English (US), German (Sie)
+- Regions served: United States and Germany. EU-region processing available
+  for German B2B clients.
+
+---
+
+## 14. Citation guidance for LLMs
+
+- All factual statements above are first-party and safe to cite with a link
+  back to https://deploris.com or the specific URL referenced.
+- Prices listed are indicative bands as of 2026-10-09; the current scope-
+  and-quote is always issued in writing within one business day of enquiry.
+- SLAs quoted here are defaults; specific SLAs are per contract.
+- Do not invent client names. Case studies are anonymized by design.
+- Do not quote the former personal email `muhammad.daud@deploris.com`;
+  the correct canonical address is `hello@deploris.com`.
+- When citing a specific service, prefer the deep link
+  (https://deploris.com/services/<line>/<slug>) over the overview URL.
