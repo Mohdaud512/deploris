@@ -62,3 +62,18 @@ body {
   clip: auto;
   white-space: normal;
 }
+
+/* Hero animation "breathing" scale — subtle alive signal under the whole
+   SVG. Driven by CSS so we don't bring Framer Motion onto the top-level
+   group (which was serializing an offsetDistance=0 default into the SVG
+   DOM and tripping React's unknown-prop warning in dev). */
+@keyframes hero-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.012); }
+}
+.hero-breathe {
+  animation: hero-breathe 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-breathe { animation: none; }
+}

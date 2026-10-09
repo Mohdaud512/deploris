@@ -16,7 +16,7 @@ Legend:
 - Jurisdiction: Florida Limited Liability Company
 - Document Number: L24000491676
 - EIN: 98-1823862
-- Managing member: Mustansar Aleem
+- Managing member: Muhammad Daud
 - Principal address: 7901 4th St N, Ste 12030, St. Petersburg, FL 33702
 - Phone: +1 (321) 495-3200
 - Email: muhammad.daud@deploris.com

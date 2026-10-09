@@ -22,7 +22,7 @@ export const site = {
     postalCode: '33702',
     country: 'US',
   },
-  managingMember: 'Mustansar Aleem',
+  managingMember: 'Muhammad Daud',
   tagline: {
     en: 'Tailored, efficient, reliable IT solutions.',
     de: 'Maßgeschneiderte, effiziente und verlässliche IT-Lösungen.',
