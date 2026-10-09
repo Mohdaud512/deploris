@@ -9,6 +9,7 @@ import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/schema';
 import { ProcessSteps } from '@/components/marketing/ProcessSteps';
 import { FAQGroup } from '@/components/marketing/FAQGroup';
 import { CTASection } from '@/components/marketing/CTASection';
+import { ServiceAnimationBySlug } from '@/components/marketing/ServiceAnimationBySlug';
 import { site } from '@/config/site';
 import { faqData } from '@/content/faq';
 
@@ -54,17 +55,22 @@ export default async function HardwareServiceDetail({
 
   return (
     <>
-      <section className="container py-14">
-        <nav aria-label="Breadcrumb" className="text-xs text-brand-900/80 dark:text-white/60">
-          <a href={`${prefix}/services/hardware`} className="hover:underline">
-            {locale === 'de' ? 'Hardware & Infrastruktur' : 'Hardware & Infrastructure'}
-          </a>{' '}
-          / <span>{c.title}</span>
-        </nav>
-        <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-brand-900 md:text-5xl dark:text-white">
-          {c.h1}
-        </h1>
-        <p className="mt-6 max-w-3xl text-lg text-brand-900/85 dark:text-white/85">{c.summary}</p>
+      <section className="container grid gap-10 py-14 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12">
+        <div>
+          <nav aria-label="Breadcrumb" className="text-xs text-brand-900/80 dark:text-white/60">
+            <a href={`${prefix}/services/hardware`} className="hover:underline">
+              {locale === 'de' ? 'Hardware & Infrastruktur' : 'Hardware & Infrastructure'}
+            </a>{' '}
+            / <span>{c.title}</span>
+          </nav>
+          <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold text-brand-900 md:text-5xl dark:text-white">
+            {c.h1}
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg text-brand-900/85 dark:text-white/85">{c.summary}</p>
+        </div>
+        <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:justify-self-end">
+          <ServiceAnimationBySlug serviceId={svc.id} />
+        </div>
       </section>
 
       <section className="container grid gap-8 pb-8 md:grid-cols-2">

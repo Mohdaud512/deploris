@@ -3,6 +3,7 @@ import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { ServiceCard } from '@/components/marketing/ServiceCard';
 import { CTASection } from '@/components/marketing/CTASection';
+import { HardwareAnimation } from '@/components/marketing/HardwareAnimation';
 import { hardwareServices } from '@/config/services';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
@@ -35,20 +36,25 @@ export default async function HardwareLandingPage({
 
   return (
     <>
-      <section className="container py-16">
-        <p className="text-xs uppercase tracking-widest text-brand-700 dark:text-accent-400">
-          {de ? 'Leistungen' : 'Services'}
-        </p>
-        <h1 className="mt-2 max-w-3xl font-display text-4xl font-bold text-brand-900 md:text-5xl dark:text-white">
-          {de
-            ? 'Hardware & Infrastruktur, die einfach läuft.'
-            : 'Hardware and infrastructure that just runs.'}
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-brand-900/85 dark:text-white/85">
-          {de
-            ? 'Von der Netzwerkbetreuung bis zum 24/7 Rechenzentrum-Support geliefert unter schriftlicher SLA, herstellerneutral, dokumentiert.'
-            : 'From network support to 24/7 data-center operations delivered under a written SLA, vendor-neutral, documented.'}
-        </p>
+      <section className="container grid gap-10 py-16 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12">
+        <div>
+          <p className="text-xs uppercase tracking-widest text-brand-700 dark:text-accent-400">
+            {de ? 'Leistungen' : 'Services'}
+          </p>
+          <h1 className="mt-2 max-w-3xl font-display text-4xl font-bold text-brand-900 md:text-5xl dark:text-white">
+            {de
+              ? 'Hardware & Infrastruktur, die einfach läuft.'
+              : 'Hardware and infrastructure that just runs.'}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-brand-900/85 dark:text-white/85">
+            {de
+              ? 'Von der Netzwerkbetreuung bis zum 24/7 Rechenzentrum-Support geliefert unter schriftlicher SLA, herstellerneutral, dokumentiert.'
+              : 'From network support to 24/7 data-center operations delivered under a written SLA, vendor-neutral, documented.'}
+          </p>
+        </div>
+        <div className="relative mx-auto w-full max-w-xl lg:mx-0 lg:justify-self-end">
+          <HardwareAnimation />
+        </div>
       </section>
 
       <section className="container pb-16">
