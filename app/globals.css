@@ -1,5 +1,48 @@
 @import 'tailwindcss';
 @config '../tailwind.config.ts';
+@plugin '@tailwindcss/typography';
+
+/* Deploris "brand" prose variant — binds the typography plugin to the
+   brand palette. Headings in brand-900 (slightly lighter in dark mode for
+   contrast), links in accent-600 with a brand-900 hover, body text picks
+   up the existing color token. Picked up by any `.prose.prose-brand`
+   element site-wide (legal pages, blog bodies, whistleblower, author
+   profiles). */
+.prose-brand {
+  --tw-prose-body: var(--d-brand-900);
+  --tw-prose-headings: var(--d-brand-900);
+  --tw-prose-lead: var(--d-brand-900);
+  --tw-prose-links: #047857; /* brand-700 */
+  --tw-prose-bold: var(--d-brand-900);
+  --tw-prose-counters: #065f46; /* brand-800 */
+  --tw-prose-bullets: #10b981; /* brand-500 */
+  --tw-prose-hr: rgba(6, 78, 59, 0.15);
+  --tw-prose-quotes: var(--d-brand-900);
+  --tw-prose-quote-borders: #10b981; /* brand-500 */
+  --tw-prose-captions: #065f46;
+  --tw-prose-code: var(--d-brand-900);
+  --tw-prose-pre-code: #e5f6ec;
+  --tw-prose-pre-bg: var(--d-brand-900);
+  --tw-prose-th-borders: rgba(6, 78, 59, 0.2);
+  --tw-prose-td-borders: rgba(6, 78, 59, 0.1);
+
+  --tw-prose-invert-body: rgba(255, 255, 255, 0.85);
+  --tw-prose-invert-headings: #ffffff;
+  --tw-prose-invert-lead: rgba(255, 255, 255, 0.85);
+  --tw-prose-invert-links: #86efac; /* accent-400 */
+  --tw-prose-invert-bold: #ffffff;
+  --tw-prose-invert-counters: rgba(255, 255, 255, 0.7);
+  --tw-prose-invert-bullets: #65d85a; /* accent-500 */
+  --tw-prose-invert-hr: rgba(255, 255, 255, 0.15);
+  --tw-prose-invert-quotes: #ffffff;
+  --tw-prose-invert-quote-borders: #65d85a;
+  --tw-prose-invert-captions: rgba(255, 255, 255, 0.7);
+  --tw-prose-invert-code: #ffffff;
+  --tw-prose-invert-pre-code: #d1fae5;
+  --tw-prose-invert-pre-bg: rgba(0, 0, 0, 0.4);
+  --tw-prose-invert-th-borders: rgba(255, 255, 255, 0.2);
+  --tw-prose-invert-td-borders: rgba(255, 255, 255, 0.1);
+}
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
