@@ -174,7 +174,7 @@ export function CrmTco({ locale }: { locale: Locale }) {
                 <TotalRow label={t.customLabel} value={totals.custom.total} nf={nf} highlighted={customWins} />
                 <div className="flex items-baseline justify-between border-t border-brand-900/10 pt-4 dark:border-white/10">
                   <span className="font-mono text-xs uppercase tracking-[0.1em] text-brand-900/60 dark:text-white/60">{t.diffLabel}</span>
-                  <span className={`font-display text-xl font-bold tabular-nums ${customWins ? 'text-accent-700 dark:text-accent-300' : 'text-brand-900/70 dark:text-white/70'}`}>
+                  <span className={`whitespace-nowrap font-display text-lg font-bold tabular-nums md:text-xl ${customWins ? 'text-accent-700 dark:text-accent-300' : 'text-brand-900/70 dark:text-white/70'}`}>
                     {customWins ? '−' : '+'} {nf(Math.abs(totals.diff))}
                   </span>
                 </div>
@@ -230,7 +230,7 @@ function Row({ label, value, nf }: { label: string; value: number; nf: (n: numbe
   return (
     <div className="flex items-baseline justify-between gap-3 text-brand-900/85 dark:text-white/85">
       <dt className="min-w-0 truncate text-xs">{label}</dt>
-      <dd className="font-mono text-xs tabular-nums text-brand-900 dark:text-white">{nf(value)}</dd>
+      <dd className="whitespace-nowrap font-mono text-xs tabular-nums text-brand-900 dark:text-white">{nf(value)}</dd>
     </div>
   );
 }
@@ -239,7 +239,7 @@ function TotalRow({ label, value, nf, highlighted }: { label: string; value: num
   return (
     <div className="flex items-baseline justify-between gap-3">
       <span className={`text-sm font-medium ${highlighted ? 'text-accent-700 dark:text-accent-300' : 'text-brand-900/70 dark:text-white/70'}`}>{label}</span>
-      <span className={`font-display tabular-nums ${highlighted ? 'text-3xl font-bold text-brand-900 dark:text-white' : 'text-2xl font-semibold text-brand-900/70 dark:text-white/70'}`}>
+      <span className={`whitespace-nowrap font-display tabular-nums ${highlighted ? 'text-2xl font-bold text-brand-900 md:text-3xl dark:text-white' : 'text-xl font-semibold text-brand-900/70 md:text-2xl dark:text-white/70'}`}>
         {nf(value)}
       </span>
     </div>

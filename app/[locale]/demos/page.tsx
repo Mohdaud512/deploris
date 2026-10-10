@@ -103,9 +103,9 @@ export default async function DemosPage({ params }: { params: Promise<{ locale: 
             </Link>
           </header>
           <div className="min-w-0 overflow-hidden rounded-xl border border-brand-900/10 bg-brand-50/70 p-5 font-mono text-[0.78rem] leading-relaxed text-brand-900 dark:border-white/10 dark:bg-brand-950/60 dark:text-white/90">
-            <div className="mb-3 flex items-center justify-between border-b border-brand-900/10 pb-2 dark:border-white/10">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-brand-900/10 pb-2 dark:border-white/10">
               <span className="text-brand-900/60 dark:text-white/50">query.jsonl</span>
-              <span className="text-accent-700 dark:text-accent-300">{copy.rag.sources}</span>
+              <span className="whitespace-nowrap text-accent-700 dark:text-accent-300">{copy.rag.sources}</span>
             </div>
             <RagTrace de={de} />
           </div>
@@ -123,7 +123,7 @@ export default async function DemosPage({ params }: { params: Promise<{ locale: 
               {copy.ctaAgent} →
             </Link>
           </header>
-          <div className="min-w-0 overflow-hidden rounded-xl border border-brand-900/10 bg-brand-50/70 p-5 font-mono text-[0.78rem] leading-relaxed text-brand-900 dark:border-white/10 dark:bg-brand-950/60 dark:text-white/90">
+          <div className="min-w-0 overflow-x-auto rounded-xl border border-brand-900/10 bg-brand-50/70 p-5 font-mono text-[0.78rem] leading-relaxed text-brand-900 dark:border-white/10 dark:bg-brand-950/60 dark:text-white/90">
             <AgentTrace de={de} />
           </div>
         </article>
@@ -140,7 +140,7 @@ export default async function DemosPage({ params }: { params: Promise<{ locale: 
               {copy.ctaCrm} →
             </Link>
           </header>
-          <div className="min-w-0 overflow-hidden rounded-xl border border-brand-900/10 bg-brand-50/70 p-5 font-mono text-[0.78rem] leading-relaxed text-brand-900 dark:border-white/10 dark:bg-brand-950/60 dark:text-white/90">
+          <div className="min-w-0 overflow-x-auto rounded-xl border border-brand-900/10 bg-brand-50/70 p-5 font-mono text-[0.78rem] leading-relaxed text-brand-900 dark:border-white/10 dark:bg-brand-950/60 dark:text-white/90">
             <CrmModel de={de} />
           </div>
         </article>

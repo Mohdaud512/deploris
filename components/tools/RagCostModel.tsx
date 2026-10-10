@@ -165,7 +165,7 @@ export function RagCostModel({ locale }: { locale: Locale }) {
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-accent-700 dark:text-accent-300">
               {t.resultLabel}
             </p>
-            <p className="mt-2 font-display text-4xl font-bold text-brand-900 tabular-nums dark:text-white">
+            <p className="mt-2 whitespace-nowrap font-display text-3xl font-bold text-brand-900 tabular-nums md:text-4xl dark:text-white">
               € {Math.round(costs.total).toLocaleString(de ? 'de-DE' : 'en-US')}
             </p>
             <p className="mt-1 font-mono text-xs text-brand-900/70 tabular-nums dark:text-white/70">
@@ -217,7 +217,7 @@ function Row({ label, value, de }: { label: string; value: number; de: boolean }
   return (
     <div className="flex items-baseline justify-between gap-3 text-brand-900/85 dark:text-white/85">
       <dt className="min-w-0 truncate">{label}</dt>
-      <dd className="font-mono text-xs tabular-nums text-brand-900 dark:text-white">
+      <dd className="whitespace-nowrap font-mono text-xs tabular-nums text-brand-900 dark:text-white">
         € {Math.round(value).toLocaleString(de ? 'de-DE' : 'en-US')}
       </dd>
     </div>
