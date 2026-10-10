@@ -23,11 +23,18 @@ const staticPaths = [
   '/services',
   '/services/hardware',
   '/services/development',
+  '/ai-opportunity-finder',
+  '/demos',
+  '/tools',
+  '/tools/ai-vendor-risk',
+  '/tools/rag-cost-model',
+  '/tools/crm-tco',
   '/legal/impressum',
   '/legal/privacy',
   '/legal/cookies',
   '/legal/terms',
   '/legal/dpa',
+  '/legal/whistleblower',
   // /legal/data-request intentionally excluded (noindex + robots-disallowed).
   '/compare/custom-crm-vs-off-the-shelf',
   '/compare/rag-vs-traditional-search',
@@ -62,6 +69,13 @@ const STATIC_LASTMOD: Record<string, string> = {
   '/compare/custom-crm-vs-off-the-shelf': '2026-10-09',
   '/compare/rag-vs-traditional-search': '2026-10-09',
   '/compare/ai-agents-vs-automation': '2026-10-09',
+  '/ai-opportunity-finder': '2026-10-10',
+  '/demos': '2026-10-10',
+  '/tools': '2026-10-10',
+  '/tools/ai-vendor-risk': '2026-10-10',
+  '/tools/rag-cost-model': '2026-10-10',
+  '/tools/crm-tco': '2026-10-10',
+  '/legal/whistleblower': '2026-10-10',
 };
 
 const DEFAULT_LASTMOD = new Date('2026-10-01');

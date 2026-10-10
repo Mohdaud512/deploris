@@ -39,7 +39,8 @@
     "cookies": "Cookies",
     "terms": "Terms",
     "dpa": "Data processing (DPA)",
-    "data_request": "Data request / erasure"
+    "data_request": "Data request / erasure",
+    "whistleblower": "Whistleblower channel"
   },
   "locale_banner": {
     "message": "Are you visiting from Germany? Switch to Deutsch for German-language content.",
@@ -60,11 +61,11 @@
     }
   },
   "home": {
-    "hero_eyebrow": "Hardware to software one partner",
-    "hero_title": "Reliable IT infrastructure and custom software, engineered for outcomes.",
-    "meta_title": "Deploris Managed IT and Custom Software Development",
-    "meta_description": "Managed IT infrastructure, custom CRM, RAG systems, and AI agents under written SLAs. One team for US and German businesses.",
-    "hero_body": "Deploris delivers hands-on hardware and infrastructure services alongside custom CRM, RAG systems, AI agents, and bespoke software one team, one point of accountability, from wiring closet to production release.",
+    "hero_eyebrow": "Custom AI software + managed IT, one team",
+    "hero_title": "We build your custom AI — and run the hardware it depends on.",
+    "meta_title": "Deploris Custom AI Software and Managed IT Under One Team",
+    "meta_description": "Custom CRM, RAG systems, and AI agents, plus the managed IT infrastructure they run on. One team, one SLA for mid-market firms in the US and DACH.",
+    "hero_body": "Nobody else in the mid-market covers both. Deploris writes the custom CRM, the RAG pipeline, the agent orchestration — and keeps the servers, networks, and endpoints they ship on running. One SLA. One point of accountability. No seams.",
     "hero_cta_primary": "Get a quote",
     "hero_cta_secondary": "Talk to an engineer",
     "trust_bar": "Trusted for enterprise IT and custom AI systems",

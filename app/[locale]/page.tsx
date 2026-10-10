@@ -4,6 +4,9 @@ import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { Hero } from '@/components/marketing/Hero';
 import { LogoStrip } from '@/components/marketing/LogoStrip';
+import { ComplianceStrip } from '@/components/marketing/ComplianceStrip';
+import { OutcomePaths } from '@/components/marketing/OutcomePaths';
+import { WhyBoth } from '@/components/marketing/WhyBoth';
 import { DualServiceSplit } from '@/components/marketing/DualServiceSplit';
 import { ValuePropGrid } from '@/components/marketing/ValueProp';
 import { StatCounterGrid } from '@/components/marketing/StatCounter';
@@ -49,7 +52,13 @@ export default async function HomePage({
         secondaryHref={`${prefix}/contact`}
       />
 
+      <ComplianceStrip locale={locale} />
+
       <LogoStrip label={t('trust_bar')} count={6} />
+
+      <OutcomePaths locale={locale} />
+
+      <WhyBoth locale={locale} />
 
       <DualServiceSplit locale={locale} />
 

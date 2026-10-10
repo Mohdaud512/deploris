@@ -7,6 +7,7 @@ import type { Locale } from '@/config/locales';
 import { site } from '@/config/site';
 import { hardwareServices, developmentServices } from '@/config/services';
 import { openCookiePreferences } from './CookieConsent';
+import { MotionToggle } from './MotionToggle';
 
 export function SiteFooter() {
   const locale = useLocale() as Locale;
@@ -101,6 +102,7 @@ export function SiteFooter() {
             <li><Link href={`${prefix}/legal/terms`} className="hover:text-white">{t('terms')}</Link></li>
             <li><Link href={`${prefix}/legal/dpa`} className="hover:text-white">{t('dpa')}</Link></li>
             <li><Link href={`${prefix}/legal/data-request`} className="hover:text-white">{t('data_request')}</Link></li>
+            <li><Link href={`${prefix}/legal/whistleblower`} className="hover:text-white">{t('whistleblower')}</Link></li>
             <li>
               <button
                 type="button"
@@ -114,9 +116,10 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="container flex flex-col items-center justify-between gap-2 py-4 text-xs text-white/60 md:flex-row">
+        <div className="container flex flex-col items-center justify-between gap-3 py-4 text-xs text-white/60 md:flex-row">
           <p>© {year} {site.legalName}. {t('rights')}</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <MotionToggle />
             <a href={site.social.linkedin} className="hover:text-white" rel="me noopener">LinkedIn</a>
             <a href={site.social.github} className="hover:text-white" rel="me noopener">GitHub</a>
             <a href={site.social.x} className="hover:text-white" rel="me noopener">X</a>

@@ -39,7 +39,8 @@
     "cookies": "Cookies",
     "terms": "AGB",
     "dpa": "Auftragsverarbeitung (AVV)",
-    "data_request": "Datenauskunft / Löschung"
+    "data_request": "Datenauskunft / Löschung",
+    "whistleblower": "Hinweisgeberportal"
   },
   "locale_banner": {
     "message": "Besuchen Sie uns aus Deutschland? Wechseln Sie zur deutschen Version.",
@@ -60,11 +61,11 @@
     }
   },
   "home": {
-    "hero_eyebrow": "Von der Hardware bis zur Software aus einer Hand",
-    "hero_title": "Verlässliche IT-Infrastruktur und individuelle Software auf Ihre Ziele ausgerichtet.",
-    "meta_title": "Deploris Managed IT und individuelle Softwareentwicklung",
-    "meta_description": "Managed IT, CRM-Entwicklung, RAG-Systeme und KI-Agenten unter schriftlicher SLA ein Team für US- und DACH-Kunden.",
-    "hero_body": "Deploris liefert praxiserprobten Infrastruktur-Support ebenso wie individuelle CRM-Systeme, RAG-Systeme, KI-Agenten und Individualsoftware. Ein Team, eine Verantwortlichkeit vom Netzwerkschrank bis zum produktiven Release.",
+    "hero_eyebrow": "Individuelle KI-Software + Managed IT aus einem Team",
+    "hero_title": "KI-Software und die Infrastruktur dahinter — aus einer Hand, unter einer SLA.",
+    "meta_title": "Deploris Individuelle KI-Software und Managed IT aus einem Team",
+    "meta_description": "Individuelle CRM-, RAG- und KI-Agenten-Systeme plus die Managed-IT-Infrastruktur, auf der alles läuft. Ein Team, eine SLA für Mittelstand in DACH und US.",
+    "hero_body": "Deploris schreibt Ihr individuelles CRM, Ihre RAG-Pipeline, Ihre KI-Agenten — und betreibt die Server, Netzwerke und Endgeräte, auf denen alles läuft. Ein Team, eine Verantwortlichkeit, keine Grauzone zwischen Entwicklung und Betrieb.",
     "hero_cta_primary": "Angebot anfordern",
     "hero_cta_secondary": "Mit einem Ingenieur sprechen",
     "trust_bar": "Vertrauenspartner für Unternehmens-IT und individuelle KI-Systeme",

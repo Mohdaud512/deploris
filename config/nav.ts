@@ -36,36 +36,36 @@ export function buildNav(locale: Locale): NavItem[] {
   const devRoot = `${servicesRoot}/development`;
   const nav = (k: string) => navLabel(locale, k);
 
-  return [
-    { key: 'nav.home', href: prefix || '/', label: nav('nav.home') },
-    {
-      key: 'nav.services',
-      href: servicesRoot,
-      label: nav('nav.services'),
-      children: [
-        {
-          key: 'nav.hardware',
-          href: hardwareRoot,
-          label: nav('nav.hardware'),
-          children: hardwareServices.map((s) => ({
-            key: `svc.${s.id}`,
-            href: `${hardwareRoot}/${s.copy[locale].slug}`,
-            label: s.copy[locale].title,
-          })),
-        },
-        {
-          key: 'nav.development',
-          href: devRoot,
-          label: nav('nav.development'),
-          children: developmentServices.map((s) => ({
-            key: `svc.${s.id}`,
-            href: `${devRoot}/${s.copy[locale].slug}`,
-            label: s.copy[locale].title,
-          })),
-        },
-      ],
-    },
-    { key: 'nav.industries', href: `${prefix}/industries`, label: nav('nav.industries') },
+  const home: NavItem = { key: 'nav.home', href: prefix || '/', label: nav('nav.home') };
+  const services: NavItem = {
+    key: 'nav.services',
+    href: servicesRoot,
+    label: nav('nav.services'),
+    children: [
+      {
+        key: 'nav.hardware',
+        href: hardwareRoot,
+        label: nav('nav.hardware'),
+        children: hardwareServices.map((s) => ({
+          key: `svc.${s.id}`,
+          href: `${hardwareRoot}/${s.copy[locale].slug}`,
+          label: s.copy[locale].title,
+        })),
+      },
+      {
+        key: 'nav.development',
+        href: devRoot,
+        label: nav('nav.development'),
+        children: developmentServices.map((s) => ({
+          key: `svc.${s.id}`,
+          href: `${devRoot}/${s.copy[locale].slug}`,
+          label: s.copy[locale].title,
+        })),
+      },
+    ],
+  };
+  const industries: NavItem = { key: 'nav.industries', href: `${prefix}/industries`, label: nav('nav.industries') };
+  const tail: NavItem[] = [
     { key: 'nav.projects', href: `${prefix}/projects`, label: nav('nav.projects') },
     { key: 'nav.blog', href: `${prefix}/blog`, label: nav('nav.blog') },
     { key: 'nav.faq', href: `${prefix}/faq`, label: nav('nav.faq') },
@@ -73,4 +73,10 @@ export function buildNav(locale: Locale): NavItem[] {
     { key: 'nav.about', href: `${prefix}/about`, label: nav('nav.about') },
     { key: 'nav.contact', href: `${prefix}/contact`, label: nav('nav.contact') },
   ];
+
+  // DACH buyers scan by vertical fit before capability; promote Branchen
+  // above Leistungen on the DE site. The EN site keeps Services-first,
+  // which is the US convention.
+  const spine = locale === 'de' ? [industries, services] : [services, industries];
+  return [home, ...spine, ...tail];
 }

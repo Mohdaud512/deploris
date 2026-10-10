@@ -77,3 +77,27 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-breathe { animation: none; }
 }
+
+/* Site-wide motion kill switch. The footer MotionToggle sets data-motion="off"
+   on the <html> element; this stops every CSS animation + transition and
+   neutralises SMIL (<animate>, <animateTransform>, <animateMotion>) across
+   the site. Pattern lifted from Nearform's accessibility toggle; complements
+   prefers-reduced-motion by giving the viewer an explicit override. */
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation-duration: 0ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0ms !important;
+  transition-delay: 0ms !important;
+}
+html[data-motion="off"] animate,
+html[data-motion="off"] animateTransform,
+html[data-motion="off"] animateMotion,
+html[data-motion="off"] set {
+  display: none;
+}
+html[data-motion="off"] video[autoplay] {
+  display: none;
+}

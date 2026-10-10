@@ -6,6 +6,7 @@ import { buildMetadata } from '@/lib/seo';
 import { getAllBlogPosts, getBlogPost } from '@/lib/mdx';
 import { MdxRenderer } from '@/components/mdx/MdxRenderer';
 import { AuthorByline } from '@/components/marketing/AuthorByline';
+import { AuthorSidebar } from '@/components/marketing/AuthorSidebar';
 import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
 import { articleSchema, breadcrumbSchema } from '@/lib/schema';
 
@@ -47,8 +48,13 @@ export default async function BlogPost({ params }: { params: Promise<{ locale: L
           locale={locale}
         />
       </div>
-      <div className="mt-8">
-        <MdxRenderer source={post.body} />
+      <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
+        <div className="min-w-0">
+          <MdxRenderer source={post.body} />
+        </div>
+        <div className="lg:sticky lg:top-28">
+          <AuthorSidebar author={post.data.author} locale={locale} />
+        </div>
       </div>
       <SchemaJsonLd
         data={[
