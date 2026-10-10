@@ -107,24 +107,7 @@ export default async function DemosPage({ params }: { params: Promise<{ locale: 
               <span className="text-brand-900/60 dark:text-white/50">query.jsonl</span>
               <span className="text-accent-700 dark:text-accent-300">{copy.rag.sources}</span>
             </div>
-            <pre className="whitespace-pre-wrap break-words"><span className="text-accent-700 dark:text-accent-300">&gt;</span> {de ? 'Wie viel kostet uns ein später Signoff bei Lieferant X pro Monat?' : 'How much does a late signoff from Supplier X cost us per month?'}
-
-<span className="text-brand-900/70 dark:text-white/50">retrieval:</span>
-  <span className="text-accent-700 dark:text-accent-300">[1]</span> contract-supplier-x-v3.pdf §12.2
-      "<span className="text-brand-900/80 dark:text-white/80">{de ? '... Verzugspauschale 1,8% der Monatsrechnung ...' : '... delay penalty 1.8% of monthly invoice ...'}</span>"
-  <span className="text-accent-700 dark:text-accent-300">[2]</span> finance-ops/{de ? 'rechnungen-2026' : 'invoices-2026'}.csv row 142
-      "<span className="text-brand-900/80 dark:text-white/80">{de ? 'Monatsrechnung Lieferant X: 84.300 €' : 'Monthly invoice Supplier X: €84,300'}</span>"
-  <span className="text-accent-700 dark:text-accent-300">[3]</span> email/thread-9821.eml
-      "<span className="text-brand-900/80 dark:text-white/80">{de ? '... Signoff kam am 11. jedes Monats, 8 Tage spät ...' : '... signoff landed on the 11th, 8 days late ...'}</span>"
-
-<span className="text-brand-900/70 dark:text-white/50">answer:</span>
-  {de
-    ? '~1.517 € pro Monat Verzugspauschale (1,8 % × 84.300 €), über die letzten vier Monate durchgängig ausgelöst — ca. 18.200 € jährlicher Mehraufwand bei unverändertem Signoff-Rhythmus. Quellen [1][2][3].'
-    : '~€1,517/month in delay penalties (1.8% × €84,300), triggered every month for the last four — approximately €18,200/year of avoidable spend at the current signoff cadence. Sources [1][2][3].'}
-
-<span className="text-brand-900/70 dark:text-white/50">confidence:</span> <span className="text-accent-700 dark:text-accent-300">0.92</span>
-<span className="text-brand-900/70 dark:text-white/50">refusal_if_unsupported:</span> true
-            </pre>
+            <RagTrace de={de} />
           </div>
         </article>
 
@@ -165,6 +148,47 @@ export default async function DemosPage({ params }: { params: Promise<{ locale: 
         <p className="mt-10 max-w-3xl text-xs text-brand-900/55 dark:text-white/50">{copy.disclaimer}</p>
       </section>
     </>
+  );
+}
+
+function RagTrace({ de }: { de: boolean }) {
+  const dim = 'text-brand-900/70 dark:text-white/55';
+  const num = 'text-accent-700 dark:text-accent-300';
+  const quote = 'text-brand-900/85 dark:text-white/85';
+
+  const question = de
+    ? 'Wie viel kostet uns ein später Signoff bei Lieferant X pro Monat?'
+    : 'How much does a late signoff from Supplier X cost us per month?';
+  const src1Quote = de ? '... Verzugspauschale 1,8% der Monatsrechnung ...' : '... delay penalty 1.8% of monthly invoice ...';
+  const src2Doc = de ? 'rechnungen-2026' : 'invoices-2026';
+  const src2Quote = de ? 'Monatsrechnung Lieferant X: 84.300 €' : 'Monthly invoice Supplier X: €84,300';
+  const src3Quote = de ? '... Signoff kam am 11. jedes Monats, 8 Tage spät ...' : '... signoff landed on the 11th, 8 days late ...';
+  const answer = de
+    ? '~1.517 € pro Monat Verzugspauschale (1,8 % × 84.300 €), über die letzten vier Monate durchgängig ausgelöst — ca. 18.200 € jährlicher Mehraufwand bei unverändertem Signoff-Rhythmus. Quellen [1][2][3].'
+    : '~€1,517/month in delay penalties (1.8% × €84,300), triggered every month for the last four — approximately €18,200/year of avoidable spend at the current signoff cadence. Sources [1][2][3].';
+
+  return (
+    <pre className="whitespace-pre-wrap break-words font-mono">
+      <span className={num}>&gt;</span> {question}
+      {'\n\n'}
+      <span className={dim}>retrieval:</span>
+      {'\n  '}
+      <span className={num}>[1]</span> contract-supplier-x-v3.pdf §12.2
+      {'\n      "'}<span className={quote}>{src1Quote}</span>{'"'}
+      {'\n  '}
+      <span className={num}>[2]</span> finance-ops/{src2Doc}.csv row 142
+      {'\n      "'}<span className={quote}>{src2Quote}</span>{'"'}
+      {'\n  '}
+      <span className={num}>[3]</span> email/thread-9821.eml
+      {'\n      "'}<span className={quote}>{src3Quote}</span>{'"'}
+      {'\n\n'}
+      <span className={dim}>answer:</span>
+      {'\n  '}{answer}
+      {'\n\n'}
+      <span className={dim}>confidence:</span> <span className={num}>0.92</span>
+      {'\n'}
+      <span className={dim}>refusal_if_unsupported:</span> true
+    </pre>
   );
 }
 
