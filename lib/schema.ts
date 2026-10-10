@@ -93,6 +93,7 @@ export function localBusinessSchema(locale: Locale) {
     telephone: site.contact.phone,
     email: site.contact.email,
     image: `${site.url}/logo.png`,
+    logo: `${site.url}/logo.png`,
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
@@ -151,7 +152,12 @@ export function serviceSchema(
     name: c.title,
     serviceType: c.title,
     description: c.summary,
-    provider: { '@id': `${site.url}#organization` },
+    provider: {
+      '@id': `${site.url}#organization`,
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+    },
     areaServed: [
       { '@type': 'Country', name: 'United States' },
       { '@type': 'Country', name: 'Germany' },
@@ -218,8 +224,10 @@ export function personSchema(opts: {
   slug?: string;
   jobTitle?: string;
   description?: string;
+  sameAs?: string[];
 }) {
   const url = opts.slug ? `${site.url}/about/${opts.slug}` : `${site.url}/about`;
+  const sameAs = opts.sameAs?.filter(Boolean);
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -229,6 +237,7 @@ export function personSchema(opts: {
     jobTitle: opts.jobTitle,
     description: opts.description,
     worksFor: { '@id': `${site.url}#organization` },
+    ...(sameAs && sameAs.length ? { sameAs } : {}),
   };
 }
 
@@ -264,7 +273,7 @@ export function articleSchema(post: {
       url: post.authorSlug ? `${site.url}/about/${post.authorSlug}` : `${site.url}/about`,
     },
     publisher: { '@id': `${site.url}#organization` },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: post.title },
     inLanguage: post.locale === 'de' ? 'de-DE' : 'en-US',
     ...(post.keywords?.length ? { keywords: post.keywords.join(', ') } : {}),
     isPartOf: { '@id': `${site.url}#website` },
@@ -298,9 +307,9 @@ export function caseStudySchema(cs: {
     image: [img],
     datePublished: cs.date,
     dateModified: cs.date,
-    author: { '@id': `${site.url}#organization` },
+    author: { '@id': `${site.url}#organization`, '@type': 'Organization', name: site.name },
     publisher: { '@id': `${site.url}#organization` },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: cs.title },
     inLanguage: cs.locale === 'de' ? 'de-DE' : 'en-US',
     about: cs.about,
     genre: 'case study',
@@ -350,6 +359,7 @@ export function jobPostingSchema(job: {
     hiringOrganization: {
       '@type': 'Organization',
       name: site.name,
+      url: site.url,
       sameAs: site.url,
       logo: `${site.url}/logo.png`,
     },
@@ -466,9 +476,9 @@ export function techArticleSchema(opts: {
     image: [`${site.url}/og-default.png`],
     datePublished: opts.date ?? '2025-02-01',
     dateModified: opts.date ?? '2025-02-01',
-    author: { '@id': `${site.url}#organization` },
+    author: { '@id': `${site.url}#organization`, '@type': 'Organization', name: site.name },
     publisher: { '@id': `${site.url}#organization` },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: opts.title },
     inLanguage: opts.locale === 'de' ? 'de-DE' : 'en-US',
     proficiencyLevel: opts.proficiencyLevel ?? 'Beginner',
     about: opts.about,

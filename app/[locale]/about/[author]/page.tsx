@@ -141,15 +141,8 @@ export default async function AuthorPage({
             slug: a.slug,
             jobTitle: c.jobTitle,
             description: c.headline,
-          }),
-          // Also attach sameAs to the Person via a second small object (keeps
-          // the personSchema helper reusable).
-          {
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            '@id': `${site.url}/about/${a.slug}#person`,
             sameAs: Object.values(a.social).filter(Boolean),
-          },
+          }),
           breadcrumbSchema([
             { name: 'Home', href: prefix || '/' },
             { name: de ? 'Über uns' : 'About', href: `${prefix}/about` },

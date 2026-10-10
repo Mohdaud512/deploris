@@ -125,8 +125,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  for (const g of glossaryData.en) {
-    push(`/glossary/${g.slug}`, 0.5, 'monthly', '/glossary');
+  // Glossary term pages use locale-specific slugs (e.g. ai-agent / ki-agent).
+  // Emit each term with its own locale URL + hreflang alternates.
+  for (let i = 0; i < glossaryData.en.length; i++) {
+    const en = glossaryData.en[i]!;
+    const de = glossaryData.de[i];
+    const perLocaleSlug: Record<string, string> = {
+      en: `/glossary/${en.slug}`,
+      de: `/glossary/${de?.slug ?? en.slug}`,
+    };
+    const langs = altLanguages(perLocaleSlug.en!, perLocaleSlug);
+    for (const l of locales) {
+      entries.push({
+        url: `${base}${l === 'en' ? '' : `/${l}`}${perLocaleSlug[l]}`,
+        lastModified: new Date(STATIC_LASTMOD['/glossary']!),
+        changeFrequency: 'monthly',
+        priority: 0.5,
+        alternates: { languages: langs },
+      });
+    }
   }
 
   for (const p of projects) {
