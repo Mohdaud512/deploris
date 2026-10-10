@@ -31,6 +31,7 @@ export function SiteHeader() {
             height={128}
             sizes="64px"
             priority
+            fetchPriority="high"
             className="h-16 w-16 object-contain"
           />
         </Link>

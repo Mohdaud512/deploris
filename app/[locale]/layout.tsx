@@ -34,6 +34,11 @@ export default async function LocaleLayout({
   return (
     <html lang={l === 'de' ? 'de-DE' : 'en-US'} suppressHydrationWarning>
       <head>
+        {/* Pre-warm DNS + TCP for the only external resource we load (and only
+            when consent has turned Plausible on). Plausible's script is async,
+            so this just shaves ~100ms off its first byte. */}
+        <link rel="preconnect" href="https://plausible.io" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://plausible.io" />
         <ConsentBootstrap />
       </head>
       <body className="font-sans antialiased">
