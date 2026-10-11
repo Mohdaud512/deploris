@@ -124,7 +124,6 @@ export function SiteFooter() {
           <div className="flex flex-wrap items-center gap-4">
             <MotionToggle />
             <a href={site.social.linkedin} className="hover:text-white" rel="me noopener">LinkedIn</a>
-            <a href={site.social.github} className="hover:text-white" rel="me noopener">GitHub</a>
             <a href={site.social.x} className="hover:text-white" rel="me noopener">X</a>
           </div>
         </div>

@@ -55,7 +55,9 @@ export const site = {
   },
   social: {
     linkedin: 'https://www.linkedin.com/company/deploris',
-    github: 'https://github.com/deploris',
+    // github dropped: https://github.com/deploris returns 404 (verified
+    // 2026-10-11). Google treats sameAs stubs as a spam signal. Restore
+    // once a real GitHub org exists.
     x: 'https://x.com/deploris',
   },
   serviceLines: {

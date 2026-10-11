@@ -64,7 +64,7 @@ export function organizationSchema(locale: Locale) {
       postalCode: site.contact.address.postalCode,
       addressCountry: site.contact.address.country,
     },
-    sameAs: [site.social.linkedin, site.social.github, site.social.x],
+    sameAs: [site.social.linkedin, site.social.x].filter(Boolean),
     contactPoint: [
       {
         '@type': 'ContactPoint',
