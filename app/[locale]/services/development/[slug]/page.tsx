@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { locales } from '@/config/locales';
 import { developmentServices, findServiceBySlug } from '@/config/services';
+import { findUseCaseByServiceId } from '@/config/use-cases';
 import { buildMetadata } from '@/lib/seo';
 import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
 import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/schema';
@@ -135,6 +136,12 @@ export default async function DevelopmentServiceDetail({
   const displayTiers = pricing?.display ?? [];
   const schemaTiers = pricing?.tiers ?? [];
 
+  // Cross-link to the matching use-case pillar page. Two-way internal link
+  // (service <-> use-case) strengthens the topical cluster for both humans
+  // and search crawlers.
+  const useCase = findUseCaseByServiceId(svc.id);
+  const useCaseHref = useCase ? `${prefix}/use-cases/${useCase.copy[locale].slug}` : null;
+
   return (
     <>
       <section className="container grid gap-10 py-14 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12">
@@ -200,6 +207,24 @@ export default async function DevelopmentServiceDetail({
             items={faqItems}
             idPrefix={`svc-${svc.id}-faq`}
           />
+        </section>
+      )}
+
+      {useCaseHref && useCase && (
+        <section className="container py-6">
+          <div className="rounded-2xl border border-accent-500/40 bg-accent-500/5 p-5 dark:border-accent-400/40 dark:bg-accent-400/10 md:p-6">
+            <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-accent-700 dark:text-accent-300">
+              {locale === 'de' ? 'Anwendungsfall-Pfeilerseite' : 'Use-case pillar'}
+            </p>
+            <h2 className="mt-2 font-display text-xl font-semibold text-brand-900 dark:text-white">
+              <a href={useCaseHref} className="hover:underline">
+                {useCase.copy[locale].h1} →
+              </a>
+            </h2>
+            <p className="mt-2 text-sm text-brand-900/85 dark:text-white/85">
+              {useCase.copy[locale].deck}
+            </p>
+          </div>
         </section>
       )}
 

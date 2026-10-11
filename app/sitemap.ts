@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { publicEnv } from '@/lib/env';
 import { locales, type Locale } from '@/config/locales';
 import { allServices } from '@/config/services';
+import { useCases } from '@/config/use-cases';
 import { glossaryData } from '@/content/glossary';
 import { projects } from '@/content/projects';
 import { roles } from '@/content/careers';
@@ -15,6 +16,7 @@ const staticPaths = [
   '/contact',
   '/quote',
   '/industries',
+  '/use-cases',
   '/projects',
   '/blog',
   '/faq',
@@ -52,7 +54,8 @@ const STATIC_LASTMOD: Record<string, string> = {
   '/about': '2026-10-01',
   '/contact': '2026-10-01',
   '/quote': '2026-10-01',
-  '/industries': '2026-10-01',
+  '/industries': '2026-10-11',
+  '/use-cases': '2026-10-11',
   '/projects': '2026-06-10',
   '/blog': '2026-10-09',
   '/faq': '2026-10-09',
@@ -134,6 +137,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date('2026-10-09'),
         changeFrequency: 'weekly',
         priority: 0.8,
+        alternates: { languages: langs },
+      });
+    }
+  }
+
+  // Use-case pillar pages — per-locale slugs with hreflang pairs. Priority
+  // 0.85 (higher than service details) because these pages are the primary
+  // AEO/GEO ranking surfaces, built specifically to be cited by LLMs and
+  // Google's AI Overviews for buyer-intent queries.
+  for (const u of useCases) {
+    const perLocaleSlug: Record<string, string> = {};
+    for (const l of locales) {
+      const lang = l as Locale;
+      perLocaleSlug[l] = `/use-cases/${u.copy[lang].slug}`;
+    }
+    const langs = altLanguages(perLocaleSlug.en!, perLocaleSlug);
+    for (const l of locales) {
+      const lang = l as Locale;
+      entries.push({
+        url: `${base}${lang === 'en' ? '' : `/${lang}`}${perLocaleSlug[l]}`,
+        lastModified: new Date(u.lastReviewed),
+        changeFrequency: 'monthly',
+        priority: 0.85,
         alternates: { languages: langs },
       });
     }
