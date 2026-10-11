@@ -3,7 +3,7 @@ import type { Locale } from '@/config/locales';
 /**
  * Deterministic rule-based scoring. Each answer contributes integer weights
  * across four axes. Final recommendation picks the top-scoring axis; the next
- * axis is surfaced as a secondary fit. Zero LLM calls, zero network — fully
+ * axis is surfaced as a secondary fit. Zero LLM calls, zero network, fully
  * static, works for anonymous visitors.
  */
 export type Axis = 'crm' | 'rag' | 'agents' | 'managedIt';
@@ -47,7 +47,7 @@ const EN: Content = {
   intro: {
     eyebrow: 'AI Opportunity Finder',
     title: 'Ten questions. One honest recommendation.',
-    deck: 'No form, no email, no download. Answer where you actually are today and we score your situation against the four problems Deploris solves — custom CRM, RAG, AI agents, managed IT — and tell you which fits (or if none does).',
+    deck: 'No form, no email, no download. Answer where you actually are today and we score your situation against the four problems Deploris solves, custom CRM, RAG, AI agents, managed IT, and tell you which fits (or if none does).',
     bullets: [
       'Three minutes, ten questions',
       'Deterministic scoring, same answers → same result',
@@ -73,7 +73,7 @@ const EN: Content = {
         { id: 'few', label: '0–1 (we barely have one in place)', weights: { crm: 1 } },
         { id: 'some', label: '2–4 (manageable but there are seams)', weights: { crm: 2 } },
         { id: 'many', label: '5+ (CRM, marketing tool, support tool, billing, enrichment …)', weights: { crm: 3, agents: 1 } },
-        { id: 'na', label: 'Not applicable — we\'re not a revenue-team-driven business', weights: {} },
+        { id: 'na', label: 'Not applicable, we\'re not a revenue-team-driven business', weights: {} },
       ],
     },
     {
@@ -91,7 +91,7 @@ const EN: Content = {
       prompt: 'Have you shipped an AI pilot in production before?',
       options: [
         { id: 'none', label: 'No, this would be our first', weights: {} },
-        { id: 'failed', label: 'Yes, and it didn\'t stick — want help getting it right', weights: { agents: 2, rag: 1 } },
+        { id: 'failed', label: 'Yes, and it didn\'t stick, want help getting it right', weights: { agents: 2, rag: 1 } },
         { id: 'working', label: 'Yes, one is live, looking to expand', weights: { agents: 2, rag: 2 } },
         { id: 'many', label: 'Multiple pilots in flight, need help picking winners', weights: { agents: 3, rag: 1 } },
       ],
@@ -112,7 +112,7 @@ const EN: Content = {
       options: [
         { id: 'low', label: 'Not important', weights: {} },
         { id: 'medium', label: 'Nice to have', weights: { rag: 1, managedIt: 1 } },
-        { id: 'high', label: 'Mandatory — regulated industry or German B2B', weights: { rag: 2, managedIt: 2, agents: 1 } },
+        { id: 'high', label: 'Mandatory, regulated industry or German B2B', weights: { rag: 2, managedIt: 2, agents: 1 } },
       ],
     },
     {
@@ -129,10 +129,10 @@ const EN: Content = {
       id: 'q8_timeline',
       prompt: 'What\'s the realistic timeline for the first production outcome?',
       options: [
-        { id: '30d', label: 'Next 30 days — something is already on fire', weights: { managedIt: 2, agents: 1 } },
-        { id: '90d', label: '1–3 months — budget approved, need to move', weights: { crm: 1, rag: 2, agents: 1 } },
-        { id: '180d', label: '3–6 months — mapping out the quarter', weights: { crm: 2, rag: 1 } },
-        { id: 'explore', label: 'Exploring — no deadline', weights: {} },
+        { id: '30d', label: 'Next 30 days, something is already on fire', weights: { managedIt: 2, agents: 1 } },
+        { id: '90d', label: '1–3 months, budget approved, need to move', weights: { crm: 1, rag: 2, agents: 1 } },
+        { id: '180d', label: '3–6 months, mapping out the quarter', weights: { crm: 2, rag: 1 } },
+        { id: 'explore', label: 'Exploring, no deadline', weights: {} },
       ],
     },
     {
@@ -160,7 +160,7 @@ const EN: Content = {
   axes: {
     crm: {
       label: 'Custom CRM development',
-      summary: 'Your pain is customer-management shape, not AI shape. A custom CRM that fits your actual sales process — and replaces license bloat — is the highest-ROI next step.',
+      summary: 'Your pain is customer-management shape, not AI shape. A custom CRM that fits your actual sales process, and replaces license bloat, is the highest-ROI next step.',
       serviceHref: '/services/development/custom-crm',
       serviceLabel: 'See custom CRM service',
     },
@@ -188,7 +188,7 @@ const EN: Content = {
     titleTemplate: 'Best fit: {label}',
     recommendedKicker: 'Primary recommendation',
     secondaryKicker: 'Also worth looking at',
-    bodyIntro: 'Based on your answers, Deploris would open with this. If it\'s wildly off, your inputs were probably ambiguous — try again or jump straight to a conversation.',
+    bodyIntro: 'Based on your answers, Deploris would open with this. If it\'s wildly off, your inputs were probably ambiguous, try again or jump straight to a conversation.',
     ctaPrimary: 'Book a 30-min scoping call',
     ctaPrimaryHref: '/contact',
     ctaSecondary: 'Request a written quote',
@@ -208,7 +208,7 @@ const DE: Content = {
   intro: {
     eyebrow: 'KI-Chancen-Finder',
     title: 'Zehn Fragen. Eine ehrliche Empfehlung.',
-    deck: 'Kein Formular, keine E-Mail, kein Download. Antworten Sie dort, wo Sie heute wirklich stehen — wir bewerten Ihre Situation gegen die vier Probleme, die Deploris löst (individuelle CRM-Systeme, RAG, KI-Agenten, Managed IT) und sagen Ihnen, was passt. Oder dass keines passt.',
+    deck: 'Kein Formular, keine E-Mail, kein Download. Antworten Sie dort, wo Sie heute wirklich stehen, wir bewerten Ihre Situation gegen die vier Probleme, die Deploris löst (individuelle CRM-Systeme, RAG, KI-Agenten, Managed IT) und sagen Ihnen, was passt. Oder dass keines passt.',
     bullets: [
       'Drei Minuten, zehn Fragen',
       'Deterministische Bewertung: gleiche Antworten → gleiches Ergebnis',
@@ -234,7 +234,7 @@ const DE: Content = {
         { id: 'few', label: '0–1 (kaum eins im Einsatz)', weights: { crm: 1 } },
         { id: 'some', label: '2–4 (handhabbar, aber mit Brüchen)', weights: { crm: 2 } },
         { id: 'many', label: '5+ (CRM, Marketing, Support, Billing, Enrichment …)', weights: { crm: 3, agents: 1 } },
-        { id: 'na', label: 'Nicht relevant — wir sind kein vertriebsgetriebenes Geschäft', weights: {} },
+        { id: 'na', label: 'Nicht relevant, wir sind kein vertriebsgetriebenes Geschäft', weights: {} },
       ],
     },
     {
@@ -252,7 +252,7 @@ const DE: Content = {
       prompt: 'Haben Sie bereits einen KI-Piloten in Produktion gebracht?',
       options: [
         { id: 'none', label: 'Nein, das wäre unser erster', weights: {} },
-        { id: 'failed', label: 'Ja, hat aber nicht gegriffen — brauche Unterstützung', weights: { agents: 2, rag: 1 } },
+        { id: 'failed', label: 'Ja, hat aber nicht gegriffen, brauche Unterstützung', weights: { agents: 2, rag: 1 } },
         { id: 'working', label: 'Ja, einer läuft, wir wollen ausbauen', weights: { agents: 2, rag: 2 } },
         { id: 'many', label: 'Mehrere Piloten parallel, brauchen Hilfe beim Priorisieren', weights: { agents: 3, rag: 1 } },
       ],
@@ -273,7 +273,7 @@ const DE: Content = {
       options: [
         { id: 'low', label: 'Nicht wichtig', weights: {} },
         { id: 'medium', label: 'Nice to have', weights: { rag: 1, managedIt: 1 } },
-        { id: 'high', label: 'Zwingend — regulierte Branche oder deutsches B2B', weights: { rag: 2, managedIt: 2, agents: 1 } },
+        { id: 'high', label: 'Zwingend, regulierte Branche oder deutsches B2B', weights: { rag: 2, managedIt: 2, agents: 1 } },
       ],
     },
     {
@@ -290,10 +290,10 @@ const DE: Content = {
       id: 'q8_timeline',
       prompt: 'Realistischer Zeitrahmen für das erste produktive Ergebnis?',
       options: [
-        { id: '30d', label: 'Nächste 30 Tage — etwas brennt bereits', weights: { managedIt: 2, agents: 1 } },
-        { id: '90d', label: '1–3 Monate — Budget steht, es muss vorwärtsgehen', weights: { crm: 1, rag: 2, agents: 1 } },
-        { id: '180d', label: '3–6 Monate — wir planen das Quartal', weights: { crm: 2, rag: 1 } },
-        { id: 'explore', label: 'Explorativ — keine Deadline', weights: {} },
+        { id: '30d', label: 'Nächste 30 Tage, etwas brennt bereits', weights: { managedIt: 2, agents: 1 } },
+        { id: '90d', label: '1–3 Monate, Budget steht, es muss vorwärtsgehen', weights: { crm: 1, rag: 2, agents: 1 } },
+        { id: '180d', label: '3–6 Monate, wir planen das Quartal', weights: { crm: 2, rag: 1 } },
+        { id: 'explore', label: 'Explorativ, keine Deadline', weights: {} },
       ],
     },
     {
@@ -302,7 +302,7 @@ const DE: Content = {
       options: [
         { id: 'none', label: 'Haben keins', weights: { crm: 2 } },
         { id: 'sheets', label: 'Excel-Tabellen und Disziplin', weights: { crm: 3 } },
-        { id: 'painful', label: 'Standardtool (HubSpot / Salesforce) — kämpfen aber täglich damit', weights: { crm: 3 } },
+        { id: 'painful', label: 'Standardtool (HubSpot / Salesforce), kämpfen aber täglich damit', weights: { crm: 3 } },
         { id: 'fine', label: 'Standardtool, funktioniert gut', weights: {} },
       ],
     },
@@ -321,7 +321,7 @@ const DE: Content = {
   axes: {
     crm: {
       label: 'Individuelle CRM-Entwicklung',
-      summary: 'Ihr Schmerz hat CRM-Form, nicht KI-Form. Ein individuelles CRM, das zu Ihrem Vertriebsprozess passt — und Lizenzbloat ersetzt — ist der Schritt mit dem besten Hebel.',
+      summary: 'Ihr Schmerz hat CRM-Form, nicht KI-Form. Ein individuelles CRM, das zu Ihrem Vertriebsprozess passt, und Lizenzbloat ersetzt, ist der Schritt mit dem besten Hebel.',
       serviceHref: '/de/services/development/crm-entwicklung',
       serviceLabel: 'Zum CRM-Service',
     },
@@ -349,7 +349,7 @@ const DE: Content = {
     titleTemplate: 'Beste Passung: {label}',
     recommendedKicker: 'Primäre Empfehlung',
     secondaryKicker: 'Auch einen Blick wert',
-    bodyIntro: 'Auf Basis Ihrer Antworten würde Deploris hier einsteigen. Wenn das weit danebenliegt, war der Input vermutlich mehrdeutig — nochmal starten oder direkt ins Gespräch.',
+    bodyIntro: 'Auf Basis Ihrer Antworten würde Deploris hier einsteigen. Wenn das weit danebenliegt, war der Input vermutlich mehrdeutig, nochmal starten oder direkt ins Gespräch.',
     ctaPrimary: '30-Min-Scoping-Call vereinbaren',
     ctaPrimaryHref: '/de/contact',
     ctaSecondary: 'Schriftliches Angebot anfragen',

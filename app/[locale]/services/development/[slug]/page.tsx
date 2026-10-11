@@ -230,7 +230,7 @@ export default async function DevelopmentServiceDetail({
             : []),
           howToSchema({
             locale,
-            name: `${c.title} — ${locale === 'de' ? 'Vorgehensweise' : 'Our process'}`,
+            name: `${c.title}, ${locale === 'de' ? 'Vorgehensweise' : 'Our process'}`,
             description: c.summary,
             steps: c.process.map((p) => ({ name: p.step, text: p.body })),
           }),

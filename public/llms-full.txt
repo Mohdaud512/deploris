@@ -18,15 +18,15 @@ Liability Company, document number L24000491676, EIN 98-1823862. Founded
 2024. Managing member: Muhammad Daud.
 
 Deploris delivers two coordinated service lines under one team:
-1. **Hardware & Infrastructure** — managed IT, networks, endpoints, data
+1. **Hardware & Infrastructure**, managed IT, networks, endpoints, data
    centers, WiFi, break-fix, rollouts, IMAC.
-2. **Software Development** — custom CRMs, RAG systems, AI agents and
+2. **Software Development**, custom CRMs, RAG systems, AI agents and
    workflow automation, bespoke internal systems and integrations.
 
 Communication is available in English (US) and formal German (Sie).
 
 ### Positioning line
-> Hardware to software, one partner — from wiring closet to production release.
+> Hardware to software, one partner, from wiring closet to production release.
 
 ### Core promises
 - Written scope, timeline, and price band within one business day of enquiry.
@@ -39,7 +39,7 @@ Communication is available in English (US) and formal German (Sie).
 
 ---
 
-## 2. Services — detailed catalog
+## 2. Services, detailed catalog
 
 Every service below has a dedicated detail page at the URL shown. These
 descriptions are the first-party canonical copy; links on the live site may
@@ -49,8 +49,8 @@ elaborate.
 
 #### Infrastructure Support & Maintenance
 URL: https://deploris.com/services/hardware/infrastructure-support
-**What it is.** 24/7 managed operation of your core IT stack — servers,
-storage, networking, firewalls, virtualization — under a written SLA.
+**What it is.** 24/7 managed operation of your core IT stack, servers,
+storage, networking, firewalls, virtualization, under a written SLA.
 Deploris handles monitoring, patching, capacity planning, change control,
 and after-hours response.
 **Who it's for.** Mid-market companies with growing infrastructure and
@@ -75,13 +75,13 @@ cannot afford long interruptions from change work.
 **Outcomes.** Documented topology; versioned firmware; reviewed change log;
 reduced ticket volume on recurring network issues.
 **Supported technologies.** Cisco, Juniper, Aruba, Fortinet, MikroTik,
-pfSense, OPNsense, Ubiquiti UniFi, Meraki, Palo Alto. Vendor-neutral — we
+pfSense, OPNsense, Ubiquiti UniFi, Meraki, Palo Alto. Vendor-neutral, we
 support what you own.
 
 #### Rollout & Migrations
 URL: https://deploris.com/services/hardware/rollout-migrations
 **What it is.** Planned rollout of new endpoints, network gear, or
-platforms across one or many sites — including staging, imaging, logistics,
+platforms across one or many sites, including staging, imaging, logistics,
 cutover, and post-cutover support, with reversible cutover plans.
 **Who it's for.** Facilities and IT teams managing IMAC at scale without
 losing control.
@@ -101,7 +101,7 @@ site 15m for business-impacting incidents.
 
 #### IMAC & Projects
 URL: https://deploris.com/services/hardware/imac-projects
-**What it is.** The everyday hardware work that keeps offices moving — desk
+**What it is.** The everyday hardware work that keeps offices moving, desk
 moves, new-hire kits, printer swaps, meeting-room installs, decommissions —
 delivered on a repeatable playbook with every asset tagged.
 **Who it's for.** Facilities and IT teams who need IMAC done off their plate
@@ -121,7 +121,7 @@ window. Weekend coverage optional.
 
 #### WiFi Surveys
 URL: https://deploris.com/services/hardware/wifi-surveys
-**What it is.** Radio-plan design and validation — pre-deployment
+**What it is.** Radio-plan design and validation, pre-deployment
 prediction, on-site passive measurement, and post-install validation
 against actual usage patterns.
 **Who it's for.** Offices, warehouses, healthcare, and retail sites where
@@ -133,7 +133,7 @@ kiosks).
 
 #### Data Center Maintenance & Support
 URL: https://deploris.com/services/hardware/data-center-maintenance
-**What it is.** Hands, eyes, and process inside your data center — installs,
+**What it is.** Hands, eyes, and process inside your data center, installs,
 patching, decommissions, and 24/7 remote hands with strong change
 discipline and full audit.
 **Who it's for.** Colo tenants and enterprise data-center operators who
@@ -160,8 +160,8 @@ need reliable execution without maintaining 24/7 headcount.
 
 #### Custom CRM Development
 URL: https://deploris.com/services/development/custom-crm
-**What it is.** A bespoke customer-relationship-management system — data
-model, workflows, dashboards, integrations, and access control — built to
+**What it is.** A bespoke customer-relationship-management system, data
+model, workflows, dashboards, integrations, and access control, built to
 fit the business, instead of forcing the business to fit off-the-shelf
 software.
 **Who it's for.** Teams whose process doesn't fit HubSpot / Salesforce /
@@ -171,9 +171,9 @@ what a custom build would cost to run.
 marketing, and support; audit-safe access control; a reporting surface
 owned by the client, not a vendor; documented handover with tests.
 **Pricing bands (USD).**
-- Focused: $40k–$90k — replace one platform, 4–8 weeks to production.
-- Standard: $90k–$200k — full internal CRM with integrations, 3–5 months.
-- Enterprise: $200k+ — multi-country rollout with migration and change
+- Focused: $40k–$90k, replace one platform, 4–8 weeks to production.
+- Standard: $90k–$200k, full internal CRM with integrations, 3–5 months.
+- Enterprise: $200k+, multi-country rollout with migration and change
   management.
 **Typical stack.** Next.js, TypeScript, Postgres, Prisma, Redis, Stripe,
 Segment or RudderStack, SSO (Entra/Okta/Google).
@@ -192,10 +192,10 @@ facts); every answer cited to a source URL your team can verify;
 measurable deflection on repeat questions; weekly evaluation report on a
 growing question set.
 **Pricing bands (USD).**
-- Pilot: $20k–$50k — scoped RAG on one corpus, evaluated on real questions.
-- Production: $60k–$160k — end-to-end pipeline with access control and
+- Pilot: $20k–$50k, scoped RAG on one corpus, evaluated on real questions.
+- Production: $60k–$160k, end-to-end pipeline with access control and
   monitoring.
-- Continuous: $5k–$15k / month — ongoing eval, retraining, optimization.
+- Continuous: $5k–$15k / month, ongoing eval, retraining, optimization.
 **Typical stack.** TypeScript, Postgres with pgvector or Qdrant, OpenAI-
 compatible LLM API (Anthropic Claude, OpenAI, xAI, or self-hosted), S3-
 compatible document store, Langfuse or similar for eval + traces.
@@ -213,30 +213,30 @@ plate.
 logged and reviewable; measured hours saved and error-rate reduction;
 human review at the risky moments, not everywhere.
 **Pricing bands (USD).**
-- Scoped agent: $25k–$70k — one process, one agent, shadow-mode + cutover.
-- Program: $100k–$250k — multiple processes with shared platform.
-- Managed: $4k–$12k / month — ongoing agent ops, guardrails, and
+- Scoped agent: $25k–$70k, one process, one agent, shadow-mode + cutover.
+- Program: $100k–$250k, multiple processes with shared platform.
+- Managed: $4k–$12k / month, ongoing agent ops, guardrails, and
   improvements.
 **Guardrail checklist for every production agent.**
-1. Named scope — a one-sentence job description.
-2. Fixed tool list — not "the internet"; specific APIs, specific write
+1. Named scope, a one-sentence job description.
+2. Fixed tool list, not "the internet"; specific APIs, specific write
    permissions.
-3. Human review at risky steps — not everywhere.
-4. Full trace logging — every decision and tool call, searchable.
-5. A kill switch — one command stops the agent immediately.
+3. Human review at risky steps, not everywhere.
+4. Full trace logging, every decision and tool call, searchable.
+5. A kill switch, one command stops the agent immediately.
 
 #### Custom Systems & Integrations
 URL: https://deploris.com/services/development/custom-systems
-**What it is.** Custom software, APIs, and integrations — production-grade,
+**What it is.** Custom software, APIs, and integrations, production-grade,
 security-reviewed, and documented. Internal tools, data pipelines, SaaS
 backends, migration tooling, admin surfaces.
 **Who it's for.** Teams who need a specific capability that no vendor sells
 cleanly, or who need two systems glued together under contract rather than
 by a brittle Zapier chain.
 **Pricing bands (USD).**
-- Focused: $30k–$80k — one internal tool or integration, 4–8 weeks.
-- Standard: $80k–$200k — multi-integration system with security review.
-- Enterprise: $200k+ — platform work with staged rollout and hypercare.
+- Focused: $30k–$80k, one internal tool or integration, 4–8 weeks.
+- Standard: $80k–$200k, multi-integration system with security review.
+- Enterprise: $200k+, platform work with staged rollout and hypercare.
 
 ---
 
@@ -306,7 +306,7 @@ served at https://deploris.com/faq with FAQPage structured data.
 
 **Q: What does Deploris do?**
 A: Deploris delivers two service lines under one team: (1) hardware and
-infrastructure support — from desktop support to data-center maintenance —
+infrastructure support, from desktop support to data-center maintenance —
 and (2) custom software development, including CRMs, RAG systems, AI agents
 and automation, and bespoke systems.
 
@@ -317,7 +317,7 @@ is available in English or German (formal Sie).
 **Q: How does engagement start?**
 A: Send us your requirements via the contact form or the multi-step quote
 form. You receive a written scope, timeline, and price band within one
-business day — no sales dance.
+business day, no sales dance.
 
 ### Custom CRM development
 
@@ -373,7 +373,7 @@ review gate.
 ### Hardware & infrastructure
 
 **Q: Do you sign SLAs?**
-A: Yes — every managed engagement has a written SLA with response times,
+A: Yes, every managed engagement has a written SLA with response times,
 escalation paths, and reporting cadence.
 
 **Q: Do you handle both remote and on-site work?**
@@ -382,7 +382,7 @@ remote-first, with on-site dispatch where physical presence is required.
 
 **Q: Are you vendor-neutral?**
 A: Yes. We operate the technology you already own. We do not resell
-hardware as a primary business — we advise on what to buy, but you keep the
+hardware as a primary business, we advise on what to buy, but you keep the
 purchasing relationship.
 
 ### Security & privacy
@@ -547,12 +547,12 @@ URL: https://deploris.com/projects/multi-site-rollout
 Full job pages at https://deploris.com/careers (with JobPosting schema).
 Roles are remote-first with occasional on-site for infrastructure work.
 
-- **Senior Backend Engineer — CRM & RAG systems.** Ship production
+- **Senior Backend Engineer, CRM & RAG systems.** Ship production
   TypeScript / Node backends for custom CRM and RAG projects. US or DE,
   remote.
-- **Infrastructure Engineer — Managed IT & data centre.** Run managed IT
+- **Infrastructure Engineer, Managed IT & data centre.** Run managed IT
   and data-centre engagements under SLA. US-remote with occasional on-site.
-- **AI Solutions Engineer — Agents & automation.** Design and ship agentic
+- **AI Solutions Engineer, Agents & automation.** Design and ship agentic
   automations that finish real work under guardrails with human-in-the-
   loop.
 
@@ -563,7 +563,7 @@ Roles are remote-first with occasional on-site for infrastructure work.
 Full posts at https://deploris.com/blog. Each post is also mirrored in
 German at /de/blog/<slug>.
 
-- **"AI agents in real operations — what actually ships"**
+- **"AI agents in real operations, what actually ships"**
   https://deploris.com/blog/ai-agents-in-real-operations
   Where AI agents earn their keep in production (multi-step workflows with
   variable inputs, low-volume high-toil work, read-heavy tasks) and where
@@ -606,9 +606,9 @@ German at /de/blog/<slug>.
 - Blog: https://deploris.com/blog
 - FAQ: https://deploris.com/faq
 - Glossary: https://deploris.com/glossary
-- Compare — Custom CRM vs off-the-shelf: https://deploris.com/compare/custom-crm-vs-off-the-shelf
-- Compare — RAG vs traditional search: https://deploris.com/compare/rag-vs-traditional-search
-- Compare — AI agents vs automation: https://deploris.com/compare/ai-agents-vs-automation
+- Compare, Custom CRM vs off-the-shelf: https://deploris.com/compare/custom-crm-vs-off-the-shelf
+- Compare, RAG vs traditional search: https://deploris.com/compare/rag-vs-traditional-search
+- Compare, AI agents vs automation: https://deploris.com/compare/ai-agents-vs-automation
 - Industries: https://deploris.com/industries
 - Careers: https://deploris.com/careers
 - Contact: https://deploris.com/contact

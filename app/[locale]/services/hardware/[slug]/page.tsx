@@ -63,7 +63,7 @@ export default async function HardwareServiceDetail({
 
   // Per-service FAQ group falls back to the generic "hardware" group only
   // if the per-service group isn't present (keeps every service page's
-  // FAQPage schema distinct from the others — duplicate FAQPages across
+  // FAQPage schema distinct from the others, duplicate FAQPages across
   // pages is a soft-ranking signal to Google).
   const perServiceSlug = svc.id;
   const faqGroup =
@@ -164,7 +164,7 @@ export default async function HardwareServiceDetail({
             : []),
           howToSchema({
             locale,
-            name: `${c.title} — ${locale === 'de' ? 'Vorgehensweise' : 'Our process'}`,
+            name: `${c.title}, ${locale === 'de' ? 'Vorgehensweise' : 'Our process'}`,
             description: c.summary,
             steps: c.process.map((p) => ({ name: p.step, text: p.body })),
           }),

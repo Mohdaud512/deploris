@@ -190,8 +190,8 @@ function RagTrace({ de }: { de: boolean }) {
   const src2Quote = de ? 'Monatsrechnung Lieferant X: 84.300 €' : 'Monthly invoice Supplier X: €84,300';
   const src3Quote = de ? '... Signoff kam am 11. jedes Monats, 8 Tage spät ...' : '... signoff landed on the 11th, 8 days late ...';
   const answer = de
-    ? '~1.517 € pro Monat Verzugspauschale (1,8 % × 84.300 €), über die letzten vier Monate durchgängig ausgelöst — ca. 18.200 € jährlicher Mehraufwand bei unverändertem Signoff-Rhythmus. Quellen [1][2][3].'
-    : '~€1,517/month in delay penalties (1.8% × €84,300), triggered every month for the last four — approximately €18,200/year of avoidable spend at the current signoff cadence. Sources [1][2][3].';
+    ? '~1.517 € pro Monat Verzugspauschale (1,8 % × 84.300 €), über die letzten vier Monate durchgängig ausgelöst, ca. 18.200 € jährlicher Mehraufwand bei unverändertem Signoff-Rhythmus. Quellen [1][2][3].'
+    : '~€1,517/month in delay penalties (1.8% × €84,300), triggered every month for the last four, approximately €18,200/year of avoidable spend at the current signoff cadence. Sources [1][2][3].';
 
   return (
     <pre className="whitespace-pre-wrap break-words font-mono">

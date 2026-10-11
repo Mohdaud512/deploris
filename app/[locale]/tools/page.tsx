@@ -48,7 +48,7 @@ export default async function ToolsHubPage({ params }: { params: Promise<{ local
           {
             tag: 'CRM-TCO',
             title: 'CRM 3-Jahres-TCO-Rechner',
-            desc: 'HubSpot/Salesforce vs. individuelles CRM, über drei Jahre. Lizenz, Konfiguration, Entwicklung, Wartung — alles berücksichtigt.',
+            desc: 'HubSpot/Salesforce vs. individuelles CRM, über drei Jahre. Lizenz, Konfiguration, Entwicklung, Wartung, alles berücksichtigt.',
             href: `${prefix}/tools/crm-tco`,
             cta: 'Zum TCO-Vergleich',
           },
@@ -57,7 +57,7 @@ export default async function ToolsHubPage({ params }: { params: Promise<{ local
     : {
         eyebrow: 'Utilities',
         title: 'Three tools. No sales funnel.',
-        deck: 'Each utility answers a concrete pre-sales question mid-market buyers have to run themselves anyway. Run them before you talk to us — or anyone else.',
+        deck: 'Each utility answers a concrete pre-sales question mid-market buyers have to run themselves anyway. Run them before you talk to us, or anyone else.',
         tools: [
           {
             tag: 'Vendor risk',
@@ -76,7 +76,7 @@ export default async function ToolsHubPage({ params }: { params: Promise<{ local
           {
             tag: 'CRM TCO',
             title: 'CRM three-year TCO estimator',
-            desc: 'HubSpot/Salesforce vs. custom CRM over three years. Licence, config, build, maintenance — all in.',
+            desc: 'HubSpot/Salesforce vs. custom CRM over three years. Licence, config, build, maintenance, all in.',
             href: `${prefix}/tools/crm-tco`,
             cta: 'Open comparator',
           },

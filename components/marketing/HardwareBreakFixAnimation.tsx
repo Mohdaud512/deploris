@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * HardwareBreakFixAnimation — "Break → SLA countdown → van arrives → fixed"
+ * HardwareBreakFixAnimation, "Break → SLA countdown → van arrives → fixed"
  *
  * Four phases cycle:
- *   0 — healthy: equipment running, LEDs green, SLA timer dormant
- *   1 — fault:   LEDs flash red/amber, SLA timer starts counting down
- *   2 — en-route: a repair van drives in from the right, timer continues
- *   3 — fixed:   wrench overlay briefly, LEDs return green, "fixed in NN min"
+ *   0, healthy: equipment running, LEDs green, SLA timer dormant
+ *   1, fault:   LEDs flash red/amber, SLA timer starts counting down
+ *   2, en-route: a repair van drives in from the right, timer continues
+ *   3, fixed:   wrench overlay briefly, LEDs return green, "fixed in NN min"
  *
  * Side panel: a service history list showing the last 4 fixes with their
  * resolution times, and an SLA strip (same-day: ✓ / NBD: ✓) at the top.
@@ -233,7 +233,7 @@ function SlaTimer({ slaMinutesLeft, phase }: { slaMinutesLeft: number; phase: nu
     <g transform="translate(140, 200)">
       <rect width="220" height="38" rx="6" fill="currentColor" fillOpacity="0.06" stroke="currentColor" strokeOpacity="0.3" />
       <text x="12" y="14" fontSize="7" fontFamily="ui-monospace, monospace" fill="currentColor" fillOpacity="0.55">
-        {phase === 0 ? 'SLA — standing by' : phase === 3 ? 'SLA — met · case closed' : 'SLA — time to resolve'}
+        {phase === 0 ? 'SLA, standing by' : phase === 3 ? 'SLA, met · case closed' : 'SLA, time to resolve'}
       </text>
       {/* Timer */}
       <text x="12" y="30" fontSize="14" fontFamily="ui-monospace, monospace" fill={danger ? '#ef4444' : 'currentColor'} fillOpacity="0.95" fontWeight="bold">

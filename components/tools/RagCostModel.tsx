@@ -6,7 +6,7 @@ import type { Locale } from '@/config/locales';
 /**
  * Transparent RAG monthly cost estimator. Deterministic math, no hidden
  * markup. All numbers are published assumptions a technical reader can
- * challenge — see the "how we calculate" block at the bottom.
+ * challenge, see the "how we calculate" block at the bottom.
  */
 const MODEL_TIERS = {
   small: { label: { en: 'Small (Claude Haiku / GPT-4o-mini / open-source)', de: 'Klein (Claude Haiku / GPT-4o-mini / Open-Source)' }, perMQuery: 0.9 },
@@ -169,7 +169,7 @@ export function RagCostModel({ locale }: { locale: Locale }) {
               € {Math.round(costs.total).toLocaleString(de ? 'de-DE' : 'en-US')}
             </p>
             <p className="mt-1 font-mono text-xs text-brand-900/70 tabular-nums dark:text-white/70">
-              {t.rangeLabel}: € {Math.round(low).toLocaleString(de ? 'de-DE' : 'en-US')} – € {Math.round(high).toLocaleString(de ? 'de-DE' : 'en-US')} / mo
+              {t.rangeLabel}: € {Math.round(low).toLocaleString(de ? 'de-DE' : 'en-US')} {de ? 'bis' : 'to'} € {Math.round(high).toLocaleString(de ? 'de-DE' : 'en-US')} / mo
             </p>
 
             <dl className="mt-5 space-y-1.5 text-sm">

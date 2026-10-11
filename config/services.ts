@@ -467,7 +467,7 @@ export const hardwareServices: Service[] = [
           '24/7 remote hands with 15-minute median P1 first-response, 1-hour P2, next-business-day P3',
           'Monthly uptime target of 99.9%+ on infrastructure we operate',
           'Cable and rack hygiene that survives audits',
-          'Full audit trail on every change — ticketed, reviewed, reversible for at least 48 hours',
+          'Full audit trail on every change, ticketed, reviewed, reversible for at least 48 hours',
           'Vendor-neutral we manage your kit, not a resale of ours',
         ],
         process: [
@@ -494,7 +494,7 @@ export const hardwareServices: Service[] = [
           '24/7 Remote Hands mit medianer P1-Erstreaktion in 15 Minuten, P2 in 1 Stunde, P3 am nächsten Werktag',
           'Monatliches Verfügbarkeits-Ziel 99,9%+ für die von uns betriebene Infrastruktur',
           'Kabel- und Rack-Hygiene, die Audits standhält',
-          'Vollständiger Audit-Trail zu jeder Änderung — getickert, geprüft, mindestens 48 h reversibel',
+          'Vollständiger Audit-Trail zu jeder Änderung, getickert, geprüft, mindestens 48 h reversibel',
           'Herstellerneutral wir betreiben Ihre Technik, nicht unseren Weiterverkauf',
         ],
         process: [

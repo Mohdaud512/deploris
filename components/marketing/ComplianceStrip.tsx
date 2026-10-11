@@ -2,7 +2,7 @@ import type { Locale } from '@/config/locales';
 
 /**
  * One-line compliance commitment band. Pattern lifted from MaibornWolff
- * ("DSGVO, EU AI Act, ISO 27001 — Architektur, nicht Add-on") but trimmed to
+ * ("DSGVO, EU AI Act, ISO 27001, Architektur, nicht Add-on") but trimmed to
  * claims Deploris can defend today: DSGVO-konformer Betrieb, EU-Region
  * Hosting, Auftragsverarbeitungsvertrag auf Anfrage, EU AI Act aligned by
  * design. No cert claims without an actual certificate.
@@ -30,8 +30,8 @@ export function ComplianceStrip({ locale }: { locale: Locale }) {
       ];
 
   const lede = de
-    ? 'Datenschutz, Souveränität, Sorgfalt — ab dem ersten Commit, nicht als Add-on.'
-    : 'Privacy, sovereignty, due diligence — from the first commit, not bolted on.';
+    ? 'Datenschutz, Souveränität, Sorgfalt, ab dem ersten Commit, nicht als Add-on.'
+    : 'Privacy, sovereignty, due diligence, from the first commit, not bolted on.';
 
   const linkText = de ? 'Compliance & Datenschutz ansehen' : 'Review compliance & privacy';
 

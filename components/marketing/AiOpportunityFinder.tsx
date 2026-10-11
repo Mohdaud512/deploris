@@ -73,17 +73,17 @@ function Intro({ content, onStart }: { content: ReturnType<typeof getContent>; o
   const preview = isDe
     ? {
         asksTitle: 'Was wir fragen',
-        asksDeck: 'Zehn Fragen zum Status quo — kein offenes Freitextfeld, keine E-Mail-Pflicht.',
+        asksDeck: 'Zehn Fragen zum Status quo, kein offenes Freitextfeld, keine E-Mail-Pflicht.',
         getsTitle: 'Was Sie zurückbekommen',
         getsDeck: 'Ihre Antworten werden gegen vier Deploris-Leistungsfelder bewertet. Das Ergebnis zeigt die beste Passung, die zweitbeste und eine ehrliche Erklärung dazu.',
-        scoring: 'Deterministische Bewertung: Jede Antwort trägt feste Gewichte zu den vier Achsen bei. Keine KI im Hintergrund, kein Zufallsgenerator — gleiche Antworten erzeugen immer dasselbe Ergebnis.',
+        scoring: 'Deterministische Bewertung: Jede Antwort trägt feste Gewichte zu den vier Achsen bei. Keine KI im Hintergrund, kein Zufallsgenerator, gleiche Antworten erzeugen immer dasselbe Ergebnis.',
       }
     : {
         asksTitle: "What we ask",
-        asksDeck: 'Ten questions about where you are today — no open-ended textarea, no email required.',
+        asksDeck: 'Ten questions about where you are today, no open-ended textarea, no email required.',
         getsTitle: "What you get back",
         getsDeck: 'Your answers are scored against four Deploris service lines. The result shows the best fit, the second best, and an honest write-up of why.',
-        scoring: 'Deterministic scoring: every answer contributes fixed weights across the four axes. No LLM in the loop, no randomness — the same answers always produce the same recommendation.',
+        scoring: 'Deterministic scoring: every answer contributes fixed weights across the four axes. No LLM in the loop, no randomness, the same answers always produce the same recommendation.',
       };
 
   return (
@@ -113,7 +113,7 @@ function Intro({ content, onStart }: { content: ReturnType<typeof getContent>; o
           <span aria-hidden>→</span>
         </button>
 
-        {/* Preview sections — expand the thin intro into something crawlers
+        {/* Preview sections, expand the thin intro into something crawlers
             and skeptical mid-market readers can actually evaluate without
             clicking Start. Grounded in the same question + axis data the
             quiz runs on. */}

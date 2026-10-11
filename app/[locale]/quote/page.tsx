@@ -31,14 +31,14 @@ export default async function QuotePage({ params }: { params: Promise<{ locale: 
         <div className="mt-5 rounded-xl border border-brand-900/10 bg-brand-50/60 p-4 text-sm text-brand-900/80 dark:border-white/10 dark:bg-white/5 dark:text-white/80">
           {locale === 'de' ? (
             <p>
-              Nach dem Absenden antwortet ein Deploris-Ingenieur — kein Verkäufer — innerhalb eines
+              Nach dem Absenden antwortet ein Deploris-Ingenieur, kein Verkäufer, innerhalb eines
               Werktags mit schriftlichem Scope, Zeitplan und einer Preisspanne (nicht einer gerundeten
               Startzahl). Keine Formulare danach, keine Verkaufsschleife. Wenn das Projekt nicht zu uns
               passt, sagen wir das direkt.
             </p>
           ) : (
             <p>
-              After you submit, a Deploris engineer — not a salesperson — replies within one business
+              After you submit, a Deploris engineer, not a salesperson, replies within one business
               day with a written scope, a timeline, and a defensible price band (not a rounded starter
               number). No follow-up forms, no sales dance. If the project isn't a fit, we'll say so
               directly.

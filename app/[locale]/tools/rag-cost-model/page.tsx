@@ -41,8 +41,8 @@ export default async function RagCostModelPage({ params }: { params: Promise<{ l
           </h1>
           <p className="mt-5 text-lg text-brand-900/80 dark:text-white/80">
             {de
-              ? 'Keine Verkaufsmasche. Verschieben Sie die Regler, wählen Sie Ihre Modellstufe und EU-Hosting-Präferenz, und sehen Sie die monatliche Kostenspanne — mit vollständig offengelegter Rechenformel am Ende.'
-              : 'No sales theatre. Move the sliders, pick your model tier and EU hosting preference, and see the monthly cost band — with the full formula disclosed at the bottom.'}
+              ? 'Keine Verkaufsmasche. Verschieben Sie die Regler, wählen Sie Ihre Modellstufe und EU-Hosting-Präferenz, und sehen Sie die monatliche Kostenspanne, mit vollständig offengelegter Rechenformel am Ende.'
+              : 'No sales theatre. Move the sliders, pick your model tier and EU hosting preference, and see the monthly cost band, with the full formula disclosed at the bottom.'}
           </p>
         </div>
       </section>
