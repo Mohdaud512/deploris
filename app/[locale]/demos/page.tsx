@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
+import { ToolFooter } from '@/components/tools/ToolFooter';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -12,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
       ? 'Demo-Galerie Produktionsbeispiele aus unseren Projekten'
       : 'Demo gallery production samples from our builds',
     description: locale === 'de'
-      ? 'Drei durchsuchbare Beispiele aus unseren Projekten: eine RAG-Abfrage mit Quellen, ein Agenten-Trace mit Tool-Calls, ein CRM-Datenmodell. Keine Verkaufsgespräche nötig vorab.'
-      : 'Three inspectable samples from real engagements: a RAG query with sources, an agent trace with tool calls, and a custom CRM data model. See how we work before a single sales call.',
+      ? 'Drei anonymisierte Beispiele aus Deploris-Projekten: eine RAG-Abfrage mit Quellen, ein Agenten-Trace mit Tool-Calls, ein CRM-Datenmodell. Vor dem ersten Gespräch prüfbar.'
+      : 'Three anonymised samples from real Deploris engagements: a RAG query with sources, an agent trace with tool calls, a custom CRM data model. Inspectable before any sales call.',
   });
 }
 
@@ -147,6 +148,31 @@ export default async function DemosPage({ params }: { params: Promise<{ locale: 
 
         <p className="mt-10 max-w-3xl text-xs text-brand-900/55 dark:text-white/50">{copy.disclaimer}</p>
       </section>
+      <ToolFooter
+        locale={locale}
+        breadcrumbTrail={[
+          { label: 'Home', href: prefix || '/' },
+          { label: de ? 'Demo-Galerie' : 'Demo gallery', href: `${prefix}/demos` },
+        ]}
+        nextSteps={[
+          {
+            label: de ? 'Zum RAG-Service' : 'See the RAG systems service',
+            href: copy.hrefRag,
+          },
+          {
+            label: de ? 'Zum KI-Agenten-Service' : 'See the AI agents service',
+            href: copy.hrefAgent,
+          },
+          {
+            label: de ? 'Zum CRM-Service' : 'See the custom CRM service',
+            href: copy.hrefCrm,
+          },
+          {
+            label: de ? 'KI-Chancen-Finder (10 Fragen)' : 'AI Opportunity Finder (10 questions)',
+            href: `${prefix}/ai-opportunity-finder`,
+          },
+        ]}
+      />
     </>
   );
 }

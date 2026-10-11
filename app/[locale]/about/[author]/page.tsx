@@ -142,6 +142,11 @@ export default async function AuthorPage({
             jobTitle: c.jobTitle,
             description: c.headline,
             sameAs: Object.values(a.social).filter(Boolean),
+            // Served by Next.js file-conventions; falls back to the default
+            // OG card when a per-author image doesn't exist. Google uses it
+            // for Person entity enrichment and AI-overview citation chips.
+            image: `/about/${a.slug}/opengraph-image`,
+            knowsAbout: c.expertise,
           }),
           breadcrumbSchema([
             { name: 'Home', href: prefix || '/' },

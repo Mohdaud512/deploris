@@ -44,6 +44,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       <ValuePropGrid
+        heading={de ? 'Was uns unterscheidet' : 'What makes us different'}
+        headingId="about-what-makes-us-different"
         items={[
           {
             title: de ? 'Ergebnis vor Aufwand' : 'Outcome before effort',

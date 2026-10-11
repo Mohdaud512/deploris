@@ -21,9 +21,12 @@ export function SiteFooter() {
       <div className="container grid gap-10 py-14 md:grid-cols-4">
         <div>
           <div className="flex items-center">
+            {/* Decorative: the brand mark is already announced by the header
+                logo (which carries alt=site.name). Repeating the alt here
+                would make screen readers say "Deploris" twice per page. */}
             <Image
               src="/logo.png"
-              alt={site.name}
+              alt=""
               width={512}
               height={512}
               className="h-16 w-16 object-contain brightness-0 invert"

@@ -5,6 +5,8 @@ import { ServiceCard } from '@/components/marketing/ServiceCard';
 import { CTASection } from '@/components/marketing/CTASection';
 import { HardwareAnimation } from '@/components/marketing/HardwareAnimation';
 import { hardwareServices } from '@/config/services';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -53,8 +55,14 @@ export default async function HardwareLandingPage({
         </div>
       </section>
 
-      <section className="container pb-16">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container pb-16" aria-labelledby="hw-services-heading">
+        <h2
+          id="hw-services-heading"
+          className="font-display text-xl font-bold text-brand-900 md:text-2xl dark:text-white"
+        >
+          {de ? 'Services in diesem Leistungsfeld' : 'Services in this line'}
+        </h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {hardwareServices.map((s) => (
             <ServiceCard
               key={s.id}
@@ -73,6 +81,15 @@ export default async function HardwareLandingPage({
         body={de ? 'Schriftlicher Scope innerhalb eines Werktags.' : 'Written scope within one business day.'}
         primaryHref={`${prefix}/quote`}
         primaryLabel={tCommon('cta_quote')}
+      />
+      <SchemaJsonLd
+        data={[
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: de ? 'Leistungen' : 'Services', href: `${prefix}/services` },
+            { name: de ? 'Hardware & Infrastruktur' : 'Hardware & Infrastructure', href: `${prefix}/services/hardware` },
+          ]),
+        ]}
       />
     </>
   );

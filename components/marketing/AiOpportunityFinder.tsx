@@ -60,6 +60,32 @@ export function AiOpportunityFinder({ locale }: { locale: Locale }) {
 }
 
 function Intro({ content, onStart }: { content: ReturnType<typeof getContent>; onStart: () => void }) {
+  // Pull the one-line prompt of every question for the "What we ask" preview,
+  // and the four axis labels for the "What you'll get back" preview. Both
+  // are derived from the same source of truth that drives the quiz, so they
+  // can never drift out of sync.
+  const questionPrompts = content.questions.map((q) => q.prompt);
+  const axisKeys = ['crm', 'rag', 'agents', 'managedIt'] as const;
+  // Localised copy for the preview sections. Kept inline rather than pushed
+  // down into content/ai-opportunity-finder.ts because this is layout copy,
+  // not scoring data.
+  const isDe = /de-DE|KI-Chancen/i.test(content.intro.eyebrow);
+  const preview = isDe
+    ? {
+        asksTitle: 'Was wir fragen',
+        asksDeck: 'Zehn Fragen zum Status quo — kein offenes Freitextfeld, keine E-Mail-Pflicht.',
+        getsTitle: 'Was Sie zurückbekommen',
+        getsDeck: 'Ihre Antworten werden gegen vier Deploris-Leistungsfelder bewertet. Das Ergebnis zeigt die beste Passung, die zweitbeste und eine ehrliche Erklärung dazu.',
+        scoring: 'Deterministische Bewertung: Jede Antwort trägt feste Gewichte zu den vier Achsen bei. Keine KI im Hintergrund, kein Zufallsgenerator — gleiche Antworten erzeugen immer dasselbe Ergebnis.',
+      }
+    : {
+        asksTitle: "What we ask",
+        asksDeck: 'Ten questions about where you are today — no open-ended textarea, no email required.',
+        getsTitle: "What you get back",
+        getsDeck: 'Your answers are scored against four Deploris service lines. The result shows the best fit, the second best, and an honest write-up of why.',
+        scoring: 'Deterministic scoring: every answer contributes fixed weights across the four axes. No LLM in the loop, no randomness — the same answers always produce the same recommendation.',
+      };
+
   return (
     <section className="container py-14 md:py-20">
       <div className="mx-auto max-w-3xl">
@@ -86,6 +112,60 @@ function Intro({ content, onStart }: { content: ReturnType<typeof getContent>; o
           <span>{content.intro.startLabel}</span>
           <span aria-hidden>→</span>
         </button>
+
+        {/* Preview sections — expand the thin intro into something crawlers
+            and skeptical mid-market readers can actually evaluate without
+            clicking Start. Grounded in the same question + axis data the
+            quiz runs on. */}
+        <div className="mt-16 grid gap-10 md:grid-cols-2">
+          <div>
+            <h2 className="font-display text-xl font-semibold text-brand-900 dark:text-white">
+              {preview.asksTitle}
+            </h2>
+            <p className="mt-2 text-sm text-brand-900/75 dark:text-white/70">{preview.asksDeck}</p>
+            <ol className="mt-4 space-y-2 text-sm text-brand-900/85 dark:text-white/80">
+              {questionPrompts.map((q, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="font-mono text-[0.75rem] text-accent-700 tabular-nums dark:text-accent-300">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span>{q}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div>
+            <h2 className="font-display text-xl font-semibold text-brand-900 dark:text-white">
+              {preview.getsTitle}
+            </h2>
+            <p className="mt-2 text-sm text-brand-900/75 dark:text-white/70">{preview.getsDeck}</p>
+            <ul className="mt-4 space-y-3">
+              {axisKeys.map((key) => {
+                const a = content.axes[key];
+                return (
+                  <li
+                    key={key}
+                    className="rounded-xl border border-brand-900/10 bg-white p-4 dark:border-white/10 dark:bg-white/5"
+                  >
+                    <p className="font-display font-semibold text-brand-900 dark:text-white">
+                      {a.label}
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-brand-900/70 dark:text-white/70">
+                      {a.summary}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-5 rounded-lg border border-accent-500/30 bg-accent-500/5 p-3 text-xs leading-relaxed text-brand-900/85 dark:border-accent-400/30 dark:bg-accent-400/10 dark:text-white/80">
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-accent-700 dark:text-accent-300">
+                {isDe ? 'Wie bewertet wird' : 'How scoring works'}
+              </span>
+              <br />
+              {preview.scoring}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { AiVendorRisk } from '@/components/tools/AiVendorRisk';
+import { ToolFooter } from '@/components/tools/ToolFooter';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -46,6 +47,32 @@ export default async function AiVendorRiskPage({ params }: { params: Promise<{ l
         </div>
       </section>
       <AiVendorRisk locale={locale} />
+      <ToolFooter
+        locale={locale}
+        breadcrumbTrail={[
+          { label: 'Home', href: prefix || '/' },
+          { label: de ? 'Werkzeuge' : 'Utilities', href: `${prefix}/tools` },
+          { label: de ? 'KI-Vendor-Risiko' : 'AI vendor risk', href: `${prefix}/tools/ai-vendor-risk` },
+        ]}
+        nextSteps={[
+          {
+            label: de ? 'Zum KI-Agenten-Service' : 'See the AI agents service',
+            href: `${prefix}/services/development/${de ? 'ki-automatisierung' : 'ai-agents-automation'}`,
+          },
+          {
+            label: de ? 'Zum RAG-Service' : 'See the RAG systems service',
+            href: `${prefix}/services/development/${de ? 'rag-systeme' : 'rag-systems'}`,
+          },
+          {
+            label: de ? 'KI-Chancen-Finder (10 Fragen)' : 'AI Opportunity Finder (10 questions)',
+            href: `${prefix}/ai-opportunity-finder`,
+          },
+          {
+            label: de ? 'Datenschutzerklärung ansehen' : 'See our privacy posture',
+            href: `${prefix}/legal/privacy`,
+          },
+        ]}
+      />
     </>
   );
 }

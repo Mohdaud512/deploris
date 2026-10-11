@@ -15,6 +15,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'CCBot', allow: '/' },
     ],
     sitemap: `${base}/sitemap.xml`,
-    host: base,
+    // `host` was a Yandex-only hint ignored by Google and Bing; dropped.
   };
 }

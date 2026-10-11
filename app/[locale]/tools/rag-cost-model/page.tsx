@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { RagCostModel } from '@/components/tools/RagCostModel';
+import { ToolFooter } from '@/components/tools/ToolFooter';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -10,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     locale,
     path: '/tools/rag-cost-model',
     title: locale === 'de'
-      ? 'RAG-Betriebskostenmodell Monatskosten für Produktion ehrlich schätzen'
-      : 'RAG cost-of-ops model what production actually runs per month',
+      ? 'RAG-Betriebskostenmodell: Monatskosten für Produktion'
+      : 'RAG Cost Model: Monthly Production Cost Estimator',
     description: locale === 'de'
       ? 'Volumen, Nutzung und Modellwahl in ein transparentes Rechenmodell einsetzen und eine ehrliche monatliche Kostenspanne für ein RAG-System in Produktion sehen.'
       : 'Plug corpus size, usage, and model tier into a transparent calculation and see an honest monthly cost band for a production RAG system.',
@@ -46,6 +47,32 @@ export default async function RagCostModelPage({ params }: { params: Promise<{ l
         </div>
       </section>
       <RagCostModel locale={locale} />
+      <ToolFooter
+        locale={locale}
+        breadcrumbTrail={[
+          { label: 'Home', href: prefix || '/' },
+          { label: de ? 'Werkzeuge' : 'Utilities', href: `${prefix}/tools` },
+          { label: de ? 'RAG-Betriebskosten' : 'RAG cost model', href: `${prefix}/tools/rag-cost-model` },
+        ]}
+        nextSteps={[
+          {
+            label: de ? 'Zum RAG-Service' : 'See the RAG systems service',
+            href: `${prefix}/services/development/${de ? 'rag-systeme' : 'rag-systems'}`,
+          },
+          {
+            label: de ? 'RAG vs. klassische Suche' : 'RAG vs. traditional search',
+            href: `${prefix}/compare/rag-vs-traditional-search`,
+          },
+          {
+            label: de ? 'RAG-Beispiel im Demo-Gallery' : 'See a RAG demo artifact',
+            href: `${prefix}/demos`,
+          },
+          {
+            label: de ? 'Schriftliches Angebot anfragen' : 'Request a written quote',
+            href: `${prefix}/quote`,
+          },
+        ]}
+      />
     </>
   );
 }

@@ -5,13 +5,15 @@ import { ServiceCard } from '@/components/marketing/ServiceCard';
 import { CTASection } from '@/components/marketing/CTASection';
 import { DevelopmentAnimation } from '@/components/marketing/DevelopmentAnimation';
 import { developmentServices } from '@/config/services';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   return buildMetadata({
     locale,
     path: '/services/development',
-    title: locale === 'de' ? 'Softwareentwicklung CRM, RAG, KI-Agenten, Individualsoftware' : 'Software Development Custom CRM, RAG, AI agents, bespoke systems',
+    title: locale === 'de' ? 'Softwareentwicklung: CRM, RAG, KI-Agenten' : 'Custom AI Software Development: CRM, RAG, Agents',
     description: locale === 'de'
       ? 'Individuelle CRM-Systeme, RAG-Systeme, KI-Agenten und maßgeschneiderte Softwarelösungen produktionsreif, sicherheitsgeprüft, vollständig dokumentiert.'
       : 'Custom CRM, RAG systems, AI agents, and bespoke software production-grade from day one, security-reviewed, and fully documented for your team.',
@@ -53,8 +55,14 @@ export default async function DevelopmentLandingPage({
         </div>
       </section>
 
-      <section className="container pb-16">
-        <div className="grid gap-4 md:grid-cols-2">
+      <section className="container pb-16" aria-labelledby="dev-services-heading">
+        <h2
+          id="dev-services-heading"
+          className="font-display text-xl font-bold text-brand-900 md:text-2xl dark:text-white"
+        >
+          {de ? 'Services in diesem Leistungsfeld' : 'Services in this line'}
+        </h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
           {developmentServices.map((s) => (
             <ServiceCard
               key={s.id}
@@ -75,6 +83,15 @@ export default async function DevelopmentLandingPage({
           : 'Tell us what you need. We come back with a price band and a schedule.'}
         primaryHref={`${prefix}/quote`}
         primaryLabel={tCommon('cta_quote')}
+      />
+      <SchemaJsonLd
+        data={[
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: de ? 'Leistungen' : 'Services', href: `${prefix}/services` },
+            { name: de ? 'Softwareentwicklung' : 'Software Development', href: `${prefix}/services/development` },
+          ]),
+        ]}
       />
     </>
   );

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
+import { SchemaJsonLd } from '@/components/seo/SchemaJsonLd';
+import { breadcrumbSchema } from '@/lib/schema';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -12,8 +14,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
       ? 'Werkzeuge für CTOs, IT- und COO-Teams gratis, keine Anmeldung'
       : 'Free utilities for CTOs, IT and COO teams no sign-up',
     description: locale === 'de'
-      ? 'Drei kleine Werkzeuge, die Deploris an ernste Fragen rund um KI, RAG und CRM anlegt: KI-Vendor-Risiko-Checkliste, RAG-Betriebskostenmodell und CRM-TCO-Rechner.'
-      : 'Three small utilities Deploris applies to serious questions on AI, RAG, and CRM: AI vendor risk checklist, RAG cost-of-ops model, and CRM three-year TCO estimator.',
+      ? 'Drei Werkzeuge für ernste KI-, RAG- und CRM-Entscheidungen: Vendor-Risiko-Checkliste, RAG-Betriebskosten-Rechner, CRM-TCO-Vergleich.'
+      : 'Three utilities for serious AI, RAG, and CRM decisions: vendor risk checklist, RAG cost-of-ops model, CRM three-year TCO estimator.',
   });
 }
 
@@ -107,6 +109,14 @@ export default async function ToolsHubPage({ params }: { params: Promise<{ local
           </Link>
         ))}
       </div>
+      <SchemaJsonLd
+        data={[
+          breadcrumbSchema([
+            { name: 'Home', href: prefix || '/' },
+            { name: de ? 'Werkzeuge' : 'Utilities', href: `${prefix}/tools` },
+          ]),
+        ]}
+      />
     </section>
   );
 }

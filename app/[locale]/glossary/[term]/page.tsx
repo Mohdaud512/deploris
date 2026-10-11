@@ -20,11 +20,22 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale; term: string }>;
 }) {
   const { locale, term } = await params;
-  const found = glossaryData[locale].find((t) => t.slug === term);
+  const idx = glossaryData[locale].findIndex((t) => t.slug === term);
+  const found = idx >= 0 ? glossaryData[locale][idx] : undefined;
   if (!found) return {};
+  // Pair with the counterpart in the other locale by array index (the two
+  // locale lists are maintained in parallel). Falls back to the same slug
+  // if the other locale is shorter, which keeps the alternate at least
+  // self-consistent even if a term is missing a translation.
+  const enTerm = glossaryData.en[idx]?.slug ?? term;
+  const deTerm = glossaryData.de[idx]?.slug ?? term;
   return buildMetadata({
     locale,
     path: `/glossary/${term}`,
+    pathByLocale: {
+      en: `/glossary/${enTerm}`,
+      de: `/glossary/${deTerm}`,
+    },
     title: `${found.term} ${locale === 'de' ? 'Definition im Glossar' : 'definition in the glossary'}`,
     description: found.description.length < 110
       ? `${found.description} ${locale === 'de' ? 'Teil des Deploris-Glossars zu CRM-, RAG-, KI- und IT-Begriffen.' : 'Part of the Deploris glossary of CRM, RAG, AI, and IT operations terms.'}`

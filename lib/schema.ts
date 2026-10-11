@@ -225,9 +225,16 @@ export function personSchema(opts: {
   jobTitle?: string;
   description?: string;
   sameAs?: string[];
+  image?: string;
+  /** Topics this person has publicly-verifiable expertise in. Fed to AI
+   *  overview citations and the Person entity graph. */
+  knowsAbout?: string[];
 }) {
   const url = opts.slug ? `${site.url}/about/${opts.slug}` : `${site.url}/about`;
   const sameAs = opts.sameAs?.filter(Boolean);
+  const image = opts.image
+    ? (opts.image.startsWith('http') ? opts.image : `${site.url}${opts.image}`)
+    : undefined;
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -238,6 +245,8 @@ export function personSchema(opts: {
     description: opts.description,
     worksFor: { '@id': `${site.url}#organization` },
     ...(sameAs && sameAs.length ? { sameAs } : {}),
+    ...(image ? { image } : {}),
+    ...(opts.knowsAbout?.length ? { knowsAbout: opts.knowsAbout } : {}),
   };
 }
 
@@ -464,8 +473,15 @@ export function techArticleSchema(opts: {
   date?: string;
   proficiencyLevel?: 'Beginner' | 'Expert';
   about?: string;
+  /** Named human author for E-E-A-T. When omitted falls back to the
+   *  managing-member Person entity; previously fell back to the
+   *  Organization which the live-site audit flagged as weak for
+   *  TechArticle. */
+  author?: { name: string; slug: string };
 }) {
   const url = `${site.url}${opts.locale === 'en' ? '' : `/${opts.locale}`}${opts.path}`;
+  const author = opts.author ?? { name: site.managingMember, slug: 'muhammad-daud' };
+  const authorUrl = `${site.url}/about/${author.slug}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -476,7 +492,12 @@ export function techArticleSchema(opts: {
     image: [`${site.url}/og-default.png`],
     datePublished: opts.date ?? '2025-02-01',
     dateModified: opts.date ?? '2025-02-01',
-    author: { '@id': `${site.url}#organization`, '@type': 'Organization', name: site.name },
+    author: {
+      '@type': 'Person',
+      '@id': `${authorUrl}#person`,
+      name: author.name,
+      url: authorUrl,
+    },
     publisher: { '@id': `${site.url}#organization` },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: opts.title },
     inLanguage: opts.locale === 'de' ? 'de-DE' : 'en-US',

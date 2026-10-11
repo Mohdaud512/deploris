@@ -63,7 +63,10 @@ export default async function BlogPost({ params }: { params: Promise<{ locale: L
             description: post.data.description,
             slug,
             date: post.data.date,
-            updated: post.data.updated,
+            // Fall back to the file's mtime when the front-matter `updated`
+            // isn't set — Google uses dateModified for freshness and all
+            // posts were serializing as "never updated" before this change.
+            updated: post.data.updated ?? post.mtime,
             author: post.data.author,
             // All current posts are authored by the Deploris managing member;
             // the slug makes `author.url` resolve to the real Person page.

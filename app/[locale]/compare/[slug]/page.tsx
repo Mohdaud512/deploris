@@ -29,9 +29,9 @@ type CompareCopy = {
 const compares: Record<string, Record<Locale, CompareCopy>> = {
   'custom-crm-vs-off-the-shelf': {
     en: {
-      title: 'Custom CRM vs. off-the-shelf CRM',
+      title: 'Custom CRM vs. off-the-shelf CRM for mid-market teams',
       intro:
-        'Off-the-shelf CRMs get you started quickly. Custom CRMs pay back once configuration cost, licensing, or process fit becomes a bottleneck. Here is how they compare.',
+        'Off-the-shelf CRMs ship fast; custom CRMs pay back once configuration cost, licensing, or process fit becomes a bottleneck. Here is how they compare.',
       definition:
         'A custom CRM is a bespoke customer-relationship-management system built around a specific business process, data model, and integrations instead of configuring an off-the-shelf product (HubSpot, Salesforce, Pipedrive) to fit.',
       headers: ['Dimension', 'Off-the-shelf', 'Custom'],

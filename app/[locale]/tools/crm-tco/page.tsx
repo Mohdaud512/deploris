@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
 import { CrmTco } from '@/components/tools/CrmTco';
+import { ToolFooter } from '@/components/tools/ToolFooter';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -10,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
     locale,
     path: '/tools/crm-tco',
     title: locale === 'de'
-      ? 'CRM-TCO-Rechner HubSpot und Salesforce vs. individuelles CRM über drei Jahre'
-      : 'CRM three-year TCO estimator HubSpot and Salesforce vs. custom',
+      ? 'CRM-TCO-Rechner: HubSpot, Salesforce vs. individuelles CRM'
+      : 'CRM TCO Calculator: HubSpot vs. Salesforce vs. Custom',
     description: locale === 'de'
       ? 'Vergleichen Sie Lizenz, Setup, Admin-Overhead und individuelle Integrationen über drei Jahre: HubSpot oder Salesforce gegen ein individuelles Deploris-CRM. Keine Formel versteckt.'
       : 'Compare licence, setup, admin overhead, and custom integrations across three years: HubSpot or Salesforce versus a custom Deploris CRM. No formula hidden.',
@@ -46,6 +47,32 @@ export default async function CrmTcoPage({ params }: { params: Promise<{ locale:
         </div>
       </section>
       <CrmTco locale={locale} />
+      <ToolFooter
+        locale={locale}
+        breadcrumbTrail={[
+          { label: 'Home', href: prefix || '/' },
+          { label: de ? 'Werkzeuge' : 'Utilities', href: `${prefix}/tools` },
+          { label: 'CRM TCO', href: `${prefix}/tools/crm-tco` },
+        ]}
+        nextSteps={[
+          {
+            label: de ? 'Zum individuellen CRM-Service' : 'See the custom CRM service',
+            href: `${prefix}/services/development/${de ? 'crm-entwicklung' : 'custom-crm'}`,
+          },
+          {
+            label: de ? 'Custom CRM vs. Standard-CRM' : 'Custom CRM vs. off-the-shelf',
+            href: `${prefix}/compare/custom-crm-vs-off-the-shelf`,
+          },
+          {
+            label: de ? 'KI-Chancen-Finder (10 Fragen)' : 'AI Opportunity Finder (10 questions)',
+            href: `${prefix}/ai-opportunity-finder`,
+          },
+          {
+            label: de ? 'Schriftliches Angebot anfragen' : 'Request a written quote',
+            href: `${prefix}/quote`,
+          },
+        ]}
+      />
     </>
   );
 }

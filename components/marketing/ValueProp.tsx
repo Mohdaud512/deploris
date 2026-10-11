@@ -1,10 +1,30 @@
 export function ValuePropGrid({
   items,
+  heading,
+  headingId,
 }: {
   items: { title: string; body: string }[];
+  /** Optional visible section heading. When provided, renders an H2 above
+   *  the grid so the outline doesn't jump H1 → H3 (card titles are H3). */
+  heading?: string;
+  headingId?: string;
 }) {
+  const id = headingId ?? 'value-prop-heading';
   return (
-    <section aria-label="Value propositions" className="container py-16">
+    <section
+      {...(heading
+        ? { 'aria-labelledby': id }
+        : { 'aria-label': 'Value propositions' })}
+      className="container py-16"
+    >
+      {heading && (
+        <h2
+          id={id}
+          className="mb-8 font-display text-xl font-bold text-brand-900 md:text-2xl dark:text-white"
+        >
+          {heading}
+        </h2>
+      )}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {items.map((it) => (
           <div

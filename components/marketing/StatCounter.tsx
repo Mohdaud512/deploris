@@ -17,17 +17,28 @@ export function StatCounterGrid({ stats }: { stats: Stat[] }) {
 }
 
 function StatItem({ stat }: { stat: Stat }) {
-  const [value, setValue] = useState(0);
+  // Initial state is the real value so SSR renders the number, not "0".
+  // (Previously initial was 0 and the animation would run on scroll — but if
+  // the client never scrolled past, or if JS was slow or disabled, the stat
+  // would read "0+" / "0.0%" / "0 min" and actively leak trust. Crawlers and
+  // social-preview scrapers also saw zeros.)
+  const [value, setValue] = useState(stat.value);
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
   useEffect(() => {
-    if (reduce) {
-      setValue(stat.value);
-      return;
-    }
+    if (reduce) return;
     const el = ref.current;
     if (!el) return;
+    // Only run the count-up when the element enters the viewport for the first
+    // time AND it wasn't already visible on mount. If the user lands with the
+    // stats already in view (anchor jump, resume on scroll position, short
+    // page), skip the animation entirely — the server-rendered number is
+    // already correct.
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    if (alreadyVisible) return;
+    setValue(0);
     const observer = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -42,7 +53,7 @@ function StatItem({ stat }: { stat: Stat }) {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [stat.value, reduce]);
+  }, [stat.value, stat.decimals, reduce]);
 
   const decimals = stat.decimals ?? 0;
   return (

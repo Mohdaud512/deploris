@@ -182,7 +182,7 @@ export function CrmTco({ locale }: { locale: Locale }) {
             </div>
 
             <div className="rounded-xl border border-brand-900/10 bg-brand-50/60 p-5 text-sm dark:border-white/10 dark:bg-brand-950/60">
-              <h3 className="font-mono text-[0.68rem] uppercase tracking-[0.12em] text-brand-900/60 dark:text-white/60">{t.breakdown}</h3>
+              <h2 className="font-mono text-[0.68rem] uppercase tracking-[0.12em] text-brand-900/60 dark:text-white/60">{t.breakdown}</h2>
               <dl className="mt-3 grid gap-x-5 gap-y-1 md:grid-cols-2">
                 <Row label={t.s_license} value={totals.saas.license} nf={nf} />
                 <Row label={t.c_build} value={totals.custom.build} nf={nf} />

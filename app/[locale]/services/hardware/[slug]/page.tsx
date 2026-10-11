@@ -39,6 +39,10 @@ export async function generateMetadata({
   return buildMetadata({
     locale,
     path: `/services/hardware/${slug}`,
+    pathByLocale: {
+      en: `/services/hardware/${svc.copy.en.slug}`,
+      de: `/services/hardware/${svc.copy.de.slug}`,
+    },
     title: c.metaTitle,
     description: c.metaDescription,
   });

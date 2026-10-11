@@ -102,7 +102,7 @@ export const hardwareServices: Service[] = [
         slug: 'network-support',
         metaTitle: 'Network Support & Management',
         metaDescription:
-          'Managed LAN, WAN, and SD-WAN operation with proactive monitoring, firmware management, and firewall change control.',
+          'Managed LAN, WAN, and SD-WAN operation with proactive monitoring, firmware discipline, reviewed firewall change control, and quarterly CVE reviews under written SLA.',
         summary:
           'Managed operation of your LAN, WAN, SD-WAN, and firewalls with proactive monitoring and change control.',
         whatItIs:
@@ -397,7 +397,7 @@ export const hardwareServices: Service[] = [
         slug: 'wifi-surveys',
         metaTitle: 'Predictive & On-site WiFi Surveys',
         metaDescription:
-          'Predictive and passive WiFi site surveys with heatmaps, AP placement plan, and validated post-install coverage.',
+          'Predictive and passive WiFi site surveys with signal and SNR heatmaps, AP placement plan, interference report, and validated post-install coverage against your real device mix.',
         summary:
           'Predictive and passive WiFi surveys with heatmaps, AP placement, and validated post-install coverage.',
         whatItIs:
@@ -456,7 +456,7 @@ export const hardwareServices: Service[] = [
         slug: 'data-center-maintenance',
         metaTitle: 'Data Center Maintenance & 24/7 Support',
         metaDescription:
-          '24/7 data center operations, remote hands, structured cabling, and PDU/rack management under strict SLA.',
+          '24/7 data-center operations, remote hands, structured cabling, PDU and rack management under written SLA. Vendor-neutral, with full audit trail on every change.',
         summary:
           '24/7 operations, remote hands, structured cabling, and PDU/rack management under strict SLA.',
         whatItIs:
@@ -464,9 +464,10 @@ export const hardwareServices: Service[] = [
         whoItsFor:
           'Colo tenants and enterprise data-center operators who need reliable execution without maintaining 24/7 headcount.',
         outcomes: [
-          '24/7 remote hands with published SLAs',
+          '24/7 remote hands with 15-minute median P1 first-response, 1-hour P2, next-business-day P3',
+          'Monthly uptime target of 99.9%+ on infrastructure we operate',
           'Cable and rack hygiene that survives audits',
-          'Full audit trail on every change',
+          'Full audit trail on every change — ticketed, reviewed, reversible for at least 48 hours',
           'Vendor-neutral we manage your kit, not a resale of ours',
         ],
         process: [
@@ -490,9 +491,10 @@ export const hardwareServices: Service[] = [
         whoItsFor:
           'Colo-Mieter und Enterprise-RZ-Betreiber, die zuverlässige Umsetzung ohne 24/7-eigene Belegschaft benötigen.',
         outcomes: [
-          '24/7 Remote Hands mit veröffentlichten SLAs',
+          '24/7 Remote Hands mit medianer P1-Erstreaktion in 15 Minuten, P2 in 1 Stunde, P3 am nächsten Werktag',
+          'Monatliches Verfügbarkeits-Ziel 99,9%+ für die von uns betriebene Infrastruktur',
           'Kabel- und Rack-Hygiene, die Audits standhält',
-          'Vollständiger Audit-Trail zu jeder Änderung',
+          'Vollständiger Audit-Trail zu jeder Änderung — getickert, geprüft, mindestens 48 h reversibel',
           'Herstellerneutral wir betreiben Ihre Technik, nicht unseren Weiterverkauf',
         ],
         process: [
@@ -519,9 +521,9 @@ export const developmentServices: Service[] = [
         title: 'Custom CRM Development',
         h1: 'Custom CRMs built around how you actually sell.',
         slug: 'custom-crm',
-        metaTitle: 'Custom CRM Development',
+        metaTitle: 'Custom CRM Development for Mid-Market Teams',
         metaDescription:
-          'Custom CRM systems designed around your sales process not the other way around. Integrations, migrations, and audit-friendly access control.',
+          'Custom CRM systems designed around your sales process not the other way around. Integrations, migrations, role-based access control, written scope in one business day.',
         summary:
           'Custom CRM systems designed around your sales process, integrated with your stack, and built for the way your teams actually work.',
         whatItIs:
@@ -578,9 +580,9 @@ export const developmentServices: Service[] = [
         title: 'RAG Systems',
         h1: 'Retrieval-augmented AI grounded in your own knowledge.',
         slug: 'rag-systems',
-        metaTitle: 'RAG System Development',
+        metaTitle: 'RAG Systems with Citations and Access Control',
         metaDescription:
-          'RAG systems that ground LLM answers in your own documents with access control, source citations, and evaluation you can trust.',
+          'Production RAG systems that ground LLM answers in your own documents with role-based access control, source citations per claim, and continuous retrieval evaluation.',
         summary:
           'Retrieval-augmented generation systems that ground LLM answers in your own documents, with access control, citations, and evaluation.',
         whatItIs:
@@ -604,9 +606,9 @@ export const developmentServices: Service[] = [
         title: 'RAG-Systeme',
         h1: 'Retrieval-Augmented KI geerdet in Ihrem eigenen Wissen.',
         slug: 'rag-systeme',
-        metaTitle: 'RAG System Entwicklung',
+        metaTitle: 'RAG-Systeme mit Quellenzitaten und Zugriffskontrolle',
         metaDescription:
-          'RAG-Systeme, die LLM-Antworten in Ihren Dokumenten verankern mit Zugriffskontrolle, Quellenzitaten und belastbarer Evaluation.',
+          'Produktive RAG-Systeme, die LLM-Antworten in Ihren Dokumenten verankern mit rollenbasierter Zugriffskontrolle, Quellenverweisen je Aussage und kontinuierlicher Evaluation.',
         summary:
           'Retrieval-Augmented-Generation-Systeme, die LLM-Antworten in Ihren Dokumenten verankern mit Zugriffskontrolle, Zitaten und Evaluation.',
         whatItIs:

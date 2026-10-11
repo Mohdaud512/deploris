@@ -52,13 +52,24 @@ export type GlossaryFrontmatter = {
   slug: string;
 };
 
-function readMdx<T>(root: string, filename: string): { data: T; body: string } | null {
+function readMdx<T>(
+  root: string,
+  filename: string,
+): { data: T; body: string; mtime: string } | null {
   try {
     const full = resolveInside(root, filename);
     if (!fs.existsSync(full)) return null;
     const raw = fs.readFileSync(full, 'utf8');
     const parsed = matter(raw);
-    return { data: parsed.data as T, body: parsed.content };
+    const stat = fs.statSync(full);
+    return {
+      data: parsed.data as T,
+      body: parsed.content,
+      // ISO 8601 date-only; feeds BlogPosting.dateModified when the
+      // front-matter `updated` is absent. Falling back to datePublished (the
+      // old behaviour) made Google treat every post as never updated.
+      mtime: stat.mtime.toISOString().slice(0, 10),
+    };
   } catch {
     return null;
   }
