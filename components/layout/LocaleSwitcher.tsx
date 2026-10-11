@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { locales, localeLabels, localeFlags, type Locale } from '@/config/locales';
+import { translateLocaleStrippedPath } from '@/lib/i18n-paths';
 
 /**
  * Segmented EN / DE toggle in the site header.
@@ -20,7 +21,13 @@ export function LocaleSwitcher() {
     if (segments[0] && (locales as readonly string[]).includes(segments[0])) {
       segments.shift();
     }
-    const rest = segments.join('/');
+    const strippedPath = segments.length ? `/${segments.join('/')}` : '/';
+    // Translate the slug when it differs between locales (service details,
+    // glossary terms). Previously a naive mirror produced URLs like
+    // /de/services/hardware/network-support which 404 — the real DE slug is
+    // netzwerk-support. Falls back to the input when the slug is identical.
+    const translated = translateLocaleStrippedPath(strippedPath, active, next);
+    const rest = translated.replace(/^\//, '');
     const target = next === 'en' ? `/${rest}` : `/${next}${rest ? `/${rest}` : ''}`;
     router.push(target || '/');
   }
