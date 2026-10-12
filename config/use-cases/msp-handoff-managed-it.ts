@@ -169,7 +169,7 @@ export const mspHandoffManagedIt: UseCase = {
         },
         {
           q: 'Do you have a DACH presence, or will we always be routed to the US?',
-          a: 'Our delivery team is in DACH, operates in CET, and provides on-site capability in Germany, Austria, and Switzerland. The legal entity is a Florida LLC (DEPLORIS LLC), which means US procurement teams get a US-counterparty contract and your DACH operation gets a native-language, same-timezone team. 24/7 coverage spans both geographies without a 12-hour handoff gap.',
+          a: 'Our delivery team is in DACH, operates in CET, and provides on-site capability in Germany, Austria, and Switzerland. The legal entity is a Colorado LLC (Deploris LLC), which means US procurement teams get a US-counterparty contract and your DACH operation gets a native-language, same-timezone team. 24/7 coverage spans both geographies without a 12-hour handoff gap.',
         },
         {
           q: 'Where does our data live when Deploris operates services?',
@@ -193,7 +193,7 @@ export const mspHandoffManagedIt: UseCase = {
         },
         {
           q: 'Who is Deploris and why should we trust you with our infrastructure?',
-          a: 'Deploris is a US-registered engineering firm (Florida LLC L24000491676) with a DACH delivery team, built as the mid-market answer to the gap between dev shops that write software and MSPs that run infrastructure. Of 40 mid-market firms benchmarked across the US and DACH, we are the only team that covers both halves under one contract. The person on your on-call escalation is the same person who wrote the runbook they are reading from.',
+          a: 'Deploris is a US-registered engineering firm (Colorado LLC 20268259375) with a DACH delivery team, built as the mid-market answer to the gap between dev shops that write software and MSPs that run infrastructure. Of 40 mid-market firms benchmarked across the US and DACH, we are the only team that covers both halves under one contract. The person on your on-call escalation is the same person who wrote the runbook they are reading from.',
         },
       ],
       related: {
@@ -361,7 +361,7 @@ export const mspHandoffManagedIt: UseCase = {
         },
         {
           q: 'Haben Sie DACH-Präsenz, oder werden wir immer in die USA geroutet?',
-          a: 'Unser Delivery-Team sitzt in DACH, arbeitet in MEZ und ist in Deutschland, Österreich und der Schweiz vor Ort einsetzbar. Die Rechtseinheit ist eine Florida LLC (DEPLORIS LLC), das heißt US-Einkaufsteams bekommen einen US-Vertragspartner, und Ihr DACH-Betrieb bekommt ein muttersprachliches Team in derselben Zeitzone. 24/7-Deckung spannt beide Geografien, ohne 12-Stunden-Lücke bei der Übergabe.',
+          a: 'Unser Delivery-Team sitzt in DACH, arbeitet in MEZ und ist in Deutschland, Österreich und der Schweiz vor Ort einsetzbar. Die Rechtseinheit ist eine Colorado LLC (Deploris LLC), das heißt US-Einkaufsteams bekommen einen US-Vertragspartner, und Ihr DACH-Betrieb bekommt ein muttersprachliches Team in derselben Zeitzone. 24/7-Deckung spannt beide Geografien, ohne 12-Stunden-Lücke bei der Übergabe.',
         },
         {
           q: 'Wo liegen unsere Daten, wenn Deploris Dienste betreibt?',
@@ -385,7 +385,7 @@ export const mspHandoffManagedIt: UseCase = {
         },
         {
           q: 'Wer ist Deploris und warum sollten wir Ihnen unsere Infrastruktur anvertrauen?',
-          a: 'Deploris ist ein in den USA registriertes Engineering-Unternehmen (Florida LLC L24000491676) mit einem DACH-Delivery-Team, aufgebaut als die Mittelstandsantwort auf die Lücke zwischen Agenturen, die Software schreiben, und MSPs, die Infrastruktur betreiben. Von 40 benchmarkten Mittelstandsfirmen in USA und DACH sind wir das einzige Team, das beide Hälften unter einem Vertrag abdeckt. Die Person in Ihrer On-Call-Eskalation ist dieselbe Person, die das Runbook geschrieben hat, aus dem sie liest.',
+          a: 'Deploris ist ein in den USA registriertes Engineering-Unternehmen (Colorado LLC 20268259375) mit einem DACH-Delivery-Team, aufgebaut als die Mittelstandsantwort auf die Lücke zwischen Agenturen, die Software schreiben, und MSPs, die Infrastruktur betreiben. Von 40 benchmarkten Mittelstandsfirmen in USA und DACH sind wir das einzige Team, das beide Hälften unter einem Vertrag abdeckt. Die Person in Ihrer On-Call-Eskalation ist dieselbe Person, die das Runbook geschrieben hat, aus dem sie liest.',
         },
       ],
       related: {

@@ -41,10 +41,6 @@ export function SiteFooter() {
             {site.contact.address.country}
           </address>
           <p className="mt-3 text-sm">
-            <a href={`tel:${site.contact.phoneRaw}`} className="hover:text-white">
-              {site.contact.phone}
-            </a>
-            <br />
             <a href={`mailto:${site.contact.email}`} className="hover:text-white">
               {site.contact.email}
             </a>

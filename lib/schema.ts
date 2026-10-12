@@ -68,7 +68,6 @@ export function organizationSchema(locale: Locale) {
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        telephone: site.contact.phone,
         contactType: 'sales',
         email: site.contact.email,
         availableLanguage: ['English', 'German'],
@@ -90,7 +89,6 @@ export function localBusinessSchema(locale: Locale) {
     '@id': `${site.url}#business`,
     name: site.name,
     url: site.url,
-    telephone: site.contact.phone,
     email: site.contact.email,
     image: `${site.url}/logo.png`,
     logo: `${site.url}/logo.png`,

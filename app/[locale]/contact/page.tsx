@@ -39,8 +39,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <a href={`mailto:${site.contact.email}`} className="underline">
               {site.contact.email}
             </a>
-            <br />
-            <a href={`tel:${site.contact.phoneRaw}`}>{site.contact.phone}</a>
           </p>
           <address className="mt-4 not-italic text-brand-900/85 dark:text-white/85">
             {site.contact.address.street}

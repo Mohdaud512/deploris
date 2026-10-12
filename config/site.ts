@@ -3,23 +3,29 @@
  * Edit once the header, footer, Impressum, structured data, sitemaps,
  * emails, and RAG index all read from here.
  *
- * ⚠️ Values marked REVIEW below match placeholders the user supplied but that
- * also match the old WordPress demo template confirm before shipping to
- * production. See CONTENT.md for the checklist.
+ * Entity: Deploris LLC, a Colorado Limited Liability Company.
+ * Colorado Secretary of State entity ID 20268259375, formed 2026-10-12.
+ *
+ * EIN is deliberately omitted until the IRS issues one. The site does not
+ * quote a tax ID until the SS-4 is back.
+ *
+ * No public phone number is listed. Email is the primary contact channel.
  */
 
 export const site = {
   name: 'Deploris',
-  legalName: 'DEPLORIS LLC',
-  jurisdiction: 'Florida Limited Liability Company',
-  documentNumber: 'L24000491676',
-  ein: '98-1823862',
+  legalName: 'Deploris LLC',
+  jurisdiction: 'Colorado Limited Liability Company',
+  documentNumber: '20268259375',
+  // ein: intentionally omitted until the IRS SS-4 issues an EIN for the CO
+  //      entity. When it lands, add it here and the Impressum will carry it
+  //      automatically.
   registeredAgent: {
-    name: 'REGISTERED AGENTS INC',
-    street: '7901 4th St N, Ste 300',
-    locality: 'St. Petersburg',
-    region: 'FL',
-    postalCode: '33702',
+    name: 'Registered Agents Inc',
+    street: '1500 N Grant St, Ste R',
+    locality: 'Denver',
+    region: 'CO',
+    postalCode: '80203',
     country: 'US',
   },
   managingMember: 'Muhammad Daud',
@@ -38,13 +44,11 @@ export const site = {
     // contact resolves to the team, not an individual. Ensure this alias is
     // configured in the mail provider before launch.
     email: 'hello@deploris.com',
-    phone: '+1 (321) 495-3200',
-    phoneRaw: '+13214953200',
     address: {
-      street: '7901 4th St N, Ste 12030',
-      locality: 'St. Petersburg',
-      region: 'FL',
-      postalCode: '33702',
+      street: '1500 N Grant St #7314',
+      locality: 'Denver',
+      region: 'CO',
+      postalCode: '80203',
       country: 'US',
     },
     hours: {

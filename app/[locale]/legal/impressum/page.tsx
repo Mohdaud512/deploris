@@ -40,8 +40,6 @@ export default async function ImpressumPage({ params }: { params: Promise<{ loca
         <p>
           {de ? 'Kontakt: ' : 'Contact: '}
           <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-          {' · '}
-          <a href={`tel:${site.contact.phoneRaw}`}>{site.contact.phone}</a>
         </p>
 
         <h2>
@@ -55,11 +53,21 @@ export default async function ImpressumPage({ params }: { params: Promise<{ loca
         <p>
           {site.jurisdiction}
           <br />
-          {de ? 'Dokumentnummer' : 'Document number'}: {site.documentNumber}
+          {de ? 'Entity-ID (Colorado Secretary of State)' : 'Entity ID (Colorado Secretary of State)'}: {site.documentNumber}
+          <br />
+          {de ? 'Gegründet' : 'Formed'}: 2026-10-12
         </p>
 
-        <h2>{de ? 'Steuernummer (EIN)' : 'Federal EIN'}</h2>
-        <p>{site.ein}</p>
+        <h2>{de ? 'Zustellungsbevollmächtigter (Registered Agent)' : 'Registered agent'}</h2>
+        <p>
+          {site.registeredAgent.name}
+          <br />
+          {site.registeredAgent.street}
+          <br />
+          {site.registeredAgent.locality}, {site.registeredAgent.region} {site.registeredAgent.postalCode}
+          <br />
+          {site.registeredAgent.country}
+        </p>
 
         <h2>
           {de ? 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV' : 'Editorially responsible per § 55(2) RStV'}

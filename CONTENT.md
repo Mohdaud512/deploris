@@ -11,23 +11,26 @@ Legend:
 
 ## 1. Business identity (`config/site.ts`): CONFIRMED
 
-✅ Real Florida LLC details are now in `config/site.ts`:
-- Legal name: DEPLORIS LLC
-- Jurisdiction: Florida Limited Liability Company
-- Document Number: L24000491676
-- EIN: 98-1823862
+✅ Real Colorado LLC details are now in `config/site.ts`:
+- Legal name: Deploris LLC
+- Jurisdiction: Colorado Limited Liability Company
+- Entity / Document ID: 20268259375
+- Formed: 2026-10-12
 - Managing member: Muhammad Daud
-- Principal address: 7901 4th St N, Ste 12030, St. Petersburg, FL 33702
-- Phone: +1 (321) 495-3200
-- Email: muhammad.daud@deploris.com
+- Principal address: 1500 N Grant St #7314, Denver, CO 80203
+- Registered agent: Registered Agents Inc, 1500 N Grant St, Ste R, Denver, CO 80203
+- Email: hello@deploris.com
+- Phone: intentionally not published (email is the primary channel)
 
-🔶 `contact.hours` currently Mon–Fri 09:00–18:00 America/New_York. If your team runs on US Eastern (Florida) hours, update the timezone to `America/New_York` in `i18n.ts`; otherwise adjust `config/site.ts`.
+🔶 EIN: not yet issued by the IRS. Add to `config/site.ts` and surface in the Impressum when the SS-4 comes back.
 
-🔶 `social.linkedin` / `github` / `x` currently guess-URLs. Replace with the real profiles or remove the entries.
+🔶 `contact.hours` currently Mon–Fri 09:00–18:00. If your team runs on US Mountain (Denver) hours, update the timezone to `America/Denver` in `i18n.ts`; otherwise adjust `config/site.ts`.
+
+🔶 `social.linkedin` / `x` currently guess-URLs. Replace with the real profiles or remove the entries.
 
 ## 2. Legal Impressum (`app/[locale]/legal/impressum/page.tsx`): WIRED
 
-✅ Real values now render on the Impressum page (managing member, jurisdiction, document number, EIN, editorially responsible).
+✅ Real values now render on the Impressum page (managing member, jurisdiction, Colorado entity ID, registered agent, editorially responsible). EIN row re-appears automatically once added to `config/site.ts`.
 
 ## 3. Legal Terms & DPA
 

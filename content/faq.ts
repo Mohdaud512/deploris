@@ -22,7 +22,7 @@ const en: FaqGroup[] = [
       },
       {
         q: 'What jurisdictions do you operate in?',
-        a: 'Deploris is registered as DEPLORIS LLC in Florida, USA (document L24000491676). For German clients we invoice and contract via that entity and offer EU-region processing where needed.',
+        a: 'Deploris is registered as Deploris LLC in Colorado, USA (document 20268259375). For German clients we invoice and contract via that entity and offer EU-region processing where needed.',
       },
       {
         q: 'Is EU-region hosting available?',
@@ -386,7 +386,7 @@ const de: FaqGroup[] = [
       },
       {
         q: 'In welchen Jurisdiktionen sind Sie aktiv?',
-        a: 'Deploris ist als DEPLORIS LLC in Florida, USA registriert (Dokument L24000491676). Für deutsche Kunden rechnen und kontraktieren wir über diese Entität und bieten bei Bedarf EU-Region-Verarbeitung.',
+        a: 'Deploris ist als Deploris LLC in Colorado, USA registriert (Dokument 20268259375). Für deutsche Kunden rechnen und kontraktieren wir über diese Entität und bieten bei Bedarf EU-Region-Verarbeitung.',
       },
       {
         q: 'Ist EU-Hosting verfügbar?',

@@ -192,7 +192,7 @@ export const operationsAiAutomation: UseCase = {
         },
         {
           q: 'Who is Deploris and why should we trust you to run our operations?',
-          a: 'Deploris is a US-registered engineering firm (Florida LLC L24000491676) with a DACH delivery team, built as the mid-market answer to the gap between dev shops that write software and MSPs that run infrastructure. Of 40 mid-market firms benchmarked across the US and DACH, we are the only team that covers both halves under one contract. The person on your on-call escalation is the same person who wrote the agent that paged.',
+          a: 'Deploris is a US-registered engineering firm (Colorado LLC 20268259375) with a DACH delivery team, built as the mid-market answer to the gap between dev shops that write software and MSPs that run infrastructure. Of 40 mid-market firms benchmarked across the US and DACH, we are the only team that covers both halves under one contract. The person on your on-call escalation is the same person who wrote the agent that paged.',
         },
       ],
       related: {
@@ -384,7 +384,7 @@ export const operationsAiAutomation: UseCase = {
         },
         {
           q: 'Wer ist Deploris, und warum sollten wir Ihnen unsere Operations anvertrauen?',
-          a: 'Deploris ist ein in den USA registriertes Engineering-Unternehmen (Florida LLC L24000491676) mit einem DACH-Delivery-Team, aufgebaut als die Mittelstandsantwort auf die Lücke zwischen Agenturen, die Software schreiben, und MSPs, die Infrastruktur betreiben. Von 40 benchmarkten Mittelstandsfirmen in USA und DACH sind wir das einzige Team, das beide Hälften unter einem Vertrag abdeckt. Die Person in Ihrer On-Call-Eskalation ist dieselbe Person, die den Agenten geschrieben hat, der sie gepaged hat.',
+          a: 'Deploris ist ein in den USA registriertes Engineering-Unternehmen (Colorado LLC 20268259375) mit einem DACH-Delivery-Team, aufgebaut als die Mittelstandsantwort auf die Lücke zwischen Agenturen, die Software schreiben, und MSPs, die Infrastruktur betreiben. Von 40 benchmarkten Mittelstandsfirmen in USA und DACH sind wir das einzige Team, das beide Hälften unter einem Vertrag abdeckt. Die Person in Ihrer On-Call-Eskalation ist dieselbe Person, die den Agenten geschrieben hat, der sie gepaged hat.',
         },
       ],
       related: {

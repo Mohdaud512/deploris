@@ -7,7 +7,6 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { SkipToContent } from '@/components/layout/SkipToContent';
 import { LocaleSuggestBanner } from '@/components/layout/LocaleSuggestBanner';
 import { CookieConsent } from '@/components/layout/CookieConsent';
-import { StickyCallButton } from '@/components/layout/StickyCallButton';
 import { Chatbot } from '@/components/chatbot/Chatbot';
 import { ConsentBootstrap } from '@/components/analytics/ConsentBootstrap';
 import { PlausibleLoader, GA4Loader, ClarityLoader } from '@/components/analytics/Loaders';
@@ -50,7 +49,6 @@ export default async function LocaleLayout({
             {children}
           </main>
           <SiteFooter />
-          <StickyCallButton />
           <Chatbot />
           <CookieConsent />
           <PlausibleLoader />
