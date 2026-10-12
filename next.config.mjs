@@ -76,6 +76,23 @@ const nextConfig = {
     return [
       { source: '/index.html', destination: '/', permanent: true },
       { source: '/home', destination: '/', permanent: true },
+      // Host-based canonical redirects. deploris.com is the single canonical
+      // host for the site. www.deploris.com and the auto-generated Vercel
+      // project URL (deploris.vercel.app) 308-redirect to the apex preserving
+      // path and query. Keeps Google / LLM citations from splitting ranking
+      // signal across hosts and preserves any pre-cutover inbound links.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.deploris.com' }],
+        destination: 'https://deploris.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'deploris.vercel.app' }],
+        destination: 'https://deploris.com/:path*',
+        permanent: true,
+      },
     ];
   },
 };
