@@ -423,12 +423,12 @@ export const dataCenterRemoteHands: UseCase = {
           },
           {
             label: 'Blog: Equinix Remote Hands, Preise und Ticketing',
-            href: '/blog/equinix-remote-hands-preise-ticketing',
+            href: '/blog/equinix-remote-hands-pricing-ticketing',
             blurb: 'Wie die Remote-Hands-Preise bei Equinix und vergleichbaren Colos tatsächlich funktionieren und wo Mieter oft zu viel zahlen.',
           },
           {
             label: 'Blog: Cage-Wartungsfenster planen, ohne On-Call zu verbrennen',
-            href: '/blog/cage-wartungsfenster-planung',
+            href: '/blog/in-cage-change-windows-scheduling',
             blurb: 'Ein Planungsleitfaden für Arbeiten im Cage, der die On-Call-Rotation schont und Rollbacks günstig hält.',
           },
         ],

@@ -423,12 +423,12 @@ export const mspHandoffManagedIt: UseCase = {
           },
           {
             label: 'Blog: MSP-Wechsel ohne Ausfall, 30-Tage-Runbook',
-            href: '/blog/msp-wechsel-ohne-ausfall-30-tage-runbook',
+            href: '/blog/msp-transition-without-downtime-30-day-runbook',
             blurb: 'Ein Tag-für-Tag-Plan für den Wechsel vom alten MSP zu einem Mittelstand-Managed-IT-Partner, ohne Ausfallfenster.',
           },
           {
             label: 'Blog: Managed-IT-SLA aushandeln, Vertragsinhalte',
-            href: '/blog/managed-it-sla-verhandlung-vertragsinhalte',
+            href: '/blog/managed-it-sla-negotiation-contract-essentials',
             blurb: 'Was wirklich in den Vertrag gehört: Prioritätsdefinitionen, Gutschrift-Mechaniken, Ausschlüsse, Eskalationswege.',
           },
         ],

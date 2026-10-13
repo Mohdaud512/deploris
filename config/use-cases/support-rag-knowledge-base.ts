@@ -422,12 +422,12 @@ export const supportRagKnowledgeBase: UseCase = {
           },
           {
             label: 'Blog: RAG-Halluzinationen verhindern',
-            href: '/blog/rag-halluzination-ablehnung-bei-fehlender-grundlage',
+            href: '/blog/rag-hallucination-refusal-when-unsupported',
             blurb: 'Ingenieurs-Leitfaden für ein RAG-System, das bei fehlender Beleg-Grundlage sauber ablehnt statt zu halluzinieren.',
           },
           {
             label: 'Blog: RAG-Antwortqualität messen, 5 Metriken',
-            href: '/blog/rag-antwortqualitaet-messen-5-metriken',
+            href: '/blog/measuring-rag-answer-quality-5-metrics',
             blurb: 'Die fünf Metriken, die wirklich zählen, und wie Sie sie auf Ihrem Support-Korpus kontinuierlich tracken.',
           },
         ],

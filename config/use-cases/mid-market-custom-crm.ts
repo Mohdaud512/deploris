@@ -422,12 +422,12 @@ export const midMarketCustomCrm: UseCase = {
           },
           {
             label: 'Blog: CRM selbst bauen oder kaufen, 24-Monats-Modell',
-            href: '/blog/build-vs-buy-crm-24-monate-gesamtkosten',
+            href: '/blog/build-vs-buy-crm-24-month-tco-model',
             blurb: 'Eine zeilenweise Gesamtkostenanalyse zwischen Standard-SaaS, Eigenbau und einem Deploris-Mandat über 24 Monate.',
           },
           {
             label: 'Blog: Salesforce zu Postgres, Migrations-Checkliste',
-            href: '/blog/salesforce-zu-postgres-crm-migration-checkliste',
+            href: '/blog/salesforce-to-postgres-crm-migration-checklist',
             blurb: 'Die praxiserprobte Checkliste, mit der Pipeline, Forecasts, Gebietslogik und Integrationen ohne Historienverlust migriert werden.',
           },
         ],

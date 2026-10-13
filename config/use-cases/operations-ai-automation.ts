@@ -422,12 +422,12 @@ export const operationsAiAutomation: UseCase = {
           },
           {
             label: 'Blog: RPA vs. KI-Agenten, wann der Umstieg sich lohnt',
-            href: '/blog/rpa-vs-ki-agenten-wann-umstieg',
+            href: '/blog/rpa-vs-ai-agents-when-to-switch',
             blurb: 'Ehrlicher Vergleich klassischer RPA und moderner KI-Agenten, mit den Signalen für den Umstieg.',
           },
           {
             label: 'Blog: Human-in-the-Loop-Freigabestufen',
-            href: '/blog/human-in-the-loop-freigabestufen-agent-workflow',
+            href: '/blog/human-in-the-loop-approval-gates-agent-workflow',
             blurb: 'Wo die Freigabe sitzen sollte, welche Aktionen autonom laufen dürfen und wie Vertrauen nach einem Fehler automatisch schrumpft.',
           },
         ],

@@ -427,7 +427,7 @@ export const warehouseWifiSurveys: UseCase = {
           },
           {
             label: 'Blog: Wi-Fi 6E vs. Wi-Fi 7 fürs Lager 2026',
-            href: '/blog/wifi-6e-vs-wifi-7-lager-2026',
+            href: '/blog/wifi-6e-vs-wifi-7-warehouse-2026',
             blurb: 'Ehrlicher Kaufvergleich für die Lager-WLAN-Erneuerung: wo Wi-Fi 7 den Aufpreis rechtfertigt, wo 6E weiter gewinnt.',
           },
           {
