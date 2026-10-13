@@ -1,0 +1,96 @@
+---
+title: 'Managed IT SLA negotiation: what to actually put in the contract'
+description: A procurement-grade guide to writing a mid-market managed-IT SLA that is actually enforceable, with honest notes on which clauses are theater.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - managed-it
+  - msp
+  - infrastructure
+locale: en
+slug: managed-it-sla-negotiation-contract-essentials
+---
+
+Most managed-IT SLAs look impressive on the first read and crumble the first time something expensive breaks. The uptime guarantee sits above a definition that excludes everything that actually goes down. The response time is measured against a clock that only starts when a human in the right time zone opens the ticket. The service credit is capped at the current month's invoice, which rarely buys back what a payroll outage costs. If you are signing a managed-IT contract for a 200 to 2,000 seat firm, the clauses below are the ones worth arguing over.
+
+## Priority definitions: what actually counts as P1
+
+Every provider has a P1 clause. Few of them define it in a way that survives procurement review.
+
+A defensible P1 definition names specific business impact, not vendor-side symptoms. Payroll cannot run, the ERP is unreachable, the production line is halted, Microsoft 365 is down for more than ten users, the identity provider is unavailable. Vendor-side definitions ("a core system is impacted") let the provider decide what counts after the fact.
+
+Insist on a short, named list of P1 systems in an appendix, agreed at kickoff and reviewed quarterly. Everything on that list, when it is down, is P1. Nothing on that list, when it is down, is renegotiated at the moment of the incident.
+
+P2 and P3 are easier, but still worth defining. P2 is a degraded production system (slow, intermittent, missing a non-critical function). P3 is a request without production impact (a new mailbox, a password reset, a license question). Keep the number of tiers at three. Any provider offering P4 and P5 is building ambiguity on purpose.
+
+## Measurement window: monthly, not rolling
+
+Response and uptime percentages are only comparable when the measurement window is the same.
+
+Choose a calendar-month window. "Rolling 30 days" sounds similar, but the rolling window lets a provider absorb a bad week by averaging it with a quiet week later. A monthly window means one bad week in October shows in October's report, not smeared into November.
+
+For response-time medians, the window matters even more. A 15-minute P1 median over a calendar month is enforceable: at month end you count the P1 tickets, you compute the median, you compare to 15. A median over "rolling 30 days measured per-ticket at close" is unenforceable, because the clock keeps moving.
+
+## Response, resolution, and restoration are three different things
+
+The single most common SLA trick is conflating these.
+
+**Response** is first human acknowledgement after the alert fires. For Deploris, the written SLA is 15-min P1 median first-response. That is a measured number out of a monitoring and paging stack (Datadog, PagerDuty, Opsgenie), not an estimate.
+
+**Restoration** is service back up, even if the underlying cause is not fixed. A failover to the standby firewall restores. A re-routed VPN restores. Restoration times are what users feel; put them in the contract.
+
+**Resolution** is root cause identified and permanently addressed. Resolution happens in days, not minutes, and belongs in a quarterly review, not an SLA clock.
+
+A contract that promises "4-hour resolution on P1" is either lying about what resolution means or committing to an engineering impossibility. A contract that promises "15-min P1 median first-response, 1-hour P1 restoration target, resolution tracked in the quarterly review" is honest and enforceable.
+
+## Credit mechanisms that have teeth
+
+Uptime guarantees without credits are theater. 99.9% means nothing if the only remedy is an apology email.
+
+A credit mechanism with teeth has three properties. First, it is automatic (the provider credits without you filing a claim). Second, it is uncapped or capped high enough to hurt (10% of monthly fee is theater, 50% is noticeable, a termination right at three consecutive missed months is leverage). Third, it is tied to the specific metric that failed, not pooled across all metrics so one missed response time can be offset by a quiet month elsewhere.
+
+Negotiate a termination-for-cause right at a specific SLA threshold. Three monthly misses of the P1 response median, or two consecutive months below 99.5% uptime, buys you the right to exit without the usual 90-day notice. Providers who object to this clause are telling you they expect to miss.
+
+## Exclusions language: planned maintenance, force majeure, upstream carrier
+
+Every SLA has exclusions. The question is whether yours are specific or escape hatches.
+
+**Planned maintenance** must be defined by a change-window agreement in the contract. Named windows (Saturday 23:00 to Sunday 02:00 CET, for example), with 72h written notice for anything inside the window and 7-day notice for anything outside it. "Planned maintenance" without a defined window excludes everything the provider schedules on short notice.
+
+**Force majeure** is standard, but qualify it. A fiber cut at the data center is not force majeure if the provider promised dual-carrier redundancy. A regional AWS outage is not force majeure if the architecture is single-region by the provider's own design choice. The clause should name events (natural disaster, state action, named cyberattack class) rather than wave broadly at "events beyond our control".
+
+**Upstream carrier outages** are the thorniest. A provider cannot own uptime it does not operate. The honest clause is: upstream outages are excluded from the uptime metric, but the provider commits to a specific response time (not resolution) for carrier escalation, and the incident appears on the quarterly review for architectural redress.
+
+## Reporting cadence and on-call escalation
+
+Reports no one reads are not reports.
+
+A workable cadence: a monthly SLA report (uptime by named system, P1 count, P1 median first-response, P1 restoration times, credit calculation), delivered within five business days of month-end. A quarterly review with the account engineer walking the metrics, the capacity trajectory, the risk register, and the sub-processor list. An annual contract review for scope and pricing changes.
+
+For on-call escalation, the contract names the path by role, not by person. Named on-call engineer, then shift lead, then account engineer, then service delivery director, with contact methods and expected acknowledgement times at each level. The paths above should be reachable 24/7 across the geographies you operate in. For a DACH + US footprint, 12-hour handoff gaps are a sign the provider is one geography pretending to be two.
+
+## Change windows, offboarding, and the clauses providers quietly leave out
+
+**Change windows.** Normal windows are agreed at kickoff. Emergency changes have a separate clause (shorter notice, higher approval, mandatory incident report). The 48h reversibility commitment Deploris puts in writing means every change is reversible for two business days without a change-request cycle; put the equivalent in your contract, not every provider offers it.
+
+**Offboarding.** The clause you want: on termination, the provider returns all data in a documented format inside 30 days, rotates and returns all credentials, exports all configurations (firewall rules, DNS zones, monitoring dashboards, ticket history), and cooperates with the incoming provider at a defined hourly rate for a defined number of hours. Without this, the next transition takes six months instead of six weeks.
+
+**Data processing.** A GDPR-compliant data processing agreement sits as an appendix. Named sub-processors (any ITSM tool, any monitoring vendor, any backup provider), named hosting regions (EU-region Frankfurt as default where applicable), named data categories. Review the appendix quarterly, not annually.
+
+## The clauses that are standard theater
+
+Four clauses sound protective and are usually not.
+
+"99.9% uptime guarantee" without credit mechanism and specific exclusions. "Best-effort response times" at any priority. "Dedicated account manager" that is actually a shared account manager behind a mailbox. "24/7 support" where the night shift is a tier-1 answering service with escalation only to a next-business-day engineer.
+
+If a competing bid rests on these clauses alone, it is reactive support in better packaging.
+
+## What a mid-market SLA actually commits to
+
+A written SLA worth signing commits to: a specific first-response median at each priority (Deploris: 15-min P1 median), a specific uptime target with teeth (99.9%+ monthly, with credits), 48h reversibility on changes, named on-call paths, a change-window agreement, a GDPR-compliant DPA with EU-region hosting default, monthly reports with the credit calculation visible, a quarterly review on the calendar before signing, and a termination-for-cause clause tied to specific SLA thresholds.
+
+Everything else is negotiation around that spine.
+
+For the full managed-IT engagement model this SLA shape fits inside, see the [MSP handoff to managed IT use case](/use-cases/msp-handoff-managed-it) and the underlying [infrastructure support service](/services/hardware/infrastructure-support). For the DPA template referenced above, see our [data processing agreement](/legal/dpa).
+
+*Reviewing a draft SLA from a competing provider? [Send a note](/contact), one business-day reply.*

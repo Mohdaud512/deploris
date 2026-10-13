@@ -1,0 +1,122 @@
+---
+title: 'Von Salesforce zu Postgres: Checkliste für die Mittelstand-CRM-Migration'
+description: Operative Reihenfolge-Checkliste für die Migration eines Mittelstandsteams von Salesforce zu einem individuellen Postgres-CRM, inklusive Dual-Run-Plan und Cutover-Freigabekriterien.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - crm
+  - individualentwicklung
+  - migration
+locale: de
+slug: salesforce-zu-postgres-crm-migration-checkliste
+---
+
+Die meisten Migrationen von Salesforce zu einem individuellen CRM scheitern an denselben zwei Stellen: an einer Historie, die nie wirklich gemappt wurde, und an einem Cutover, der unter dem Druck eines auslaufenden Vertrags passiert ist. Diese Checkliste richtet sich an die Vertriebsoperations-Leitung, die Vertriebsleitung oder den CFO, der eine belastbare Migrationsreihenfolge und ein auditfestes Cutover-Gate benötigt.
+
+Zielprofil ist ein Mittelstands-Vertriebsteam mit 200 bis 2.000 Sitzen, das von Salesforce (Sales Cloud, Service Cloud oder beides) auf ein individuelles Postgres-basiertes CRM wechselt. Dieselbe Reihenfolge trägt auch für HubSpot-, Dynamics- oder Pipedrive-Migrationen; auf Salesforce-Besonderheiten wird dort hingewiesen, wo sie abweichen.
+
+## Bevor Sie eine einzige Zeile anfassen
+
+Drei Punkte müssen schriftlich stehen, bevor ein einziger Datensatz exportiert wird.
+
+**Ein schriftliches Cutover-Datum.** Nicht ein Renewal-Datum, ein Cutover-Datum. Das Renewal-Datum ist eine Budgetgrenze; das Cutover-Datum ist eine operative Zusage, die Vertriebsoperations, Vertrieb und Finance gemeinsam zeichnen.
+
+**Ein schriftliches Rückrollbarkeitsfenster.** Im Deploris-Modell sind das 48 Stunden, mit vollständigem Audit-Trail und einem dokumentierten Rollback-Runbook. Jedes migrierte Objekt braucht einen getesteten Rollback-Pfad, bevor das erste Byte produktiv bewegt wird.
+
+**Ein eingefrorener Scope dessen, was mitgeht und was zurückbleibt.** Nicht jedes Objekt in Ihrer Salesforce-Instanz ist mitnehmenswert. Veraltete Custom Fields, aufgegebene Flows und Dashboards, die seit sechs Monaten niemand geöffnet hat, bleiben bewusst zurück. Das Scope-Dokument benennt jeden einzelnen Punkt.
+
+Wie wir dieses Dokument in der Praxis strukturieren, zeigt die Seite [Individuelle CRM-Entwicklung](/de/services/development/crm-entwicklung).
+
+## Die Migrationsreihenfolge
+
+Migrieren Sie nach Abhängigkeit, nicht nach Größe. Die Stabilität des Postgres-Schemas hängt davon ab, dass die Eltern vor den Kindern korrekt stehen.
+
+### 1. Benutzer, Rollen und Berechtigungssätze
+
+Zuerst die Nutzer, weil jedes nachgelagerte Objekt auf einen Owner verweist. Mappen Sie Salesforce-Benutzer-IDs mit einer persistenten Lookup-Tabelle, die die Migration überlebt (Ihr Audit-Trail wird darauf noch Jahre lang zurückgreifen).
+
+Übersetzen Sie Salesforce-Profile und Permission Sets in explizite RBAC-Rollen in Postgres. Widerstehen Sie der Versuchung, die vollständige Berechtigungsmatrix zu replizieren. Ein Mittelstandsteam braucht nach dem Entrümpeln selten mehr als sechs bis acht Rollen. Dokumentieren Sie jede Rolle, jede Berechtigung und jeden benannten Freigeber, bevor das Migrationsskript entsteht.
+
+### 2. Accounts und Kontakte
+
+Accounts folgen, weil Opportunities auf sie verweisen, und Kontakte nach den Accounts, weil Kontaktrollen auf beide zeigen. Behalten Sie die externe Salesforce-ID als Spalte auf jeder migrierten Zeile. Lineage ist jetzt billig und später teuer. Behalten Sie sie.
+
+Ein häufiger Fehler ist, Account-Hierarchien an dieser Stelle platt zu klopfen. Tun Sie das nicht. Übernehmen Sie die Eltern-Account-Beziehung, damit Gebietslogik und konsolidiertes Reporting ab Tag eins weiter funktionieren.
+
+### 3. Opportunities und Pipeline-Historie
+
+Hier scheitern die meisten Migrationen. Die Opportunity-Historie ist nicht nur der aktuelle Zustand jedes Deals; sie ist das Stage-Change-Log, das Amount-Change-Log und das Close-Date-Change-Log, auf dem Ihr Forecast beruht. Exportieren Sie die Opportunity-Historie getrennt von der Opportunity selbst und laden Sie sie in eine eigene Historientabelle in Postgres.
+
+Behalten Sie das vollständige Änderungslog, inklusive des Salesforce-Benutzers und des Zeitstempels. Wenn Sie nur den Aktuellzustand migrieren, verlieren Sie die Fähigkeit, Forecast-Erfüllung über die Migrationsgrenze hinweg zu analysieren, und Finance wird das bemerken.
+
+### 4. Forecast-Kategorien und Quotendaten
+
+Forecast-Kategorien sind meist eine Mischung aus Standard-Salesforce-Kategorien (Pipeline, Best Case, Commit, Closed) und über die Jahre aufgesetzten Custom-Kategorien. Bauen Sie sie in Postgres explizit als Enum mit benannten Ownern nach, nicht als Freitextfeld. Quotendaten liegen in einer verknüpften Tabelle mit Nutzer, Periode und Betrag, gebunden an die Gebietsstruktur, die als Nächstes migriert wird.
+
+### 5. Gebietslogik
+
+Salesforce Territory Management ist oft ein verwilderter Garten. Bauen Sie den Gebietsbaum in Postgres als sauberen Graphen nach, mit jedem Account auf ein Blatt-Gebiet gemappt und jedem Gebiet über eine datierte Zuordnung auf einen Nutzer. Datierte Zuordnungen sind wichtig: Ein unterjähriger Gebietswechsel darf die Historie nicht rückwirkend umschreiben.
+
+### 6. Produkte, Preisbücher und Angebote
+
+Wenn Ihre Salesforce-Instanz ein aktives CPQ nutzt, behandeln Sie die Quote-Migration als eigenes Projekt. Für die meisten Mittelstandsteams ist die Zahl aktiver Angebote gering und die historischen Angebote sind reine Archive. Aktive Angebote inklusive Positionen migrieren, historische Angebote als schreibgeschützte Snapshots.
+
+### 7. Aktivitäten, Aufgaben und E-Mails
+
+Aktivitäten haben hohes Volumen und geringen Wert pro Zeile. Migrieren Sie die letzten 18 bis 24 Monate vollständig und archivieren Sie den Rest in Object Storage mit einem Suchindex. Vertriebsmitarbeiter brauchen Aktivitätshistorien älter als zwei Jahre selten im Live-CRM, und sie draußen zu halten hilft der Query-Performance deutlich.
+
+### 8. Anhänge, Dateien und Notizen
+
+Dateien kommen zum Schluss, weil sie die schwersten sind. Migrieren Sie angehängte Dateien in den neuen Object Store, mit erhaltener Elternreferenz. Notizen wandern als strukturierter Text mit Autor und Zeitstempel.
+
+## Integrationsverträge: neu bauen oder abschalten
+
+Jede Salesforce-Integration fällt in einen von drei Töpfen. Entscheiden Sie das für jede, bevor der Bau beginnt.
+
+**Neu bauen.** Die Integration ist tragend und das neue CRM kann einen saubereren Vertrag anbieten. Abrechnung, Vertragssystem, Finance-Warehouse und Marketing-Automation landen fast immer hier. Die neue Integration bekommt einen benannten Owner, einen dokumentierten Vertrag (Felder, Richtung, Sync-Intervall, Fehlerpfad) und eine Testsuite.
+
+**1:1 replizieren.** Die Integration funktioniert, das Volumen ist gering, und das neue CRM sollte eine kompatible Schnittstelle anbieten. Shipping und Routing landen oft hier in der ersten Welle, mit Plan für späteren Neubau.
+
+**Abschalten.** Die Integration existiert, weil sie 2019 jemand gebaut hat und niemand sie je abgeschaltet hat. Prüfen Sie die Nutzung ehrlich und schalten Sie alles ab, das niemand in den letzten zwei Quartalen genutzt hat. Dokumentieren Sie die Entscheidung, damit der Auditor dieselbe Frage in einem Jahr nicht erneut stellt.
+
+Wie Integrationsverträge in der Praxis aufgebaut werden, zeigt der Pfeiler-Artikel [Individuelles CRM für Vertriebsteams im Mittelstand](/de/use-cases/crm-mittelstand-vertrieb).
+
+## Welche Reports neu aufgebaut werden
+
+Nicht jeder Salesforce-Report ist einen Neubau wert. Führen Sie ein Nutzungs-Audit auf der Report-Bibliothek durch und bauen Sie nur die Reports neu auf, die mindestens monatlich geöffnet werden, in einem QBR-Deck zitiert sind oder in einer Compliance-Kontrolle namentlich stehen. Für die meisten Mittelstandsteams reduziert das die Report-Zahl um 60 bis 80 Prozent.
+
+Bauen Sie sie als SQL gegen das Postgres-Modell nach, gestützt auf ein Dashboard-Werkzeug, das Ihr Team wirklich besitzen kann: Metabase, Looker oder was Finance ohnehin für das Data Warehouse nutzt. Die Reports, nach denen Ihre Führung fragt, sollten lesbare Queries sein, keine Report-Builder-Artefakte.
+
+## Die Dual-Run-Phase
+
+Lassen Sie beide CRMs mindestens eine volle Quotenperiode parallel laufen, bevor der Cutover erfolgt. Dual-Run ist kein Shadow-Deployment, sondern eine Abgleichdisziplin:
+
+- Vertriebsmitarbeiter pflegen Daten in Salesforce als Quelle der Wahrheit, und ein Change-Data-Capture-Feed streamt jeden Schreibvorgang innerhalb von Minuten nach Postgres.
+- Tägliche Abgleichjobs markieren jede Zeile, in der sich beide Systeme bei Opportunity-Betrag, Stage, Abschlussdatum oder Owner uneinig sind.
+- Eine benannte Person in Vertriebsoperations besitzt die Abgleich-Queue und arbeitet sie jeden Morgen auf null.
+- Wochen-Reports werden aus beiden Systemen erzeugt und nebeneinander verglichen. Finance zeichnet den Vergleich ab.
+
+Dual-Run existiert, damit der Cutover ein Routineereignis bleibt und kein Sprung ins Ungewisse.
+
+## Freigabekriterien für den Cutover
+
+Die Cutover-Entscheidung ist eine Gated-Checkliste, kein Kalendertermin. Jeder Punkt braucht einen benannten Freigeber.
+
+- Vertriebsoperations zeichnet, dass die Postgres-Pipeline für das laufende Quartal innerhalb einer vereinbarten Abweichung zu Salesforce passt.
+- Finance zeichnet, dass Forecast-Kategorien, Quotenerfüllung und Provisionsrechnungen für die vorherige volle Quotenperiode mit dem Salesforce-Quellsystem übereinstimmen.
+- Die Vertriebsleitung zeichnet, dass die Top-20-Vertriebsmitarbeiter das Postgres-CRM mindestens zwei Wochen genutzt und keine blockierenden Probleme gemeldet haben.
+- Engineering zeichnet, dass jeder dokumentierte Integrationsvertrag seine Testsuite in Produktion bestanden hat.
+- Das 48-Stunden-Rückrollbarkeitsfenster wurde mindestens einmal durchgängig mit einem geprobten Rollback getestet.
+- Ein schriftliches Incident-Runbook deckt die ersten 72 Stunden nach dem Cutover ab, inklusive benannter On-Call-Ingenieure unter der 15-Min-P1-Median-SLA.
+
+Sind alle sechs Punkte abgehakt, ist der Cutover ein Ein-Tages-Ereignis. Vertriebsmitarbeiter melden sich morgens am neuen CRM an, Salesforce wechselt in den Nur-Lese-Modus, und der Dual-Run-Feed wird gestoppt. Die alte Salesforce-Instanz bleibt als Nur-Lese-Archiv für die Dauer der Datenaufbewahrungsfrist bestehen.
+
+## Hypercare und die ersten 90 Tage
+
+Die ersten 90 Tage nach dem Cutover sind nicht nachgelagert, sondern Teil des Projekts. Die Deploris-SLA deckt sie mit derselben 15-minütigen P1-Median-Reaktion, demselben Ziel von 99,9 %+ monatlicher Verfügbarkeit und derselben 48-Stunden-Rückrollbarkeit ab. Rechnen Sie in den ersten zwei Wochen mit leicht erhöhtem Incident-Aufkommen, das bis Tag 30 auf Steady-State fällt.
+
+Wöchentliche Steering-Termine bis Woche 12 halten Vertriebsoperations, Vertriebsleitung und das Engineering-Team auf einer gemeinsamen Sicht der Migration. Danach monatlich, mit einem Quartals-Roadmap-Review zum 90-Tage-Punkt.
+
+Den breiteren Rahmen, wann sich ein individuelles CRM gegenüber Standard-SaaS auszahlt, finden Sie in [Individuelles CRM vs. Standardlösung](/de/compare/custom-crm-vs-off-the-shelf). Die zugrunde liegende Leistungsseite ist [Individuelle CRM-Entwicklung](/de/services/development/crm-entwicklung), und der vollständige Anwendungsfall steht in [Individuelles CRM für Vertriebsteams im Mittelstand](/de/use-cases/crm-mittelstand-vertrieb).
+
+*Planen Sie einen Salesforce-Ausstieg? [Schreiben Sie uns kurz](/de/contact) mit aktueller Sitzzahl und Renewal-Datum. Antwort innerhalb eines Werktags.*

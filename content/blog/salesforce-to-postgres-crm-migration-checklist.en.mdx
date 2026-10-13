@@ -1,0 +1,122 @@
+---
+title: 'Salesforce to Postgres: a mid-market CRM migration checklist'
+description: Order-of-operations checklist for a mid-market team migrating off Salesforce to a custom Postgres CRM, with cutover sign-off criteria and a dual-run plan.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - crm
+  - custom-development
+  - migration
+locale: en
+slug: salesforce-to-postgres-crm-migration-checklist
+---
+
+Most Salesforce to custom CRM migrations fail at the same two places: history that was never actually mapped and a cutover that happened under the pressure of an expiring contract. This checklist is for the sales ops lead, revenue leader, or CFO who wants a defensible migration order and a cutover gate that holds up to audit.
+
+The target shape is a 200 to 2,000 seat mid-market revenue team moving from Salesforce (Sales Cloud, Service Cloud, or both) to a custom Postgres-backed CRM. The same order of operations works for HubSpot, Dynamics, or Pipedrive migrations; the Salesforce specifics are called out where they differ.
+
+## Before you touch any data
+
+Three things need to be settled on paper before a single row is exported.
+
+**A written cutover date.** Not a renewal date, a cutover date. The renewal date is a budget constraint; the cutover date is an operational commitment that sales ops, revenue, and finance sign off on together.
+
+**A written reversibility window.** On the Deploris model this is 48 hours, with full audit trail and a documented rollback runbook. Every migrated object needs a tested rollback path before the first byte moves in anger.
+
+**A frozen scope of what moves and what retires.** Not every object in your Salesforce org is worth bringing across. Deprecated custom fields, abandoned flows, and dashboards nobody has opened in six months stay behind on purpose. The scope document names each one.
+
+The [custom CRM development scope](/services/development/custom-crm) covers how we structure that document in practice.
+
+## The migration order of operations
+
+Migrate in dependency order, not in size order. Postgres schema stability depends on getting the parents right before the children.
+
+### 1. Users, roles, and permission sets
+
+Users first because every downstream object references an owner. Map Salesforce user IDs to Postgres user IDs with a persistent lookup table that survives the migration (your audit trail will depend on it for years).
+
+Translate Salesforce profiles and permission sets into explicit RBAC roles in Postgres. Resist the urge to replicate the full permission matrix. A mid-market team rarely needs more than six to eight roles once the dead permissions are stripped. Document each role, each permission, and each named approver before writing the migration script.
+
+### 2. Accounts and contacts
+
+Accounts next because opportunities depend on them, and contacts after accounts because contact roles reference both. Preserve the external Salesforce ID as a column on every migrated row. Lineage is cheap now and expensive later; keep it.
+
+A common mistake is to flatten account hierarchies at this stage. Do not. Carry the parent-account relationship through so territory logic and consolidated reporting still work on day one.
+
+### 3. Opportunities and pipeline history
+
+This is where most migrations go wrong. Opportunity history is not just the current state of each deal; it is the stage-change log, the amount-change log, and the close-date-change log that your forecast depends on. Export opportunity history separately from the opportunity itself and load it into a dedicated history table in Postgres.
+
+Preserve the full change log, including the Salesforce user who made the change and the timestamp. If you only migrate the current state, you lose the ability to run forecast attainment analysis across the migration boundary, and finance will notice.
+
+### 4. Forecast categories and quota data
+
+Forecast categories are usually a mix of standard Salesforce categories (Pipeline, Best Case, Commit, Closed) and custom categories tacked on over the years. Rebuild them explicitly in Postgres as an enum with named owners, not as a free-text field. Quota data lives in a related table with user plus period plus amount, scoped to the territory structure you are about to migrate.
+
+### 5. Territory logic
+
+Salesforce territory management is often a weeded garden. Rebuild the territory tree in Postgres as a proper graph, with each account mapped to a leaf territory and each territory mapped to a user through a dated assignment. Dated assignments matter: a mid-year territory change should not retroactively rewrite history.
+
+### 6. Products, price books, and quotes
+
+If your Salesforce org has an active CPQ, treat quote migration as a separate project. For most mid-market teams the active quotes count is low and the historical quotes are archive-only. Migrate active quotes with full line items; migrate historical quotes as read-only snapshots.
+
+### 7. Activities, tasks, and emails
+
+Activities are high volume and low value per row. Migrate the last 18 to 24 months in full and archive the rest to object storage with a search index. Reps rarely need activity history older than two years in the live CRM, and keeping it out of Postgres materially helps query performance.
+
+### 8. Attachments, files, and notes
+
+Files move last because they are the heaviest. Migrate attached files to the new object store with the parent reference preserved. Notes migrate as structured text with authorship and timestamp intact.
+
+## Integration contracts: rebuild or retire
+
+Every Salesforce integration falls into one of three buckets. Decide for each one before the build begins.
+
+**Rebuild.** The integration is load-bearing and the new CRM has a cleaner contract to offer. Billing, contract tool, finance warehouse, and marketing automation almost always land here. The new integration gets a named owner, a documented contract (fields, direction, sync interval, failure path), and a test suite.
+
+**Replicate as-is.** The integration works, the volume is low, and the new CRM should expose a compatible interface. Shipping and routing often land here on the first pass, with a plan to rebuild later.
+
+**Retire.** The integration exists because someone built it in 2019 and nobody has turned it off. Audit utilization honestly and retire anything that nobody has used in the last two quarters. Document the decision so the auditor does not ask the same question in a year.
+
+The pillar on [Custom CRM for mid-market revenue teams](/use-cases/mid-market-custom-crm) covers how integration contracts are structured in practice.
+
+## Reports to recreate
+
+Not every Salesforce report is worth rebuilding. Run a utilization audit on the report library and recreate only the reports that are opened at least monthly, cited in a QBR deck, or named in a compliance control. For most mid-market teams that cuts the report count by 60 to 80 percent.
+
+Recreate them in SQL against the Postgres model, backed by a dashboard tool your team can actually own: Metabase, Looker, or whatever the finance team uses for the data warehouse. The reports your leadership asks for should be queries you can read, not report-builder artifacts.
+
+## The dual-run period
+
+Run both CRMs in parallel for at least one full quota period before cutover. Dual-run is not a shadow deployment; it is a reconciliation discipline:
+
+- Reps enter data in Salesforce as the source of truth, and a change-data-capture feed streams every write to Postgres within minutes.
+- Daily reconciliation jobs flag any row where the two systems disagree on opportunity amount, stage, close date, or owner.
+- A named person on sales ops owns the reconciliation queue and clears it to zero each morning.
+- Weekly reports are generated from both systems and compared side by side. Finance signs off on the comparison.
+
+The dual-run exists so that cutover is a routine event, not a leap of faith.
+
+## Cutover sign-off criteria
+
+The cutover decision is a gated checklist, not a calendar event. Every item needs a named approver.
+
+- Sales ops lead signs off that the Postgres pipeline matches Salesforce for the current quarter within an agreed variance.
+- Finance signs off that forecast categories, quota attainment, and commission calculations match the Salesforce source for the previous full quota period.
+- The revenue leader signs off that top 20 reps have used the Postgres CRM for at least two weeks and reported no blocking issues.
+- Engineering signs off that every documented integration contract has passed its test suite in production.
+- The 48h reversibility window has been tested end to end at least once with a staged rollback.
+- A written incident runbook covers the first 72 hours after cutover, including named on-call engineers under the 15-min P1 median SLA.
+
+Once all six are checked, cutover is a one-day event. Reps log into the new CRM in the morning, Salesforce goes to read-only, and the dual-run feed stops. The old Salesforce org stays as a read-only archive for the length of the data retention commitment.
+
+## Hypercare and the first 90 days
+
+The first 90 days after cutover are not post-project, they are part of the project. The Deploris SLA covers them with the same 15-min P1 median response, 99.9%+ monthly uptime target, and 48h reversibility. Expect a slightly elevated incident volume in the first two weeks, declining to steady state by day 30.
+
+Weekly steering calls through week 12 keep sales ops, revenue leadership, and the engineering team on one shared view of the migration. Monthly thereafter, with a quarterly roadmap review at the 90-day mark.
+
+For the broader framework on when a custom CRM pays off against generic SaaS, read [Custom CRM vs off-the-shelf](/compare/custom-crm-vs-off-the-shelf). The underlying service page is [Custom CRM Development](/services/development/custom-crm), and the end-to-end use case walkthrough sits at [Custom CRM for mid-market revenue teams](/use-cases/mid-market-custom-crm).
+
+*Planning a Salesforce exit? [Send a note](/contact) with your current seat count and renewal date. One business-day reply.*

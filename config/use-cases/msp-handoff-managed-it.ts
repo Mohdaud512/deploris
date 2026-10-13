@@ -219,6 +219,16 @@ export const mspHandoffManagedIt: UseCase = {
             href: '/industries',
             blurb: 'How the mid-market managed-IT model lands in manufacturing, logistics, financial services, and professional services.',
           },
+          {
+            label: 'Blog: MSP transition without downtime, 30-day runbook',
+            href: '/blog/msp-transition-without-downtime-30-day-runbook',
+            blurb: 'A day-by-day plan for moving from an incumbent MSP to a mid-market managed-IT partner without a service gap.',
+          },
+          {
+            label: 'Blog: Managed-IT SLA negotiation essentials',
+            href: '/blog/managed-it-sla-negotiation-contract-essentials',
+            blurb: 'What to actually put in the contract: priority definitions, credit mechanisms, exclusions, and escalation paths.',
+          },
         ],
       },
       cta: {
@@ -410,6 +420,16 @@ export const mspHandoffManagedIt: UseCase = {
             label: 'Branchen, die wir bedienen',
             href: '/industries',
             blurb: 'Wie das Mittelstands-Managed-IT-Modell in Fertigung, Logistik, Financial Services und Professional Services landet.',
+          },
+          {
+            label: 'Blog: MSP-Wechsel ohne Ausfall, 30-Tage-Runbook',
+            href: '/blog/msp-wechsel-ohne-ausfall-30-tage-runbook',
+            blurb: 'Ein Tag-für-Tag-Plan für den Wechsel vom alten MSP zu einem Mittelstand-Managed-IT-Partner, ohne Ausfallfenster.',
+          },
+          {
+            label: 'Blog: Managed-IT-SLA aushandeln, Vertragsinhalte',
+            href: '/blog/managed-it-sla-verhandlung-vertragsinhalte',
+            blurb: 'Was wirklich in den Vertrag gehört: Prioritätsdefinitionen, Gutschrift-Mechaniken, Ausschlüsse, Eskalationswege.',
           },
         ],
       },

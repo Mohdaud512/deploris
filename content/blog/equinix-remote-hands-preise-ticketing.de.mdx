@@ -1,0 +1,109 @@
+---
+title: 'Equinix Remote Hands: wie Preise und Ticketing wirklich funktionieren'
+description: Ehrlicher Leitfaden zu Preisen, Ticket-Lebenszyklus und SLAs für Equinix Remote Hands und Smart Hands, mit den typischen Mehrkostenfallen bei Colo-Mietern.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - rechenzentrum
+  - colocation
+  - operations
+locale: de
+slug: equinix-remote-hands-preise-ticketing
+---
+
+Colocation-Remote-Hands wirkt wie eine pauschale Versorgungsleistung, bis die erste Rechnung eintrifft. Der Stundensatz auf dem Equinix-Angebot ist nur die Eröffnungszahl. Die reale Kostenlast entsteht aus dem Smart-Hands-Tier, aus Abrechnungs-Inkrementen, aus Zuschlägen für ungeplante Arbeit sowie aus Zusatzposten für Teilehandhabung, Cross-Connects und Nachtarbeit. Dieser Beitrag zerlegt, wie Equinix (und kurz: Digital Realty, Interxion, NTT) tatsächlich abrechnet, wie der Ticket-Lebenszyklus im Equinix Customer Portal aussieht und welches Nutzungsmuster einen mittelständischen Colo-Footprint planbar hält.
+
+## Wie Equinix Remote Hands bepreist
+
+Equinix verkauft Remote Hands unter zwei Begriffen: Standard-"Smart Hands" (Sammelbegriff für alle Arbeiten im Käfig, Rack oder Private Suite) und aufgabenbezogene Positionen wie Cross-Connect-Installation, Kabel-Patching und Medien-Handling. Die Preisliste ist global nicht öffentlich. Sätze variieren nach Metropolregion, nach Vertrag und danach, ob Sie unter einem Rahmenvertrag oder ad hoc über das Customer Portal buchen.
+
+### Stundensatz-Stufen
+
+Auf einem Equinix-Angebot erscheinen typischerweise drei Stufen:
+
+- **Standard-Geschäftszeiten.** Montag bis Freitag, 08:00 bis 18:00 Ortszeit, Floor mit regulärer Besetzung. Niedrigster Stundensatz.
+- **Nachtzuschlag.** Wochenenden, Feiertage und Nachtfenster. Multiplikator typischerweise im Bereich 1,5x bis 2x des Basissatzes.
+- **Notfall ungeplant.** Jedes Ticket mit kurzer Dispatch-Frist (meist 1 oder 2 Stunden), unabhängig von der Uhrzeit. Höchster effektiver Satz, weil die Reaktionszusage Personal verschiebt.
+
+Innerhalb jeder Stufe entsteht die Rechnungszahl aus drei Größen: Basis-Stundensatz der Metropole, Mindest-Abrechnungs-Inkrement sowie dem jeweils gültigen Zuschlag.
+
+### Mindest-Abrechnung in 15-Minuten-Takten
+
+Equinix rechnet Smart Hands in 15-Minuten-Inkrementen ab, mit einem Mindestansatz von 15 Minuten pro ausgelöstem Ticket. Praktischer Effekt: Ein Kabel-Patch von sechs Minuten wird als Viertelstunde fakturiert. Bei einer reaktiven Ticketlast von fünf bis zehn Vorgängen im Monat ist dieses Minimum der größte Treiber des Rechnungsanstiegs über das Jahr.
+
+Das Inkrement rundet zudem am oberen Rand jedes Einsatzes auf. Eine Aufgabe von 32 Minuten wird als 45 abgerechnet, eine Aufgabe von 46 als 60. Eine Teil-Inkrement-Verrechnung am Monatsende gibt es nicht.
+
+### Geplant versus ungeplant
+
+Equinix unterscheidet zwischen geplanter Arbeit (mit Vorlauf angefragt, typischerweise 24 bis 72 Stunden je Metropole und Aufgabe) und ungeplanter Arbeit (auf Zuruf). Ungeplante Arbeit trägt einen Aufschlag, der regional variiert. In Frankfurt FR5, FR6 und FR7 liegt geplante Smart-Hands-Arbeit in Geschäftszeit auf dem Listensatz; dieselbe Aufgabe ungeplant im selben Zeitfenster bewegt sich bei 1,25x bis 1,5x. In den USA (NY4, NY5, DC2, DC3, SV5) fällt der Abstand größer aus.
+
+Der Multiplikator ist keine Strafe, er ist ein Weitergabe-Posten für Dispatch-Kosten. Equinix besetzt den Floor nach prognostiziertem Planvolumen. Ein Ticket ohne Vorlauf zieht einen Techniker aus einer eingeplanten Tätigkeit ab, und diese Kosten landen auf der Rechnung.
+
+### Teile-Handhabung und Versand
+
+Der Empfang eines Ersatz-Mainboards an der Rampe ist nicht kostenfrei. Equinix berechnet eine Pauschale je Lieferung, die typischerweise nach Gewicht skaliert, mit einer separaten Lagergebühr, wenn das Teil länger als ein definiertes Fenster (meist 72 Stunden in EU-Standorten, 48 in mehreren US-Standorten) im käfignahen Wareneingang liegt. Ausgehende RMA-Sendungen tragen eine eigene Pauschale. Medien- und Band-Handling (also Band oder versiegeltes Laufwerk, das empfangen, protokolliert und in einen definierten Käfig verbracht wird) ist eine separate Position mit eigenem Inkrement.
+
+### Cross-Connect-Bereitstellung
+
+Eine Cross-Connect-Bestellung über das Equinix Marketplace trägt drei getrennte Posten:
+
+- **Einmalige Installationsgebühr** je Verbindung, variabel nach Metropole und Kabeltyp (Single-Mode-Faser, Multi-Mode-Faser, Cat6, Koaxial).
+- **Monatlicher Grundpreis** je Verbindung, über die reguläre Colo-Rechnung.
+- **Patch- und Port-Test-Arbeit**, üblicherweise als geplante Smart Hands gegen das Installations-Ticket abgerechnet.
+
+Die Installationsgebühr ist meist der Schocker für Teams, die interne Patches gewohnt sind. Ein Equinix-Fabric-Port in bestimmten Metropolen trägt einen vierstelligen Einmalbetrag, bevor eine Minute Smart Hands anfällt.
+
+### 24/7 und Feiertagszuschläge
+
+Feiertage und Nachtfenster tragen einen Zuschlag zusätzlich zur Nachtstufe, nicht statt ihr. Ein P1 am 25. Dezember um 03:00 stapelt Feiertagsmultiplikator, Nachtmultiplikator und Notfall-ungeplant-Multiplikator über dem Basissatz. Für einen mittelständischen Betreiber mit sparsamem Weihnachts-Change-Kalender kann dieses einzelne Ticket die größte Smart-Hands-Position des Quartals sein.
+
+## Wie der Equinix-Ticket-Lebenszyklus wirklich läuft
+
+Das Equinix Customer Portal ist die primäre Schnittstelle. Tickets öffnen sich dort, der Dispatch fließt dort, und Foto-Evidenz (soweit angefordert) wird dort an das Ticket gehängt, bevor es geschlossen wird.
+
+### Smart Hands Portal und Equinix Fabric
+
+Smart-Hands-Anfragen entstehen im Customer Portal mit einem Anhangsfeld für Runbook und Foto-Anforderungen. Cross-Connect-Bestellungen laufen über den Marketplace-Teil des Portals, mit LOA-Upload und Carrier-Kontakt als Teil der Einreichung.
+
+Das Portal zeigt einen Statusschritt (eingegangen, in der Queue, disponiert, in Bearbeitung, warten auf Kunden, geschlossen). Der Techniker-Name erscheint erst mit Disposition, und die Tiefe der Dispatch-Queue bleibt verborgen, Vorlauf-Schätzungen aus Portalansicht sind daher nicht möglich.
+
+### SLA auf Dispatch-Zeit versus Abschlusszeit
+
+Equinix veröffentlicht zwei getrennte SLAs:
+
+- **Zeit bis Disposition.** Fenster zwischen Ticket-Einreichung und Techniker im Käfig. Standardzusage: 2 Stunden für Premium-Tickets, 24 Stunden für geplante, mit optional 1 Stunde für Notfall-Disposition in großen Metropolen.
+- **Zeit bis Abschluss.** Nicht vertraglich begrenzt in der Standard-SLA. Der Abschluss hängt an Aufgabenkomplexität, Teileverfügbarkeit und Queue-Tiefe.
+
+Diese Unterscheidung zählt im Audit. Ein Ticket, das innerhalb der SLA disponiert wurde und acht Stunden bis zum Abschluss brauchte, weil das Runbook unvollständig war und der Techniker mit dem NOC hin und her ging, zählt auf der Equinix-Seite als SLA-erfüllt.
+
+### Foto-Evidenz als Anforderung
+
+Foto-Evidenz ist ein Positionspunkt, kein Default. Das anfragende Team spezifiziert die Checkpoints (Vorzustand, Zwischenzustand, Nachzustand), die geforderten Asset-Details (Seriennummer sichtbar, Port-Label sichtbar) sowie das Dateiformat. Fehlt diese Spezifikation im Ticket, schließt der Techniker gegebenenfalls mit einer einzelnen Weitwinkelaufnahme der Rack-Front, die für ISO 27001 oder SOC 2 beim Mutterkonzern nicht brauchbar ist.
+
+## Digital Realty, Interxion und NTT in Kürze
+
+Digital Realty und Interxion (jetzt unter der Marke Digital Realty im EU-Footprint) nutzen eine vergleichbare Struktur, das ServiceFabric-Portal ersetzt das Equinix Customer Portal, ServiceFabric Cross Connects übernehmen die Rolle von Equinix Fabric. Der Abstand zwischen geplant und ungeplant fällt in mehreren EU-Metropolen enger aus, und die Teile-Handhabung ist strukturell sauberer. NTT veröffentlicht die Remote-Hands-Stufen im Global-Data-Centers-Kundenportal, mit identischen 15-Minuten-Inkrementen und einer übersichtlicheren Feiertagszuschlag-Tabelle als Equinix.
+
+Über alle vier Anbieter gilt dasselbe Grundmuster: Stundensatz mal Stufenmultiplikator, aufgerundet auf das nächste Viertelstunden-Inkrement, mit separater Position für Teilehandhabung und separater Position für Cross-Connects. Ein Anbieterwechsel entfernt das Inkrement-Problem nicht.
+
+## Wo mittelständische Mieter zu viel zahlen
+
+Drei Muster erscheinen auf fast jeder Rechnung, die wir prüfen.
+
+**Reaktive Notfall-Tickets.** Ein P1 um 02:00 auf dem Notfall-Satz, in einem Standort, in dem das Problem zwei Tage vorher durch ein geplantes Firmware-Audit gefunden worden wäre. Das Ticket selbst kostet einige hundert Euro. Die zugrunde liegende Audit-Lücke summiert sich über ein Jahr leicht in den fünfstelligen Bereich.
+
+**Keine SOW für Routinearbeiten.** PDU-Tausch, Kabel-Patches und Firmware-Updates als einzelne Smart-Hands-Tickets, jedes mit eigenem 15-Minuten-Minimum, statt gebündelt in einem geplanten Change-Fenster mit einer Mehr-Aufgaben-SOW. Die Rechnung verdoppelt sich, die eigentliche Arbeit ist identisch.
+
+**Cross-Connect-Wildwuchs.** Neue Dienste auf frischen Cross-Connects provisioniert, ohne quartalsweisen Abgleich mit dem Bestand, so laufen alte Verbindungen weiter in der Monatsrechnung, lange nachdem der Circuit, den sie versorgt haben, abgeschaltet wurde. Bei einem Bestand von 20 Cross-Connects fließt dort routinemäßig ein vierstelliger Monatsbetrag an reiner Verschwendung.
+
+## Das Muster, das die Rechnung planbar hält
+
+Für einen mittelständischen Colo-Footprint (ein bis zwanzig Käfige über einen oder zwei Anbieter) ist das Muster einfach zu formulieren und anspruchsvoll zu betreiben:
+
+- Geplante Arbeit (Change-Fenster, Firmware, Kabelhygiene, Cross-Connect-Reconciliation) über einen verwalteten Partner, unter schriftlicher SLA mit benannten Ingenieuren, gebündelten SOWs und Foto-Evidenz an jedem Ticket.
+- Die Remote-Hands-Hotline des Colo-Anbieters für reine Zugangsereignisse im Käfig reservieren, in denen die Zugangsrichtlinie der Einrichtung einen Anbieter-gebadgten Techniker verlangt, oder für P1-Disposition in einen Standort, an dem der Partner noch nicht enrollt ist.
+- Einen gemeinsamen Change-Kalender und ein DCIM-Leitsystem (Nlyte, Sunbird dcTrack oder Schneider EcoStruxure IT), damit keiner der Beteiligten gegen einen veralteten Stand plant.
+
+Genau dieses Muster betreiben wir in unserem Anwendungsfall [Rechenzentrum 24/7 Remote Hands](/de/use-cases/rechenzentrum-remote-hands). Die zugrunde liegende Leistung ist [Rechenzentrum Wartung](/de/services/hardware/rechenzentrum-wartung), kombiniert mit [Infrastruktur-Support](/de/services/hardware/infrastruktur-support), wenn aus dem Hardware-Ticket eine Server-, Storage- oder Hypervisor-Frage statt einer Käfig-Frage wird. Eine SLA, 15-Minuten-P1-Median, 99,9 %+ Verfügbarkeit, 48 Stunden Rückrollbarkeit, EU-Region (Frankfurt) wo einschlägig, Colorado-basiertes Engineering für die US-Seite.
+
+Das Ziel ist nicht, Equinix zu ersetzen. Das Ziel ist, innerhalb der Equinix-Rechnung planbares Geld auszugeben, mit dem Audit-Trail, den das ISO-27001- und SOC-2-Programm des Mutterkonzerns braucht.

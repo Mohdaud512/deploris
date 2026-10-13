@@ -1,0 +1,103 @@
+---
+title: "RAG hallucination control: the refusal-when-unsupported pattern"
+description: An engineer's guide to building a RAG system that refuses to answer when retrieval returns no relevant chunks, with thresholds, re-rank, grounding, and evals.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - rag
+  - evaluation
+  - llm
+locale: en
+slug: rag-hallucination-refusal-when-unsupported
+---
+
+A RAG system that always answers is a RAG system that will eventually lie. The single most useful mechanism in production retrieval-augmented generation is the one your demo deck never shows: a disciplined, measured refusal when the retrieved context does not actually support an answer. This post walks through how we build that path, how we tune it against real traffic, and why support use cases need it even more than internal research tools do.
+
+## Why "refuse when unsupported" is the pattern that matters
+
+Most teams catch hallucinations the wrong way. They prompt the model politely ("only answer from the context"), then hope. In production the model will cheerfully stitch together an answer from one weakly related chunk and its own pretraining, especially on edge-case product questions where the right source simply does not exist in the corpus.
+
+The pattern that holds under traffic is explicit:
+
+1. Score every retrieved chunk.
+2. If the top chunks do not clear a quality bar, do not call the LLM at all. Return a structured refusal.
+3. If they do clear the bar, generate the answer, then run a grounding check against the chunks before it leaves the system.
+4. Measure both refusal recall and false-refusal rate on a graded set, every week.
+
+That is it. Everything else is tuning. The reason it matters more for a [support knowledge base](/use-cases/support-rag-knowledge-base) than for an internal research tool is customer trust. An analyst reading an internal doc has context, suspicion, and the ability to re-run the query. A customer reading your support chat has none of those. A single confident wrong answer about billing, data retention, or product behavior costs a renewal.
+
+## The retrieval score threshold
+
+Every vector search returns similarity scores. Most teams ignore them. That is the first bug.
+
+Pick a floor for the top-1 chunk and a floor for the mean of top-k. If either fails, refuse. The exact numbers depend on your embedding model and your corpus, which is why they belong in a config, not in prompt text. For a dense retriever over a cleanly chunked support corpus, we typically start the top-1 cosine floor around 0.72 and the top-5 mean around 0.65, then tune from there. The hard rule: do not pick these thresholds by reading papers. Pick them by looking at 50 refusals and 50 non-refusals on your own corpus and deciding which calls you want on which side.
+
+Threshold alone is not enough, because similarity scores are noisy on short queries ("where is my invoice") and on compound questions ("can I export to CSV and schedule it weekly"). Which is why the next stage exists.
+
+## Cross-encoder re-rank
+
+A bi-encoder gets you the top 50 cheaply. A cross-encoder tells you which of those 50 actually address the question. The difference matters most on exactly the queries that drive hallucinations: short, ambiguous, or multi-part questions where the first-stage retriever surfaces plausible-looking but off-topic chunks.
+
+Run the cross-encoder on the top 20 to 50, keep the top 5 to 8 by cross-encoder score, and apply a second floor there. We routinely see the cross-encoder floor change the refusal decision on 10 to 20 percent of queries that the bi-encoder would have waved through. For open models, bge-reranker-v2-m3 or mxbai-rerank-large-v2 are strong starting points. For hosted, Cohere's rerank family or a Mistral endpoint works. The choice is less important than the fact that you have one.
+
+## The grounding check
+
+Even with clean retrieval, the model can drift. The grounding check runs after generation and before the answer leaves the system. The pattern we use most often:
+
+1. Decompose the generated answer into atomic claims (one sentence or clause each).
+2. For each claim, ask a smaller model to answer "is this claim supported by at least one of the retrieved chunks" against the retrieved context only.
+3. If any claim fails, either strip the ungrounded sentences or refuse the whole answer, depending on policy.
+
+This step adds latency (typically 200 to 600 ms with a small model, Haiku-class or a Mistral small) and cost, but it catches the residual hallucinations that threshold plus re-rank miss. For a customer-facing assistant we recommend running it on every answer. For an internal agent-facing assistant you can sample it, run it on long answers only, or run it async and surface it as a confidence badge.
+
+## The structured refusal
+
+A refusal is a product surface, not an error. Make it one.
+
+The refusal response should carry:
+
+- A clear, calm sentence ("I cannot answer this from your documentation.").
+- A short explanation of why (no source found, source found but low confidence, grounding failed).
+- A deterministic handoff path (open a ticket, route to a named queue, surface the three closest sources for a human to look at).
+- A log entry with the query, the top chunks considered, the scores, and the refusal reason.
+
+That last item is the one most teams skip. Refusals without logs are refusals you cannot improve. Refusals with logs are the single best source of corpus-gap signal you will ever have, and they feed directly into your next doc-writing sprint.
+
+## Why support needs this more than research tools do
+
+Internal research assistants fail softly. A legal analyst or a data scientist asking a RAG system for context knows the output needs verification, treats low confidence as noise, and will reformulate the query if the answer looks off. The social contract already assumes skepticism.
+
+Customer-facing support fails hard. The customer trusts the chat window because it sits inside your product. A hallucinated answer about data residency or deletion windows ends up in a complaint ticket, a Trustpilot review, or in a lawyer's letter. The cost of a false answer is not symmetric with the cost of a refusal that routes politely to a human. Which is why the refusal path, in support, should err on the side of refusing one correct answer rather than hallucinating one wrong one.
+
+## The core trade-off: refusal recall against false-refusal rate
+
+Threshold too strict and you kill coverage. Agents stop trusting the assistant because it says "I cannot help" to things they know are in the docs, and they stop opening it. Threshold too loose and you kill trust. Legal flags three answers a quarter and the pilot gets paused.
+
+The two metrics that matter:
+
+- **Refusal recall.** Of the queries that should have been refused (because the corpus does not contain a defensible answer), what fraction were. Target: above 95 percent on a graded set.
+- **False-refusal rate.** Of the queries that should have been answered, what fraction were refused anyway. Target: below 10 percent, dropping over time as the corpus grows.
+
+You tune the thresholds and the grounding sensitivity against both metrics together, not either in isolation.
+
+## How to tune on real support ticket data
+
+The only tuning data worth anything is your own. The procedure we use:
+
+1. Pull a stratified sample of 200 to 300 resolved tickets from the last 90 days: common ones, long-tail ones, escalated ones.
+2. For each, have a senior agent write the ideal answer and mark whether the current corpus actually supports it. The "should refuse" tickets are gold.
+3. Run the pipeline. For each query, record retrieval scores, re-rank scores, grounding verdict, and the final decision.
+4. Plot the two metrics against the threshold floors. The elbow is your starting point.
+5. Re-run weekly. The corpus changes, the questions change, the thresholds drift.
+
+The reason this works where a generic benchmark does not: your corpus has its own score distribution, your users have their own query patterns, and the LLM behind the generator has its own grounding behaviour. A threshold set from a public dataset will miss your real failure modes by a mile.
+
+## What this looks like in a shipped Deploris engagement
+
+For every RAG system we ship, the refusal path is in the written scope on day one. We build the retrieval pipeline, the re-ranker, the grounding check, and the evaluation harness in the same 4 to 6 week first-release window. Everything runs on EU-region (Frankfurt) infrastructure by default, under one SLA: 15-min P1 median response, 99.9%+ monthly uptime, 48h reversibility on any change. The threshold values, the grounding model, and the refusal copy all live in a config a product owner can review, not buried in prompt strings. Weekly eval runs catch regressions before agents see them, and the refusal log feeds the quarterly roadmap for the docs team.
+
+A SaaS firm with a 60-person support team can expect the healthy refusal rate at steady state to sit between 5 and 15 percent of inbound queries. That number is a product metric, reviewed monthly against your traffic, not a bug to drive down.
+
+## Where to go next
+
+The refusal pattern is one of five pillars of a defensible RAG stack: retrieval quality, re-rank, grounding, refusal, and continuous evaluation. If you are weighing a build-vs-buy decision, our [RAG knowledge base for customer support use case](/use-cases/support-rag-knowledge-base) walks through the full scope posture. If you are already building and want operations under one contract, our [RAG systems service](/services/development/rag-systems) covers the SLA shape. The [RAG vs traditional search comparison](/compare/rag-vs-traditional-search) frames the decision against keyword search, and the [RAG cost model](/tools/rag-cost-model) lets you plug your own numbers in before you commit.

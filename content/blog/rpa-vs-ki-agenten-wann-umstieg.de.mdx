@@ -1,0 +1,108 @@
+---
+title: "RPA vs. KI-Agenten: wann der Umstieg sich lohnt"
+description: Ehrlicher Vergleich zwischen klassischer RPA und modernen KI-Agenten für Mittelstand-Operations, mit den Signalen für einen Umstieg und den Risiken des Wechsels.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - ki-agenten
+  - automatisierung
+  - operations
+locale: de
+slug: rpa-vs-ki-agenten-wann-umstieg
+---
+
+Die meisten Automatisierungs-Stacks im Mittelstand laufen weiterhin auf RPA-Skripten, die vor drei Jahren von einem Umsetzungspartner aufgezeichnet wurden, der längst weg ist. Diese Skripte haben funktioniert, einmal. Dann kam ein UI-Update des ERP, die Ausnahmequote stieg, und die Fix-Queue war niemandes Aufgabe mehr. Die Frage ist nicht, ob KI-Agenten RPA flächendeckend ablösen (das tun sie nicht), sondern welche Workflows Sie migrieren sollten, welche auf RPA bleiben, und wie Sie den Unterschied erkennen, ohne sechs Monate zu evaluieren.
+
+## Wo RPA weiterhin die richtige Wahl ist
+
+Klassische RPA (UiPath, Automation Anywhere, Blue Prism) wurde für eine bestimmte Aufgabe gebaut und ist dort weiterhin das richtige Werkzeug. Deterministische, hochvolumige, strukturierte Arbeit auf stabilen Oberflächen schlägt mit einem aufgezeichneten Klickpfad alles andere beim Durchsatz und bei den Stückkosten.
+
+- **Batch-Buchungen gegen eine stabile ERP-Maske.** Gleiche Felder, gleiche Validierung, gleicher Button, tausendfach pro Nacht. Ein KI-Agent ist hier überdimensioniert, langsamer und pro Transaktion teurer.
+- **Tastaturarbeit auf Legacy-Terminals.** Mainframe-Grünschirme, alte Desktop-Clients, alles ohne API. RPA hat weiterhin die beste Konnektor-Bibliothek für die hässlichen Ecken des Unternehmens.
+- **Regulierte Abläufe, in denen jeder Schritt identisch sein muss.** Deterministisches Replay ist ein Feature, kein Bug, wenn eine Prüferin wissen will, was der Roboter am dritten Dienstag des letzten Quartals getan hat.
+
+Ist der Prozess verstanden, sind die Eingaben strukturiert, die Ausnahmequote niedrig, und niemand ergänzt monatlich neue Regeln, dann ist RPA die richtige Antwort. Ein Agent kostet hier mehr und bringt nichts.
+
+## Wo KI-Agenten gewinnen
+
+Das Scheitermuster von RPA ist nicht Geschwindigkeit. Es ist das Fehlen jeder Kapazität für Fälle, gegen die das Skript nicht aufgezeichnet wurde. Ein KI-Agent (gebaut auf OpenAI, Anthropic Claude oder einem Azure-OpenAI-Deployment, verdrahtet mit LangGraph oder einem schlanken eigenen Orchestrator) kann über die Eingaben reasonieren, eine feste Tool-Liste gegen Ihre Systems of Record aufrufen und an einen benannten Menschen eskalieren, wenn ein Fall außerhalb seiner Guardrails liegt.
+
+- **Ausnahmebehandlung.** Fehlende Bestellnummern, nicht passende Summen, doppelte Rechnungen, Geschäftspartner mit leicht abweichenden Firmierungen. Ein RPA-Skript läuft in einen Validierungsfehler und stirbt. Ein Agent liest den Kontext, schlägt eine Lösung vor und schreibt sie innerhalb der Toleranz oder öffnet eine erklärte Ausnahme für einen Menschen.
+- **Unstrukturierte Eingaben.** E-Mails, PDFs, gescannte Dokumente, Chat-Nachrichten. Ein Agent extrahiert das Anliegen, nicht die Form.
+- **Mehrstufiges Reasoning über Systeme hinweg.** Kontext aus dem CRM ziehen, Bestand im WMS prüfen, Antwort entwerfen, Entscheidung im Audit-System protokollieren. RPA kann die Schritte verdrahten; es kann zwischen ihnen nicht entscheiden.
+- **Workflows, die sich oft ändern.** Preisregeln, Freigabeschwellen, Routing-Logik. Das Verhalten eines Agenten ändert sich mit einer Scope-Anpassung, nicht mit einem zweiwöchigen Umbau.
+
+Das Muster, das uns am häufigsten begegnet, zeigt der [Anwendungsfall KI-Automation für Operations-Teams im Mittelstand](/de/use-cases/operations-ai-automation): ein RPA-Skript, das einst 80 Prozent der Rechnungsabgleiche erledigte, erledigt heute 55 Prozent, und die restlichen 45 Prozent landen bei drei Fachkräften in der Kreditorenbuchhaltung, die ihre Woche mit Ausnahmen verbringen. Die Migration ist nicht RPA zu Agent für den ganzen Workflow. Sie ist RPA für den direkten Abgleich, Agent für den Ausnahmepfad.
+
+## Sechs Signale für den Umstieg
+
+Sie brauchen keine formale Evaluation, um zu sehen, wann ein RPA-Einsatz seinen Zenit überschritten hat. Treffen drei der folgenden sechs Punkte zu, ist der Business Case für die Migration dieses konkreten Workflows meist bereits klar.
+
+### 1. Selektoren brechen monatlich
+
+Jedes ERP-, CRM- oder SaaS-UI-Update kostet Sie eine Woche Nacharbeit, und niemand verantwortet die Queue. Das Skript ist nicht prinzipiell kaputt; es ist in der Praxis kaputt, weil die Oberfläche, auf die es sich stützt, nicht aufhört, sich zu verändern.
+
+### 2. Ausnahmequote über 15 Prozent
+
+Mehr als jeder sechste Fall fällt aus dem Happy Path. Die Automatisierung deckt die einfache Arbeit ab, die nie die teure Arbeit war.
+
+### 3. Menschen begleiten den Bot
+
+Eine Fachkraft schaut dem Roboter beim Laufen zu und greift ein, wenn er stehen bleibt. Das ist keine Automatisierung; das ist eine langsamere Version der Handarbeit.
+
+### 4. Der Audit-Trail ist auf drei Werkzeuge verteilt
+
+Die RPA-Plattform protokolliert die Klicks, das ERP protokolliert die Schreibvorgänge, das Ticketsystem protokolliert die Ausnahmen, und niemand kann eine einzige Sicht pro Fall erzeugen, wenn die Leitung danach fragt.
+
+### 5. Der Erbauer ist weg
+
+Der Umsetzungspartner ist abgezogen, der interne Autor ist in ein anderes Team gewechselt, und das Skript ist eine Blackbox. Jede Änderung ist ein Rediscovery-Projekt.
+
+### 6. Neue Regeln kommen schneller, als der Bot umgebaut werden kann
+
+Geschäftsregeln bewegen sich im Takt Ihres Marktes. Dauert der Umbau vier Wochen und ändert das Pricing-Team seine Schwellen zweimal pro Monat, ist die Automatisierung dauerhaft veraltet.
+
+## Wo KI-Agenten neue Risiken einführen
+
+Ehrliche Antwort: Ein Wechsel von RPA zu Agent tauscht ein Risikoprofil gegen ein anderes. Die Fehlerbilder sind unterschiedlich, und wenn Sie sie nicht von Anfang an einplanen, erzeugt der Agent ein schlimmeres Problem als das Skript, das er abgelöst hat.
+
+- **Halluzination.** Ein Agent kann selbstbewusst eine USt-ID extrahieren, die nicht existiert, ein Sachkonto vorschlagen, das nicht im Kontenplan steht, oder eine Rechnung der falschen Bestellung zuordnen. RPA scheitert deterministisch; Agenten scheitern plausibel.
+- **Nicht-Determinismus.** Dieselbe Eingabe kann über mehrere Läufe leicht unterschiedliche Ausgaben erzeugen. Prüfer merken das.
+- **Stiller Drift.** Modell-Anbieter aktualisieren ihre Modelle, Embeddings verschieben sich, Prompts, die letztes Quartal funktioniert haben, degradieren. Wer nicht misst, sieht es nicht.
+- **Zu breiter Tool-Zugriff.** Ein Agent mit „dem Internet" oder „Schreibrechten auf das gesamte ERP" ist ein Risiko. Die Gegenmaßnahme ist eine kurze, benannte Tool-Liste und rückrollbare Schreibvorgänge, nicht ein größerer System-Prompt.
+
+Die Gegenmaßnahmen sind bekannt und unspektakulär. Benannter Scope, feste Tool-Liste, Human-in-the-Loop an den riskanten Schritten, rückrollbare Schreibvorgänge mit 48-Stunden-Fenster, vollständiges Trace-Logging pro Fall, eine Shadow-Phase, bevor ein Mensch den Loop verlässt, messbare Automatisierungs- und Ausnahmequoten, und ein Notaus, den jede Operations-Leitung ohne Entwicklungssupport auslösen kann. Das sind die gleichen Guardrails, die wir in jedes Mandat zu [KI-Agenten und Automatisierung](/de/services/development/ki-automatisierung) einbauen, und sie sind der Grund, warum Nicht-Determinismus kein Schreckwort bleibt, sondern eine verwaltete Eigenschaft des Systems wird.
+
+## Wie man migriert, ohne den Stack niederzureißen
+
+Ein kompletter RPA-zu-Agent-Austausch in einem Quartal ist eine Geschichte, die der Einkauf gern hört und niemand liefert. Das Muster, das tatsächlich trägt, ist inkrementell, gemessen und beginnt in der Ausnahme-Queue, nicht im Hauptpfad.
+
+### RPA auf dem deterministischen Kern lassen
+
+Läuft der direkte Abgleich und ist das Volumen hoch, lassen Sie es in Ruhe. Der Agent steht neben dem RPA-Skript, nicht davor.
+
+### Den Agenten zuerst auf den Ausnahmepfad setzen
+
+Alles, was der RPA-Bot auswirft, geht an den Agenten statt in das Sammelpostfach. Der Agent liest den Kontext, schlägt eine Lösung vor, schreibt innerhalb der Toleranz oder öffnet eine erklärte Ausnahme für einen Menschen. Automatisierungsrate wird auf der Ausnahme-Queue gemessen, nicht auf dem gesamten Workflow.
+
+### Zwei Wochen Shadow-Betrieb vor dem Cutover
+
+Der Agent entscheidet, der Mensch entscheidet, Sie messen die Lücke. Erst wenn die Shadow-Metriken im Zielbereich liegen, geht der Agent in den aktiven Betrieb.
+
+### Rückrollbare Schreibvorgänge, 48 Stunden, nicht verhandelbar
+
+Jeder Schreibvorgang des Agenten ist 48 Stunden rückrollbar. Jeder Tool-Aufruf wird geloggt. Jede Entscheidung ist aus dem Audit-Trail erklärbar. Das ist Grundanforderung, kein Alleinstellungsmerkmal, und wenn Ihr Anbieter nicht beschreiben kann, wie Rückrollbarkeit in Ihren Systems of Record implementiert ist, kaufen Sie eine Demo.
+
+### Erweiterung nur, wenn die Metriken es tragen
+
+Automatisierungsrate, Ausnahmequote, gesparte Stunden, Fehlerquote. Monatliches Review, quartalsweise Roadmap, keine neuen Prozesse, solange der aktuelle nicht langweilig läuft.
+
+Ein realistisches erstes Produktiv-Release landet in 4 bis 6 Wochen, mit 15-Minuten-P1-Median, Ziel 99,9 Prozent Verfügbarkeit, und dem gesamten Stack per Default in der EU-Region Frankfurt. Der volle Rollout eines Prozesses dauert typischerweise 3 bis 6 Monate, und weitere Prozesse kommen im gleichen zweiwöchigen Takt in den Stack.
+
+## Unsicher, welcher Workflow zuerst?
+
+Die ehrliche Version dieser Entscheidung ist ein einstündiges Gespräch mit den zwei Personen, die den Prozess tatsächlich ausführen, eine Minuten-Zählung des Ist-Pfads und eine Klassifikation der Ausnahmen. Wer diesen Teil selbst machen will, bevor er mit jemandem spricht, findet im [KI-Chancen-Finder](/de/ai-opportunity-finder) dieselbe Scoping-Analyse in etwa zehn Minuten und bekommt eine belastbare Shortlist zurück. Wer weiß, welcher Workflow das Problem ist, und sehen will, wo er zwischen Agent und deterministischer Automatisierung liegt, findet im Vergleich [KI-Agenten vs. Workflow-Automatisierung](/compare/ai-agents-vs-automation) den kürzeren Weg.
+
+Der Sinn der Migration ist nicht, RPA abzulösen. Der Sinn ist, nicht länger so zu tun, als sei ein drei Jahre altes RPA-Skript noch das richtige Werkzeug für einen Prozess, dessen Ausnahmequote sich leise verdreifacht hat.
+
+*Wenn Sie ein Scoping-Gespräch wollen, das mit einem schriftlichen Scope, einer Zielautomatisierungsrate und einer belastbaren Preisspanne innerhalb eines Werktags nach dem zweiten Termin endet, [sind wir darauf eingerichtet](/de/contact).*

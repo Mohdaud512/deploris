@@ -1,0 +1,123 @@
+---
+title: "Human-in-the-loop approval gates: where to put them in an agent workflow"
+description: A practitioner guide to designing approval gates in an AI agent workflow, which actions need human review, which can be audited after the fact, and the trust-degrade pattern.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - ai-agents
+  - automation
+  - operations
+locale: en
+slug: human-in-the-loop-approval-gates-agent-workflow
+---
+
+Every AI agent deployment that fails in production fails in one of two ways. Either the humans are everywhere (so the automation never pays back), or the humans are nowhere (so the first bad decision ships at scale). The design question is not whether to put humans in the loop. It is where exactly to put them, and how to keep the number of approval gates small enough that the ROI survives.
+
+## The three tiers of agent actions
+
+A workflow is not one risk level. A single invoice-reconciliation agent might read ten systems, call six tools, and produce one write that touches money. The approvals belong on the write, not on the reads. Classifying every action the agent can take, before any code is written, is the first move.
+
+### Tier 1: Fully autonomous
+
+Classification, routing, enrichment, and read-only API calls. The agent can run these at full speed, log them, and never ask a human. Mistakes are cheap, visible, and reversible by the next step in the workflow.
+
+- Classifying an inbound email as a complaint, a renewal, or a billing question
+- Enriching a CRM record with public company data
+- Reading a PO from the ERP to compare against an invoice
+- Routing a ticket to a queue based on content
+
+If an auditor can look at the log a month later and understand what happened, this tier is fine. The audit trail is the control, not a human in the moment.
+
+### Tier 2: Post-hoc audited
+
+Internal writes with low blast radius, communication inside a shared internal channel, draft replies that a human sends, and anything with easy rollback. The agent writes, the system records, and a human reviews a sample weekly or monthly.
+
+- Creating an internal note on a CRM record
+- Posting a status update in an internal Slack channel
+- Drafting an outbound reply that lands in the agent operator's queue, not the customer's inbox
+- Writing a reconciliation entry below a defined tolerance threshold
+
+Post-hoc audit works when the write is contained, the rollback window is wide, and the sampling cadence catches drift before it compounds. A 48h reversibility window on every write is the safety net here, not a nice-to-have.
+
+### Tier 3: Human approval required
+
+Financial transactions, external communication, data deletion, permission grants, and anything whose consequence persists outside the system you operate.
+
+- Transfers, payments, refunds, or any write that moves money
+- Outbound email, SMS, or chat to a customer or supplier under your brand
+- Hard-deleting records in a system of record
+- Granting access to systems or data
+- Signing off on a change above a stated monetary threshold
+
+These never run unattended, in any trust state, under any shadow metric. If a vendor's pitch deck promises "fully autonomous AI employees" writing to any of these, they are selling a liability.
+
+## The default classification table
+
+The classification lives in the written scope before anyone opens an editor. We write it as a four-column table (action, systems, tier, named approver) and attach it to the engagement SOW. The pattern we use for most mid-market [operations AI automation](/use-cases/operations-ai-automation) engagements starts from a default and gets narrowed down.
+
+| Action type | Default tier |
+| --- | --- |
+| Read from an internal system | Tier 1 |
+| Classify, extract, enrich | Tier 1 |
+| Route to a queue | Tier 1 |
+| Write to internal note or log | Tier 2 |
+| Internal communication (Slack, Teams) | Tier 2 |
+| Reconciliation write within tolerance | Tier 2 |
+| Reconciliation write above tolerance | Tier 3 |
+| Draft to customer (held, not sent) | Tier 2 |
+| Send to customer | Tier 3 |
+| Financial write (any amount) | Tier 3 |
+| Delete, archive, or permission change | Tier 3 |
+
+The defaults move. A read against a sanctioned-party watch list is not Tier 1, it is Tier 2 with a human on the hit path. A Tier 2 reconciliation write becomes Tier 3 when the supplier is new. The point is to start from an explicit table and justify every deviation in writing, not to improvise.
+
+## Approval friction has a cost
+
+The temptation on a first deployment is to put approvals on everything. It is safer in principle. It is also the pattern that produces the engagement that leadership kills after a quarter because the specialists are now reviewing the agent's output instead of doing the original work. Three signals that your approval design is costing more than it protects:
+
+- **Approval queue depth grows faster than the automation rate.** The agent is routing to humans faster than humans can process. The gate is a bottleneck, not a safety.
+- **Approval rate is above 97 percent.** If humans approve almost everything, the approval is theatre. Either the agent is good enough to run that step alone, or the humans are rubber-stamping.
+- **Specialists stop reading the context.** The gate is still there, the clicks happen, but the humans trust the agent and move fast. That trust is reasonable, and it means the gate's job can be moved to a post-hoc audit.
+
+The practical move is to design the gate with a sunset. Every Tier 3 gate has a condition under which it drops to Tier 2 (approval rate above 95 percent for 60 days, inside a defined scope). Every Tier 2 audit cadence has a condition under which it drops to Tier 1 sampling. The system earns autonomy; it does not start with it.
+
+## The trust-degrade pattern
+
+The counterpart to earning autonomy is losing it automatically. When the agent is wrong (or when a human reviewer catches a mistake it would have made), the gate design has to tighten without a meeting.
+
+- A reversed write inside the 48h window flags the related step for a re-review window of 14 days
+- Two reversed writes on the same action class drop that action from Tier 2 to Tier 3 for 30 days
+- A missed exception that caused an escalation drops the whole workflow's confidence threshold by a defined amount, routing more cases to humans
+- Any Tier 3 action with a human override of the agent's recommendation feeds back into the calibration dataset and triggers a prompt review in the next two-week increment
+
+None of this is a judgement call made in a Slack thread. It is written into the agent's own policy and runs on the audit log. The point is that the system's autonomy breathes: it expands when the metrics support it, it contracts when they do not, and the contraction does not depend on anyone noticing. The 48h reversibility window on every write is the structural safety net, and the mechanical trust-degrade is the behavioural one.
+
+## Where humans actually belong, by workflow
+
+The patterns above are general. In practice, the gates land on predictable actions in each workflow we see most often.
+
+### Invoice reconciliation
+
+Reads from ERP, PO system, goods receipts: Tier 1. Match write within tolerance: Tier 2 with weekly sample audit. Match write above tolerance, new supplier, or sanctioned-party flag: Tier 3 with named approver.
+
+### Order triage
+
+Classification, routing, enrichment: Tier 1. Write to internal note on the order: Tier 2. Change to the order's delivery date, pricing, or customer-facing status: Tier 3.
+
+### Support ticket pre-triage
+
+Classification, routing, draft of the reply: Tier 1 for everything except sending the reply. Send to customer: Tier 3 until the agent has a 60-day track record on that queue, then Tier 2 with audit.
+
+### Vendor onboarding
+
+Document extraction, data entry into internal fields: Tier 2. Writing to the vendor master, approving the vendor for payment, or granting system access: Tier 3.
+
+The theme is consistent. The gate goes on the write, not on the read. The gate goes on the external effect, not on the internal reasoning. The gate goes on the irreversible, not on the recoverable.
+
+## Not every workflow is agent-ready
+
+If the process has no documented rules, no measurable exception rate, and no named systems of record, the first job is not to put humans in the loop. It is to write the process down. The gates assume an agent that knows what "correct" looks like. If nobody can say what "correct" looks like, the gate's job is undefined and the humans will end up re-doing the whole case anyway. The [AI agents vs workflow automation comparison](/compare/ai-agents-vs-automation) covers the decision between a deterministic path, an agent, or a mix, with the trade-offs laid out for a mid-market operations team.
+
+The design job is honest work. A table, a classification per action, a named approver per Tier 3 gate, a trust-degrade policy, a 48h reversibility window, and a monthly review of the approval metrics. Done this way, the humans in the loop are the ones whose judgement is actually load-bearing. Done the other way, the humans in the loop are the ones who used to do the whole job and now do most of it while watching the agent.
+
+*If you want the classification table written against your specific workflow before any build starts, that is the first deliverable of our [AI agents and automation engagement](/services/development/ai-agents-automation), and [we are happy to show the template](/contact).*

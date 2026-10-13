@@ -1,0 +1,106 @@
+---
+title: 'CRM selbst bauen oder kaufen: das 24-Monats-Kostenmodell'
+description: Ein zeilengenaues Gesamtkostenmodell, das Salesforce- oder HubSpot-Lizenzausgaben gegen ein von Deploris gebautes und betriebenes individuelles CRM über 24 Monate stellt.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - crm
+  - individualentwicklung
+  - kaufberatung
+locale: de
+slug: build-vs-buy-crm-24-monate-gesamtkosten
+---
+
+Die meisten Build-vs-Buy-Diskussionen scheitern an einem Listenpreisvergleich. Jemand öffnet die Salesforce-Verlängerung, jemand anders ein Angebot für eine Eigenentwicklung, und das Gespräch ist vorbei. Dieser Vergleich ist falsch, weil er ungefähr die Hälfte jeder Spalte weglässt. Dieser Beitrag liefert ein ehrliches 24-Monats-Gesamtkostenmodell, das zur tatsächlichen Kostenentwicklung in einem mittelständischen Vertriebsteam passt.
+
+Zielleser ist ein Unternehmen mit 200 bis 2.000 Sitzen, bei dem Vertriebsoperations an einen CFO berichtet, der eine belastbare Zahl möchte, nicht ein Hersteller-Datenblatt.
+
+## Warum 24 Monate das richtige Fenster sind
+
+Eine 12-Monats-Betrachtung schmeichelt Standard-SaaS, weil die Renewal-Erhöhung noch nicht gewirkt hat. Eine 36-Monats-Betrachtung schmeichelt der Eigenentwicklung, weil die Baukosten bereits abgeschrieben sind. Vierundzwanzig Monate zeigen beide Pfade in ihrer realen Form: einen vollen Renewal-Zyklus auf der SaaS-Seite, einen vollen Build plus das erste volle Betriebsjahr auf der Custom-Seite. Es ist auch das Fenster, gegen das der Einkauf tatsächlich verhandelt.
+
+Legen Sie das Modell auf dieses Fenster fest und halten Sie jede Annahme offen auf der Seite sichtbar. Wenn eine Position eine Fußnote länger als sich selbst braucht, ist sie wahrscheinlich ein Upsell im Wartestand.
+
+## Spalte A: 24-Monats-Gesamtkosten für Standard-SaaS
+
+Vier Positionen treiben die Summe auf dieser Seite. Nur eine davon steht auf der Preisseite des Herstellers.
+
+### 1. Lizenz pro Sitz, vollständig geladen
+
+Sitze multipliziert mit dem Listenpreis pro Sitz, multipliziert mit 24 Monaten, dann die Preissteigerung aufschlagen. Veröffentlichte Listenpreise für Salesforce Enterprise liegen bei etwa 165 USD pro Nutzer und Monat, Unlimited bei rund 330 USD und Einstein 1 Sales bei rund 500 USD. HubSpot Sales Enterprise liegt bei rund 150 USD, Dynamics 365 Sales Enterprise bei rund 95 USD. Verhandelte Rabatte von 15 bis 30 Prozent sind im Mittelstand üblich; die Preiserhöhung bei Verlängerung liegt bei 7 bis 12 Prozent und frisst den Rabatt bis Monat 13 meist wieder auf.
+
+Für ein Team mit 300 Sitzen auf Salesforce Enterprise zu verhandelten 125 USD pro Nutzer und Monat ergibt Jahr eins 450.000 USD. Mit 8 Prozent Erhöhung landet Jahr zwei bei 486.000 USD. Die reinen Lizenzausgaben über 24 Monate summieren sich auf 936.000 USD, bevor überhaupt ein Ticket geöffnet wurde.
+
+### 2. Admin-FTE und Professional Services
+
+Standard-CRM setzt ein Konfigurationsteam voraus, das die Lücke zwischen Produkt und Prozess füllt. Für ein Vertriebsteam mit 300 Sitzen bedeutet das typischerweise einen vollständig beladenen Senior-Admin (vollgeladen 120.000 bis 170.000 USD pro Jahr), dazu ein Viertel eines Senior-Architekten für die schwierigeren Themen und einen Salesforce- oder HubSpot-Partner auf Retainer für 2.000 bis 4.000 USD pro Monat.
+
+Die 24-Monats-Zwischensumme landet zwischen 420.000 USD und 620.000 USD. Keine dieser Zahlen steht auf der Herstellerrechnung.
+
+### 3. Integrations-Dienstleister und Middleware
+
+Jede Pipeline-Integration, auf die Ihre Vertriebsmitarbeiter angewiesen sind, also Abrechnung, Verträge, Routing, Support, Marketing, Warehouse, läuft entweder über ein Middleware-Abonnement (Zapier Enterprise, Workato, Boomi) oder über einen eigenen Partnervertrag. Workato startet bei rund 2.000 USD pro Monat für einen Mittelstandsplan und steigt mit der Anzahl der Rezepte. Ein typisches Mittelstands-Vertriebsteam betreibt sechs bis zehn aktive Integrationen, und Rezepte brechen oft genug, dass fast immer ein kleiner Retainer dahintersteht.
+
+Rechnen Sie mit 60.000 bis 180.000 USD über 24 Monate allein für Middleware und Integrationspflege.
+
+### 4. Enterprise-Stufen-Upsells, ausgelöst durch Nutzung
+
+Das ist der stille Kostentreiber. Der Report, den Ihr CFO möchte, verlangt ein Tier-Upgrade. Die Sandbox, die Ihr Admin für den Forecast-Umbau benötigt, verlangt ein weiteres. Das KI-Add-on, das API-Call-Volumen, die Speicherstufe für Konversationshistorien: Jeder Punkt landet als Position in der Verlängerung. Rechnen Sie innerhalb von 24 Monaten mit 10 bis 20 Prozent der Lizenzsumme als zusätzliche Upsell-Kosten.
+
+Für das Beispiel mit 300 Sitzen sind das weitere 90.000 bis 190.000 USD.
+
+### Zwischensumme Spalte A
+
+Zählen Sie die vier Positionen zusammen. Ein Standard-SaaS-CRM mit 300 Sitzen zu verhandelten Mittelstandskonditionen landet über 24 Monate bei rund 1,5 bis 1,9 Millionen USD, wobei 55 bis 60 Prozent dieser Summe außerhalb der Lizenzzeile liegen, die niemand angesehen hat.
+
+## Spalte B: Eigenentwicklung plus Deploris-Betrieb
+
+Drei Positionen. Alle drei werden schriftlich vor Vertragsunterzeichnung scoped.
+
+### 1. Baukosten
+
+Ein individuelles CRM für ein Mittelstandsteam mit 300 Sitzen bedeutet ein erstes Release in 4 bis 6 Wochen, gefolgt von 3 bis 6 Monaten Migration, Dual-Run und Cutover. Das Baubudget umfasst Discovery, Datenmodell, die sechs bis acht relevanten Integrationen, Migration mit Feld-Level-Lineage, die Dual-Run-Phase, Schulung und ein dokumentiertes Runbook. Für ein Mittelstandsteam liegt das solide im sechsstelligen Bereich, scoped nach Teamgröße, nicht nach Sitzzahl. Was in einem Scope steht, zeigt die Seite [Individuelle CRM-Entwicklung](/de/services/development/crm-entwicklung).
+
+### 2. Hosting und Infrastruktur
+
+Ein individuelles Mittelstands-CRM auf EU-Region-Hosting (Frankfurt) mit Staging, Produktion, Observability, Backups und Identitätsschicht kostet auf einem Hyperscale-Cloud im niedrigen vierstelligen USD-Bereich pro Monat. Für das Beispiel mit 300 Sitzen landen 24 Monate Hosting zwischen 60.000 und 120.000 USD. Die Zahl stammt aus der Cloud-Rechnung, nicht aus einem Hersteller-Angebot.
+
+### 3. Betrieb unter SLA
+
+Deploris betreibt das System unter einer schriftlichen SLA: 15-minütige P1-Erstreaktion im Median, Ziel 99,9 %+ monatliche Verfügbarkeit, 48 Stunden Rückrollbarkeit auf jede Änderung, benannter On-Call-Ingenieur, wöchentliches Patch-Fenster. Die Betriebs-Position deckt auch die Roadmap-Arbeit ab: die zweiwöchigen Inkremente, die das CRM mit dem Prozess synchron halten. Das ist eine Zahl, vertraglich festgehalten, keine Sitz-Position, die mit der Teamgröße mitwächst.
+
+### Zwischensumme Spalte B
+
+Build plus 24 Monate Hosting plus 24 Monate Betrieb unter SLA landen für ein Team mit 300 Sitzen deutlich unter der Summe aus Spalte A, bei einem entscheidenden Unterschied: Die Steigung ist flach. Jahr drei und vier bleiben auf der Deploris-Betriebslinie, während die SaaS-Spalte die nächste Preiserhöhung und das nächste Tier aufnimmt.
+
+Modellieren Sie Ihre eigenen Zahlen im [CRM-Gesamtkosten-Rechner](/de/tools/crm-tco); jede Annahme auf der Seite ist editierbar.
+
+## Wo der Break-Even typischerweise liegt
+
+Drei Signale markieren den Übergang für die meisten Mittelstands-Vertriebsteams.
+
+**Sitzzahl über 150.** Unter 150 Sitzen ist Standard-SaaS meist der richtige Default, weil das Amortisationsfenster zu lang ist. Zwischen 150 und 500 Sitzen kreuzen sich die beiden Spalten verlässlich innerhalb von 24 Monaten. Oberhalb von 500 Sitzen zieht die Custom-Route mit Abstand davon.
+
+**Sechsstellige jährliche Lizenzkosten.** Sobald die Lizenzzeile rund 300.000 USD pro Jahr überschreitet, haben Admin-, Integrations- und Upsell-Positionen die Baukosten auf annualisierter Basis bereits übertroffen.
+
+**Prozesskomplexität, die der Hersteller-Roadmap nicht entspricht.** Wenn das Team mit nicht standardisierten Forecast-Kategorien, mehrteiliger Gebietslogik oder tiefer Integration in Abrechnung und Verträge arbeitet, steigen die Konfigurationskosten bei jedem Renewal. Custom zahlt sich schneller aus, weil der Prozess im System kodiert ist und nicht gegen das System ausgefochten wird.
+
+Der Entscheidungsrahmen für alle drei Signale steht in [Individuelles CRM vs. Standardlösung](/de/compare/custom-crm-vs-off-the-shelf).
+
+## Übliche Einwände und ihre Korrekturen
+
+**„Die Lizenzzeile ist die einzige vergleichbare Zahl."** Ist sie nicht. Admin-FTE, Integrationspflege und Tier-Upsells sind nicht optional. Wenn das Modell sie weglässt, ist das Modell falsch.
+
+**„Ein individuelles CRM braucht ein eigenes Entwicklungsteam."** Nicht, wenn Sie es unter einem Betriebsvertrag laufen lassen. Das Deploris-Modell bedeutet: Ein Team schreibt das System und betreibt die Server, unter einer SLA. Das Einstellungsproblem im Haus taucht gar nicht erst auf.
+
+**„Wir wachsen aus der Lösung heraus."** Code und Daten gehören Ihnen ab Tag eins. Repository, Infrastructure-as-Code und Hosting-Account können jederzeit intern übernommen oder zu einem anderen Betreiber migriert werden, ohne neu zu schreiben. Für eine große Salesforce-Instanz gilt das nicht.
+
+**„Sechsstellige Baukosten können wir uns vorab nicht leisten."** Das Mandat läuft in zweiwöchigen Inkrementen gegen einen schriftlichen Scope, mit phasenweise gestellter Rechnung. Vergleichen Sie das mit der achtstelligen Lizenzzusage, die ein vierjähriger Salesforce-ELA bedeutet.
+
+## Was in das nächste Finance-Review gehört
+
+Drei Zahlen gehen in das Modell: 24 Monate vollständig geladene Lizenz plus Steigerung, 24 Monate Admin- und Integrations-Last, 24 Monate Upsell-Tier-Erfassung. Dem gegenüber: Baukosten plus Hosting plus eine schriftliche SLA auf der anderen Seite. Für ein Team mit 200 bis 2.000 Sitzen ist der Übergang selten knapp.
+
+Für den vollständigen Anwendungsfall mit Datenmodell, Dual-Run-Vorgehen und der schriftlichen SLA, die den Betrieb zusammenhält, siehe [Individuelles CRM für Vertriebsteams im Mittelstand](/de/use-cases/crm-mittelstand-vertrieb). Um Ihre eigenen Zahlen gegen das Modell zu rechnen, öffnen Sie den [CRM-Gesamtkosten-Rechner](/de/tools/crm-tco). Der zugrunde liegende Entscheidungsrahmen steht in [Individuelles CRM vs. Standardlösung](/de/compare/custom-crm-vs-off-the-shelf).
+
+*Soll das Modell gegen Ihre genaue Sitzzahl und Ihre Integrationen gerechnet werden? [Schreiben Sie uns kurz](/de/contact). Antwort innerhalb eines Werktags.*

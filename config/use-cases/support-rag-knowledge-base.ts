@@ -218,6 +218,16 @@ export const supportRagKnowledgeBase: UseCase = {
             href: '/ai-opportunity-finder',
             blurb: 'Not sure a RAG system is the right next investment? Run a 10-minute scoping assessment first.',
           },
+          {
+            label: 'Blog: RAG hallucination control, refusal-when-unsupported',
+            href: '/blog/rag-hallucination-refusal-when-unsupported',
+            blurb: 'Engineer’s guide to building a RAG system that refuses to answer when retrieval returns no grounded evidence.',
+          },
+          {
+            label: 'Blog: Measuring RAG answer quality, 5 metrics',
+            href: '/blog/measuring-rag-answer-quality-5-metrics',
+            blurb: 'The five metrics that matter (retrieval precision, recall, faithfulness, completeness, refusal correctness) and how to track them.',
+          },
         ],
       },
       cta: {
@@ -409,6 +419,16 @@ export const supportRagKnowledgeBase: UseCase = {
             label: 'KI-Chancen-Finder',
             href: '/ai-opportunity-finder',
             blurb: 'Noch unsicher, ob ein RAG-System die richtige nächste Investition ist? Starten Sie mit einer 10-Minuten-Scoping-Analyse.',
+          },
+          {
+            label: 'Blog: RAG-Halluzinationen verhindern',
+            href: '/blog/rag-halluzination-ablehnung-bei-fehlender-grundlage',
+            blurb: 'Ingenieurs-Leitfaden für ein RAG-System, das bei fehlender Beleg-Grundlage sauber ablehnt statt zu halluzinieren.',
+          },
+          {
+            label: 'Blog: RAG-Antwortqualität messen, 5 Metriken',
+            href: '/blog/rag-antwortqualitaet-messen-5-metriken',
+            blurb: 'Die fünf Metriken, die wirklich zählen, und wie Sie sie auf Ihrem Support-Korpus kontinuierlich tracken.',
           },
         ],
       },

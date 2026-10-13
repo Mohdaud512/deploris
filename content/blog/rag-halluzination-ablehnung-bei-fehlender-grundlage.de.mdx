@@ -1,0 +1,104 @@
+---
+title: "RAG-Halluzination verhindern: das Ablehnung-bei-fehlender-Grundlage-Muster"
+description: Praxisanleitung für ein RAG-System, das Antworten verweigert, wenn das Retrieval keine belastbaren Chunks liefert, mit Schwellwerten, Re-Rank, Grounding und Evaluation.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - rag
+  - evaluation
+  - qualitaetssicherung
+  - llm
+locale: de
+slug: rag-halluzination-ablehnung-bei-fehlender-grundlage
+---
+
+Ein RAG-System, das immer antwortet, ist ein RAG-System, das früher oder später lügt. Der nützlichste Mechanismus im produktiven Retrieval-Augmented-Generation-Stack ist der, den keine Demo zeigt: eine disziplinierte, messbare Verweigerung, wenn der abgerufene Kontext die Aussage schlicht nicht trägt. Dieser Beitrag beschreibt, wie wir diesen Pfad bauen, wie wir ihn gegen echten Traffic tunen, und warum Support-Fälle ihn noch dringender brauchen als interne Recherchewerkzeuge.
+
+## Warum "Ablehnen, wenn ungedeckt" das entscheidende Muster ist
+
+Die meisten Teams fangen Halluzinationen am falschen Ende ab. Sie schreiben höfliche Prompts („Antworte nur aus dem Kontext") und hoffen. Im Produktivbetrieb wird das Modell munter einen schwach verwandten Chunk mit seinem Vortraining verweben, besonders bei Produktdetails, zu denen die passende Quelle gar nicht im Korpus liegt.
+
+Das Muster, das unter Last trägt, ist explizit:
+
+1. Bewerten Sie jeden abgerufenen Chunk.
+2. Erreichen die Top-Chunks die Qualitätsgrenze nicht, rufen Sie das LLM gar nicht erst auf. Geben Sie eine strukturierte Verweigerung zurück.
+3. Erreichen sie die Grenze, generieren Sie die Antwort und prüfen Sie die Grounding-Beziehung zu den Chunks, bevor etwas das System verlässt.
+4. Messen Sie wöchentlich auf einem bewerteten Set sowohl Verweigerungs-Recall als auch Falsch-Verweigerungs-Rate.
+
+Das ist alles. Der Rest ist Tuning. Warum das für eine [RAG-Wissensbasis im Kundensupport](/use-cases/support-rag-knowledge-base) wichtiger ist als für ein internes Recherchewerkzeug: Kundenvertrauen. Eine Analystin, die ein internes Dokument liest, bringt Kontext, Skepsis und die Fähigkeit mit, die Anfrage zu wiederholen. Eine Kundin, die Ihren Support-Chat liest, hat davon nichts. Eine einzige selbstbewusst falsche Aussage zu Abrechnung, Datenaufbewahrung oder Produktverhalten kostet eine Verlängerung.
+
+## Die Retrieval-Score-Schwelle
+
+Jede Vektorsuche liefert Ähnlichkeits-Scores. Die meisten Teams ignorieren sie. Das ist der erste Fehler.
+
+Legen Sie einen Floor für den Top-1-Chunk und einen Floor für den Mittelwert der Top-k fest. Scheitert einer davon, verweigern Sie. Die konkreten Zahlen hängen von Embedding-Modell und Korpus ab, deshalb gehören sie in eine Konfiguration, nicht in den Prompt. Für einen dichten Retriever über einem sauber gechunkten Support-Korpus starten wir typischerweise mit einem Top-1-Kosinus-Floor um 0,72 und einem Top-5-Mittelwert um 0,65 und tunen von dort weiter. Harte Regel: Diese Schwellen bestimmen Sie nicht aus Papers. Sie bestimmen sie, indem Sie je 50 Verweigerungen und 50 Nicht-Verweigerungen auf Ihrem eigenen Korpus durchgehen und entscheiden, welche Fälle auf welcher Seite stehen sollen.
+
+Schwellen allein reichen nicht, weil Scores bei kurzen Anfragen („wo ist meine Rechnung") und bei zusammengesetzten Fragen („kann ich als CSV exportieren und das wöchentlich planen") verrauscht sind. Deshalb gibt es die nächste Stufe.
+
+## Cross-Encoder-Re-Rank
+
+Ein Bi-Encoder liefert günstig die Top 50. Ein Cross-Encoder sagt Ihnen, welche dieser 50 die Frage tatsächlich beantworten. Der Unterschied schlägt genau bei den Anfragen durch, die Halluzinationen auslösen: kurze, mehrdeutige oder mehrteilige Fragen, bei denen der Erst-Retriever plausibel wirkende, aber themenfremde Chunks hochspült.
+
+Lassen Sie den Cross-Encoder über die Top 20 bis 50 laufen, behalten Sie die Top 5 bis 8 nach Cross-Encoder-Score und setzen Sie dort einen zweiten Floor. Wir sehen regelmäßig, dass der Cross-Encoder-Floor bei 10 bis 20 Prozent der Anfragen die Verweigerungsentscheidung ändert, die der Bi-Encoder durchgewunken hätte. Für offene Modelle sind bge-reranker-v2-m3 oder mxbai-rerank-large-v2 solide Startpunkte. Für gehostete Dienste funktioniert die Rerank-Familie von Cohere oder ein Mistral-Endpoint. Die Wahl ist weniger wichtig als die Tatsache, dass überhaupt ein Re-Ranker vorhanden ist.
+
+## Die Grounding-Prüfung
+
+Selbst bei sauberem Retrieval kann das Modell abdriften. Die Grounding-Prüfung läuft nach der Generierung und bevor die Antwort das System verlässt. Das Muster, das wir am häufigsten einsetzen:
+
+1. Zerlegen Sie die generierte Antwort in atomare Aussagen (je ein Satz oder Teilsatz).
+2. Fragen Sie für jede Aussage ein kleineres Modell: „Wird diese Aussage von mindestens einem der abgerufenen Chunks gestützt?" gegen den abgerufenen Kontext.
+3. Schlägt eine Aussage fehl, entfernen Sie die ungedeckten Sätze oder verweigern Sie je nach Policy die ganze Antwort.
+
+Dieser Schritt kostet Latenz (typischerweise 200 bis 600 ms mit einem kleinen Modell, Haiku-Klasse oder Mistral Small) und Rechenleistung, fängt aber die Rest-Halluzinationen ab, die Schwelle und Re-Rank übersehen. Für kundenseitige Assistenten empfehlen wir ihn für jede Antwort. Für interne Agenten-Assistenten können Sie samplen, nur lange Antworten prüfen oder die Prüfung asynchron als Confidence-Badge einblenden.
+
+## Die strukturierte Verweigerung
+
+Eine Verweigerung ist eine Produktoberfläche, kein Fehlerfall. Behandeln Sie sie so.
+
+Die Verweigerungsantwort sollte Folgendes tragen:
+
+- Einen klaren, ruhigen Satz („Dafür habe ich keine Grundlage in Ihrer Dokumentation.").
+- Eine kurze Begründung (keine Quelle gefunden, Quelle gefunden aber niedrige Konfidenz, Grounding fehlgeschlagen).
+- Einen deterministischen Übergabepfad (Ticket öffnen, an eine benannte Queue routen, die drei nächstgelegenen Quellen für einen Menschen einblenden).
+- Einen Log-Eintrag mit Anfrage, betrachteten Top-Chunks, Scores und Verweigerungsgrund.
+
+Den letzten Punkt überspringen die meisten Teams. Verweigerungen ohne Logs sind Verweigerungen, die Sie nicht verbessern können. Verweigerungen mit Logs sind das beste Signal zur Korpus-Lücke, das Sie je bekommen werden, und sie fließen direkt in den nächsten Dokumentations-Sprint ein.
+
+## Warum Support das Muster dringender braucht als Research
+
+Interne Research-Assistenten scheitern weich. Eine Juristin oder ein Data-Scientist, die ein RAG-System nach Kontext fragen, wissen, dass die Ausgabe geprüft werden muss, nehmen niedrige Konfidenz als Rauschen und formulieren notfalls um. Der Vertrauensvertrag enthält Skepsis.
+
+Kundenseitiger Support scheitert hart. Der Kunde vertraut dem Chat, weil er in Ihrem Produkt sitzt. Eine halluzinierte Aussage zu Datenresidenz oder Löschfristen landet in einer Beschwerde, einer Trustpilot-Bewertung oder im Anwaltsbrief. Die Kosten einer falschen Antwort sind nicht symmetrisch zu den Kosten einer Verweigerung, die höflich an einen Menschen weiterleitet. Deshalb sollte der Verweigerungspfad im Support lieber eine richtige Antwort zu viel ablehnen, als eine falsche zu viel generieren.
+
+## Der zentrale Zielkonflikt: Verweigerungs-Recall gegen Falsch-Verweigerungs-Rate
+
+Zu strenge Schwelle und Sie töten die Abdeckung. Agenten verlieren das Vertrauen in den Assistenten, weil er zu Dingen „Dafür habe ich keine Grundlage" sagt, die sie in der Doku sehen, und sie öffnen ihn nicht mehr. Zu lockere Schwelle und Sie töten das Vertrauen. Die Rechtsabteilung markiert drei Antworten pro Quartal, und der Pilot wird pausiert.
+
+Die zwei Metriken, die zählen:
+
+- **Verweigerungs-Recall.** Anteil der Anfragen, die hätten verweigert werden müssen (weil der Korpus keine belastbare Antwort trägt) und tatsächlich verweigert wurden. Ziel: über 95 Prozent auf einem bewerteten Set.
+- **Falsch-Verweigerungs-Rate.** Anteil der Anfragen, die hätten beantwortet werden sollen und trotzdem verweigert wurden. Ziel: unter 10 Prozent, sinkend mit wachsendem Korpus.
+
+Sie tunen Schwellen und Grounding-Sensitivität gegen beide Metriken gemeinsam, nicht gegen eine isoliert.
+
+## Tuning auf echten Support-Ticket-Daten
+
+Die einzigen Tuning-Daten mit Wert sind Ihre eigenen. Unser Vorgehen:
+
+1. Ziehen Sie eine geschichtete Stichprobe von 200 bis 300 gelösten Tickets aus den letzten 90 Tagen: häufige, Long-Tail, eskalierte.
+2. Lassen Sie je einen Senior-Agenten die ideale Antwort schreiben und markieren, ob der aktuelle Korpus sie überhaupt trägt. Die „sollte verweigern"-Tickets sind Gold.
+3. Lassen Sie die Pipeline laufen. Protokollieren Sie pro Anfrage Retrieval-Scores, Re-Rank-Scores, Grounding-Verdict und die finale Entscheidung.
+4. Tragen Sie beide Metriken gegen die Schwellen-Floors auf. Der Knick ist Ihr Startpunkt.
+5. Wiederholen Sie wöchentlich. Der Korpus ändert sich, die Fragen ändern sich, die Schwellen driften.
+
+Weshalb das funktioniert, wo ein generischer Benchmark versagt: Ihr Korpus hat seine eigene Score-Verteilung, Ihre Nutzer haben ihre eigenen Anfragemuster, und das LLM hinter dem Generator hat sein eigenes Grounding-Verhalten. Eine Schwelle aus einem öffentlichen Datensatz übersieht Ihre echten Ausfälle meilenweit.
+
+## Wie das in einem gelieferten Deploris-Mandat aussieht
+
+Für jedes RAG-System, das wir ausliefern, steht der Verweigerungspfad am ersten Tag im schriftlichen Scope. Wir bauen Retrieval-Pipeline, Re-Ranker, Grounding-Prüfung und Evaluations-Harness im gleichen 4 bis 6 Wochen First-Release-Fenster. Alles läuft per Default auf EU-Region-Infrastruktur (Frankfurt), unter einer SLA: 15-Min-P1-Median, 99,9 %+ monatliche Verfügbarkeit, 48h Rückrollbarkeit jeder Änderung. Schwellwerte, Grounding-Modell und Verweigerungs-Copy liegen in einer Konfiguration, die ein Product-Owner prüfen kann, nicht vergraben in Prompt-Strings. Wöchentliche Eval-Läufe fangen Regressionen vor den Agenten ab, und das Verweigerungs-Log speist die quartalsweise Roadmap des Doku-Teams.
+
+Ein SaaS-Unternehmen mit einem 60-Personen-Supportteam darf im Steady-State mit einer gesunden Verweigerungsrate zwischen 5 und 15 Prozent der eingehenden Anfragen rechnen. Diese Zahl ist eine Produktmetrik, die monatlich am Traffic überprüft wird, kein Fehler, den man wegoptimiert.
+
+## Wie es weitergeht
+
+Das Verweigerungsmuster ist eine von fünf Säulen eines belastbaren RAG-Stacks: Retrieval-Qualität, Re-Rank, Grounding, Verweigerung, kontinuierliche Evaluation. Wenn Sie zwischen Build und Buy abwägen, zeigt unser [Use Case RAG-Wissensbasis im Kundensupport](/use-cases/support-rag-knowledge-base) den vollständigen Scope-Rahmen. Wenn Sie bereits bauen und den Betrieb unter einem Vertrag wünschen, deckt unsere Leistung [RAG-Systeme](/services/development/rag-systeme) die SLA-Form ab. Der [Vergleich RAG vs. klassische Suche](/compare/rag-vs-traditional-search) rahmt die Entscheidung gegen Stichwortsuche, und das [RAG-Kostenmodell](/tools/rag-cost-model) nimmt Ihre eigenen Zahlen auf, bevor Sie sich festlegen.

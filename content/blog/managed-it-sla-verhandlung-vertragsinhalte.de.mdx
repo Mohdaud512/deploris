@@ -1,0 +1,96 @@
+---
+title: 'Managed-IT-SLA aushandeln: was wirklich in den Vertrag gehört'
+description: Ein beschaffungstauglicher Leitfaden zur Formulierung einer durchsetzbaren Managed-IT-SLA im Mittelstand, inklusive ehrlicher Hinweise auf Klauseln ohne Substanz.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - managed-it
+  - msp
+  - infrastruktur
+locale: de
+slug: managed-it-sla-verhandlung-vertragsinhalte
+---
+
+Die meisten Managed-IT-SLAs sehen beim ersten Lesen eindrucksvoll aus und zerbröseln beim ersten teuren Ausfall. Die Verfügbarkeitsgarantie sitzt über einer Definition, die alles ausschließt, was wirklich ausfällt. Die Reaktionszeit wird gegen eine Uhr gemessen, die erst anläuft, wenn ein Mensch in der richtigen Zeitzone das Ticket öffnet. Das Service-Credit ist auf die laufende Monatsrechnung gedeckelt, und das kauft selten zurück, was ein Lohn-Ausfall kostet. Wenn Sie für ein 200- bis 2.000-Arbeitsplatz-Haus einen Managed-IT-Vertrag unterschreiben, sind die folgenden Klauseln die, über die sich Verhandeln lohnt.
+
+## Prioritätsdefinition: was zählt tatsächlich als P1
+
+Jeder Anbieter hat eine P1-Klausel. Nur wenige definieren sie so, dass sie eine Beschaffungsprüfung übersteht.
+
+Eine belastbare P1-Definition benennt konkrete Geschäftsauswirkung, nicht anbieterseitige Symptome. Die Lohnbuchhaltung kann nicht laufen, das ERP ist nicht erreichbar, die Fertigungslinie steht, Microsoft 365 ist für mehr als zehn Nutzer ausgefallen, der Identity-Provider ist down. Anbieterseitige Definitionen ("ein Kernsystem ist betroffen") lassen den Anbieter nachträglich entscheiden, was zählt.
+
+Bestehen Sie auf einer kurzen, benannten P1-Systemliste in einem Anhang, zum Kickoff festgelegt und quartalsweise überprüft. Alles auf der Liste ist, wenn es ausfällt, P1. Nichts auf der Liste wird im Moment des Vorfalls neu verhandelt.
+
+P2 und P3 sind leichter, aber trotzdem zu definieren. P2 ist ein degradiertes Produktivsystem (langsam, sporadisch, mit fehlender nicht-kritischer Funktion). P3 ist eine Anfrage ohne Produktionsauswirkung (neue Mailbox, Passwort-Reset, Lizenzfrage). Belassen Sie es bei drei Stufen. Jeder Anbieter, der P4 und P5 anbietet, baut Mehrdeutigkeit absichtlich ein.
+
+## Messfenster: monatlich, nicht rollierend
+
+Reaktions- und Verfügbarkeitsprozente sind nur vergleichbar, wenn das Messfenster dasselbe ist.
+
+Wählen Sie ein Kalendermonatsfenster. "Rollierende 30 Tage" klingt ähnlich, aber das rollierende Fenster lässt eine schlechte Woche durch eine ruhige Woche später glätten. Ein Monatsfenster bedeutet, dass eine schlechte Oktoberwoche im Oktoberbericht erscheint und nicht nach November verschmiert wird.
+
+Für Reaktionszeit-Mediane zählt das Fenster noch mehr. Ein 15-Min-P1-Median über einen Kalendermonat ist durchsetzbar: zum Monatsende zählen Sie die P1-Tickets, berechnen den Median, vergleichen mit 15. Ein Median über "rollierende 30 Tage pro Ticket beim Schließen" ist nicht durchsetzbar, weil die Uhr weiterläuft.
+
+## Reaktion, Wiederherstellung und Lösung sind drei verschiedene Dinge
+
+Der häufigste SLA-Trick ist das Vermengen dieser drei.
+
+**Reaktion** ist die erste menschliche Bestätigung, nachdem der Alert ausgelöst hat. Für Deploris lautet die schriftliche SLA 15-Min P1-Median als Erstreaktion. Das ist eine gemessene Zahl aus einem Monitoring- und Paging-Stack (Datadog, PagerDuty, Opsgenie), keine Schätzung.
+
+**Wiederherstellung** ist der Dienst zurück im Betrieb, auch wenn die Ursache noch nicht behoben ist. Ein Failover auf die Standby-Firewall stellt wieder her. Ein umgerouteter VPN stellt wieder her. Wiederherstellungszeiten sind, was Nutzer fühlen; packen Sie sie in den Vertrag.
+
+**Lösung** ist Ursache identifiziert und dauerhaft behoben. Lösung passiert in Tagen, nicht in Minuten, und gehört in den quartalsweisen Review, nicht an die SLA-Uhr.
+
+Ein Vertrag, der "4-Stunden-Lösung bei P1" verspricht, lügt entweder darüber, was Lösung heißt, oder er verpflichtet sich zu einer technischen Unmöglichkeit. Ein Vertrag, der "15-Min P1-Median als Erstreaktion, 1-Stunden-Wiederherstellungs-Ziel bei P1, Lösung im Quartals-Review verfolgt" verspricht, ist ehrlich und durchsetzbar.
+
+## Credit-Mechanik mit Zähnen
+
+Verfügbarkeitsgarantien ohne Credits sind Theater. 99,9 % heißt nichts, wenn das einzige Mittel eine Entschuldigungs-Mail ist.
+
+Eine Credit-Mechanik mit Zähnen hat drei Eigenschaften. Erstens: sie läuft automatisch (der Anbieter gutschreibt ohne Anspruchseinreichung durch Sie). Zweitens: sie ist ungedeckelt oder hoch genug gedeckelt, um wehzutun (10 % der Monatsrechnung sind Theater, 50 % sind spürbar, ein Kündigungsrecht nach drei aufeinanderfolgenden gerissenen Monaten ist Hebel). Drittens: sie hängt an der konkreten Metrik, die verfehlt wurde, und ist nicht über alle Metriken gepoolt, sodass eine verfehlte Reaktionszeit nicht durch einen ruhigen Monat anderswo kompensiert werden kann.
+
+Verhandeln Sie ein außerordentliches Kündigungsrecht an einer konkreten SLA-Schwelle. Drei monatliche Verfehlungen des P1-Reaktions-Medians oder zwei aufeinanderfolgende Monate unter 99,5 % Verfügbarkeit kaufen Ihnen das Recht, ohne die üblichen 90 Tage Kündigungsfrist auszusteigen. Anbieter, die diese Klausel ablehnen, sagen Ihnen damit, dass sie Verfehlungen erwarten.
+
+## Ausschlussklauseln: Wartung, höhere Gewalt, Upstream-Carrier
+
+Jede SLA hat Ausschlüsse. Die Frage ist, ob Ihre spezifisch sind oder Hintertüren.
+
+**Geplante Wartung** muss durch eine Change-Fenster-Vereinbarung im Vertrag definiert sein. Benannte Fenster (Samstag 23:00 bis Sonntag 02:00 MEZ zum Beispiel), mit 72h schriftlicher Ankündigung für alles innerhalb des Fensters und 7 Tagen für alles außerhalb. "Geplante Wartung" ohne definiertes Fenster schließt alles aus, was der Anbieter kurzfristig ansetzt.
+
+**Höhere Gewalt** ist Standard, aber qualifizieren Sie sie. Ein Glasfaserschnitt am Rechenzentrum ist keine höhere Gewalt, wenn der Anbieter Dual-Carrier-Redundanz zugesagt hat. Ein regionaler AWS-Ausfall ist keine höhere Gewalt, wenn die Architektur per Entscheidung des Anbieters Single-Region ist. Die Klausel sollte Ereignisse benennen (Naturkatastrophe, staatlicher Eingriff, benannte Cyberangriffsklasse) und nicht pauschal auf "Ereignisse außerhalb unserer Kontrolle" verweisen.
+
+**Upstream-Carrier-Ausfälle** sind das Dornigste. Ein Anbieter kann keine Verfügbarkeit besitzen, die er nicht betreibt. Die ehrliche Klausel lautet: Upstream-Ausfälle sind aus der Verfügbarkeitsmetrik ausgeschlossen, aber der Anbieter verpflichtet sich zu einer konkreten Reaktionszeit (keine Lösung) für die Carrier-Eskalation, und der Vorfall erscheint im Quartals-Review für die architektonische Nachbesserung.
+
+## Berichtskadenz und Rufbereitschafts-Eskalation
+
+Berichte, die niemand liest, sind keine Berichte.
+
+Eine praktikable Kadenz: ein monatlicher SLA-Bericht (Verfügbarkeit je benanntem System, P1-Zahl, P1-Median-Erstreaktion, P1-Wiederherstellungszeiten, Credit-Berechnung), geliefert innerhalb von fünf Werktagen nach Monatsende. Ein quartalsweiser Review, in dem der Account-Ingenieur Metriken, Kapazitätsentwicklung, Risikoregister und Sub-Prozessor-Liste durchgeht. Eine jährliche Vertragsprüfung für Scope- und Preisänderungen.
+
+Für die Rufbereitschafts-Eskalation benennt der Vertrag den Pfad nach Rolle, nicht nach Person. Benannter On-Call-Ingenieur, dann Schichtleitung, dann Account-Ingenieur, dann Service-Delivery-Direktor, mit Kontaktweg und erwarteter Bestätigungszeit je Ebene. Die Pfade darüber müssen 24/7 über alle betriebenen Geografien erreichbar sein. Für einen DACH + USA-Footprint sind 12-Stunden-Übergabelücken ein Zeichen, dass der Anbieter eine Geografie ist, die zwei vortäuscht.
+
+## Change-Fenster, Offboarding und die Klauseln, die Anbieter still weglassen
+
+**Change-Fenster.** Reguläre Fenster werden beim Kickoff vereinbart. Not-Changes haben eine eigene Klausel (kürzere Ankündigung, höhere Freigabe, verpflichtender Incident-Bericht). Die 48h Rückrollbarkeit, die Deploris schriftlich zusichert, bedeutet, dass jede Änderung zwei Werktage lang ohne Change-Request-Zyklus zurückrollbar ist; packen Sie das Äquivalent in Ihren Vertrag, nicht jeder Anbieter bietet das.
+
+**Offboarding.** Die Klausel, die Sie wollen: bei Kündigung gibt der Anbieter alle Daten innerhalb von 30 Tagen in einem dokumentierten Format zurück, rotiert und übergibt alle Zugangsdaten, exportiert alle Konfigurationen (Firewall-Regeln, DNS-Zonen, Monitoring-Dashboards, Ticket-Historie) und kooperiert mit dem Nachfolger zu einem definierten Stundensatz für eine definierte Stundenanzahl. Ohne diese Klausel dauert der nächste Übergang sechs Monate statt sechs Wochen.
+
+**Datenverarbeitung.** Ein DSGVO-konformer AV-Vertrag sitzt als Anhang. Benannte Sub-Prozessoren (jedes ITSM-Tool, jeder Monitoring-Anbieter, jeder Backup-Anbieter), benannte Hosting-Regionen (EU-Region Frankfurt als Default, wo anwendbar), benannte Datenkategorien. Prüfen Sie den Anhang quartalsweise, nicht jährlich.
+
+## Die Klauseln, die Standard-Theater sind
+
+Vier Klauseln klingen schützend und sind es meist nicht.
+
+"99,9 % Verfügbarkeitsgarantie" ohne Credit-Mechanik und ohne konkrete Ausschlüsse. "Best-Effort-Reaktionszeiten" auf jeder Prioritätsstufe. "Dedizierter Account-Manager", der tatsächlich ein geteilter Account-Manager hinter einer Mailbox ist. "24/7-Support", bei dem die Nachtschicht ein Tier-1-Entgegennahmedienst ist mit Eskalation erst zum nächsten Werktag.
+
+Wenn ein konkurrierendes Angebot allein auf diesen Klauseln ruht, ist es reaktiver Support in besserer Verpackung.
+
+## Worauf sich eine mittelstandstaugliche SLA tatsächlich verpflichtet
+
+Eine schriftliche SLA, die eine Unterschrift wert ist, verpflichtet sich auf: einen konkreten Erstreaktions-Median je Priorität (Deploris: 15-Min P1-Median), ein konkretes Verfügbarkeitsziel mit Zähnen (99,9%+ monatlich, mit Credits), 48h Rückrollbarkeit bei Änderungen, benannte Rufbereitschafts-Pfade, eine Change-Fenster-Vereinbarung, einen DSGVO-konformen AV-Vertrag mit EU-Region-Hosting als Default, monatliche Berichte mit sichtbarer Credit-Berechnung, einen quartalsweisen Review im Kalender schon vor Unterschrift und ein außerordentliches Kündigungsrecht an konkreten SLA-Schwellen.
+
+Alles andere ist Verhandlung um dieses Rückgrat.
+
+Das vollständige Managed-IT-Modell, in das diese SLA-Form passt, finden Sie im [Anwendungsfall MSP-Übergabe zu Managed IT](/de/use-cases/msp-uebergabe-managed-it) und in der zugrunde liegenden Leistung [Infrastruktur-Support](/de/services/hardware/infrastruktur-support). Die oben referenzierte AV-Vorlage steht unter [AV-Vertrag](/de/legal/dpa).
+
+*Entwurf einer SLA eines Mitbewerbers zu prüfen? [Schreiben Sie uns kurz](/de/contact), Antwort innerhalb eines Werktags.*

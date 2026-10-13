@@ -1,0 +1,94 @@
+---
+title: "Wi-Fi 6E vs. Wi-Fi 7 fürs Lager 2026: was jetzt kaufen"
+description: Ehrlicher Vergleich von Wi-Fi 6E und Wi-Fi 7 für Lager-, 3PL- und Logistikzentren-Refreshes, mit Gerätemix- und DFS-Hinweisen für EU und US.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - wlan
+  - lager
+  - infrastruktur
+locale: de
+slug: wifi-6e-vs-wifi-7-lager-2026
+---
+
+Wenn Sie 2026 einen Lager-WLAN-Refresh planen, stehen auf der Shortlist meist zwei Stufen: ausgereiftes Wi-Fi 6E (Cisco Meraki MR57, Aruba AP-635, Juniper Mist AP45, Ruckus R750) und die neue Wi-Fi-7-Linie (Meraki MR58, Aruba AP-700er, Juniper Mist AP64, Ruckus R770). Der Vertriebspitch klingt in beiden Fällen ähnlich. Die richtige Antwort ist es selten. Dieser Text zeigt, wo Wi-Fi 7 den Aufpreis rechtfertigt, wo Wi-Fi 6E weiterhin die vernünftige Wahl ist, und welche zwei Punkte das Thema für die meisten Mittelstandsstandorte faktisch entscheiden: Ihre Handheld-Flotte und Ihre Regulierungsdomäne.
+
+## Was Wi-Fi 7 wirklich bringt
+
+Drei Features zählen im Lager, nur drei.
+
+### 320-MHz-Kanäle
+
+Wi-Fi 7 verdoppelt die maximale 6-GHz-Kanalbreite von 160 MHz auf 320 MHz. Auf dem Papier doppelter Spitzen-Durchsatz pro Client. In der Praxis hilft das nur in Zonen mit wenigen Clients mit hohem Datenbedarf: staplermontierte Terminals mit Live-Kamera, Pick-Stationen mit hochauflösenden Etikettenbildern oder video-gestützte Sicherheitssysteme. Dichte Scannerflächen mit 300 Handhelds à durchschnittlich 1 Mbps profitieren nicht, denn das Limit ist Airtime-Konkurrenz, nicht Kanalbreite.
+
+### Multi-Link Operation (MLO)
+
+MLO erlaubt es einem Client, zwei Funkmodule (etwa 5 GHz und 6 GHz) gleichzeitig zu nutzen, wobei der AP den Verkehr über beide Pfade steuert. Für Pick-by-Voice-Headsets und Staplerterminals ist das die eigentliche Nachricht: ein kurzer Störer auf einem Band legt die Session nicht mehr lahm, weil der zweite Link weitertransportiert. Vocollect A700 und A730 beherrschen Stand heute noch kein MLO, der Nutzen beschränkt sich auf die Geräte, die es können.
+
+### Deterministische Latenz
+
+Wi-Fi 7 ergänzt restricted Target Wake Time und verbessertes QoS-Mapping. Für ein Lager, das Pick-by-Voice mit strikten Sub-150-ms-Roam-Budgets fährt, drückt das die Worst-Case-Latenz. Es hilft nicht, wenn 802.11k, v und r falsch konfiguriert sind, und das ist deutlich häufiger die Ursache von Jitter als der Standard selbst.
+
+## Wo Wi-Fi 7 den Aufpreis wert ist
+
+Drei saubere Fälle.
+
+- **Greenfield-Neubauten.** Neue Verteilzentren über 20.000 Quadratmeter mit einer projektierten Funk-Lebensdauer von fünf bis sieben Jahren. Der Mehrpreis von Wi-Fi 7 gegenüber 6E ist klein im Vergleich zu Verkabelung, PoE und Montage, und Sie vermeiden einen Mid-Cycle-Refresh, sobald 6-GHz-Geräte Standard sind.
+- **Dichte 6-GHz-fähige Handheld-Flotten.** Wenn der Rollout-Plan Wi-Fi-7-Scanner (Zebra TC58 und TC73, Honeywell CT47) über Hunderte Picker vorsieht, erlauben Wi-Fi-7-APs genau diesen Geräten, 6 GHz mit MLO auch zu nutzen. Auf einem Wi-Fi-6E-AP laufen dieselben Scanner, lassen MLO aber auf dem Tisch liegen.
+- **Staplermontierte Video-Workloads.** Dock-Tor-Kameras, Stapler-Video für Sicherheit oder Vision-Picking, Fahrzeug-Barcode-Validierung mit Echtzeitrendering. Diese Lasten sind 2026 noch selten, nehmen aber zu, und sind genau das Szenario, für das 320-MHz-Kanäle und MLO gebaut wurden.
+
+## Wo Wi-Fi 6E weiterhin die richtige Wahl ist
+
+Vier Fälle decken die meisten Mittelstands-Refreshes ab.
+
+- **Inkrementeller Refresh einer Wi-Fi-6-Flotte.** Sie tauschen über einen rollenden Zweijahresplan jeweils zwölf APs, nicht den ganzen Standort auf einmal. Wi-Fi-6E-APs sind preislich attraktiv, Controller und Management-Toolchain sind ausgereift.
+- **Mischflotte mit älteren Zebra MC9300, TC52 oder Honeywell CK65.** Diese Geräte reichen bis Wi-Fi 6 (teils Wi-Fi 5) und sehen null Nutzen aus einem Wi-Fi-7-AP. Wi-Fi-7-APs für Wi-Fi-6-Clients zu kaufen heißt, Aufpreis für Marketingmaterial zu zahlen.
+- **Kostensensitive Projekte.** Der Delta zwischen Wi-Fi 7 und 6E auf einem 60-AP-Standort ist weiterhin spürbar und oft besser in Antennen, kühlhaustaugliche Gehäuse oder eine ordentliche Vor-Ort-Ausleuchtung investiert als in das neuere Silizium.
+- **Standorte ohne kurzfristigen 6-GHz-Geräte-Fahrplan.** Wenn der Scanner-Refresh drei Jahre entfernt ist und die aktuelle Flotte 6 GHz nicht nutzt, bleibt die zusätzliche 6-GHz-Kapazität über das gesamte Payback-Fenster ungenutzt.
+
+## Die Gerätemix-Tabelle
+
+Prüfen Sie das gegen Ihren tatsächlichen Scanner- und Headset-Bestand, bevor jemand eine Stückliste quotiert.
+
+| Gerät | Max. Standard | 6-GHz-fähig | MLO-fähig |
+|---|---|---|---|
+| Zebra TC52, TC56 | Wi-Fi 6 | Nein | Nein |
+| Zebra TC53, TC58 | Wi-Fi 6E (TC53), Wi-Fi 7 (TC58) | Ja | nur TC58 |
+| Zebra TC73, TC78 | Wi-Fi 6E bis Wi-Fi 7 (SKU-abhängig) | Ja | teilweise |
+| Zebra MC9300 | Wi-Fi 5 bis Wi-Fi 6 (späte SKUs) | Nein | Nein |
+| Zebra MC9400 | Wi-Fi 6E | Ja | Nein |
+| Zebra WT6300 Handgelenk-Terminal | Wi-Fi 6 | Nein | Nein |
+| Honeywell CT45 | Wi-Fi 6 | Nein | Nein |
+| Honeywell CT47 | Wi-Fi 6E bis Wi-Fi 7 (SKU-abhängig) | Ja | teilweise |
+| Honeywell CT60, CK65 | Wi-Fi 5 bis Wi-Fi 6 | Nein | Nein |
+| Datalogic Memor 20 | Wi-Fi 5 | Nein | Nein |
+| Datalogic Skorpio X5 | Wi-Fi 6 | Nein | Nein |
+| Vocollect A700, A730 | Wi-Fi 6 (A730) | Nein | Nein |
+
+Das Muster wiederholt sich in den Inventaren, die wir prüfen: die Pick-by-Voice-Schicht und die ältere Handheld-Schicht sind weiterhin Wi-Fi 6. Den AP überzudimensionieren ist ein häufiger Fehler; die Antenne unterzudimensionieren ist noch häufiger und teurer zu beheben.
+
+## DFS in der EU vs. in den USA
+
+Hier bricht der Vergleich die regionale Symmetrie.
+
+In den USA hat die FCC die vollen 1.200 MHz von 6 GHz für unlizenzierte Innenraumnutzung geöffnet, Standard-Power-Betrieb mit Automated Frequency Coordination (AFC) ist produktiv. Ein Wi-Fi-7-AP in einem US-Lager kann 320-MHz-Kanäle über 6 GHz mit echter Leistung nutzen, DFS auf 5 GHz ist bekannt.
+
+In der EU sind nur 480 MHz von 6 GHz freigegeben (5945 bis 6425 MHz), das reicht für maximal einen 320-MHz-Kanal pro Standort. Zwei 320-MHz-Kanäle für Zellüberlappung sind nicht verfügbar. Für die meisten Lager wird 6 GHz damit zur Kapazitätsreserve und nicht zum Primärband; der Großteil des Designs läuft weiterhin über sauber geplantes 5 GHz mit DFS. Wer in Frankfurt Wi-Fi 7 mit US-Kapazitätserwartungen kauft, wird enttäuscht.
+
+Das pragmatische Design in einem Frankfurter oder Münchener Verteilzentrum 2026 bleibt: 5 GHz primär, 6 GHz als Kapazitätsreserve für Wi-Fi-6E- und 7-Clients, 2,4 GHz nur noch für alte Etikettendrucker und IoT. Wi-Fi 7 hilft dort, wo Geräte es können; es verändert nicht den grundlegenden Kanalplan.
+
+## Die Hersteller, ehrlich eingeordnet
+
+- **Cisco Meraki MR57 (6E) vs. MR58 (7).** Cloud-managed, starke Roaming-Defaults, die Operations-Toolchain kennen die meisten Mittelstands-IT-Teams bereits. Der MR58 lohnt den Delta auf Neubauten, der MR57 bleibt richtig im inkrementellen Refresh.
+- **Aruba AP-635 (6E) vs. AP-700er (7).** Die AP-700er-Linie bringt echtes MLO und Tri-Band-Parallelbetrieb. Aruba Central und ClearPass gehören weiter zu den ausgereiftesten Policy-Schichten.
+- **Juniper Mist AP45 (6E) vs. AP64 (7).** Die AI-gestützte Marvis-Schicht ist hier der eigentliche Unterschied, nicht die Funkmodule. Auf einem Bestandsstandort mit Roaming-Problemen verdient Mist seinen Platz unabhängig vom Standard.
+- **Ruckus R750 (6E) vs. R770 (7).** BeamFlex-adaptive Antennen bleiben in reflexionsreichen Regalumgebungen ungewöhnlich wirksam. Der R770 bringt 320 MHz, soweit es die Regulierung zulässt.
+- **Extreme und Fortinet.** Beide Hersteller liefern seriöse Wi-Fi-7-Linien. Entscheiden Sie nach Controller-Fit, nicht nach Funk-Datenblatt.
+
+## Die Entscheidung in einem Absatz
+
+Wenn Sie einen Standort in einem Zug refreshen, Ihre Flotte binnen zwei Jahren auf Wi-Fi-7-Scanner wechselt und Sie in den USA stehen, kaufen Sie Wi-Fi 7. Wenn Sie inkrementell refreshen, eine Mischflotte aus Zebra MC9300 und TC52 neben neuerem Gerät betreiben oder über mehrere EU-Standorte planen, in denen 6 GHz beschränkt ist, kaufen Sie Wi-Fi 6E und investieren den gesparten Betrag in eine ordentliche Ausleuchtung und einen Antennenplan. In beiden Fällen zählt das Design mehr als der Standard.
+
+Den vollständigen Ansatz für Lager-Funkplanung (prädiktive Modellierung, Vor-Ort-Messung unter realer Picking-Last, Sanierung und Nachvalidierung) finden Sie in unserem Use-Case [WLAN-Ausleuchtung Lager für Scanner und Pick-by-Voice](/de/use-cases/lager-wlan-ausleuchtung). Die zugrunde liegende Leistung liegt unter [WLAN-Ausleuchtung](/de/services/hardware/wlan-ausleuchtung), und wenn Sie das Netz nach Cutover unter einer SLA betrieben haben wollen (15 Min P1-Median, 99,9 %+ Verfügbarkeit, EU-Region Frankfurt, zweisprachig DE + EN), sitzt das unter [Netzwerk-Support](/de/services/hardware/netzwerk-support).
+
+*Weiterführend: [Praxisleitfaden für WLAN-Ausleuchtungen, die reale Abdeckung tatsächlich vorhersagen](/de/blog/wifi-survey-guide).*

@@ -1,0 +1,106 @@
+---
+title: "Zebra and Honeywell scanner roaming: fixing the 802.11k/v/r setup"
+description: A practitioner guide to configuring 802.11k, v, and r for Zebra and Honeywell warehouse scanners, with device-specific gotchas and validation steps.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - wifi
+  - warehouse
+  - infrastructure
+locale: en
+slug: zebra-honeywell-scanner-roaming-802-11-kvr
+---
+
+Scanner roaming is the quietest reason a warehouse WMS looks slow. The device holds onto a weakening AP a few seconds too long, the picker scans twice to be sure, and SAP EWM or Manhattan Active logs a duplicate. Multiply by six pickers per aisle, two shifts, two sites, and the problem is big enough to fund a whole project. The usual fix list reads "enable 802.11k, v, and r on the controller." It is almost always more complicated than that, because the device fleet does not behave uniformly. This post goes through what each amendment actually does, the misconfiguration patterns we see most often, and the device-specific traps on Zebra and Honeywell handhelds.
+
+## What 802.11k, v, and r actually do
+
+Three separate standards, often spoken about as if they were one.
+
+### 802.11k, neighbor reports
+
+The AP maintains a list of neighbouring APs (SSID, BSSID, channel, radio metrics) and advertises them to clients on request. Instead of a device scanning every channel to find a roam candidate, it asks the current AP "who else is nearby" and gets a shortlist. Scan time drops from seconds to milliseconds, which matters because scanning is when the client cannot receive data.
+
+### 802.11v, BSS Transition Management
+
+The AP can send a request to the client suggesting it move to a specific target AP, with a reason code (load balancing, signal strength, imminent AP outage). The client can accept, reject, or ignore. This is the standard that turns "the client decided to roam" into "the controller suggested a roam that the client agreed to."
+
+### 802.11r, Fast BSS Transition
+
+The 802.1X and PMK (pairwise master key) exchange is cached across the mobility domain so that re-authenticating to a new AP takes one round-trip instead of five. On an enterprise WPA2 or WPA3 network with 802.1X, this is the difference between a 150ms roam and a 15ms roam. On a PSK network, the benefit is smaller but still real.
+
+The three combine cleanly on a modern fleet: 11k and 11v tell the client where to go and when; 11r makes the move cheap once it decides.
+
+## The misconfiguration patterns we see most
+
+Four patterns cover most of what breaks on site.
+
+### 11r enabled on the controller, fleet mix includes legacy scanners
+
+Fast Transition requires client-side support. Zebra TC53, TC58, TC73, Honeywell CT45 and CT47, and Vocollect A700 and A730 all handle it. The older Zebra MC9300 (Android 8 or earlier firmware) and some Honeywell CK65 SKUs do not negotiate 11r cleanly and will fail association against an FT-only SSID. The fix is a dual SSID (one with 11r enabled, one without) or 11r in mixed mode (where supported), not pretending the old devices will catch up.
+
+### 11v enabled with aggressive disassociation timers
+
+The BTM request carries a disassociation imminent flag and timer. If set to a few seconds and the client is slow to react (older firmware, busy radio, legacy device), the AP disassociates the client before it has moved, and the picker gets a visible drop. The right default is disassociation imminent on but with a timer long enough for the slowest device to complete the move, and we tune it by device class during the active survey.
+
+### 11k enabled without a proper AP neighbor list
+
+The feature works, but the neighbour reports include every AP in the mobility domain, not the actual radio neighbours. The client gets a shortlist that includes APs it cannot hear. Correct configuration limits the neighbour report to APs within a measured RSSI threshold of each AP (based on the on-site survey), not the full controller inventory.
+
+### Minimum data rates left at vendor default
+
+This one is not a 11k/v/r setting but it is the single most common root cause we find. If the AP is still advertising 1 Mbps and 6 Mbps, the client sees distant APs as viable and sticks to the one it associated with. Raising the minimum basic rate to 12 or 24 Mbps on 5 GHz forces the client to disassociate when the signal drops, and the k, v, and r machinery actually gets to run. Without this change, 11k and 11v are suggestions nobody listens to.
+
+## Device-specific gotchas
+
+### Zebra TC53 and TC58
+
+The Zebra Fusion radio stack exposes a roaming trigger threshold and a hysteresis setting in the Fusion configuration. Default values are reasonable for office use and poor for warehouses. On a dense 5 GHz plan with cell overlap in the 15 to 20 percent range, we typically raise the trigger threshold to around minus 70 dBm (from the default minus 75 dBm) so the device looks for alternatives before it is on its last legs. The TC58 adds Wi-Fi 7 and MLO, which changes the roaming calculus; leave it on manufacturer defaults until the first survey, then tune.
+
+### Zebra WT6300 wrist terminal
+
+The WT6300 is Wi-Fi 6 only and has a known preference for the first AP it associates with each session. On a long aisle, this manifests as the terminal staying on the AP at one end even after the picker has walked to the other. 802.11v with a clear BTM request helps; 802.11r is required for sub-50ms voice-pick parity. We raise the minimum data rate to force the stickiness breakage.
+
+### Zebra MC9300 (late firmware)
+
+Treat it as a Wi-Fi 6 client with partial 11k and 11v and no reliable 11r. Put it on an SSID without Fast Transition or on a mixed-mode SSID if your controller supports it. Expect roaming times in the 150ms to 300ms range, which is fine for scanner work but borderline for voice.
+
+### Honeywell CT45
+
+Honeywell has published guidance for voice-pick deployments that enables 11k, 11v, and 11r by default on the SmartSystems profile. The gotcha is a preferred-AP sticking behaviour on firmware revisions below the 2024 release: the client keeps a soft affinity for the last AP it successfully authenticated against, and will not move until signal degrades past a hard threshold. Upgrade firmware first, then tune.
+
+### Honeywell CT47
+
+The CT47 is the current Wi-Fi 6E to Wi-Fi 7 flagship. 11k, v, and r all work cleanly. The common site problem is 6 GHz: in EU domains the available spectrum is narrow enough that cell overlap on 6 GHz is poor, so the CT47 roams on 5 GHz most of the time and uses 6 GHz as a capacity reserve. Design accordingly.
+
+### Vocollect A700 and A730
+
+Voice-pick is the use case that justifies the entire 11k/v/r stack. The A730 needs sub-150ms roam time to avoid a visible audio gap. 11r is non-negotiable (over 802.1X PEAP or TLS), 11k is strongly recommended, and 11v is tuned carefully because an incorrect BTM request mid-utterance drops a word. We also drop the 802.1X session timeout to keep the handshake cheap.
+
+### Datalogic Memor 20 and Skorpio X5
+
+Older Wi-Fi 5 and Wi-Fi 6 silicon. Treat 11r as experimental, 11k and 11v as best-effort. If the fleet is a mix of Datalogic plus Zebra plus Honeywell, this is usually the device that defines the slowest-roamer baseline.
+
+## How to validate
+
+Three steps, in order.
+
+### Ekahau or Hamina active survey
+
+An active survey with the actual device fleet (not a laptop) walking the real aisles exposes the roaming behaviour that matters. The survey tool logs every re-association, every scan, every BTM request accepted or rejected. Pair this with a passive survey to catch the AP that is advertising poor neighbour lists.
+
+### Syslog analysis on the controller
+
+The controller logs every association, disassociation, 11v BTM query, and 11r key exchange. A twenty-minute shift sample is usually enough to see the pattern: are clients moving on their own, moving on BTM request, or being kicked by the AP? If the ratio of controller-initiated kicks to client-initiated moves is high, the config is too aggressive.
+
+### Device logs
+
+Zebra StageNow and Honeywell SmartSystems both expose detailed roaming logs. Pulling these from a representative sample of devices (not just one) shows whether the client firmware is honouring BTM requests and whether 11r is actually being negotiated.
+
+## The order of operations
+
+If you take one thing from this piece, make it the order of operations. Fix the minimum data rate first (12 or 24 Mbps on 5 GHz), then enable 11k with a proper neighbour list, then 11v with a disassociation timer tuned to the slowest device, and only then 11r on an SSID appropriate to your fleet. Enabling all four at once on a mixed fleet is how an afternoon of "we are turning on roaming" becomes a week of broken scanners.
+
+For how this fits into the broader survey and remediation process (predictive modelling, on-site passive and active measurement under real load, remediation design, and post-cutover validation) see the pillar on [warehouse WiFi surveys for scanners and voice-pick](/use-cases/warehouse-wifi-surveys). The underlying capability sits under [WiFi surveys](/services/hardware/wifi-surveys), and the managed network layer that keeps the config stable after cutover (15-min P1 median, 99.9%+ uptime, EU-region hosting in Frankfurt, bilingual DE + EN) sits under [network support](/services/hardware/network-support).
+
+*Related reading: [a practical guide to WiFi surveys that actually predict real-world coverage](/blog/wifi-survey-guide).*

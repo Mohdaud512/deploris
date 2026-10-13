@@ -1,0 +1,108 @@
+---
+title: "RPA vs AI agents: when to stop patching old scripts"
+description: An honest comparison of legacy RPA against modern AI agents for mid-market operations, with the signals that say it is time to migrate and the risks of doing so.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - ai-agents
+  - automation
+  - operations
+locale: en
+slug: rpa-vs-ai-agents-when-to-switch
+---
+
+Most mid-market operations stacks still run on RPA scripts that were recorded three years ago by a vendor who has since left the building. Those scripts worked, once. Then the ERP shipped a UI update, the exception rate climbed, and the fix queue stopped being anyone's job. The question is no longer whether AI agents will replace RPA across the board (they will not), but which workflows you should migrate, which ones you should keep on RPA, and how to tell the difference without a six-month evaluation.
+
+## Where RPA still earns its keep
+
+Legacy RPA (UiPath, Automation Anywhere, Blue Prism) was built for a specific job, and for that job it is still the right tool. Deterministic, high-volume, structured work on stable interfaces is where a recorded click path beats anything else on throughput and unit cost.
+
+- **Batch postings against a stable ERP screen.** Same fields, same validation, same button, thousands of times a night. An AI agent here is overkill, slower, and more expensive per transaction.
+- **Keystroke-level work on legacy terminals.** Mainframe green screens, old desktop clients, anything without an API. RPA still has the richest connector library for the ugly bits of the enterprise.
+- **Regulated workflows where every step must be identical.** Deterministic replay is a feature, not a bug, when an auditor asks what the robot did on the third Tuesday of last quarter.
+
+If the process is well-understood, the inputs are structured, the exception rate is low, and nobody is adding new rules every month, RPA is the correct answer. Replacing it with an agent costs more and buys you nothing.
+
+## Where AI agents win
+
+The failure mode of RPA is not that it is slow. It is that it has no capacity for the cases it was not recorded against. An AI agent (built on OpenAI, Anthropic Claude, or an Azure OpenAI deployment, wired together with LangGraph or a thin custom orchestrator) can reason over the inputs, call a fixed tool list against your systems of record, and escalate to a named human when a case falls outside its guardrails.
+
+- **Exception handling.** Missing PO numbers, mismatched totals, duplicate invoices, counterparties with slightly different legal names. An RPA script hits a validation error and dies. An agent reads the context, proposes a resolution, and either writes it (within tolerance) or raises a one-line explanation for a human.
+- **Unstructured input.** Emails, PDFs, scanned documents, chat messages. An agent extracts the ask, not the form.
+- **Multi-step reasoning across systems.** Pull context from the CRM, check inventory in the WMS, draft the response, log the decision in the audit system. RPA can wire the steps; it cannot decide between them.
+- **Workflows that change often.** Pricing rules, approval thresholds, routing logic. Changing an agent's behaviour is an edit to a written scope, not a two-week rebuild.
+
+The pattern that comes up most often in our [AI automation use case for mid-market operations teams](/use-cases/operations-ai-automation) is exactly this: an RPA script that once handled 80 percent of invoice matches, now handling 55 percent, with the remaining 45 percent dumped on three accounts-payable specialists who spend their week on exceptions. The migration is not RPA to agent for the whole workflow. It is RPA for the straight match, agent for the exception path.
+
+## Six signals it is time to migrate
+
+You do not need a formal evaluation to see when an RPA deployment has run its course. If three of the following six are true, the business case for migrating that specific workflow is probably already clear.
+
+### 1. Selectors break monthly
+
+Every ERP, CRM, or SaaS UI update costs you a week of fix work, and nobody owns the queue. The script is not broken in principle; it is broken in practice, because the surface it depends on will not stop moving.
+
+### 2. Exception rate above 15 percent
+
+More than one in six cases falls out of the happy path. The automation is covering the easy work, which was never the expensive work.
+
+### 3. Humans babysit the bot
+
+A specialist watches the robot run and intervenes when it stalls. That is not automation; that is a slower version of doing it by hand.
+
+### 4. The audit trail is split across three tools
+
+The RPA platform logs the clicks, the ERP logs the writes, the ticketing system logs the exceptions, and nobody can produce a single per-case view when leadership asks.
+
+### 5. The vendor who built it has left
+
+The implementation partner is gone, the internal author has moved teams, and the script is a black box. Every change is a rediscovery exercise.
+
+### 6. New rules land faster than the bot can be rebuilt
+
+Business rules move at the speed of your market. If the bot takes four weeks to update and the pricing team changes thresholds twice a month, the automation is permanently out of date.
+
+## Where AI agents introduce new risks
+
+Honest answer: migrating from RPA to an agent trades one risk profile for another. The failure modes are different, and if you do not design for them up front, the agent will create a worse problem than the RPA script it replaced.
+
+- **Hallucination.** An agent can confidently extract a VAT ID that does not exist, propose a GL account that is not in your chart of accounts, or match an invoice to the wrong purchase order. RPA fails deterministically; agents fail plausibly.
+- **Non-determinism.** The same input can produce slightly different outputs across runs. Auditors notice.
+- **Silent drift.** Model providers update their models, embeddings shift, prompts that worked last quarter degrade. If you are not measuring, you will not see it.
+- **Over-broad tool access.** An agent with "the internet" or "write access to the whole ERP" is a liability. The mitigation is a short, named tool list and reversible writes, not a bigger system prompt.
+
+Mitigations are known and boring. Named scope, fixed tool list, human-in-the-loop at the risky steps, reversible writes with a 48h window, full trace logging per case, a shadow run before any human leaves the loop, measurable automation and exception rates, and a kill switch any operations lead can trigger without engineering support. These are the same guardrails we build into every [AI agents and automation](/services/development/ai-agents-automation) engagement, and they are the reason non-determinism stops being a scare word and starts being a managed property of the system.
+
+## How to migrate without burning the stack
+
+A full RPA-to-agent cutover in one quarter is a story procurement likes and nobody delivers. The pattern that actually works is incremental, measured, and starts with the exception queue, not the main path.
+
+### Keep RPA on the deterministic core
+
+If the straight-match path works and the volume is high, do not touch it. The agent sits next to the RPA script, not in front of it.
+
+### Put the agent on the exception path first
+
+Everything the RPA bot kicks out goes to the agent instead of the shared mailbox. The agent reads the context, proposes a resolution, writes within tolerance, or raises an explained exception for a human. Measure automation rate on the exception queue, not the whole workflow.
+
+### Run two weeks in shadow before cutting over
+
+The agent decides, the human decides, you measure the delta. Only promote the agent to active handling when the shadow metrics are inside tolerance.
+
+### Reversible writes, 48 hours, non-negotiable
+
+Every write the agent makes is reversible for 48 hours. Every tool call is logged. Every decision is explainable from the audit trail. This is table stakes, not a differentiator, and if your vendor cannot describe how reversibility is implemented in your systems of record, you are buying a demo.
+
+### Expand only when the metrics support it
+
+Automation rate, exception rate, hours saved, error rate. Monthly review, quarterly roadmap, no new processes added until the current one is boring.
+
+A realistic first production release lands in 4 to 6 weeks, with a 15-min P1 median response, 99.9%+ uptime target, and the full stack running EU-region out of Frankfurt by default. Full rollout for one process typically completes inside 3 to 6 months, and additional processes join the stack on the same two-week cadence.
+
+## Not sure which workflow to migrate first
+
+The honest version of this decision is a one-hour conversation with the two people who actually run the process, a minute-count of the current path, and an exception classification. If you want to do that part yourself before talking to anyone, the [AI Opportunity Finder](/ai-opportunity-finder) runs the same scoping assessment in about ten minutes and gives you back a defensible shortlist. If you already know which workflow is the problem and want to see where it sits on the agent versus deterministic automation line, the [AI agents vs workflow automation comparison](/compare/ai-agents-vs-automation) is the shorter read.
+
+The point of the migration is not to retire RPA. The point is to stop pretending that an RPA script written three years ago is still the right tool for a process whose exception rate has quietly tripled.
+
+*If you want a scoping call that ends with a written scope, a target automation rate, and a defensible price band inside one business day of the second session, [we are set up for that](/contact).*

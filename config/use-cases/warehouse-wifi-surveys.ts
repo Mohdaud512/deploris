@@ -223,6 +223,16 @@ export const warehouseWifiSurveys: UseCase = {
             href: '/industries',
             blurb: 'How Deploris delivers for logistics, retail, manufacturing, and other mid-market sectors in the US and DACH.',
           },
+          {
+            label: 'Blog: Wi-Fi 6E vs Wi-Fi 7 for warehouses in 2026',
+            href: '/blog/wifi-6e-vs-wifi-7-warehouse-2026',
+            blurb: 'Honest buy-now comparison for warehouse refresh decisions: where Wi-Fi 7 justifies the premium, where 6E still wins.',
+          },
+          {
+            label: 'Blog: Zebra and Honeywell scanner roaming, 802.11k/v/r setup',
+            href: '/blog/zebra-honeywell-scanner-roaming-802-11-kvr',
+            blurb: 'Deep-tech practitioner guide to fixing scanner roaming problems on mixed Zebra, Honeywell, and voice-pick fleets.',
+          },
         ],
       },
       cta: {
@@ -414,6 +424,16 @@ export const warehouseWifiSurveys: UseCase = {
             label: 'Branchen, die wir bedienen',
             href: '/industries',
             blurb: 'Wie Deploris Logistik, Handel, Fertigung und weitere Mittelstandssektoren in den USA und DACH beliefert.',
+          },
+          {
+            label: 'Blog: Wi-Fi 6E vs. Wi-Fi 7 fürs Lager 2026',
+            href: '/blog/wifi-6e-vs-wifi-7-lager-2026',
+            blurb: 'Ehrlicher Kaufvergleich für die Lager-WLAN-Erneuerung: wo Wi-Fi 7 den Aufpreis rechtfertigt, wo 6E weiter gewinnt.',
+          },
+          {
+            label: 'Blog: Scanner-Roaming mit Zebra und Honeywell, 802.11k/v/r',
+            href: '/blog/zebra-honeywell-scanner-roaming-802-11-kvr',
+            blurb: 'Praxis-Leitfaden zur Behebung von Roaming-Problemen auf gemischten Zebra-, Honeywell- und Voice-Pick-Flotten.',
           },
         ],
       },

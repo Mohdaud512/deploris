@@ -1,0 +1,109 @@
+---
+title: 'Equinix remote hands pricing: how the ticketing actually works'
+description: An honest guide to Equinix remote-hands and Smart Hands pricing, ticket lifecycle, SLAs, and where colo tenants over-spend on reactive work.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - data-center
+  - colocation
+  - operations
+locale: en
+slug: equinix-remote-hands-pricing-ticketing
+---
+
+Colocation remote hands sounds like a flat utility until the first invoice lands. The hourly rate on the Equinix order form is only the opening number. The real cost is driven by what Equinix calls Smart Hands tier, by billing increments, by scheduled-vs-unscheduled multipliers, and by the hidden add-ons for parts handling, cross-connects, and after-hours work. This piece unpacks how Equinix (and, in short, Digital Realty, Interxion, and NTT) actually charges, what the ticket lifecycle looks like inside the Equinix Customer Portal, and the usage pattern that keeps a mid-market colo footprint predictable.
+
+## How Equinix structures remote-hands pricing
+
+Equinix sells remote hands under two names: standard "Smart Hands" (the catch-all for anything inside your cage, cabinet, or private suite) and task-specific line items such as cross-connect installation, cable patching, and media handling. The price card is not public globally. Rates vary by metro, by contract, and by whether you buy under a Master Services Agreement or ad hoc through the Customer Portal.
+
+### Hourly rate tiers
+
+Three tiers typically appear on an Equinix quote:
+
+- **Standard business hours.** Monday to Friday, 08:00 to 18:00 local, where the facility operates with regular staffing. Lowest hourly rate.
+- **After-hours premium.** Weekends, public holidays, and the overnight window. Expect a multiplier in the 1.5x to 2x range on the base rate.
+- **Emergency unscheduled.** Any ticket raised with a short time-to-dispatch SLA (typically 1 or 2 hours), day or night. Highest effective rate, because the response commitment forces staff reallocation.
+
+Within each tier the number on the invoice is a function of three variables: the base hourly rate for the metro, the minimum billing increment, and whichever surcharge applies to the time of day or the response window.
+
+### 15-minute minimum billing increments
+
+Equinix bills Smart Hands in 15-minute increments, with a 15-minute minimum per dispatched ticket. The practical effect is that a one-cable patch that takes six minutes still bills as a quarter hour. On a reactive ticket queue that fires five to ten times a month, that minimum is the single biggest driver of year-over-year invoice drift.
+
+The increment also rounds up at the top of each dispatch. A task that takes 32 minutes bills as 45. A task that takes 46 bills as 60. There is no partial-increment reconciliation at month-end.
+
+### Scheduled vs unscheduled multipliers
+
+Equinix differentiates between scheduled work (requested with lead time, typically 24 to 72 hours depending on the metro and the task) and unscheduled work (dispatched on demand). Unscheduled work carries an uplift that varies by region. In Frankfurt FR5, FR6, and FR7, scheduled Smart Hands in business hours sits on the published base rate; the same task raised as unscheduled, same hour of day, can bill at 1.25x to 1.5x. The gap is wider in the US, where NY4, NY5, DC2, DC3, and SV5 apply steeper on-demand uplifts.
+
+The multiplier is not a penalty, it is a dispatch-cost pass-through. Equinix staffs the floor for the forecasted scheduled volume. A ticket that lands without lead time pulls an engineer off something that was planned, and that cost ends up on the invoice.
+
+### Parts handling and shipping fees
+
+Receiving a replacement motherboard at the loading dock is not free. Equinix charges a per-shipment handling fee that typically scales with weight, with a separate storage fee if the part sits in the cage-adjacent receiving area for more than a defined window (usually 72 hours in EU facilities, 48 in several US facilities). Outbound RMA shipments carry their own handling line. Media and tape handling, where a sealed drive must be received, logged, and placed in a specific cage, is a separate SKU with its own increment.
+
+### Cross-connect provisioning fees
+
+A cross-connect order on the Equinix Marketplace carries three distinct charges:
+
+- **Non-recurring installation fee** per connection, which varies by metro and by cable type (single-mode fiber, multi-mode fiber, Cat6, coax).
+- **Monthly recurring charge** per connection, billed on your main colo invoice.
+- **Patch and port-test labor**, usually billed as scheduled Smart Hands against the installation ticket.
+
+The install fee is often the sticker-shock line for teams used to running internal patches. An Equinix Fabric port in some metros can carry a four-figure non-recurring charge, before any Smart Hands minutes are counted.
+
+### 24/7 and holiday surcharges
+
+Holidays and overnight windows carry an uplift on top of the after-hours tier, not a replacement for it. A P1 dispatched at 03:00 on 25 December stacks the holiday multiplier, the after-hours multiplier, and the emergency unscheduled multiplier against the base rate. For a mid-market operator with a sparse Christmas-week change calendar, that single ticket can be the largest Smart Hands line on the quarter.
+
+## How the Equinix ticket lifecycle actually works
+
+The Equinix Customer Portal is the primary interface. Tickets open there, dispatch flows from there, and photo evidence (where you request it) is attached there before the ticket closes.
+
+### Smart Hands Portal and Equinix Fabric
+
+Smart Hands requests are raised in the Customer Portal with an attachment slot for the runbook and photo requirements. Cross-connect orders flow through the Marketplace side of the portal, with LOA (letter of agency) upload and the carrier contact as part of the submission.
+
+The portal exposes a status field (received, in queue, dispatched, in progress, awaiting customer, closed). It does not expose the engineer name until dispatch, and it does not expose the dispatch queue depth, which means lead-time guesses are not possible from the portal view alone.
+
+### SLA on time-to-dispatch vs time-to-completion
+
+Equinix publishes two separate SLAs:
+
+- **Time-to-dispatch.** The window between ticket submission and engineer on the cage floor. Standard commitment is 2 hours for premium tickets, 24 hours for scheduled, with an expedited 1-hour option for emergency dispatch in major metros.
+- **Time-to-completion.** Not contractually bounded in the standard SLA. Completion depends on task complexity, parts availability, and queue depth.
+
+The distinction matters at audit time. A ticket that was dispatched inside SLA but took eight hours to complete, because the runbook was incomplete and the engineer went back and forth with the NOC, still counts as SLA-attained on the Equinix side.
+
+### Photo evidence requirements
+
+Photo evidence is a line item, not a default. The requesting team specifies the checkpoints (pre-state, mid-change, post-state), the asset detail required (serial visible, port label visible), and the file format. Without that spec in the ticket, the on-site engineer may close with a single wide-angle shot of the rack face, which is not useful for ISO 27001 or SOC 2 evidence at the parent company.
+
+## Digital Realty, Interxion, and NTT in short
+
+Digital Realty and Interxion (now operating under the Digital Realty brand across the EU footprint) use a comparable tier structure, with the ServiceFabric portal replacing the Equinix Customer Portal and ServiceFabric Cross Connects taking the role of Equinix Fabric. The scheduled-vs-unscheduled gap tends to be narrower in several EU metros, and the parts-handling SKU is cleaner. NTT publishes its remote-hands tiers inside the Global Data Centers client portal, with similar 15-minute increments and a cleaner holiday-surcharge table than Equinix.
+
+Across all four, the structural pattern is the same: hourly rate times tier multiplier, rounded up to the next 15 minutes, with a separate parts-handling SKU and a separate cross-connect SKU. Switching provider does not remove the increment problem.
+
+## Where mid-market tenants over-spend
+
+Three patterns show up on nearly every tenant invoice we review.
+
+**Reactive emergency tickets.** A P1 dispatched at 02:00 at the emergency unscheduled rate, in a facility where the problem would have been caught two days earlier by a scheduled firmware audit. The ticket itself is a few hundred dollars. The underlying missed-audit cost, over a year, is a line item measured in tens of thousands.
+
+**No statement of work for routine tasks.** PDU swaps, cable patches, and firmware updates raised as individual Smart Hands tickets, each with its own 15-minute minimum, instead of batched into a scheduled change window with a single multi-task SOW. The invoice doubles. The underlying work is identical.
+
+**Cross-connect sprawl.** New services provisioned on fresh cross-connects without a quarterly reconciliation against the inventory, so old connections keep accruing MRC long after the circuit they fed went dark. On a 20-cross-connect footprint this is routinely four figures a month of pure waste.
+
+## The pattern that keeps the invoice predictable
+
+For a mid-market colo footprint (one to twenty cages across one or two providers), the pattern that works is simple to state and hard to run:
+
+- Use a managed partner for scheduled work (change windows, firmware, cable hygiene, cross-connect reconciliation), under a written SLA with named engineers, batched SOWs, and photo evidence against every ticket.
+- Reserve the colo provider's own remote hands for pure in-cage access events where the facility access policy requires a provider-badged engineer, or for P1 dispatch into a facility outside the managed partner's current enrolment.
+- Keep one shared change calendar and one DCIM of record (Nlyte, Sunbird dcTrack, or Schneider EcoStruxure IT), so neither partner is scheduling against a stale view.
+
+Running that pattern is what we do inside our [data-center 24/7 remote hands](/use-cases/data-center-remote-hands) use case. The underlying service is [data center maintenance](/services/hardware/data-center-maintenance), paired with [infrastructure support](/services/hardware/infrastructure-support) when the hardware ticket turns out to be a server, storage, or hypervisor question rather than a cage question. One SLA, 15-min P1 median, 99.9%+ uptime, 48h reversibility, EU-region (Frankfurt) hosting where applicable, Colorado-based engineering for the US side.
+
+The goal is not to replace Equinix. The goal is to spend predictable money inside the Equinix invoice, with the audit trail your parent company's ISO 27001 and SOC 2 program needs.

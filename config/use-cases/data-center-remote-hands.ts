@@ -219,6 +219,16 @@ export const dataCenterRemoteHands: UseCase = {
             href: '/industries',
             blurb: 'How the remote-hands posture adapts to fintech, logistics, manufacturing, and other mid-market industries.',
           },
+          {
+            label: 'Blog: Equinix remote-hands pricing and ticketing',
+            href: '/blog/equinix-remote-hands-pricing-ticketing',
+            blurb: 'How colo remote-hands pricing actually works at Equinix and peers, and where tenants typically over-spend.',
+          },
+          {
+            label: 'Blog: In-cage change windows without burning on-call',
+            href: '/blog/in-cage-change-windows-scheduling',
+            blurb: 'A scheduling playbook for in-cage work that respects your on-call rotation and keeps rollbacks cheap.',
+          },
         ],
       },
       cta: {
@@ -410,6 +420,16 @@ export const dataCenterRemoteHands: UseCase = {
             label: 'Branchen, die wir bedienen',
             href: '/industries',
             blurb: 'Wie sich die Remote-Hands-Aufstellung an Fintech, Logistik, Fertigung und weitere Mittelstandsbranchen anpasst.',
+          },
+          {
+            label: 'Blog: Equinix Remote Hands, Preise und Ticketing',
+            href: '/blog/equinix-remote-hands-preise-ticketing',
+            blurb: 'Wie die Remote-Hands-Preise bei Equinix und vergleichbaren Colos tatsächlich funktionieren und wo Mieter oft zu viel zahlen.',
+          },
+          {
+            label: 'Blog: Cage-Wartungsfenster planen, ohne On-Call zu verbrennen',
+            href: '/blog/cage-wartungsfenster-planung',
+            blurb: 'Ein Planungsleitfaden für Arbeiten im Cage, der die On-Call-Rotation schont und Rollbacks günstig hält.',
           },
         ],
       },

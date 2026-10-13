@@ -1,0 +1,94 @@
+---
+title: "Wi-Fi 6E vs Wi-Fi 7 for warehouses in 2026: what to buy now"
+description: An honest comparison of Wi-Fi 6E against Wi-Fi 7 for warehouse, 3PL, and distribution-center refreshes, with device-mix and DFS guidance for EU and US buyers.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - wifi
+  - warehouse
+  - infrastructure
+locale: en
+slug: wifi-6e-vs-wifi-7-warehouse-2026
+---
+
+If you are planning a warehouse WiFi refresh in 2026, your access-point shortlist likely includes two tiers: mature Wi-Fi 6E (Cisco Meraki MR57, Aruba AP-635, Juniper Mist AP45, Ruckus R750) and the newer Wi-Fi 7 line (Meraki MR58, Aruba AP-700 series, Juniper Mist AP64, Ruckus R770). The vendor pitch sounds similar on both. The right answer rarely is. This piece covers where Wi-Fi 7 earns its premium, where Wi-Fi 6E is still the sensible buy, and the two things that quietly decide it for most mid-market sites: your handheld fleet and your regulatory domain.
+
+## What Wi-Fi 7 actually adds
+
+Three features matter in a warehouse, and only three.
+
+### 320 MHz channels
+
+Wi-Fi 7 doubles the maximum 6 GHz channel width from 160 MHz to 320 MHz. On paper that doubles peak throughput per client. In practice it only helps zones with a small number of high-bandwidth clients: forklift-mounted terminals pulling live camera feeds, picking stations streaming high-resolution label images, or video-based safety systems. Dense scanner floors, where you have 300 handhelds averaging 1 Mbps each, see no benefit, because the limit is airtime contention, not channel width.
+
+### Multi-Link Operation (MLO)
+
+MLO lets a client use two radios (for example 5 GHz and 6 GHz) at the same time, with the AP steering traffic across both. For voice-pick headsets and forklift terminals this is the real headline: a brief interferer on one band no longer stalls the session, because the second link carries it through. Vocollect A700 and A730 headsets still do not speak MLO as of this writing, so the benefit is restricted to the devices that do.
+
+### Deterministic latency features
+
+Wi-Fi 7 adds restricted target wake time and improved QoS mapping. For a warehouse running Vocollect voice-pick on strict sub-150ms roam budgets, these help trim worst-case latency. They do not help if 802.11k, v, and r are misconfigured, which is a much more common cause of jitter than the standard itself.
+
+## Where Wi-Fi 7 is worth the premium
+
+Three clean cases.
+
+- **Greenfield builds.** New distribution centers over 20,000 square metres with a projected five-year to seven-year radio lifecycle. The incremental cost of Wi-Fi 7 APs over 6E is small compared to the cabling, PoE, and mounting labour, and you avoid a mid-cycle refresh when 6 GHz devices become the default.
+- **Dense 6 GHz-capable handheld fleets.** If your rollout plan includes Wi-Fi 7 scanners (the Zebra TC58 and TC73, the Honeywell CT47) across hundreds of pickers, Wi-Fi 7 APs let those devices actually use 6 GHz with MLO. On a Wi-Fi 6E AP, the same scanners work fine but leave MLO on the table.
+- **Forklift-mounted terminals doing video.** Smart dock-door cameras, forklift-mounted video for safety or vision picking, or on-truck barcode validation with real-time rendering. These workloads are rare in 2026 but growing, and they are exactly what 320 MHz channels and MLO were designed for.
+
+## Where Wi-Fi 6E is still the right buy
+
+Four cases cover most mid-market refreshes.
+
+- **Incremental refresh of a Wi-Fi 6 estate.** You are replacing twelve APs at a time across a two-year rolling plan, not overhauling the entire site. Wi-Fi 6E AP pricing has come down enough that it slots in cleanly next to existing 6E hardware, and the controller and management tooling are mature.
+- **Mixed device fleet with older Zebra MC9300, TC52, or Honeywell CK65.** These top out at Wi-Fi 6 (or Wi-Fi 5 in some cases) and will see zero benefit from a Wi-Fi 7 AP. Buying 7 APs to serve 6 clients is spending a premium for marketing material.
+- **Cost-sensitive projects.** The Wi-Fi 7 to 6E delta on a 60-AP site is still real money, and often the budget is better spent on antennas, cold-storage-rated enclosures, or a proper on-site survey than on the newer silicon.
+- **Sites with no near-term 6 GHz client roadmap.** If your scanner refresh is three years away and your current fleet does not touch 6 GHz, the extra 6 GHz capacity is unused for the entire payback window.
+
+## The device-mix table
+
+Match this against your actual scanner and headset inventory before anyone quotes a BOM.
+
+| Device | Max standard | 6 GHz capable | MLO capable |
+|---|---|---|---|
+| Zebra TC52, TC56 | Wi-Fi 6 | No | No |
+| Zebra TC53, TC58 | Wi-Fi 6E (TC53), Wi-Fi 7 (TC58) | Yes | TC58 only |
+| Zebra TC73, TC78 | Wi-Fi 6E to Wi-Fi 7 depending on SKU | Yes | Partial |
+| Zebra MC9300 | Wi-Fi 5 to Wi-Fi 6 (late SKUs) | No | No |
+| Zebra MC9400 | Wi-Fi 6E | Yes | No |
+| Zebra WT6300 wrist terminal | Wi-Fi 6 | No | No |
+| Honeywell CT45 | Wi-Fi 6 | No | No |
+| Honeywell CT47 | Wi-Fi 6E to Wi-Fi 7 depending on SKU | Yes | Partial |
+| Honeywell CT60, CK65 | Wi-Fi 5 to Wi-Fi 6 | No | No |
+| Datalogic Memor 20 | Wi-Fi 5 | No | No |
+| Datalogic Skorpio X5 | Wi-Fi 6 | No | No |
+| Vocollect A700, A730 | Wi-Fi 6 (A730) | No | No |
+
+The pattern repeats across inventories we audit: the voice-pick layer and the older handheld layer are both still Wi-Fi 6. Overbuying the AP is a common mistake; underbuying the antenna is more common and more expensive to fix.
+
+## DFS in the EU vs the US
+
+This is where the comparison breaks regional symmetry.
+
+In the United States, the FCC opened the full 1,200 MHz of 6 GHz for unlicensed indoor use, and standard-power automatic frequency coordination (AFC) is now live. A Wi-Fi 7 AP in a US warehouse can use 320 MHz channels across 6 GHz with real power, and DFS on the 5 GHz band is a known quantity.
+
+In the EU, only 480 MHz of 6 GHz is open (5945 to 6425 MHz), which supports at most one 320 MHz channel per site. Two 320 MHz channels for cell-overlap planning is not available. For most warehouses this reduces 6 GHz to a capacity reserve rather than a primary band, and most of the design still rides on well-planned 5 GHz with DFS. If you buy Wi-Fi 7 in Frankfurt expecting the US capacity picture, you will be disappointed.
+
+The pragmatic design in a Frankfurt or Munich distribution center in 2026 is 5 GHz as primary, 6 GHz as a capacity reserve for Wi-Fi 6E and 7 clients, and 2.4 GHz only for legacy label printers and IoT. Wi-Fi 7 helps on devices that support it; it does not change the fundamental channel plan.
+
+## Vendor landscape, honestly
+
+- **Cisco Meraki MR57 (6E) vs MR58 (7).** Cloud-managed, strong roaming defaults, the operational tooling most mid-market IT teams already know. MR58 is worth the delta on new builds; MR57 is still the correct call on an incremental refresh.
+- **Aruba AP-635 (6E) vs AP-700 series (7).** The AP-700 line adds genuine MLO and tri-band simultaneous operation. Aruba Central and ClearPass remain among the most mature policy layers.
+- **Juniper Mist AP45 (6E) vs AP64 (7).** Mist's AI-driven Marvis layer is the strongest differentiator here, not the radios. On a brownfield site with roaming problems, Mist earns its spot regardless of standard.
+- **Ruckus R750 (6E) vs R770 (7).** BeamFlex adaptive antennas remain unusually effective in high-reflection racking environments. R770 adds 320 MHz where regulation permits.
+- **Extreme and Fortinet.** Both ship credible Wi-Fi 7 lines. Choose on controller fit, not on the radio datasheet.
+
+## How to decide, in one paragraph
+
+If you are refreshing an entire site in one go, your fleet is turning over to Wi-Fi 7 scanners inside two years, and you are in the US, buy Wi-Fi 7. If you are refreshing incrementally, running a mixed fleet of Zebra MC9300 and TC52 alongside newer kit, or planning across EU sites with constrained 6 GHz, buy Wi-Fi 6E and spend the saved budget on a proper survey and antenna plan. In either case, the standard matters less than the design.
+
+For the full approach to warehouse radio design (predictive modelling, on-site measurement under real picking load, remediation, and post-cutover validation) see our pillar on [warehouse WiFi surveys for scanners and voice-pick](/use-cases/warehouse-wifi-surveys). The underlying capability is covered under [WiFi surveys](/services/hardware/wifi-surveys), and if you want the network operated after cutover under one SLA (15-min P1 median, 99.9%+ uptime, EU-region hosting in Frankfurt, bilingual DE + EN), that sits under [network support](/services/hardware/network-support).
+
+*Related reading: [a practical guide to WiFi surveys that actually predict real-world coverage](/blog/wifi-survey-guide).*

@@ -1,0 +1,74 @@
+---
+title: 'MSP-Wechsel ohne Ausfall: ein 30-Tage-Runbook'
+description: Ein Tag-für-Tag-Plan für den Wechsel vom Alt-MSP zu einem neuen Managed-IT-Anbieter ohne Deckungslücke. Ehrlich dazu, wo Mitwirkung des Alt-Anbieters zählt.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - managed-it
+  - msp
+  - infrastruktur
+locale: de
+slug: msp-wechsel-ohne-ausfall-30-tage-runbook
+---
+
+Den Managed-IT-Anbieter zu wechseln, versuchen die meisten Mittelstandsfirmen als E-Mail-Verlauf, und so wird aus einem Montagmorgen eine Woche ohne Lohnbuchhaltung. Der Übergang ist ein eigenständiges Managed-Mandat mit datiertem Runbook, Parallelbetrieb und einem Cutover-Fenster, das in Ihrem Kalender gewählt wird, nicht in dem des Alt-Anbieters. Was folgt, ist der Plan, den wir bei Deploris nutzen, wenn ein Unternehmen mit 200 bis 2.000 Arbeitsplätzen sein Umfeld vom Alt-MSP in einen mittelstandsfähigen Managed-IT-Vertrag übergibt. Dreißig Tage sind straff, aber machbar, wenn die Discovery sauber beginnt und der Alt-Anbieter gekündigt ist.
+
+## Tage 1 bis 7: Discovery, Inventar, Zugriffs-Audit, Vertragsprüfung
+
+Die erste Woche ist Aufklärung. Der neue Anbieter geht das Umfeld mit einem Senior-Ingenieur durch, nicht mit einem Vertriebler, und liefert ein schriftliches Inventar. Physische Standorte, Cloud-Tenants, SaaS-Admin-Konsolen, Identity-Provider, Backup-Targets, Netzwerk-Edge und jede Fachanwendung bekommen einen Owner und einen Ist-Zustand.
+
+**Tag 1, Kickoff und Scope-Fixierung.** Ein gemeinsamer Kickoff mit Ihrer IT-Leitung, dem Einkauf und dem Account-Manager des Alt-Anbieters, sofern er teilnimmt. Es geht nicht um Höflichkeit, sondern darum, die Übergabe schriftlich festzuhalten, damit der Alt-Anbieter weiß, dass der Pager zu einem bestimmten Datum geht.
+
+**Tage 2 bis 4, Inventar und Zugriffs-Audit.** Der eingehende Ingenieur liest jede Admin-Konsole, jeden Tenant, jeden Credential-Vault. Alles, was der Alt-Anbieter nicht teilt, wird markiert. Zum Ende von Tag vier liegt ein Inventar-Entwurf vor, eine Liste nicht offengelegter Systeme und eine Kurzliste von Risiken (end-of-life Hardware, verwaiste Admin-Konten, Backup-Targets, aus denen seit einem Jahr nicht restauriert wurde).
+
+**Tage 5 bis 7, Alt-Vertragsprüfung und Kommunikationsplan.** Legal und Einkauf gehen den aktuellen Vertrag durch: Kündigungsfrist, Datenrückgabe, Mitwirkungspflichten, Offboarding-Gebühren. Parallel entsteht der Kommunikationsplan für Endnutzer im Entwurf (neue Support-E-Mail, neues Ticket-Portal, neue Rufbereitschaftsnummer), zu versenden in Ihrem Namen am Cutover-Tag.
+
+Wo Mitwirkung kritisch ist: Credential-Übergabe, Firewall-Regel-Export, Backup-Vault-Zugriff. Wo Sie den Alt-Anbieter umgehen können: Monitoring-Rollout (eigene Agenten über Microsoft Intune oder Jamf), Identity-Provider-Admin-Zugriff (Reset über Break-Glass), DNS (Zonen beim Registrar selbst exportieren). Das Runbook markiert jeden Punkt, damit niemand überrascht ist, wenn eine Anfrage an den Alt-Anbieter mit "nein" zurückkommt.
+
+## Tage 8 bis 14: Runbook-Erfassung, paralleler Monitoring-Lauf, Alert-Routing
+
+Woche zwei ist der Punkt, an dem der neue Anbieter aufhört zu lesen und anfängt zu übernehmen. Das Ergebnis ist ein schriftliches Runbook jedes Produktivsystems plus ein gespiegelter Monitoring-Stack, der alles sieht, was der Alt-Anbieter sieht, und mehr.
+
+**Tage 8 bis 10, Runbook-Erfassung.** Firewall-Regeln, VPN-Konfiguration, DNS, DHCP, Active Directory und Entra, Microsoft 365 oder Google Workspace, Backup- und Restore-Prozeduren, jede Integration zwischen Identity-Provider und Ihren Fachanwendungen. Exportiert der Alt-Anbieter Konfigurationen, nehmen wir die Übergabe entgegen; andernfalls rekonstruieren wir aus dem Live-Umfeld. Das Runbook ist am Ende der Übergabe der Artefakt, der Ihnen gehört, unabhängig davon, welchen Anbieter Sie behalten.
+
+**Tage 11 bis 13, paralleler Monitoring-Lauf.** Datadog oder ein gleichwertiger Stack geht neben das Tooling des Alt-Anbieters. PagerDuty oder Opsgenie übernimmt die Alerts aus dem neuen Monitoring-Stack und routet sie an das eingehende On-Call-Team. In der Produktion ändert sich nichts. Der Alt-Anbieter hält den Pager vertraglich weiter; das neue Team läuft im Schatten.
+
+**Tag 14, Alert-Routing-Trockenübung.** Eine Tabletop-Übung: ein simulierter P1-Vorfall (Lohn-Datenbank down, Firewall-Failover) wird in den Monitoring-Stack eingespielt. Die neue Rufbereitschaft antwortet, der Alt-Anbieter antwortet, beide Zeiten werden verglichen. Das ist der erste datierte Nachweis, dass das neue Team die 15-Min P1-Median-Vorgabe erfüllen kann, die nach dem Cutover die vertragliche SLA sein wird.
+
+## Tage 15 bis 21: paralleler Ticket-Lauf, selektiver Cutover nachrangiger Systeme
+
+Woche drei ist der Punkt, an dem echte Nutzer die Veränderung sehen, kontrolliert. Nicht das ganze Umfeld, noch nicht. Zuerst nachrangige Systeme.
+
+**Tage 15 bis 17, paralleler Ticket-Lauf.** Endnutzer behalten das Ticket-Portal des Alt-Anbieters für alles Produktions-Kritische. Für einen definierten Scope (ein bestimmter Standort, eine bestimmte Abteilung, nicht-kritische SaaS-Admin-Anfragen) laufen Tickets in die ServiceNow- oder Jira-Service-Management-Warteschlange des neuen Anbieters. Beide Warteschlangen melden in ein gemeinsames Dashboard, sodass Ihre IT-Leitung Reaktionszeiten nebeneinander sieht. Der Alt-Anbieter bleibt für alles in der Hauptwarteschlange vertraglich verantwortlich.
+
+**Tage 18 bis 19, selektiver Cutover.** Nachrangige Systeme gehen unter die SLA des neuen Anbieters: Endpoint-Management, Patch-Orchestrierung (ConnectWise, Kaseya, NinjaOne, Atera oder N-able je nach Flotte), eine Mac-Flotte, sofern vorhanden (Addigy oder Jamf). Noch nichts Nutzer-Sichtbares in der Produktion. Fällt etwas aus, ist der Radius klein und der Rollback schnell.
+
+**Tage 20 bis 21, SLA-Einlauf auf dem bewegten Scope.** Der neue Anbieter betreibt den nachrangigen Scope unter der vollen schriftlichen SLA, einschließlich 15-Min P1-Median, 99,9%+ Verfügbarkeits-Ziel und 48h Rückrollbarkeit jeder Änderung. Eine Woche echter Traffic auf begrenztem Scope reicht, um Fehler bei Alert-Schwellen und Lücken in der On-Call-Rota vor dem Hauptcutover zu finden.
+
+## Tage 22 bis 30: vollständiger Cutover, Dekommissionierung, SLA-Einlauf
+
+Woche vier ist das eigentliche Ereignis, und es ist das, das am lautesten scheitert, wenn die drei Vorwochen gehetzt waren.
+
+**Tag 22, Change-Fenster-Planung.** Das Hauptcutover-Fenster wird gefixt, fast immer ein Samstag, abgestimmt mit Ihrem Team. Die Endnutzer-Kommunikation geht in Ihrem Namen raus. Die finale Übergabekündigung an den Alt-Anbieter wird datiert und bestätigt.
+
+**Tage 23 bis 25, Hauptcutover.** Die SLA-Verantwortung für das volle Umfeld geht an den neuen Anbieter. Jede Zugangsinformation, die der Alt-Anbieter je hielt, wird im selben Fenster rotiert: Admin-Konten, Service-Konten, API-Keys, VPN-Pre-Shared-Keys, Break-Glass-Zugänge. Jede Rotation wird gegen das Inventar protokolliert. Monitoring ist jetzt primär, nicht Schatten. Der Pager läuft scharf.
+
+**Tage 26 bis 28, Dekommissionierung.** Die Agenten des Alt-Anbieters werden deinstalliert, sein Monitoring-Stack wird abgebaut, seine VPN-Tunnel geschlossen, seine Zugänge formell entzogen. Ein datiertes Übergabedokument wird von beiden Anbietern unterzeichnet, und das ist der Artefakt, den Ihr Auditor beim nächsten ISO-27001- oder SOC-2-Renewal verlangt. Für regulierte Workloads wird das Backup-Target im Tenant des Alt-Anbieters auf ein neues Target in Ihrer Kontrolle entleert, in der Regel in der EU-Region (Frankfurt).
+
+**Tage 29 bis 30, SLA-Einlauf auf vollem Scope.** Der neue Anbieter ist nun voll verantwortlich: 15-Min P1-Median als Erstreaktion, Ziel 99,9%+ monatliche Verfügbarkeit auf betriebenen Systemen, 48h Rückrollbarkeit jeder Änderung, benannter On-Call-Ingenieur, unterzeichneter AV-Vertrag, EU-Region-Hosting als Default. Zwei Tage echter Produktion unter vollem Vertrag genügen, um die letzten Monitoring-Lücken vor dem ersten quartalsweisen Review zu finden.
+
+## Wo dieser Plan sich dehnt
+
+Drei Stellen, an denen aus einem 30-Tage-Plan ehrlicherweise ein 45- oder 60-Tage-Plan wird. Erstens ein unkooperativer Alt-Anbieter, bei dem das Runbook vollständig aus dem Live-Umfeld neu aufgebaut wird (plus ein bis drei Wochen). Zweitens ein Mehrstandort-Footprint DACH + USA, bei dem die physischen Standorte zwei parallele Deckungsfenster brauchen (plus eine Woche). Drittens eine Backup-Vault-Migration, die wegen Datenresidenz nicht beschleunigt werden kann.
+
+Die 30-Tage-Form ist für einen Ein-Geografie-Handoff mit kooperierendem Alt-Anbieter realistisch. Für die härteren Fälle bleibt die Disziplin dieselbe, der Kalender wird länger.
+
+## Was den Plan trägt, auch wenn er sich dehnt
+
+Drei Prinzipien halten das Runbook stabil, egal ob 30 oder 60 Tage. Erstens: jede Übergabe wird datiert und schriftlich festgehalten, von der Credential-Rotation bis zur formalen Alt-Anbieter-Entlastung. Zweitens: der Parallelbetrieb ist nicht verhandelbar, auch wenn der Einkauf ihn für Dopplung hält, denn die 30-Tage-Überlappung ist der einzige Belastungstest, bevor der Pager scharfgeschaltet wird. Drittens: Senior-Ingenieure, keine Vertriebler, führen jede Phase, inklusive der unbequemen Gespräche mit dem Alt-Anbieter über fehlende Dokumentation.
+
+Was ein guter Übergang vermeidet, ist eine stille Lücke: Monitoring, das zum Cutover-Datum noch nicht spiegelt, oder ein Backup-Target, das vier Wochen nach Cutover noch im alten Tenant liegt. Das Runbook adressiert diese Risiken jeweils durch einen datierten Prüfpunkt, nicht durch ein Versprechen.
+
+Das vollständige Managed-IT-Modell, in das dieses Runbook mündet, finden Sie im [Anwendungsfall MSP-Übergabe zu Managed IT](/de/use-cases/msp-uebergabe-managed-it), die zugrunde liegende Leistung unter [Infrastruktur-Support](/de/services/hardware/infrastruktur-support) und die ergänzende Leistung unter [Hardware Reparatur & Wartung](/de/services/hardware/hardware-reparatur-wartung). Wie das in den jeweiligen Sektoren landet, zeigt die Seite [Branchen](/de/industries).
+
+*Runbook als Arbeitsdokument? [Schreiben Sie uns kurz](/de/contact), Antwort innerhalb eines Werktags.*

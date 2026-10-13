@@ -1,0 +1,120 @@
+---
+title: "Measuring RAG answer quality: 5 metrics that matter"
+description: A practitioner guide to RAG evaluation, with 5 metrics, a golden-set recipe, open-source eval libraries, and how to tie scores to rollback decisions.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - rag
+  - evaluation
+  - llm
+locale: en
+slug: measuring-rag-answer-quality-5-metrics
+---
+
+Every RAG system looks great in the demo. Then real traffic arrives, the corpus doubles, someone swaps the embedding model, and nobody can tell whether quality went up or down. The gap between a demo and a defensible production system is a single word: evaluation. This post lays out the five metrics we track on every RAG engagement, how we build the golden set behind them, which open-source libraries help, and how we tie the numbers to actual rollback decisions.
+
+## Why five metrics, not one
+
+Teams that pick one metric end up optimizing a corner. Pick retrieval recall alone and the system drowns answers in context. Pick faithfulness alone and the system refuses everything. The useful shape is a small, bounded set that covers retrieval, generation, and the refusal path together, so a regression in any one of them lights up on the dashboard.
+
+The five we hold ourselves to on every [RAG system we ship](/services/development/rag-systems):
+
+1. Retrieval precision@k.
+2. Retrieval recall@k.
+3. Answer faithfulness.
+4. Answer completeness.
+5. Refusal correctness.
+
+Everything else (latency, cost, citation precision, user satisfaction) sits on top of these. If the five above are green, you have a system worth running. If any one is red, you have a bug worth fixing before the next release.
+
+## Metric 1: Retrieval precision@k
+
+Of the top k chunks retrieved for a question, what fraction are actually relevant to the answer. If the top 5 chunks contain two relevant passages and three off-topic ones, precision@5 is 0.4.
+
+Precision tells you how much noise your context window carries. A low-precision retriever forces the generator to filter at inference time, which is where hallucinations start. The target depends on k. For k=5 we expect precision above 0.7 on a well-tuned support corpus; below 0.5 is a sign that chunking, embedding model, or re-ranker needs work.
+
+Measure it by having a senior reviewer tag each retrieved chunk as relevant or not against the gold answer for the question. The tagging is tedious; it is also the only tagging that cannot be faked by metrics layered on top.
+
+## Metric 2: Retrieval recall@k
+
+Of the chunks in the corpus that would be relevant to the answer, what fraction appear in the top k. Low recall is the quiet killer: the generator never gets the right source, so even a perfect LLM cannot produce a defensible answer.
+
+Recall is harder to measure than precision because you have to know, for a given gold question, which chunks across the entire corpus are relevant. In practice we approximate with a two-pass label: an agent writes the gold answer, then runs a broad retrieval (top 50 across multiple embedding models) and tags any chunk that supports the gold answer. Those tagged chunks become the recall target. If top-5 pulls four of five of them, recall@5 is 0.8.
+
+Target: above 0.8 at k=5, above 0.9 at k=10. If recall is low and precision is high, your retriever is confident and narrow; broaden the search or add a hybrid lexical path. If both are low, re-chunk the corpus before touching the embedding model.
+
+## Metric 3: Answer faithfulness
+
+Does the generated answer only use the retrieved context, or does it stitch in model knowledge from somewhere else. Faithfulness is the metric that most directly protects you against hallucinations.
+
+Measure it per claim. Decompose the answer into atomic sentences and, for each, ask a judge model (or a human on a sample) whether the sentence is supported by at least one retrieved chunk. Faithfulness is the fraction of claims that pass.
+
+Target: above 0.95. Below 0.9 is a system shipping unsupported sentences; below 0.8 is a system about to be paused by legal. Ragas, TruLens, and DeepEval all ship faithfulness scorers; the implementations differ, so pick one and stick with it rather than averaging across libraries.
+
+## Metric 4: Answer completeness
+
+Does the answer actually address the question in full, or does it answer a partial version of it. Completeness is the complement to faithfulness: a system that refuses to say anything beyond the exact wording of a chunk will be faithful but useless.
+
+Measure against the gold answer. For each gold answer, decompose into required claims (what the answer must say). Completeness is the fraction of required claims that appear in the generated answer. Multi-part questions ("can I export and schedule?") are where completeness tanks and where you catch it; a single-sentence answer that solves half the question looks fine until you measure.
+
+Target: above 0.85. The trade-off against faithfulness is real: raise one and the other may drop. The honest tuning path is to raise both together, usually by improving retrieval recall rather than by loosening the generator.
+
+## Metric 5: Refusal correctness
+
+Across the questions in the golden set, two counts matter. Of the questions where the corpus does not actually support an answer, what fraction were refused (correct refusals). Of the questions where it does, what fraction were refused anyway (false refusals).
+
+You report refusal correctness as a pair, not a single number. Correct-refusal rate above 95 percent, false-refusal rate below 10 percent, and the two stay stable release over release. This metric exists because faithfulness and completeness alone will let a system that confidently answers everything look better than one that correctly refuses the hard 10 percent. For a customer-facing [support knowledge base](/use-cases/support-rag-knowledge-base) the refusal metric is not optional; it is the metric legal will ask about.
+
+## Building the golden set
+
+The five metrics are only as useful as the questions you score them on. The golden set is the whole game.
+
+Our build pattern:
+
+1. Pull 150 to 300 real questions from the last 90 days of your help desk (Zendesk, Intercom, or whatever ticket store you use). Stratify by product area, by common vs long-tail, and by escalated-vs-resolved.
+2. For each, have a senior agent write the ideal answer and tag whether the current corpus supports it.
+3. For the "supported" questions, tag the supporting chunks (two-pass retrieval, broad top-50).
+4. For the "unsupported" questions, mark them as expected refusals.
+5. Freeze the set as version 1 and store it alongside the pipeline code. Grow it monthly, with every regression triage adding one or two new examples.
+
+Three to five hundred graded items is the sweet spot. Smaller sets whipsaw on noise; larger sets become hard to re-grade when the gold answers go stale.
+
+## Which open-source libraries help
+
+Three are worth knowing. All are complementary, not competing.
+
+- **Ragas.** Opinionated, batteries-included, excellent for the standard faithfulness and context-precision scorers. The default choice when you want a working metric set in an afternoon.
+- **TruLens.** Strong on tracing and feedback functions, good when you want to attach custom scorers and track answers through a complex pipeline. Scales well to multi-step agent workflows that layer RAG with tool calls.
+- **DeepEval.** Pytest-style assertions on top of LLM evaluations, which makes it fit naturally into CI. Useful when you want eval runs to block deploys rather than fill a dashboard.
+
+Pick one as the primary and treat the others as references. Mixing scorer implementations across libraries makes trends unreadable.
+
+## How often to re-evaluate
+
+Two cadences, both documented in the operations runbook.
+
+- **On every corpus update.** New docs, deprecated features, release notes, a bulk import of resolved tickets. The eval runs before the index flips. If any of the five metrics regresses beyond threshold, the update holds and the diff is triaged.
+- **Weekly spot-check.** The full golden set runs end to end, with a dashboard that shows the trend over 12 weeks. Weekly catches slow drifts that per-update checks miss: a vendor model silently retrained, a reranker version bump, a change in query distribution.
+
+Both run in CI, automatically, on the same EU-region (Frankfurt) infrastructure the production pipeline uses. Results live in a tracked store, not in notebooks, and the dashboard is readable by product owners, not only by engineers.
+
+## Tying metrics to rollback
+
+Numbers without decisions are theatre. The useful discipline is to write, before launch, the exact thresholds that trigger a rollback and the exact actor who signs off.
+
+A workable template:
+
+- Faithfulness drops below 0.90 on the full golden set: automatic hold, no deploy.
+- Correct-refusal rate drops below 0.90: automatic hold.
+- Precision@5 or recall@5 drops by more than 10 percentage points release over release: human review, deploy allowed only after a written explanation.
+- All five green: deploy proceeds under the standard 48h reversibility window.
+
+The 48h window is the safety net. Deploris operates every shipped system under one SLA: 15-min P1 median response, 99.9%+ monthly uptime, 48h reversibility on any change, EU-region hosting by default. Tying evals to the rollback window means a regression that slips through CI has a bounded blast radius and a documented path back.
+
+## What this looks like in practice
+
+A SaaS firm with a 60-person support team can expect to grade their first golden set in roughly 20 agent-hours spread across a week. The weekly eval run takes under 30 minutes of pipeline time, with a dashboard review on a 15-minute cadence inside the Monday standup. By month three, the regressions caught by evals outnumber the ones caught by human spot-check by about 5 to 1. By month six, the golden set is the single most valuable artifact of the engagement: more valuable than any model choice, any prompt, or any specific line of code.
+
+## Where to go next
+
+The five-metric frame is the backbone of a defensible RAG release process. If you are scoping an engagement, our [RAG knowledge base for customer support use case](/use-cases/support-rag-knowledge-base) walks through the full build. If you want the operations shape under one contract, the [RAG systems service](/services/development/rag-systems) covers scope posture and the SLA. The [RAG cost model](/tools/rag-cost-model) lets you weigh the evaluation effort against per-conversation pricing before you commit.

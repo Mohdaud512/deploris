@@ -1,0 +1,106 @@
+---
+title: 'Build vs buy CRM: the 24-month total cost of ownership model'
+description: A line-by-line TCO framework comparing Salesforce or HubSpot license spend against a custom CRM built and operated by Deploris over 24 months.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - crm
+  - custom-development
+  - buyer-guide
+locale: en
+slug: build-vs-buy-crm-24-month-tco-model
+---
+
+Most build-vs-buy CRM arguments collapse under a sticker-price comparison. Someone pulls up the per-seat line on a Salesforce renewal, someone else pulls up a build quote, and the conversation ends. That comparison is wrong because it leaves out roughly half of each column. This post lays out an honest 24-month total cost of ownership model that actually matches how spend behaves in a mid-market revenue team.
+
+The target reader is a 200 to 2,000 seat company where sales ops reports to a CFO who wants a defensible number, not a vendor one-pager.
+
+## Why 24 months is the right window
+
+A 12-month view flatters generic SaaS because the renewal uplift has not landed yet. A 36-month view flatters custom because build cost has already amortized. Twenty-four months is the window where both paths show their real shape: one full renewal cycle on the SaaS side, one full build plus the first full year of managed operation on the custom side. It is also the window procurement actually negotiates against.
+
+Pin the model to that window and keep every assumption on the page. If a line item needs a footnote longer than the line itself, it is probably an upsell waiting to happen.
+
+## Column A: generic SaaS 24-month TCO
+
+Four line items drive the total on this side. Vendor pricing pages show one of them.
+
+### 1. Per-seat license, loaded
+
+Take seats times per-seat list price times 24 months, then apply the uplift. Published Salesforce Enterprise list pricing sits around 165 USD per user per month, with Unlimited around 330 USD and Einstein 1 Sales around 500 USD. HubSpot Sales Enterprise lists around 150 USD per user per month, Dynamics 365 Sales Enterprise around 95 USD. Negotiated discounts of 15 to 30 percent are typical at mid-market volumes; the uplift at renewal is typically 7 to 12 percent, which eats most of the discount back by month 13.
+
+For a 300 seat team on Salesforce Enterprise at a negotiated 125 USD per user per month, year one is 450,000 USD. Apply an 8 percent uplift and year two is 486,000 USD. Twenty-four month license spend lands at 936,000 USD before anyone has filed a ticket.
+
+### 2. Admin FTE and professional services
+
+Generic CRM assumes a configuration team that owns the gap between the product and your process. For a 300 seat revenue team that is typically one fully loaded senior admin (120,000 to 170,000 USD per year loaded), plus a quarter of a senior architect for the harder changes, plus a Salesforce or HubSpot partner on retainer for 2,000 to 4,000 USD per month.
+
+Twenty-four month subtotal lands between 420,000 USD and 620,000 USD. None of this appears on the vendor renewal.
+
+### 3. Integration vendor and middleware
+
+Every pipeline integration your reps depend on, billing, contracts, routing, support, marketing, warehouse, runs on either a middleware subscription (Zapier Enterprise, Workato, Boomi) or a dedicated partner contract. Workato starts around 2,000 USD per month for a mid-market plan and climbs with recipe count. A typical mid-market revenue team runs six to ten active integrations, and recipes break often enough that there is almost always a small retainer behind them.
+
+Budget 60,000 to 180,000 USD across 24 months on middleware and integration maintenance alone.
+
+### 4. Enterprise-tier upsells, triggered by use
+
+This is the quiet killer. The report your CFO wants requires a tier upgrade. The sandbox your admin needs for the forecast rebuild requires another. The AI add-on, the API call volume, the storage tier for conversation history, each one lands as a renewal line item. Expect 10 to 20 percent of the license number to reappear as upsell inside 24 months.
+
+For the 300 seat example that is another 90,000 to 190,000 USD.
+
+### Column A total
+
+Add the four lines. A 300 seat generic SaaS CRM at mid-market negotiated rates lands at roughly 1.5 to 1.9 million USD across 24 months, with 55 to 60 percent of that spend outside the per-seat line nobody looked at.
+
+## Column B: custom build plus Deploris managed operation
+
+Three line items. All three are scoped in writing before anyone signs.
+
+### 1. Build cost
+
+A custom CRM for a 300 seat mid-market revenue team is a 4 to 6 week first release followed by 3 to 6 months of migration, dual-run, and cutover. The build budget covers discovery, data model, the six to eight integrations that matter, migration with field-level lineage, the dual-run period, training, and a documented runbook. For a mid-market team that lands squarely in six figures, scoped against the shape of the team rather than a seat count. See the [custom CRM development service](/services/development/custom-crm) for what sits inside a scope.
+
+### 2. Hosting and infrastructure
+
+A mid-market custom CRM on EU-region hosting (Frankfurt) with staging, production, observability, backups, and an identity layer runs in the low thousands of USD per month on a hyperscale cloud. For the 300 seat example, 24 months of hosting lands between 60,000 and 120,000 USD. Numbers come from the cloud bill, not a vendor estimate.
+
+### 3. Managed operation under SLA
+
+Deploris operates the system under a written SLA: 15-minute P1 median first response, 99.9%+ monthly uptime, 48h reversibility on any change, named on-call engineer, weekly patching window. The managed operation line also carries the roadmap work: the two-week increments that keep the CRM aligned with the process. This is one number, written into the contract, not a per-seat line that climbs with headcount.
+
+### Column B total
+
+Build plus 24 months of hosting plus 24 months of managed operation under SLA lands meaningfully below the Column A total for a 300 seat team, with the key difference that the slope is flat. Year three and year four stay on the Deploris operate line while the SaaS column takes another uplift and another tier.
+
+Model your own numbers in the [CRM TCO calculator](/tools/crm-tco); every assumption on that page is editable.
+
+## Where crossover typically happens
+
+Three signals mark the crossover for most mid-market revenue teams.
+
+**Seat count above 150.** Below 150 seats, generic SaaS is usually the right default because the build amortization window is too long. Between 150 and 500 seats, the two columns cross reliably inside 24 months. Above 500, the custom path pulls ahead by a wide margin.
+
+**Six-figure annual license spend.** Once the per-seat line passes roughly 300,000 USD per year, the admin, integration, and upsell lines have already crossed the build budget on an annualized basis.
+
+**Process complexity the vendor roadmap does not serve.** If the team runs non-standard forecast categories, multi-territory logic, or deep integration into billing and contracts, the configuration cost on generic SaaS compounds every renewal. Custom pays for itself faster because the process is encoded in the system, not fought against it.
+
+The decision framework for all three signals sits in [Custom CRM vs off-the-shelf](/compare/custom-crm-vs-off-the-shelf).
+
+## Common objections and the corrections
+
+**"The license line is the only comparable number."** It is not. Admin FTE, integration maintenance, and tier upsells are mandatory, not optional. If the model does not include them, the model is wrong.
+
+**"A custom CRM needs a dedicated engineering team."** Not if you operate it under a managed contract. The Deploris model is one team that writes the system and runs the servers, under one SLA. The in-house hiring problem never appears.
+
+**"We will outgrow it."** The code and the data are yours from day one. The repo, the infrastructure-as-code, and the hosting account can move in-house or to a different operator without a rewrite. That is not true of a Salesforce org at scale.
+
+**"We cannot afford six figures of build cost up front."** The engagement is scoped in two-week increments against a written scope, with phased invoicing. Compare that to the eight-figure license commitment implied by a four-year Salesforce ELA.
+
+## What to take into the next finance review
+
+Three numbers go into the model: 24 months of fully loaded license plus uplift, 24 months of admin and integration carry, and 24 months of upsell-tier capture. Set that against build cost plus hosting plus a written SLA on the other side. For a 200 to 2,000 seat team the crossover is rarely close.
+
+For the full use case walkthrough, with the data model, the dual-run approach, and the written SLA that holds the operate side together, see [Custom CRM for mid-market revenue teams](/use-cases/mid-market-custom-crm). To price your own numbers against the model, open the [CRM TCO calculator](/tools/crm-tco). The underlying decision framework sits in [Custom CRM vs off-the-shelf](/compare/custom-crm-vs-off-the-shelf).
+
+*Want the model worked against your exact seat count and integrations? [Send a note](/contact). One business-day reply.*

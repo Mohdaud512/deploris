@@ -218,6 +218,16 @@ export const operationsAiAutomation: UseCase = {
             href: '/ai-opportunity-finder',
             blurb: 'Not sure which process is the right first automation? Run a 10-minute scoping assessment first.',
           },
+          {
+            label: 'Blog: RPA vs AI agents, when to switch',
+            href: '/blog/rpa-vs-ai-agents-when-to-switch',
+            blurb: 'Honest comparison of legacy RPA and modern AI agents, with the signals that mean it is time to migrate.',
+          },
+          {
+            label: 'Blog: Human-in-the-loop approval gates',
+            href: '/blog/human-in-the-loop-approval-gates-agent-workflow',
+            blurb: 'Where to put the human in the loop, which actions can run autonomously, and how to shrink agent trust after a mistake.',
+          },
         ],
       },
       cta: {
@@ -409,6 +419,16 @@ export const operationsAiAutomation: UseCase = {
             label: 'KI-Chancen-Finder',
             href: '/ai-opportunity-finder',
             blurb: 'Noch unsicher, welcher Prozess die richtige erste Automatisierung ist? Starten Sie mit einer 10-Minuten-Scoping-Analyse.',
+          },
+          {
+            label: 'Blog: RPA vs. KI-Agenten, wann der Umstieg sich lohnt',
+            href: '/blog/rpa-vs-ki-agenten-wann-umstieg',
+            blurb: 'Ehrlicher Vergleich klassischer RPA und moderner KI-Agenten, mit den Signalen für den Umstieg.',
+          },
+          {
+            label: 'Blog: Human-in-the-Loop-Freigabestufen',
+            href: '/blog/human-in-the-loop-freigabestufen-agent-workflow',
+            blurb: 'Wo die Freigabe sitzen sollte, welche Aktionen autonom laufen dürfen und wie Vertrauen nach einem Fehler automatisch schrumpft.',
           },
         ],
       },

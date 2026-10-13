@@ -1,0 +1,68 @@
+---
+title: 'MSP transition without downtime: a 30-day runbook'
+description: A day-by-day plan for moving from an incumbent MSP to a new managed-IT provider without a service gap. Honest about where incumbent cooperation matters.
+date: 2026-10-13
+author: Muhammad Daud
+tags:
+  - managed-it
+  - msp
+  - infrastructure
+locale: en
+slug: msp-transition-without-downtime-30-day-runbook
+---
+
+Changing managed-IT providers is a project most mid-market firms try to do as an email thread, and that is how a Monday morning turns into a week without payroll. The transition is a managed engagement in its own right, with a dated runbook, parallel coverage, and a cutover window chosen on your calendar rather than theirs. What follows is the plan we use at Deploris when a 200 to 2,000 seat firm hands over its estate from an incumbent MSP to a mid-market-grade managed-IT contract. Thirty days is tight, but it is doable when discovery starts cleanly and the incumbent is on notice.
+
+## Days 1 to 7: discovery, inventory, access audit, contract review
+
+The first week is reconnaissance. The new provider walks the estate with a senior engineer, not a salesperson, and produces a written inventory. Physical sites, cloud tenants, SaaS admin consoles, the identity provider, backup targets, the network edge, and every line-of-business application get listed with an owner and a current state.
+
+**Day 1, kickoff and scope lock.** A joint kickoff with your IT lead, procurement, and the incumbent's account manager (if they will attend). The point is not politeness, it is to put the handoff in writing so the incumbent understands the pager is leaving on a specific date.
+
+**Days 2 to 4, inventory and access audit.** The incoming engineer reads every admin console, every tenant, every credential vault. Anything the incumbent will not share gets flagged. By end of day four you have a draft inventory, a list of undisclosed systems, and a short list of risks (end-of-life hardware, orphaned admin accounts, backup targets no one has restored from in a year).
+
+**Days 5 to 7, incumbent-contract review and comms plan.** Legal and procurement walk the current contract: notice period, data-return clauses, cooperation obligations, offboarding fees. In parallel, the comms plan for end users goes to draft (new support email, new ticket portal, new after-hours number), to be sent in your name on cutover day.
+
+Where cooperation is critical: credential handover, firewall-rule export, backup-vault access. Where you can route around them: monitoring deployment (install your own agents through Microsoft Intune or Jamf), identity-provider admin access (reset through break-glass), DNS (export zones through the registrar yourself). The runbook flags each item so no one is surprised when a request to the incumbent comes back as "no".
+
+## Days 8 to 14: runbook capture, monitoring parallel-run, alert routing
+
+Week two is where the new provider stops reading and starts owning. The deliverable is a written runbook for every production system, plus a mirrored monitoring stack that sees everything the incumbent sees, and more.
+
+**Days 8 to 10, runbook capture.** Firewall rules, VPN config, DNS, DHCP, Active Directory and Entra, Microsoft 365 or Google Workspace, backup and restore procedures, every integration between the identity provider and your line-of-business apps. If the incumbent will export configs, we take the handover; if not, we rediscover from the live estate. The runbook is the artifact you own at the end of this engagement regardless of which provider you keep.
+
+**Days 11 to 13, monitoring parallel-run.** Datadog or an equivalent goes in alongside the incumbent's tooling. PagerDuty or Opsgenie takes alerts from the new monitoring stack and routes to the incoming on-call team. Nothing in production changes. The incumbent still owns the pager contractually; the new team is in shadow.
+
+**Day 14, alert routing dry-run.** A tabletop exercise: a simulated P1 (payroll database down, firewall failover) is injected into the monitoring stack. The new on-call responds, the incumbent responds, the two timings are compared. This is the first dated evidence that the new team can meet the 15-min P1 median that will become its contractual SLA post-cutover.
+
+## Days 15 to 21: ticket queue parallel, selective cutover of lower-tier systems
+
+Week three is where real users see change, carefully. Not the whole estate, not yet. Lower-tier systems first.
+
+**Days 15 to 17, ticket queue parallel.** End users keep the incumbent's ticketing portal for anything production-critical. For a defined scope (a specific office, a specific department, non-critical SaaS admin requests), tickets route to the new provider's ServiceNow or Jira Service Management queue. Both queues report into a shared dashboard, so your IT lead can see response times side by side. The incumbent remains contractually responsible for everything in the primary queue.
+
+**Days 18 to 19, selective cutover.** Lower-tier systems move under the new provider's SLA: endpoint management, patch orchestration (ConnectWise, Kaseya, NinjaOne, Atera, or N-able depending on the fleet), a Mac fleet if there is one (Addigy or Jamf). Nothing user-facing in production yet. If something breaks, the blast radius is small and the rollback is quick.
+
+**Days 20 to 21, SLA warm-up on the moved systems.** The new provider operates the lower-tier scope under the full written SLA, including the 15-min P1 median, 99.9%+ uptime target, and 48h reversibility on every change. One week of real traffic on a limited scope is enough to catch the alerting-threshold mistakes and the on-call rota gaps before the main cutover.
+
+## Days 22 to 30: full cutover, incumbent decommission, SLA warm-up
+
+Week four is the main event, and it is the one that fails loudest when the preceding three weeks were rushed.
+
+**Day 22, change-window scheduling.** The main cutover window gets locked, almost always a Saturday chosen with your team. End-user comms are sent in your name. The incumbent's notice of final handover is dated and acknowledged.
+
+**Days 23 to 25, main cutover.** SLA responsibility moves to the new provider for the full estate. Every credential the incumbent ever held is rotated inside the same window: admin accounts, service accounts, API keys, VPN pre-shared keys, break-glass access. Each rotation is logged against the inventory. Monitoring is now primary, not shadow. The pager is live.
+
+**Days 26 to 28, incumbent decommission.** The incumbent's agents are uninstalled, their monitoring stack is torn down, their VPN tunnels are closed, their access is formally revoked. A dated handover document is signed by both providers, which is the artifact your auditor will ask for when ISO 27001 or SOC 2 renews. For regulated workloads, the backup target in the incumbent's tenant is drained to a new target under your control, usually in the EU-region (Frankfurt).
+
+**Days 29 to 30, SLA warm-up on the full scope.** The new provider is now fully accountable: 15-min P1 median first-response, 99.9%+ monthly uptime target on operated systems, 48h reversibility on every change, named on-call engineer, written DPA, EU-region hosting default. Two days of real production under the full contract is enough to find the last few monitoring gaps before the first quarterly review.
+
+## Where this plan bends
+
+Three places where a 30-day plan becomes a 45- or 60-day plan honestly. First, a hostile incumbent, where the runbook has to be rebuilt entirely from the live estate (add one to three weeks). Second, a multi-site DACH + US footprint where the physical sites need two parallel coverage windows (add a week). Third, a backup-vault migration that cannot be rushed because of data-residency obligations.
+
+The 30-day shape is realistic for a single-geography, cooperating-incumbent handoff. For the harder cases, the discipline is the same, the calendar is longer.
+
+For the full managed-IT model that this runbook delivers you into, see the [MSP handoff to managed IT use case](/use-cases/msp-handoff-managed-it), the underlying [infrastructure support service](/services/hardware/infrastructure-support), and the [hardware break-fix service](/services/hardware/hardware-break-fix) that pairs with it when devices do fail. How this lands by sector is on the [industries](/industries) page.
+
+*Want the runbook as a working document? [Send a note](/contact), one business-day reply.*

@@ -218,6 +218,16 @@ export const midMarketCustomCrm: UseCase = {
             href: '/ai-opportunity-finder',
             blurb: 'Not sure a custom CRM is the right next investment? Run a 10-minute scoping assessment first.',
           },
+          {
+            label: 'Blog: Build vs buy CRM, 24-month TCO model',
+            href: '/blog/build-vs-buy-crm-24-month-tco-model',
+            blurb: 'A line-by-line total cost of ownership comparison across generic SaaS licensing, in-house build, and a Deploris managed engagement.',
+          },
+          {
+            label: 'Blog: Salesforce to Postgres migration checklist',
+            href: '/blog/salesforce-to-postgres-crm-migration-checklist',
+            blurb: 'The practitioner-grade checklist for migrating pipeline, forecasts, territory logic, and integrations without losing history.',
+          },
         ],
       },
       cta: {
@@ -409,6 +419,16 @@ export const midMarketCustomCrm: UseCase = {
             label: 'KI-Chancen-Finder',
             href: '/ai-opportunity-finder',
             blurb: 'Noch unsicher, ob ein individuelles CRM die richtige nächste Investition ist? Starten Sie mit einer 10-Minuten-Scoping-Analyse.',
+          },
+          {
+            label: 'Blog: CRM selbst bauen oder kaufen, 24-Monats-Modell',
+            href: '/blog/build-vs-buy-crm-24-monate-gesamtkosten',
+            blurb: 'Eine zeilenweise Gesamtkostenanalyse zwischen Standard-SaaS, Eigenbau und einem Deploris-Mandat über 24 Monate.',
+          },
+          {
+            label: 'Blog: Salesforce zu Postgres, Migrations-Checkliste',
+            href: '/blog/salesforce-zu-postgres-crm-migration-checkliste',
+            blurb: 'Die praxiserprobte Checkliste, mit der Pipeline, Forecasts, Gebietslogik und Integrationen ohne Historienverlust migriert werden.',
           },
         ],
       },
