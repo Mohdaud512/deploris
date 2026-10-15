@@ -1,7 +1,21 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { Fraunces } from 'next/font/google';
 import { locales, type Locale } from '@/config/locales';
+
+/**
+ * Serif display face for the hero's italic emphasis phrase. Self-hosted
+ * via next/font so it respects the CSP (which blocks fonts.googleapis.com)
+ * and ships with zero layout shift. Opsz axis + italic style only.
+ */
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  axes: ['opsz'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif-display',
+  display: 'swap',
+});
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { SkipToContent } from '@/components/layout/SkipToContent';
@@ -31,7 +45,7 @@ export default async function LocaleLayout({
   const l = locale as Locale;
 
   return (
-    <html lang={l === 'de' ? 'de-DE' : 'en-US'} suppressHydrationWarning>
+    <html lang={l === 'de' ? 'de-DE' : 'en-US'} className={fraunces.variable} suppressHydrationWarning>
       <head>
         {/* Theme bootstrap: resolves the user's saved theme preference OR
             the OS preference and writes data-theme on <html> BEFORE first
