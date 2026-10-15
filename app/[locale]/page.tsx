@@ -54,7 +54,17 @@ export default async function HomePage({
 
       <ComplianceStrip locale={locale} />
 
-      <LogoStrip label={t('trust_bar')} count={6} />
+      <LogoStrip
+        label={t('trust_bar')}
+        partners={[
+          { slug: 'accenture', name: 'Accenture' },
+          { slug: 'hcl', name: 'HCL' },
+          { slug: 'tcs', name: 'TCS' },
+          { slug: 'infosys', name: 'Infosys' },
+          { slug: 'cloudflare', name: 'Cloudflare' },
+          { slug: 'hammersbach', name: 'Hammersbach' },
+        ]}
+      />
 
       <OutcomePaths locale={locale} />
 
