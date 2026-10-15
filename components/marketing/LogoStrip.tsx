@@ -48,7 +48,7 @@ export function LogoStrip({ label, partners }: { label: string; partners: Partne
         <p className="text-center text-xs uppercase tracking-widest text-brand-900/80 dark:text-white/60">
           {label}
         </p>
-        <ul className="mt-5 grid grid-cols-2 items-center gap-x-6 gap-y-5 sm:grid-cols-3 md:grid-cols-6">
+        <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
           {partners.map((p) => (
             <li key={p.slug} className="flex items-center justify-center">
               {hasLogoFile(p.slug) ? (

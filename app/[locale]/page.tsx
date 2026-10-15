@@ -58,11 +58,7 @@ export default async function HomePage({
         label={t('trust_bar')}
         partners={[
           { slug: 'accenture', name: 'Accenture' },
-          { slug: 'hcl', name: 'HCL' },
-          { slug: 'tcs', name: 'TCS' },
-          { slug: 'infosys', name: 'Infosys' },
           { slug: 'cloudflare', name: 'Cloudflare' },
-          { slug: 'hammersbach', name: 'Hammersbach' },
         ]}
       />
 
