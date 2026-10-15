@@ -1,22 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { Fraunces } from 'next/font/google';
 import { locales, type Locale } from '@/config/locales';
-
-/**
- * Serif display face used in the hero's italic emphasis phrase. Self-hosted
- * via next/font so it works under our CSP (which blocks fonts.googleapis.com),
- * ships zero layout shift, and keeps the file size small (one italic axis,
- * one optical-size axis, nothing else loaded).
- */
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  axes: ['opsz'],
-  style: ['normal', 'italic'],
-  variable: '--font-serif-display',
-  display: 'swap',
-});
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { SkipToContent } from '@/components/layout/SkipToContent';
@@ -46,7 +31,7 @@ export default async function LocaleLayout({
   const l = locale as Locale;
 
   return (
-    <html lang={l === 'de' ? 'de-DE' : 'en-US'} className={fraunces.variable} suppressHydrationWarning>
+    <html lang={l === 'de' ? 'de-DE' : 'en-US'} suppressHydrationWarning>
       <head>
         {/* Pre-warm DNS + TCP for the only external resource we load (and only
             when consent has turned Plausible on). Plausible's script is async,

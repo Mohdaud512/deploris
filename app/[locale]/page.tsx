@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/config/locales';
 import { buildMetadata } from '@/lib/seo';
-import { ScopedHero } from '@/components/marketing/ScopedHero';
+import { Hero } from '@/components/marketing/Hero';
 import { LogoStrip } from '@/components/marketing/LogoStrip';
 import { ComplianceStrip } from '@/components/marketing/ComplianceStrip';
 import { OutcomePaths } from '@/components/marketing/OutcomePaths';
@@ -44,9 +44,9 @@ export default async function HomePage({
 
   return (
     <>
-      <ScopedHero
-        locale={locale}
+      <Hero
         eyebrow={t('hero_eyebrow')}
+        title={t('hero_title')}
         body={t('hero_body')}
         primaryHref={`${prefix}/quote`}
         secondaryHref={`${prefix}/contact`}
