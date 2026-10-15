@@ -33,6 +33,18 @@ export default async function LocaleLayout({
   return (
     <html lang={l === 'de' ? 'de-DE' : 'en-US'} suppressHydrationWarning>
       <head>
+        {/* Theme bootstrap: resolves the user's saved theme preference OR
+            the OS preference and writes data-theme on <html> BEFORE first
+            paint, so the correct dark/light palette is in place with zero
+            flash. Script is a build-time constant, no user input, no
+            injection surface. Runs sync via dangerouslySetInnerHTML (not
+            Next's <Script>) because <Script> defaults to afterInteractive
+            which is too late to prevent FOUC. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('deploris-theme');var m=s==='light'||s==='dark'?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var r=document.documentElement;r.setAttribute('data-theme',m);r.style.colorScheme=m;}catch(e){}})();`,
+          }}
+        />
         {/* Pre-warm DNS + TCP for the only external resource we load (and only
             when consent has turned Plausible on). Plausible's script is async,
             so this just shaves ~100ms off its first byte. */}

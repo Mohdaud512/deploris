@@ -8,6 +8,7 @@ import { buildNav } from '@/config/nav';
 import type { Locale } from '@/config/locales';
 import { site } from '@/config/site';
 import { LocaleSwitcher } from './LocaleSwitcher';
+import { ThemeToggle } from './ThemeToggle';
 import { cn } from '@/lib/utils';
 
 export function SiteHeader() {
@@ -43,10 +44,11 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           <LocaleSwitcher />
           <Link
             href={locale === 'en' ? '/quote' : `/${locale}/quote`}
-            className="rounded-full bg-brand-900 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800"
+            className="rounded-full bg-brand-900 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800 dark:bg-accent-500 dark:text-brand-950 dark:hover:bg-accent-400"
           >
             {t('common.cta_quote')}
           </Link>
@@ -79,12 +81,15 @@ export function SiteHeader() {
             {nav.map((item) => (
               <MobileNavGroup key={item.href} item={item} onNav={() => setOpen(false)} />
             ))}
-            <div className="mt-2 flex items-center justify-between border-t border-brand-900/10 pt-3 dark:border-white/10">
-              <LocaleSwitcher />
+            <div className="mt-2 flex flex-wrap items-center justify-between gap-3 border-t border-brand-900/10 pt-3 dark:border-white/10">
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+                <LocaleSwitcher />
+              </div>
               <Link
                 href={locale === 'en' ? '/quote' : `/${locale}/quote`}
                 onClick={() => setOpen(false)}
-                className="rounded-full bg-brand-900 px-4 py-2 text-sm font-medium text-white"
+                className="rounded-full bg-brand-900 px-4 py-2 text-sm font-medium text-white dark:bg-accent-500 dark:text-brand-950"
               >
                 {t('common.cta_quote')}
               </Link>

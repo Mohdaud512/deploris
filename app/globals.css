@@ -50,6 +50,13 @@
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
+/* Dark-mode trigger: fires on [data-theme="dark"] which the pre-paint
+ * bootstrap in <head> writes before first paint based on saved choice
+ * OR system preference (zero FOUC). Users without JS get the light
+ * palette as a safe default, same as the historical media-query behavior
+ * for anyone whose OS pref is light. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 :root {
   color-scheme: light dark;
   --d-surface: #ffffff;
@@ -77,11 +84,13 @@ body {
   color: var(--ks-brand-900);
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: var(--ks-surface-dark);
-    color: #fff;
-  }
+/* Body ground follows the user's explicit theme choice (data-theme
+ * written by the pre-paint bootstrap). Previously used a bare media
+ * query, which meant a user on light-OS who picked "Dark" via the
+ * toggle got a white body behind the dark Tailwind utilities. */
+html[data-theme='dark'] body {
+  background: var(--ks-surface-dark);
+  color: #fff;
 }
 
 .sr-only {

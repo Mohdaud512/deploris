@@ -12,6 +12,12 @@
     "error_generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
     "success_generic": "Vielen Dank wir haben Ihre Nachricht erhalten und melden uns innerhalb eines Werktags."
   },
+  "theme": {
+    "group_label": "Design",
+    "light": "Helles Design",
+    "system": "Systemeinstellung übernehmen",
+    "dark": "Dunkles Design"
+  },
   "nav": {
     "home": "Startseite",
     "about": "Über uns",
