@@ -47,6 +47,7 @@
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-display: 'Inter', system-ui, sans-serif;
+  --font-serif-display: var(--font-serif-display), 'Fraunces', 'Georgia', serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
