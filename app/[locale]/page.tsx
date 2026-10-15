@@ -56,10 +56,7 @@ export default async function HomePage({
 
       <LogoStrip
         label={t('trust_bar')}
-        partners={[
-          { slug: 'accenture', name: 'Accenture' },
-          { slug: 'cloudflare', name: 'Cloudflare' },
-        ]}
+        partners={[{ slug: 'cloudflare', name: 'Cloudflare' }]}
       />
 
       <OutcomePaths locale={locale} />
